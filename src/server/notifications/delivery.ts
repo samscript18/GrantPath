@@ -1,11 +1,22 @@
 import { db } from "@/lib/db";
 import { sendEmail } from "@/server/accounts/email";
+import {
+  EMAIL_SAFE_RETRY_MS,
+  EmailAcceptanceUncertain,
+  emailIdempotencyKey,
+} from "@/server/accounts/brevo";
+import { readEnv } from "@/lib/env";
 import { preferencesSchema, type Topic } from "./index";
 import { availabilityOf, scholarshipDataSchema } from "@/server/scholarships/schema";
 import { ENGINE_VERSION } from "@/server/eligibility/engine";
 import { reminderEventKey, inReminderWindow } from "./events";
 import type { Delivery, Prisma } from "@/generated/prisma/client";
 type Client = Prisma.TransactionClient;
+function emailIdentity(delivery: Delivery) {
+  const provider = readEnv().EMAIL_MODE;
+  const key = `grantpath-delivery:${delivery.id}`;
+  return { provider, providerKey: provider === "brevo" ? emailIdempotencyKey(key) : key };
+}
 export async function deliveryDecision(
   delivery: Delivery,
   client: Client = db(),
@@ -131,7 +142,13 @@ async function finish(
   if (!updated.count) return { state: "stale" };
   await tx.deliveryAttempt.upsert({
     where: { deliveryId_number: { deliveryId: delivery.id, number: delivery.attempts } },
-    create: { deliveryId: delivery.id, number: delivery.attempts, state, error },
+    create: {
+      deliveryId: delivery.id,
+      number: delivery.attempts,
+      state,
+      error,
+      ...(delivery.channel === "email" ? emailIdentity(delivery) : {}),
+    },
     update: { state, error },
   });
   return { state };
@@ -164,11 +181,28 @@ export async function deliverClaimed(delivery: Delivery, now = new Date()) {
         });
         return finish(tx, delivery, "published", undefined, undefined, now);
       });
+    const decision = await deliveryDecision(delivery, db(), now);
+    if (!decision.allowed || !decision.user)
+      return db().$transaction((tx) =>
+        finish(tx, delivery, "suppressed", decision.reason, undefined, now),
+      );
     const previous = await db().deliveryAttempt.findFirst({
       where: { deliveryId: delivery.id },
       orderBy: { number: "asc" },
     });
-    if (previous && now.getTime() - previous.createdAt.getTime() >= 23 * 3600000)
+    const identity = emailIdentity(delivery);
+    if (previous && previous.provider !== identity.provider)
+      return db().$transaction((tx) =>
+        finish(
+          tx,
+          delivery,
+          "uncertain",
+          "An earlier attempt used another or unknown email provider. Inspect its acceptance before sending through the current provider.",
+          undefined,
+          now,
+        ),
+      );
+    if (previous && now.getTime() - previous.createdAt.getTime() >= EMAIL_SAFE_RETRY_MS)
       return db().$transaction((tx) =>
         finish(
           tx,
@@ -179,11 +213,6 @@ export async function deliverClaimed(delivery: Delivery, now = new Date()) {
           now,
         ),
       );
-    const decision = await deliveryDecision(delivery, db(), now);
-    if (!decision.allowed || !decision.user)
-      return db().$transaction((tx) =>
-        finish(tx, delivery, "suppressed", decision.reason, undefined, now),
-      );
     await db().deliveryAttempt.upsert({
       where: { deliveryId_number: { deliveryId: delivery.id, number: delivery.attempts } },
       create: {
@@ -191,6 +220,7 @@ export async function deliverClaimed(delivery: Delivery, now = new Date()) {
         number: delivery.attempts,
         state: "started",
         createdAt: now,
+        ...identity,
       },
       update: {},
     });
@@ -203,6 +233,8 @@ export async function deliverClaimed(delivery: Delivery, now = new Date()) {
     return db().$transaction((tx) => finish(tx, delivery, result.state, undefined, result.id, now));
   } catch (error) {
     const message = (error instanceof Error ? error.message : "Delivery failed").slice(0, 1000);
+    if (error instanceof EmailAcceptanceUncertain)
+      return db().$transaction((tx) => finish(tx, delivery, "uncertain", message, undefined, now));
     return db().$transaction(async (tx) => {
       const owned = await tx.delivery.updateMany({
         where: { id: delivery.id, leaseToken: delivery.leaseToken, state: "processing" },
@@ -223,6 +255,7 @@ export async function deliverClaimed(delivery: Delivery, now = new Date()) {
             state: "failed",
             error: message,
             createdAt: now,
+            ...emailIdentity(delivery),
           },
           update: { state: "failed", error: message },
         });

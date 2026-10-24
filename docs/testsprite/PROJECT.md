@@ -16,3 +16,9 @@ Plans in `plans/` passed official offline lint: two valid, zero issues. Cases we
 The user reports GitHub App connected and supplied a screenshot showing detected Vercel commit status/check and `vercel[bot] PR comment`. Select the actual Ready bot comment and use URL pattern `https://grantpath-git-{branch-slug}-lammysam8-7688.vercel.app`. The user configured the trigger in the portal; execution 9e9aec5c-54f3-4e6f-84a0-d15e8ec68394 ran both cases and **both passed**. GitHub status TestSprite V3 from App 2756476 is required on main. Keep Active and Block PR until tests pass enabled once configured. No schedules or duplicate CLI/App runs.
 
 Account observation after preparation: 150 credits; 0.5 credits/run. First two-case execution estimated 1 credit; actual observed debit 1, balance 149. Broad exploration has no established estimate and is not requested. Preserve approximately 50 credits.
+
+## Reusable assertion correction
+
+The automatic second execution `bec3b808-1c62-4735-897a-114ccf1c39fb` reported two passes, with debit 1 and balance 148. Reviewing exported v2 code found missing assertions from the natural-language plans (including destination persistence and the exact funding range). The profile export also omitted persisted citizenship/residence checks. Explicit Python replacements in `code/` preserve all these assertions and the exact note punctuation. Both passed locally against the live preview (17.492s and 36.322s), using Python Playwright 1.60.0 with the existing project Chromium executable.
+
+Saved through the official code API without execution: discovery version `v-f8ff1573758e`, profile version `v-6ad74e9476aa`. The next automatic App execution must verify those scripts at the Brevo release head. No assertion was weakened.

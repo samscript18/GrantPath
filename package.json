@@ -23,6 +23,7 @@
     "sources:ingest": "tsx scripts/ingest.ts",
     "jobs:run": "tsx scripts/worker.ts",
     "setup:check": "tsx scripts/check-env.ts",
+    "email:check": "tsx scripts/check-email.ts",
     "check": "npm run typecheck && npm run lint && npm test",
     "db:test-migrate": "tsx scripts/test-db.ts",
     "operator:grant": "tsx scripts/grant-operator.ts",
@@ -46,7 +47,6 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-hook-form": "7.91.0",
-    "resend": "6.34.1",
     "server-only": "0.0.1",
     "tailwind-merge": "3.7.0",
     "zod": "4.6.7"

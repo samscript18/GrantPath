@@ -11,7 +11,7 @@ describe("isolated public preview registration", () => {
   });
   it("permits real signup when the preview uses configured email delivery", () => {
     expect(
-      previewRegistrationAllowed("student@gmail.com", { ...preview, EMAIL_MODE: "resend" }),
+      previewRegistrationAllowed("student@gmail.com", { ...preview, EMAIL_MODE: "brevo" }),
     ).toBe(true);
     expect(previewRegistrationAllowed("student@gmail.com", { EMAIL_MODE: "sink" })).toBe(true);
   });

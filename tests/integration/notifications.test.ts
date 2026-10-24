@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { db } from "../../src/lib/db";
 import { createOpportunity } from "../../src/server/operator";
 import { saveOpportunity, unsaveOpportunity } from "../../src/server/applications";
@@ -50,6 +50,60 @@ async function deliver(id: string, now = new Date()) {
   return deliverClaimed(claimed, now);
 }
 describe("durable preference-aware notifications", () => {
+  it("holds unknown/previous providers and Brevo duplicate acceptance without another delivery", async () => {
+    const { actor, s } = await fixture();
+    await savePreferences(actor, all);
+    const queue = async (eventId: string) => {
+      await queueAlert({
+        userId: actor.id,
+        scholarshipId: s.id,
+        eventId,
+        topic: "change",
+        title: "[TEST ONLY] Provider transition",
+        body: "Isolated recovery check",
+        href: `/scholarships/${s.slug}`,
+      });
+      return db().delivery.findFirstOrThrow({
+        where: { userId: actor.id, channel: "email", eventId },
+      });
+    };
+    const old = await queue(`old-provider:${crypto.randomUUID()}`);
+    await db().deliveryAttempt.create({
+      data: { deliveryId: old.id, number: 1, state: "started", provider: "previous-provider" },
+    });
+    await db().delivery.update({ where: { id: old.id }, data: { attempts: 1 } });
+    expect((await deliver(old.id)).state).toBe("uncertain");
+    expect(await db().emailSink.count({ where: { recipient: actor.email } })).toBe(0);
+    const duplicate = await queue(`brevo-duplicate:${crypto.randomUUID()}`);
+    await db().user.update({ where: { id: actor.id }, data: { email: `${actor.id}@example.org` } });
+    const transport = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ code: "duplicate_parameter" }), { status: 400 }),
+      );
+    try {
+      vi.stubEnv("EMAIL_MODE", "brevo");
+      vi.stubEnv("BREVO_API_KEY", "isolated-test-key");
+      vi.stubEnv("EMAIL_FROM", "sender@example.org");
+      vi.stubEnv("TEST_EMAIL_DOMAINS", "example.org");
+      vi.stubGlobal("fetch", transport);
+      expect((await deliver(duplicate.id)).state).toBe("uncertain");
+      expect(transport).toHaveBeenCalledTimes(1);
+      const attempt = await db().deliveryAttempt.findFirstOrThrow({
+        where: { deliveryId: duplicate.id },
+        orderBy: { number: "desc" },
+      });
+      expect(attempt.provider).toBe("brevo");
+      expect(attempt.providerKey).toMatch(/^[a-f0-9-]{36}$/);
+      expect(
+        (await db().delivery.findUniqueOrThrow({ where: { id: duplicate.id } })).providerId,
+      ).toBeNull();
+    } finally {
+      vi.unstubAllGlobals();
+      vi.unstubAllEnvs();
+      await db().user.delete({ where: { id: actor.id } });
+    }
+  });
   it("advances a bounded reminder scan past already queued rows, including millisecond identities", async () => {
     const data = testScholarship();
     data.deadline = "2041-01-15T12:00:00.123Z";
@@ -165,7 +219,14 @@ describe("durable preference-aware notifications", () => {
       },
     });
     await db().deliveryAttempt.create({
-      data: { deliveryId: delivery.id, number: 1, state: "started", createdAt: at },
+      data: {
+        deliveryId: delivery.id,
+        number: 1,
+        state: "started",
+        createdAt: at,
+        provider: "sink",
+        providerKey: `grantpath-delivery:${delivery.id}`,
+      },
     });
     expect((await deliver(delivery.id, new Date(at.getTime() + 1000))).state).toBe("captured");
     expect(await db().emailSink.count({ where: { recipient: actor.email } })).toBe(1);
@@ -177,7 +238,7 @@ describe("durable preference-aware notifications", () => {
         leaseToken: "another-interruption",
       },
     });
-    expect((await deliver(delivery.id, new Date(at.getTime() + 24 * 3600000))).state).toBe(
+    expect((await deliver(delivery.id, new Date(at.getTime() + 29 * 60000))).state).toBe(
       "uncertain",
     );
     expect(await db().emailSink.count({ where: { recipient: actor.email } })).toBe(1);

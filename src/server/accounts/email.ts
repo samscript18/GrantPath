@@ -1,11 +1,13 @@
-import { Resend } from "resend";
 import { db } from "@/lib/db";
 import { readEnv, SetupError } from "@/lib/env";
+import { sendBrevoEmail } from "./brevo";
 export async function sendEmail(input: { to: string; subject: string; text: string; key: string }) {
   const env = readEnv();
   if (
     env.APP_ENV === "test" &&
-    !env.TEST_EMAIL_DOMAINS.split(",").some((d) => input.to.endsWith(`@${d.trim()}`))
+    !env.TEST_EMAIL_DOMAINS.split(",").some((d) =>
+      input.to.toLowerCase().endsWith(`@${d.trim().toLowerCase()}`),
+    )
   )
     throw new Error("Test email recipient is outside the allowed isolated domains.");
   if (env.EMAIL_MODE === "sink") {
@@ -18,15 +20,9 @@ export async function sendEmail(input: { to: string; subject: string; text: stri
     });
     return { id: `sink:${input.key}`, state: "captured" as const };
   }
-  if (input.to.endsWith(".test"))
+  if (input.to.toLowerCase().endsWith(".test"))
     throw new Error("Isolated test recipients cannot be sent through the live provider.");
-  if (!env.RESEND_API_KEY || !env.EMAIL_FROM)
-    throw new SetupError("Set RESEND_API_KEY and verified EMAIL_FROM to send email.");
-  const result = await new Resend(env.RESEND_API_KEY).emails.send(
-    { from: env.EMAIL_FROM, to: input.to, subject: input.subject, text: input.text },
-    { idempotencyKey: input.key, signal: AbortSignal.timeout(12000) },
-  );
-  if (result.error) throw new Error(`Email provider rejected request: ${result.error.message}`);
-  if (!result.data) throw new Error("Email provider returned no acceptance identifier.");
-  return { id: result.data.id, state: "accepted" as const };
+  if (!env.BREVO_API_KEY || !env.EMAIL_FROM)
+    throw new SetupError("Set BREVO_API_KEY and a verified Brevo EMAIL_FROM sender to send email.");
+  return sendBrevoEmail(input, { apiKey: env.BREVO_API_KEY, sender: env.EMAIL_FROM });
 }

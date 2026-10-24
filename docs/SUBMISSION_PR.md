@@ -13,9 +13,9 @@ Students discover real official-source scholarships, save versioned profiles, in
 
 ## Actual scope
 
-Twenty real catalogue records include historical cycles and explicitly uncertain schemes. Four scoped adapters are contract-tested; Twente has a successful observed live extraction and UCL/Oxford access was blocked. Native TestSprite cases cover discovery/evidence and profile/application persistence; first execution passed both cases, with actual debit 1 and observed balance 149. Local checks, hosted-browser assertions and GitHub CI passed, as detailed in TEST_EVIDENCE.md. Main requires correctness CI and TestSprite V3 specifically from their authentic Apps. A failing TestSprite regression/blocked-red/fix exercise remains unperformed.
+Twenty real catalogue records include historical cycles and explicitly uncertain schemes. Four scoped adapters are contract-tested; Twente has a successful observed live extraction and UCL/Oxford access was blocked. Native TestSprite cases cover discovery/evidence and profile/application persistence; first and automatic second executions passed both cases, with total actual debit 2 and observed balance 148. Exported-script assertion gaps were identified and corrected with explicit reusable scripts that passed locally before the next automatic verification. Local checks, hosted-browser assertions and GitHub CI passed, as detailed in TEST_EVIDENCE.md. Main requires correctness CI and TestSprite V3 specifically from their authentic Apps. A failing TestSprite regression/blocked-red/fix exercise remains unperformed.
 
-The app is publicly browseable. Preview email is explicitly unavailable; isolated accounts use captured mail. Real sender delivery, scheduler activation and automatic Neon branch provisioning remain pending. See RELEASE_REVIEW.md and the actual credit ledger.
+The app is publicly browseable. Brevo replaces Resend; its active sender, free account, actual acceptance and duplicate suppression are verified. Recipient receipt, scheduler activation and automatic Neon branch provisioning remain pending. See RELEASE_REVIEW.md and the actual credit ledger.
 
 ## Submission timing
 

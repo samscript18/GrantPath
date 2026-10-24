@@ -312,6 +312,8 @@ model DeliveryAttempt {
   number     Int
   state      String
   error      String?
+  provider   String?
+  providerKey String?
   createdAt  DateTime @default(now())
   @@unique([deliveryId, number])
 }

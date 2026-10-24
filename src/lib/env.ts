@@ -4,9 +4,9 @@ const schema = z.object({
   BETTER_AUTH_SECRET: z.string().min(32, "Generate a secret of at least 32 characters"),
   BETTER_AUTH_URL: z.url(),
   APP_ENV: z.enum(["development", "test", "production"]).default("development"),
-  EMAIL_MODE: z.enum(["sink", "resend"]).default("sink"),
+  EMAIL_MODE: z.enum(["sink", "brevo"]).default("sink"),
   EMAIL_FROM: z.string().optional(),
-  RESEND_API_KEY: z.string().optional(),
+  BREVO_API_KEY: z.string().optional(),
   TEST_EMAIL_DOMAINS: z.string().default("example.test"),
 });
 export class SetupError extends Error {
@@ -24,12 +24,16 @@ export function readEnv(input: NodeJS.ProcessEnv = process.env) {
   const env = parsed.data;
   if (input.NODE_ENV === "production" && env.APP_ENV === "test")
     throw new SetupError("APP_ENV=test cannot run in production.");
+  if (env.APP_ENV === "production" && env.EMAIL_MODE !== "brevo")
+    throw new SetupError("Production requires EMAIL_MODE=brevo with a verified sender.");
   if (
-    env.APP_ENV === "production" &&
-    (env.EMAIL_MODE !== "resend" || !env.RESEND_API_KEY || !env.EMAIL_FROM)
+    env.EMAIL_MODE === "brevo" &&
+    (!env.BREVO_API_KEY?.trim() ||
+      !z.email().safeParse(env.EMAIL_FROM).success ||
+      env.EMAIL_FROM?.toLowerCase().endsWith("@resend.dev"))
   )
     throw new SetupError(
-      "Production requires Resend credentials and a verified EMAIL_FROM sender.",
+      "Brevo email requires BREVO_API_KEY and EMAIL_FROM as a verified Brevo sender address. Resend's test sender cannot be used with Brevo.",
     );
   if (env.APP_ENV === "production" && !env.BETTER_AUTH_URL.startsWith("https://"))
     throw new SetupError("Production authentication requires HTTPS.");

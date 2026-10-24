@@ -65,6 +65,16 @@ function createAuth() {
       before: createAuthMiddleware(async (ctx) => {
         if (
           ctx.path === "/sign-up/email" &&
+          env.EMAIL_MODE === "brevo" &&
+          typeof ctx.body?.email === "string" &&
+          ctx.body.email.toLowerCase().endsWith(".test")
+        )
+          throw new APIError("BAD_REQUEST", {
+            message:
+              "Use a deliverable email address. Isolated test addresses are unavailable with live email delivery.",
+          });
+        if (
+          ctx.path === "/sign-up/email" &&
           !previewRegistrationAllowed(typeof ctx.body?.email === "string" ? ctx.body.email : "")
         )
           throw new APIError("BAD_REQUEST", {

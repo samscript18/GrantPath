@@ -15,13 +15,15 @@
 | 3 Eligibility   | Implemented; locally verified                              | Engine 1.1.0; independent comparisons and domain matrix pass                                                   |
 | 4 Experience    | Implemented; locally verified                              | Connected account, profile, evidence and application browser journeys pass                                     |
 | 5 Monitoring    | Implemented; locally verified                              | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
-| 6 Notifications | Implemented; locally verified                              | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending                 |
+| 6 Notifications | Implemented; locally verified                              | Brevo acceptance and duplicate suppression verified; recipient receipt and scheduler operation pending         |
 | 7 Protection    | Local checks and GitHub correctness gate verified          | Two real TestSprite cases passed; authentic App gate required; final-head rerun pending                        |
 | 8 Polish        | Local/hosted design inspected; public preview and PR exist | Final-head automatic check and submission timing/remaining provider setup                                      |
 
 ## External setup pending
 
-Neon pooled/direct database access, Resend API access, Vercel Hobby access and TestSprite API access are now configured in ignored .env. Neon migration and 20 accepted catalogue records are verified, with an idempotent zero-publication replay. TestSprite account inspection reports 150 credits and no projects. A Vercel Next.js project exists; deployment and Git linkage are underway. Resend has no verified custom domain, so mail stays in isolated sink mode. Neon branch API, Inngest signing keys, native TestSprite 3.0 suite/App trigger and authentic merge gate remain pending. The live public preview and PR exist. Hosted browser checks and GitHub CI passed, as did the first two-case authentic TestSprite execution (balance 149). Main requires the exact TestSprite App status. See REMOTE_RELEASE.md for the current continuation state.
+Neon main and isolated PR databases are migrated and contain the reviewed real catalogue. Vercel Hobby hosts the public preview and PR 1 exists. GitHub CI and two authentic two-case TestSprite executions passed; observed balance 148. Main requires the exact correctness/App statuses, with administrators included, and blocked pending then clean states were observed. Generated TestSprite replay gaps were found and corrected with explicit scripts, which passed locally; their next automatic check is pending.
+
+The user switched email from Resend to Brevo. Brevo free-account API/sender checks and actual provider acceptance/duplicate suppression pass. Runtime/worker configuration now uses BREVO_API_KEY and an active sender. Live preview deployment verification continues. Source schedules and application-job workflows are explicitly disabled pending policies/secrets; CI and the TestSprite trigger remain active. Neon API branch automation and signed Inngest keys remain absent. See REMOTE_RELEASE.md for the exact continuation state.
 
 ## Phase 1 local increment
 
@@ -60,3 +62,7 @@ Added live database-backed landing examples, source-interpretation corrections w
 Final domain checks: 54 unit tests and 14 PostgreSQL integration tests pass, including bounded reminder progress and delayed-window suppression. Source application-link changes are reviewed rather than guessed. Preserved local failure/fix evidence is separate from the unavailable authentic remote gate.
 
 Final production Chromium run: 5 passed in 38.7s. Local release implementation committed as 7e2b2d7. GitHub admin/push access is now verified; publication remains pending TestSprite account/trigger/cost inspection (including possible branch-push/draft triggers) and hosting setup. The user reconfirmed a 150-credit allowance but does not know the App settings. No credited operation, push, PR or deployment occurred; no configured automatic gate was disabled.
+
+## Brevo provider change
+
+User requested replacement of Resend. Implemented native Brevo API adapter, stable UUID keys, 29-minute bounded retries, conservative duplicate/unknown-provider holding, provider-attempt audit migration, reserved test-address isolation, verified sender setup checks and updated workflow variables. Resend SDK removed. Active free sender and actual send/duplicate response verified. Both Neon databases migrated. Latest local: 62 unit, 15 PostgreSQL and 5 production-browser tests (31.8s), typecheck/lint/build passed. Hosted deployment and strict reusable TestSprite scripts receive the next automatic check.

@@ -24,9 +24,9 @@ jobs:
       BETTER_AUTH_URL: ${{ vars.APP_URL }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       EMAIL_FROM: ${{ vars.EMAIL_FROM }}
-      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
       APP_ENV: production
-      EMAIL_MODE: resend
+      EMAIL_MODE: brevo
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -267,7 +267,13 @@ export default async function OperatorPage({
                 {delivery.history.map((attempt) => (
                   <p key={attempt.id} className="mt-2 text-[10px] leading-5">
                     Attempt {attempt.number}: {attempt.state} · {attempt.createdAt.toISOString()}
+                    {` · Provider: ${attempt.provider || "legacy / unknown"}`}
                     {attempt.error ? ` · ${attempt.error}` : ""}
+                    {attempt.providerKey && (
+                      <span className="block break-all font-mono">
+                        Idempotency key: {attempt.providerKey}
+                      </span>
+                    )}
                   </p>
                 ))}
               </details>
