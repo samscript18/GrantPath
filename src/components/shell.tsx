@@ -35,7 +35,7 @@ export async function Shell({
     <div className="min-h-screen lg:pl-[238px]">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex">
         <Logo light />
-        <div className="eyebrow mt-13 mb-4 text-white/40">YOUR NEXT CHAPTER</div>
+        <div className="eyebrow mt-13 mb-4 text-white/70">YOUR NEXT CHAPTER</div>
         <nav aria-label="Main navigation" className="space-y-1.5">
           {nav.map(([href, label, Icon]) => (
             <Link
@@ -74,7 +74,7 @@ export async function Shell({
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs text-white">{actor?.name || "Welcome, explorer"}</p>
-              <p className="mt-1 text-[10px] text-white/45">
+              <p className="mt-1 text-[10px] text-white/70">
                 {actor ? "Your scholarship workspace" : "Explore your possibilities"}
               </p>
             </div>

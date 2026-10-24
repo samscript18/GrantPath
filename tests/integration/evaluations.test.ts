@@ -73,3 +73,29 @@ describe("versioned matching and concurrency", () => {
     await db().user.delete({ where: { id: actor.id } });
   });
 });
+
+describe("meaningful profile versioning", () => {
+  it("does not create a new profile version or event for JSONB key reordering or an unchanged stage save", async () => {
+    const id = crypto.randomUUID();
+    const actor = { id, name: "Test profile owner", email: `${id}@example.test`, role: "student" };
+    await db().user.create({ data: actor });
+    const profile = { targetLevel: "master", citizenships: ["Nigeria"], residence: "Ghana" };
+    const first = await saveProfile(actor, profile, 0, 0);
+    expect(first.version).toBe(1);
+    const second = await saveProfile(
+      actor,
+      { residence: "Ghana", citizenships: ["Nigeria"], targetLevel: "master" },
+      1,
+      2,
+    );
+    expect(second.version).toBe(1);
+    expect(second.stage).toBe(2);
+    expect(await db().profileVersion.count({ where: { userId: id } })).toBe(1);
+    expect(
+      await db().outbox.count({
+        where: { topic: "profile.changed", payload: { path: ["userId"], equals: id } },
+      }),
+    ).toBe(1);
+    await db().user.delete({ where: { id } });
+  });
+});

@@ -8,20 +8,20 @@
 
 ## Phase status
 
-| Phase           | State       | Remaining acceptance                                                                                |
-| --------------- | ----------- | --------------------------------------------------------------------------------------------------- |
-| 1 Foundation | Implemented; locally verified | Hosted auth/email/preview and authentic TestSprite gate pending |
-| 2 Catalogue | Implemented; locally verified | Bounded catalogue and evidence; unresolved provider conditions explicit |
-| 3 Eligibility | Implemented; locally verified | Engine 1.1.0; independent comparisons and domain matrix pass |
-| 4 Experience | Implemented; locally verified | Initial connected browser journeys pass; full release browser review follows |
-| 5 Monitoring | Implemented; locally verified | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
-| 6 Notifications | Implemented; locally verified | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending |
-| 7 Protection | In progress | Final integrated browser change/notification journey; authentic external gate remains pending |
-| 8 Polish | In progress | Full page/mobile screenshots, release docs and final review |
+| Phase           | State                                                              | Remaining acceptance                                                                                           |
+| --------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| 1 Foundation    | Implemented; locally verified                                      | Hosted auth/email/preview and authentic TestSprite gate pending                                                |
+| 2 Catalogue     | Implemented; locally verified                                      | Bounded catalogue and evidence; unresolved provider conditions explicit                                        |
+| 3 Eligibility   | Implemented; locally verified                                      | Engine 1.1.0; independent comparisons and domain matrix pass                                                   |
+| 4 Experience    | Implemented; locally verified                                      | Connected account, profile, evidence and application browser journeys pass                                     |
+| 5 Monitoring    | Implemented; locally verified                                      | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
+| 6 Notifications | Implemented; locally verified                                      | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending                 |
+| 7 Protection    | Local checks implemented and verified; external acceptance blocked | Authentic TestSprite/App required check and blocked-merge demonstration need accounts                          |
+| 8 Polish        | Local design and release review implemented; submission blocked    | Desktop/mobile review and release documents prepared; remote PR/live URL need accounts                         |
 
 ## External setup pending
 
-No project secrets are configured: Neon database/project, Resend API key and verified sender, Vercel project/account, GitHub repository/remote and permissions, Inngest keys, TestSprite portal/GitHub App and actual credit balance. Independent work continues using isolated local PostgreSQL and email sink where possible. No deployed URL or remote results exist.
+No external project secrets are configured: Neon database/project, Resend API key and verified sender, Vercel project/account, Inngest keys, TestSprite portal/GitHub App and actual credit balance. Isolated local PostgreSQL and a generated local authentication secret are configured in ignored .env. GitHub origin is now configured as samscript18/GrantPath; authenticated read inspection confirms admin/push permissions, an empty repository, no rulesets and no workflows. No deployed URL or remote check results exist. Exact remaining setup and acceptance are in RELEASE_REVIEW.md.
 
 ## Phase 1 local increment
 
@@ -49,7 +49,12 @@ Implemented registry/cadence/manual requests, four explicit adapters, bounded al
 
 Implemented private paginated inbox/read states, topic/channel preferences, relevant new-match and accepted-change alerts, exact-version/evaluation links, seven-/one-day confirmed-instant reminders, durable deduplication and delivery leases/attempts/backoff, suppression using current preferences and saved/current-match relevance, email sink isolation, Resend idempotency and accepted-versus-captured diagnostics. Added optional signed Inngest steps and separate GitHub application-jobs scheduler; neither fetches sources. 35 unit and 11 PostgreSQL tests plus production build pass. Real Resend/Inngest account operation, hosted schedules and TestSprite remain externally unverified.
 
-
 ## Phase 7 local increment
 
 50 local unit tests and 12 PostgreSQL integration tests pass. Independent logical reference comparison covers 2,000 generated and 882 exhaustive small-grammar cases. Exact reason codes, unknown alternatives, country identity, complete qualification history, stale work, ownership, interruption and exhausted leases are checked. Input is bounded before recursive rule parsing. Engine changes are versioned at 1.1.0. Final connected browser/operator/notification review continues. No remote TestSprite or merge-block evidence is claimed.
+
+## Phase 8 local release increment
+
+Added live database-backed landing examples, source-interpretation corrections with preserved history, mobile/editorial refinements, explicit source timestamps, readable error recovery, profile idempotence and final publication/cycle/reminder safeguards. Reviewed actual desktop/360px screenshots across the main product. Five connected Chromium journeys passed against development and the local production server; exact final runs are in TEST_EVIDENCE.md. A separate unavailable-database error/retry smoke passed. Setup, architecture, coverage, release, demonstration and submission documents are prepared. External acceptance and submission remain blocked by the precisely recorded account/configuration gaps.
+
+Final domain checks: 54 unit tests and 14 PostgreSQL integration tests pass, including bounded reminder progress and delayed-window suppression. Source application-link changes are reviewed rather than guessed. Preserved local failure/fix evidence is separate from the unavailable authentic remote gate.

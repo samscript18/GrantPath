@@ -2,7 +2,17 @@ import { getAuth } from "@/server/accounts/auth";
 import { SetupError } from "@/lib/env";
 async function handler(request: Request) {
   try {
-    return await getAuth().handler(request);
+    const response = await getAuth().handler(request);
+    if (
+      request.method === "GET" &&
+      new URL(request.url).pathname.endsWith("/verify-email") &&
+      response.status >= 400
+    )
+      return Response.redirect(
+        new URL("/verify-email?error=expired-or-used", process.env.BETTER_AUTH_URL),
+        303,
+      );
+    return response;
   } catch (error) {
     return Response.json(
       {

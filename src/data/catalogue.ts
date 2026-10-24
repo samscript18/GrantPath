@@ -59,7 +59,16 @@ const requirement = (
 });
 function make(s: Spec): Entry {
   const evidence: ScholarshipData["evidence"] = [
-    { field: "funding", url: s.url, passage: s.passage, state: "verified", retrievedAt: checkedAt },
+    {
+      field: "funding",
+      url: s.url,
+      passage:
+        s.fundingType === "unknown"
+          ? "Funding components need further official-source confirmation; no complete package has been accepted."
+          : s.passage,
+      state: s.fundingType === "unknown" ? "missing" : "verified",
+      retrievedAt: checkedAt,
+    },
     {
       field: "levels",
       url: s.url,
@@ -126,26 +135,30 @@ function make(s: Spec): Entry {
       levels: s.levels,
       fields: [s.field || "Various fields"],
       fundingType: s.fundingType,
-      funding: [
-        {
-          component: "tuition",
-          coverage: s.tuitionFull
-            ? "full"
-            : s.fundingType === "tuition" || s.fundingType === "partial"
-              ? "partial"
-              : "unspecified",
-          description: s.funding,
-        },
-        ...(s.living
-          ? [
+      funding:
+        s.fundingType === "unknown"
+          ? []
+          : [
               {
-                component: "living" as const,
-                coverage: "unspecified" as const,
-                description: "Living-cost support; see the provider for award-specific terms.",
+                component: s.fundingType === "partial" ? "other" : "tuition",
+                coverage: s.tuitionFull
+                  ? "full"
+                  : s.fundingType === "tuition" || s.fundingType === "partial"
+                    ? "partial"
+                    : "unspecified",
+                description: s.funding,
               },
-            ]
-          : []),
-      ],
+              ...(s.living
+                ? [
+                    {
+                      component: "living" as const,
+                      coverage: "unspecified" as const,
+                      description:
+                        "Living-cost support; see the provider for award-specific terms.",
+                    },
+                  ]
+                : []),
+            ],
       fundingSummary: s.funding,
       availability: s.availability || "unknown",
       opensAt: null,
@@ -235,7 +248,8 @@ const specs: Spec[] = [
     tuitionFull: true,
     summary:
       "Humanities graduate funding with an additional supporting statement. Course deadlines and eligible subjects need checking.",
-    passage: "funds full-time graduate degrees in various subjects within the Humanities",
+    passage: "cover course fees and a grant for living costs",
+    levelPassage: "funds full-time graduate degrees in various subjects within the Humanities",
     deadlineLabel: "Relevant January course deadline",
     deadlineState: "date_only",
   },
@@ -254,6 +268,7 @@ const specs: Spec[] = [
     summary:
       "Graduate support for disadvantaged or underrepresented applicants. Multiple contextual routes and additional application conditions apply.",
     passage: "The scholarship covers course fees and provides a grant for living costs.",
+    levelPassage: "submit your application for graduate study",
     deadlineLabel: "Relevant December or January course deadline",
     deadlineState: "date_only",
   },
@@ -271,7 +286,8 @@ const specs: Spec[] = [
     tuitionFull: true,
     summary:
       "Selected full-time graduate courses for residents of specified Asian countries. Partner-college and shortlist application conditions apply.",
-    passage: "full-time masters or DPhil courses at Oxford",
+    passage: "The scholarship covers course fees and a grant for living costs.",
+    levelPassage: "full-time masters or DPhil courses at Oxford",
     deadlineLabel: "Relevant December or January course deadline",
     deadlineState: "date_only",
   },
@@ -343,6 +359,7 @@ const specs: Spec[] = [
     cycle: "2026/27",
     levels: ["bachelor"],
     fundingType: "tuition",
+    tuitionFull: true,
     funding: "Full tuition awards; only some awards also include maintenance support.",
     availability: "closed",
     deadline: "2026-04-27T16:00:00.000Z",
@@ -388,7 +405,7 @@ const specs: Spec[] = [
     availability: "upcoming",
     summary:
       "For outstanding incoming regular master’s students. Existing ETH master’s students and holders of a master’s degree are excluded. The provider’s closing-time wording needs clarification.",
-    passage: "from HS27 onwards 13'500 CHF",
+    passage: "scholarship covering living and study expenses ... as well as a tuition fee waiver",
     levelPassage: "supports excellent Master's students",
     deadlineLabel: "30 November 2026; provider closing-time wording conflicts",
     deadlineState: "conflicting",
@@ -400,7 +417,7 @@ const specs: Spec[] = [
           "qualification",
           "notIn",
           "Must not already hold a master’s degree",
-          ["master", "doctorate"],
+          ["master"],
         ),
         evidenceKey: "existing-degree",
       },
@@ -458,7 +475,8 @@ const specs: Spec[] = [
     deadlineLabel: "10 December 2026, 16:59 GMT",
     deadlineState: "confirmed",
     summary,
-    passage: "Full payment of your academic fees",
+    passage:
+      "Full payment of your academic fees ... A tax-free maintenance stipend to support living costs",
     levelPassage: "Eligible courses include: PhD, MPhil/PhD, EngD",
     deadlinePassage: "Scholarship Applications 10 December 2026",
     ...(slug === "china-scholarship-council"

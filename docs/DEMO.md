@@ -1,0 +1,12 @@
+# Demonstration outline
+
+1. Landing and discovery: real catalogue examples, search for Twente, filter destination; inspect funding and official evidence. Explain known versus uncertain dates and source-check history.
+2. Create an isolated student account, follow captured verification, save the four profile stages. Show citizenship versus residence, current/final-year qualifications versus intended master's study, and original GPA scale.
+3. Update matches. Open a potential match and read pass/fail/unknown reasons and provider-confirmation clauses. Show that ranking and application availability do not alter eligibility.
+4. Save an opportunity, add a note/checklist, move to Preparing documents. Reload and sign out/return. Show provider status remains independent.
+5. In the isolated browser test only, use the labelled controlled-source record. Operator reviews a proposed level change with evidence and accepts it; the real outbox handlers recalculate the student's outcome and create one alert. Replay creates no duplicate.
+6. Open the alert's exact evidence/evaluation context. Disable accepted-change alerts, accept the reversal, and show suppression. The prior alert still opens the older immutable evidence. A controlled source outage preserves last success and accepted data.
+7. Operator studio: actual attempts/success, pending review, audits and delivery states. Explain sink capture versus provider acceptance versus recipient receipt.
+8. Present TEST_EVIDENCE.md and the external setup ledger. Do not demonstrate a deployment, paid test result or blocked merge that has not actually occurred.
+
+For a live presentation use a dedicated isolated database, `EMAIL_MODE=sink`, and clearly label controlled fixtures. Public development/production seed data contains only real source-backed scholarships.

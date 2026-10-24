@@ -24,6 +24,17 @@ const months = [
   "december",
 ];
 export function parseClosingInstant(text: string): string | null {
+  const dates = [
+    ...text.matchAll(
+      /\b\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}\b/gi,
+    ),
+  ];
+  const times = [
+    ...text.matchAll(
+      /\b\d{1,2}(?:[:.]\d{2})?\s*(?:am|pm)\s*(?:GMT|BST|UTC|CET|CEST)\b|\b\d{1,2}[:.]\d{2}\s*(?:GMT|BST|UTC|CET|CEST)\b/gi,
+    ),
+  ];
+  if (dates.length !== 1 || times.length !== 1) return null;
   const date = text.match(
     /\b(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b/i,
   );
@@ -132,6 +143,19 @@ export function extractSource(
     : /applications[^\n]{0,50}(?:are now open|are open)/i.test(text)
       ? "open"
       : "unknown";
+  const applicationLinks = new Set<string>();
+  root.find("a[href]").each((_, element) => {
+    const anchor = $(element);
+    if (!/\bapply\b|application (?:form|portal|system)/i.test(anchor.text())) return;
+    try {
+      const link = new URL(anchor.attr("href")!, sourceUrl);
+      if (link.protocol === "https:" && !link.username && !link.password && !link.hash)
+        applicationLinks.add(link.href);
+    } catch {
+      /* An invalid link is not promoted into an application destination. */
+    }
+  });
+  facts.applicationLinks = [...applicationLinks].sort().slice(0, 20).join("\n");
   const normal = (v: string) => v.replace(/\s+/g, " ").trim();
   Object.keys(facts).forEach((k) => {
     facts[k] = normal(facts[k]);
@@ -144,6 +168,10 @@ export function extractSource(
   const warnings: string[] = [];
   candidate.sourceFacts = facts;
   const previous = accepted.sourceFacts;
+  if (previous && facts.applicationLinks !== (previous.applicationLinks || ""))
+    warnings.push(
+      "Application links changed. Inspect the official anchors and correct the application destination if needed; a removed link does not close the cycle.",
+    );
   const evidence = (
     field: string,
     passage: string,
@@ -205,9 +233,13 @@ export function extractSource(
       candidate.deadlineState = "confirmed";
       candidate.deadlineLabel = facts.deadline.slice(0, 300);
       evidence("deadline", facts.deadline);
-    } else if (!instant && previous && facts.deadline !== previous.deadline) {
+    } else if (
+      !instant &&
+      facts.deadline !== previous?.deadline &&
+      facts.deadline !== accepted.deadlineLabel
+    ) {
       candidate.deadline = null;
-      candidate.deadlineState = "date_only";
+      candidate.deadlineState = "conflicting";
       candidate.deadlineLabel = facts.deadline.slice(0, 300);
       evidence("deadline", facts.deadline, "conflicting");
       warnings.push(

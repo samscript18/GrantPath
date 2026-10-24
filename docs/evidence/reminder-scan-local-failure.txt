@@ -1,0 +1,14 @@
+Observed local PostgreSQL integration failures, 24 October 2026.
+
+Original failure at 13:22:01 local:
+12 passed, 1 failed (13 total), 13.11s.
+notifications.test.ts: schedules only confirmed open deadlines at seven and one day, with replay deduplication.
+The expected deadline outbox row was absent. Repeated isolated fixtures had accumulated beyond the bounded first 100 scholarships; already queued rows occupied the next scan too.
+
+Fix development initially produced a PostgreSQL 42601 syntax error because "window" is a reserved alias. Renamed the alias. The next assertions still failed because Date parameter casts interacted with the local database session time zone (Africa/Lagos). The final query compares stored UTC timestamps against an explicit ISO timestamptz converted to UTC and excludes existing durable event keys before LIMIT.
+
+Final focused domain verification:
+npm run test:integration — 14 passed (7 files), 13:27:00 local, 7.14s.
+New assertion: two fresh records are both scheduled across successive limit=1 runs, then replay queues zero, with millisecond-precise identities. Existing delayed-reminder suppression and confirmed-only cases also pass.
+
+These are local findings and fixes, not TestSprite checks or GitHub merge-block evidence. No assertion was weakened to obtain a passing result.

@@ -11,8 +11,8 @@ export default function ErrorPage({
       <p className="eyebrow">A pause along the way</p>
       <h1 className="editorial mt-5 text-4xl">We couldn’t load this page.</h1>
       <p className="my-6 text-sm leading-6 text-muted-foreground">
-        Your saved work is safe. Try again in a moment. If you’re setting up GrantPath, run npm run
-        setup:check and confirm the database is available.
+        We couldn’t retrieve your information. Try again in a moment. If this continues, contact the
+        GrantPath administrator.
       </p>
       <Button onClick={retry}>Try again</Button>
     </main>

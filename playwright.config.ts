@@ -28,9 +28,12 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run dev -- --port 3100",
+    command:
+      process.env.PLAYWRIGHT_PRODUCTION === "1"
+        ? "npm run start -- --port 3100"
+        : "npm run dev -- --port 3100",
     url: `${baseURL}/login`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI && process.env.PLAYWRIGHT_PRODUCTION !== "1",
     timeout: 120000,
     env: {
       DATABASE_URL: database,

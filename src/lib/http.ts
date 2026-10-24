@@ -1,6 +1,7 @@
 import { getAuth, type Actor } from "@/server/accounts/auth";
 import { mutationQuota } from "@/server/rate-limit";
 import { z } from "zod";
+import { DomainInputError } from "./errors";
 export async function apiActor(request: Request): Promise<Actor> {
   if (request.method !== "GET" && request.method !== "HEAD") {
     const origin = request.headers.get("origin");
@@ -26,6 +27,8 @@ export class HttpError extends Error {
   }
 }
 export function apiError(error: unknown) {
+  if (error instanceof DomainInputError)
+    return Response.json({ message: error.message }, { status: 400 });
   if (error instanceof z.ZodError)
     return Response.json(
       { message: "Please check the highlighted fields.", issues: error.flatten() },

@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-10-24T11:55:52.090Z",
+  "environment": "Local production build; one cold browser-cache sample per public route. 360×800; 150ms latency; 1.6Mbps down/750kbps up; 4× CPU throttle. Loopback PostgreSQL, no hosting/CDN latency. Not field-performance evidence.",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "domContentLoadedMs": 628,
+      "loadMs": 1395,
+      "lcpMs": 888,
+      "transferredBytes": 12231
+    },
+    {
+      "path": "/scholarships",
+      "status": 200,
+      "domContentLoadedMs": 570,
+      "loadMs": 1348,
+      "lcpMs": 960,
+      "transferredBytes": 27048
+    },
+    {
+      "path": "/scholarships/twente-uts-2027",
+      "status": 200,
+      "domContentLoadedMs": 550,
+      "loadMs": 1367,
+      "lcpMs": 960,
+      "transferredBytes": 19943
+    }
+  ]
+}

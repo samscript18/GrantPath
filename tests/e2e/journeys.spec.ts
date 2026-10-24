@@ -1,6 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import { db } from "../../src/lib/db";
-const password = "Isolated-test-passphrase-42";
+const password = process.env.TEST_ACCOUNT_PASSWORD || "Isolated-test-passphrase-42";
 test("registration, captured verification, staged profile, sign out and return", async ({
   page,
 }) => {
@@ -119,6 +119,7 @@ test("360px public pages have no horizontal overflow and empty filters recover",
   await page.setViewportSize({ width: 360, height: 800 });
   for (const path of ["/", "/login", "/scholarships", "/scholarships/eth-esop-2027"]) {
     await page.goto(path);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
       path,

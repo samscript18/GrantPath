@@ -1,3 +1,4 @@
+import { stableJson } from "@/lib/json";
 import { db } from "@/lib/db";
 import type { Actor } from "@/server/accounts/auth";
 import { emptyProfile, profileSchema } from "./schema";
@@ -22,7 +23,7 @@ export async function saveProfile(
     const previous = await tx.profile.findUnique({ where: { userId: actor.id } });
     if ((previous?.version ?? 0) !== expectedVersion)
       throw new Error("Your profile changed in another tab. Reload before saving.");
-    if (previous && JSON.stringify(previous.data) === JSON.stringify(data)) {
+    if (previous && stableJson(previous.data) === stableJson(data)) {
       return tx.profile.update({ where: { userId: actor.id }, data: { stage } });
     }
     const version = expectedVersion + 1;

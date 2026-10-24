@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { DomainInputError } from "@/lib/errors";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
 import { scholarshipDataSchema } from "@/server/scholarships/schema";
 import { publishScholarship, semanticHash } from "@/server/scholarships/publish";
@@ -235,6 +236,7 @@ export async function decideReview(
     reason: string;
     confirmedFields: string[];
     candidate?: unknown;
+    sameCycleConfirmed?: boolean;
   },
 ) {
   requireOperator(actor);
@@ -260,6 +262,10 @@ export async function decideReview(
       return { state: "rejected", changed: false };
     });
   }
+  if (input.sameCycleConfirmed !== true)
+    throw new DomainInputError(
+      "Confirm this source update belongs to the existing application cycle. Create a separate opportunity for a new cycle.",
+    );
   const candidate = scholarshipDataSchema.parse(input.candidate || review.candidate);
   candidate.evidence = candidate.evidence.map((e) =>
     input.confirmedFields.includes(e.field) ? { ...e, state: "verified" as const } : e,

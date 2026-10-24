@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { alertKey, preferencesSchema } from "../../src/server/notifications";
-import { reminderEventKey } from "../../src/server/notifications/events";
+import { reminderEventKey, inReminderWindow } from "../../src/server/notifications/events";
 describe("notification identity and defaults", () => {
+  it("keeps reminders inside their actual window, including delayed work and exact boundaries", () => {
+    const close = new Date("2027-01-15T12:00:00Z");
+    expect(inReminderWindow(close, 7, new Date("2027-01-08T12:00:00Z"))).toBe(true);
+    expect(inReminderWindow(close, 7, new Date("2027-01-08T11:59:59Z"))).toBe(false);
+    expect(inReminderWindow(close, 7, new Date("2027-01-09T12:00:00Z"))).toBe(false);
+    expect(inReminderWindow(close, 7, new Date("2027-01-14T12:00:00Z"))).toBe(false);
+    expect(inReminderWindow(close, 1, new Date("2027-01-14T12:00:00Z"))).toBe(true);
+    expect(inReminderWindow(close, 1, close)).toBe(false);
+    expect(inReminderWindow(close, 2, new Date("2027-01-13T12:00:00Z"))).toBe(false);
+  });
   it("deduplicates the same tuple and separates topics, channels, users, cycles and events", () => {
     const base = {
       userId: "a",

@@ -97,3 +97,32 @@ export async function scholarshipBySlug(slug: string) {
   };
 }
 export type CatalogueRow = Awaited<ReturnType<typeof catalogue>>["rows"][number];
+export async function featuredScholarships() {
+  const rows = await db().scholarship.findMany({
+    where: {
+      published: true,
+      availability: { in: ["open", "upcoming"] },
+      OR: [{ deadline: null }, { deadline: { gt: new Date() } }],
+    },
+    include: {
+      programme: { include: { provider: true } },
+      versions: { orderBy: { number: "desc" }, take: 1 },
+      sources: true,
+    },
+    orderBy: [{ deadline: { sort: "asc", nulls: "last" } }, { title: "asc" }],
+    take: 30,
+  });
+  const providers = new Set<string>();
+  return rows
+    .filter((row) => {
+      if (providers.has(row.programme.providerId)) return false;
+      providers.add(row.programme.providerId);
+      return true;
+    })
+    .slice(0, 3)
+    .map((row) => ({
+      ...row,
+      data: scholarshipDataSchema.parse(row.versions[0].data),
+      currentAvailability: availabilityOf(row),
+    }));
+}

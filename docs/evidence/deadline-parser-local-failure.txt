@@ -1,0 +1,16 @@
+Local Vitest run, 24 October 2026, before the ambiguity fix.
+Command: npm test
+
+FAIL tests/unit/monitoring.test.ts > bounded explicit official adapters > never guesses an instant without an explicit year, time and zone
+AssertionError: expected '2027-05-01T16:00:00.000Z' to be null
+
+Input: Opens 1 May 2027; closes 7 May 2027, 5pm BST
+Expected: null (multiple dates are ambiguous for this bounded parser)
+Received: 2027-05-01T16:00:00.000Z
+
+Test Files: 1 failed, 6 passed
+Tests: 1 failed, 51 passed (52)
+Start: 12:58:20 local time
+Duration: 731ms
+
+The test exposed the previous implementation choosing the first date and a later time. No deliberate production regression was introduced. The fix rejects multiple date/time candidates, and the assertions remain enabled. This is local failure evidence, not TestSprite or GitHub blocked-merge evidence.

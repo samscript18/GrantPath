@@ -9,7 +9,7 @@ import { SourceControls, RegisterSource } from "@/components/source-controls";
 import { ReviewPanel } from "@/components/review-panel";
 import { scholarshipDataSchema } from "@/server/scholarships/schema";
 import { materialChanges } from "@/server/scholarships/changes";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatTimestamp } from "@/lib/utils";
 import { RetryEvent } from "@/components/delivery-diagnostics";
 import { OperatorEditor } from "@/components/operator-editor";
 export const metadata = { title: "Operator studio" };
@@ -135,8 +135,8 @@ export default async function OperatorPage({
                 {source.enabled ? "scheduled" : "paused"}
               </p>
               <div className="mt-4 grid gap-2 text-[10px] text-muted-foreground">
-                <p>Last attempted check: {formatDate(source.lastAttemptAt)}</p>
-                <p>Last successful check: {formatDate(source.lastSuccessAt)}</p>
+                <p>Last attempted check: {formatTimestamp(source.lastAttemptAt)}</p>
+                <p>Last successful check: {formatTimestamp(source.lastSuccessAt)}</p>
                 <p>{source.requestedAt ? "Manual check queued" : "No manual check pending"}</p>
               </div>
               <SourceControls source={source} />
@@ -176,6 +176,14 @@ export default async function OperatorPage({
         <div className="mt-5 space-y-5">
           {overview.reviews.map((review) => {
             const candidate = scholarshipDataSchema.parse(review.candidate);
+            const observed = review.observation?.candidate;
+            const warnings =
+              observed &&
+              typeof observed === "object" &&
+              !Array.isArray(observed) &&
+              Array.isArray(observed.warnings)
+                ? observed.warnings.filter((w): w is string => typeof w === "string")
+                : [];
             const accepted = overview.scholarships.find((s) => s.id === review.scholarshipId)
               ?.versions[0];
             const changes = materialChanges(
@@ -185,6 +193,16 @@ export default async function OperatorPage({
             return (
               <article key={review.id} className="paper p-6">
                 <h3 className="mb-4 font-serif text-2xl">{review.scholarship.title}</h3>
+                {warnings.length > 0 && (
+                  <div className="mb-5 border-l-2 border-accent bg-accent/10 p-4">
+                    <p className="text-xs font-semibold">Extraction needs your review</p>
+                    <ul className="mt-2 list-disc space-y-2 pl-4 text-xs leading-6">
+                      {warnings.map((w) => (
+                        <li key={w}>{w}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <div className="mb-5 space-y-3">
                   {changes.map((change) => (
                     <details key={change.field} className="border-t border-border pt-3">
@@ -203,7 +221,12 @@ export default async function OperatorPage({
                   ))}
                 </div>
                 <ReviewPanel
-                  review={{ id: review.id, baseVersion: review.baseVersion, candidate }}
+                  review={{
+                    id: review.id,
+                    baseVersion: review.baseVersion,
+                    cycle: review.scholarship.cycle,
+                    candidate,
+                  }}
                 />
               </article>
             );
@@ -251,21 +274,25 @@ export default async function OperatorPage({
             </article>
           ))}
         </div>
-        <h3 className="mt-7 font-serif text-xl">Persisted application events</h3>
-        <div className="mt-4 space-y-3">
-          {overview.events.map((event) => (
-            <article key={event.id} className="paper p-4">
-              <p className="text-xs font-semibold">
-                {event.topic} · {event.state}
-              </p>
-              <p className="mt-2 text-[10px] text-muted-foreground">
-                Attempts {event.attempts} · Available {formatDate(event.availableAt)}
-              </p>
-              {event.error && <p className="mt-2 text-xs">{event.error}</p>}
-              {event.state === "failed" && <RetryEvent id={event.id} />}
-            </article>
-          ))}
-        </div>
+        <details className="mt-7">
+          <summary className="cursor-pointer font-serif text-xl">
+            Persisted application events · {overview.events.length} recent
+          </summary>
+          <div className="mt-4 space-y-3">
+            {overview.events.map((event) => (
+              <article key={event.id} className="paper p-4">
+                <p className="text-xs font-semibold">
+                  {event.topic} · {event.state}
+                </p>
+                <p className="mt-2 text-[10px] text-muted-foreground">
+                  Attempts {event.attempts} · Available {formatDate(event.availableAt)}
+                </p>
+                {event.error && <p className="mt-2 text-xs">{event.error}</p>}
+                {event.state === "failed" && <RetryEvent id={event.id} />}
+              </article>
+            ))}
+          </div>
+        </details>
         <details className="mt-8">
           <summary className="cursor-pointer font-serif text-xl">
             Recent operator audit trail

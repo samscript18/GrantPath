@@ -9,6 +9,12 @@ import { materialChanges } from "@/server/scholarships/changes";
 export const notificationTopics = ["match.created", "change.ready", "deadline.ready"];
 export const reminderEventKey = (scholarshipId: string, instant: string, days: number) =>
   `deadline:${scholarshipId}:${new Date(instant).toISOString()}:d${days}`;
+export function inReminderWindow(deadline: Date, days: number, now: Date) {
+  const remaining = deadline.getTime() - now.getTime();
+  return (
+    (days === 7 || days === 1) && remaining <= days * 86400000 && remaining > (days - 1) * 86400000
+  );
+}
 const matchPayload = z.object({
   userId: z.string(),
   scholarshipId: z.string(),
@@ -169,23 +175,34 @@ export async function handleNotificationEvent(event: Outbox) {
   throw new Error("Unrecognised notification event.");
 }
 export async function scheduleReminders(now = new Date(), limit = 100) {
+  const bounded = Math.max(1, Math.min(100, limit));
+  // Exclude durable event identities before LIMIT; queued early rows must not
+  // starve later opportunities on every repeated bounded scheduler invocation.
+  const candidates = await db().$queryRaw<{ id: string }[]>`
+    SELECT s.id FROM "Scholarship" s CROSS JOIN (VALUES (7),(1)) AS reminder_window(days)
+    WHERE s.published = true AND s.availability = 'open'
+      AND s.deadline > (${now.toISOString()}::timestamptz AT TIME ZONE 'UTC') + (reminder_window.days-1) * interval '1 day'
+      AND s.deadline <= (${now.toISOString()}::timestamptz AT TIME ZONE 'UTC') + reminder_window.days * interval '1 day'
+      AND NOT EXISTS (SELECT 1 FROM "Outbox" o WHERE o.key =
+        'deadline:' || s.id || ':' || to_char(s.deadline,'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') || ':d' || reminder_window.days)
+    ORDER BY s.deadline,s.id LIMIT ${bounded}`;
   const rows = await db().scholarship.findMany({
     where: {
+      id: { in: candidates.map((row) => row.id) },
       published: true,
       availability: "open",
       deadline: { gt: now, lte: new Date(now.getTime() + 7 * 86400000) },
     },
     include: { versions: { orderBy: { number: "desc" }, take: 1 } },
     orderBy: [{ deadline: "asc" }, { id: "asc" }],
-    take: Math.max(1, Math.min(100, limit)),
+    take: bounded,
   });
   let queued = 0;
   for (const s of rows) {
     const data = scholarshipDataSchema.parse(s.versions[0].data);
     if (!s.deadline || data.deadlineState !== "confirmed") continue;
-    const remaining = s.deadline.getTime() - now.getTime();
     for (const days of [7, 1] as const) {
-      if (remaining > days * 86400000 || remaining <= (days - 1) * 86400000) continue;
+      if (!inReminderWindow(s.deadline, days, now)) continue;
       const key = reminderEventKey(s.id, s.deadline.toISOString(), days);
       const result = await db().outbox.createMany({
         data: [

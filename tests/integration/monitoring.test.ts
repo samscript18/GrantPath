@@ -76,8 +76,25 @@ describe("controlled snapshots use the production processing path", () => {
     });
     expect(first.state).toBe("review");
     if (!("reviewId" in first)) throw new Error("Missing review");
+    await expect(
+      decideReview(operator, first.reviewId!, {
+        decision: "accept",
+        reason: "Cycle identity must be checked separately.",
+        confirmedFields: [],
+      }),
+    ).rejects.toThrow("existing application cycle");
+    await expect(
+      decideReview(operator, first.reviewId!, {
+        decision: "accept",
+        sameCycleConfirmed: true,
+        reason: "Unreviewed closing instants must remain unpublished.",
+        confirmedFields: [],
+      }),
+    ).rejects.toThrow("deadline");
+    expect((await db().scholarship.findUniqueOrThrow({ where: { id: s.id } })).version).toBe(1);
     await decideReview(operator, first.reviewId!, {
       decision: "accept",
+      sameCycleConfirmed: true,
       reason: "Checked the controlled source baseline against the isolated fixture.",
       confirmedFields: [
         "source.levels",
@@ -101,12 +118,14 @@ describe("controlled snapshots use the production processing path", () => {
     await expect(
       decideReview(actor, changed.reviewId!, {
         decision: "accept",
+        sameCycleConfirmed: true,
         reason: "Students cannot approve source changes.",
         confirmedFields: ["levels"],
       }),
     ).rejects.toThrow("Operator");
     await decideReview(operator, changed.reviewId!, {
       decision: "accept",
+      sameCycleConfirmed: true,
       reason: "Checked the changed target level in the controlled source snapshot.",
       confirmedFields: [
         "levels",

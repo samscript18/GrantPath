@@ -7,7 +7,7 @@ import type { ScholarshipData } from "@/server/scholarships/schema";
 export function ReviewPanel({
   review,
 }: {
-  review: { id: string; baseVersion: number; candidate: ScholarshipData };
+  review: { id: string; baseVersion: number; cycle: string; candidate: ScholarshipData };
 }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
@@ -32,6 +32,7 @@ export function ReviewPanel({
               decision,
               candidate,
               confirmedFields: f.getAll("confirmedFields"),
+              sameCycleConfirmed: f.get("sameCycleConfirmed") === "on",
               reason: f.get("reason"),
             }),
           });
@@ -77,6 +78,13 @@ export function ReviewPanel({
             </label>
           ))}
       </fieldset>
+      <label className="flex items-start gap-3 border-l-2 border-accent py-2 pl-3 text-xs leading-6">
+        <input type="checkbox" name="sameCycleConfirmed" className="mt-1 accent-primary" />
+        <span>
+          I checked that this update belongs to cycle {review.cycle}. A new cycle must be created as
+          a separate opportunity, preserving this record.
+        </span>
+      </label>
       <details>
         <summary className="cursor-pointer text-xs underline">
           Inspect or correct structured candidate before accepting

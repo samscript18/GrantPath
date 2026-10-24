@@ -12,3 +12,7 @@ export function formatDate(value: Date | string | null | undefined, timeZone = "
     timeZone,
   }).format(new Date(value));
 }
+export function formatTimestamp(value: Date | string | null | undefined, timeZone = "UTC") {
+  if (!value) return "Never recorded";
+  return `${new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone }).format(new Date(value))} · ${timeZone}`;
+}

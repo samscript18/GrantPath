@@ -2,7 +2,13 @@ import Link from "next/link";
 import { ArrowUpRight, Check, Compass, FileCheck2, Sprout } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-export default function Home() {
+import { connection } from "next/server";
+import { featuredScholarships } from "@/server/scholarships";
+import { fundingLabels } from "@/server/scholarships/schema";
+import { Badge } from "@/components/ui/badge";
+export default async function Home() {
+  await connection();
+  const featured = process.env.DATABASE_URL ? await featuredScholarships() : [];
   return (
     <div>
       <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-7 sm:px-12">
@@ -115,6 +121,66 @@ export default function Home() {
               );
             })}
           </div>
+        </section>
+        <section className="mx-auto max-w-7xl px-6 pt-18 sm:px-12">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow text-muted-foreground">
+                REAL OPPORTUNITIES. REAL POSSIBILITIES.
+              </p>
+              <h2 className="editorial mt-4 text-4xl sm:text-5xl">
+                A glimpse of what’s out there.
+              </h2>
+            </div>
+            <Link
+              href="/scholarships"
+              className="inline-flex items-center gap-2 text-xs underline underline-offset-4"
+            >
+              Explore the catalogue <ArrowUpRight size={14} />
+            </Link>
+          </div>
+          {featured.length ? (
+            <div className="grid border-y border-border md:grid-cols-3">
+              {featured.map((s, i) => (
+                <article
+                  key={s.id}
+                  className={`py-7 ${i ? "border-t border-border md:border-t-0 md:border-l md:pl-7" : ""} md:pr-7`}
+                >
+                  <p className="eyebrow text-[9px] text-muted-foreground">
+                    {s.programme.provider.name}
+                  </p>
+                  <Link
+                    href={`/scholarships/${s.slug}`}
+                    className="mt-4 flex items-start justify-between gap-3 font-serif text-[25px] leading-snug"
+                  >
+                    {s.title}
+                    <ArrowUpRight size={15} className="mt-1.5 shrink-0" />
+                  </Link>
+                  <p className="mt-4 text-[11px] text-muted-foreground">
+                    {s.destination} · {s.data.levels.join(" / ")} · {s.cycle}
+                  </p>
+                  <p className="mt-4 text-xs leading-6 text-muted-foreground">
+                    {s.data.fundingSummary}
+                  </p>
+                  <Badge
+                    className="mt-5"
+                    tone={s.fundingType === "comprehensive" ? "green" : "neutral"}
+                  >
+                    {fundingLabels[s.data.fundingType]}
+                  </Badge>
+                  <p className="mt-3 text-[10px] text-muted-foreground">
+                    {s.currentAvailability === "open" ? "Applications open" : "Upcoming cycle"} ·
+                    Inspect official conditions
+                  </p>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="border-y border-border py-8 text-sm leading-7 text-muted-foreground">
+              The catalogue is being prepared. Opportunities appear here only after source-backed
+              records have been accepted.
+            </p>
+          )}
         </section>
         <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 sm:px-12 lg:grid-cols-2">
           <div>

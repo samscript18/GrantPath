@@ -36,7 +36,10 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
       if (result.error) setMessage(result.error.message || "Unable to continue. Please try again.");
       else if (mode === "register")
         router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
-      else router.push("/dashboard");
+      else {
+        router.replace("/dashboard");
+        router.refresh();
+      }
     } catch {
       setMessage("Account service unavailable. Please retry in a moment.");
     }
@@ -118,6 +121,13 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           {mode === "login" ? "Find your path" : "Sign in"}
         </Link>
       </p>
+      {mode === "login" && (
+        <p className="text-center text-xs">
+          <Link href="/verify-email" className="text-muted-foreground underline underline-offset-4">
+            Resend an email verification link
+          </Link>
+        </p>
+      )}
     </form>
   );
 }

@@ -9,7 +9,7 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "prisma generate && next build",
     "start": "next start --hostname 127.0.0.1",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -26,7 +26,8 @@
     "check": "npm run typecheck && npm run lint && npm test",
     "db:test-migrate": "tsx scripts/test-db.ts",
     "operator:grant": "tsx scripts/grant-operator.ts",
-    "sources:smoke": "tsx scripts/source-smoke.ts"
+    "sources:smoke": "tsx scripts/source-smoke.ts",
+    "catalogue:corrections": "tsx scripts/catalogue-corrections.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "1.7.12",

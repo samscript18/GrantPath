@@ -18,13 +18,14 @@ import { scholarshipBySlug } from "@/server/scholarships";
 import { evidenceHealth } from "@/server/evidence";
 import { fundingLabels, scholarshipDataSchema } from "@/server/scholarships/schema";
 import { ChangeTimeline } from "@/components/change-timeline";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatTimestamp } from "@/lib/utils";
 import { applicationForScholarship } from "@/server/applications";
 import { SaveButton } from "@/components/save-button";
 import { ApplicationEditor } from "@/components/application-editor";
 import { studentAssessment } from "@/server/eligibility";
 import { Assessment } from "@/components/assessment";
 import { Recalculate } from "@/components/recalculate";
+import { getProfile } from "@/server/profiles";
 import type { Rule } from "@/server/eligibility/rules";
 function Rules({ rule }: { rule: Rule }) {
   return rule.kind === "requirement" ? (
@@ -73,12 +74,14 @@ export default async function ScholarshipDetail({
     : s.versions[0];
   if (!selected) notFound();
   const historical = selected.number !== s.version;
-  const [match, application] = actor
+  const [match, application, viewerProfile] = actor
     ? await Promise.all([
         studentAssessment(actor, s.id, selected.number, query.evaluation),
         applicationForScholarship(actor, s.id),
+        getProfile(actor),
       ])
-    : [null, null];
+    : [null, null, null];
+  const viewerTimeZone = viewerProfile?.data.timeZone || "UTC";
   const d = scholarshipDataSchema.parse(selected.data);
   const health = evidenceHealth(d);
   return (
@@ -212,9 +215,16 @@ export default async function ScholarshipDetail({
                           : "Needs confirmation"}
                   </Badge>
                 </div>
-                <blockquote className="mt-3 border-l-2 border-accent/60 pl-4 font-serif text-base leading-7">
-                  {e.passage}
-                </blockquote>
+                {e.state === "verified" ? (
+                  <blockquote className="mt-3 border-l-2 border-accent/60 pl-4 font-serif text-base leading-7">
+                    {e.passage}
+                  </blockquote>
+                ) : (
+                  <p className="mt-3 border-l-2 border-accent/60 pl-4 text-xs leading-7">
+                    <span className="font-semibold">Recorded uncertainty: </span>
+                    {e.passage}
+                  </p>
+                )}
                 <div className="mt-3 flex flex-wrap justify-between gap-2 text-[10px] text-muted-foreground">
                   <a
                     href={e.url}
@@ -251,15 +261,20 @@ export default async function ScholarshipDetail({
               APPLICATION TIMING
             </p>
             <h2 className="mt-4 font-serif text-2xl">
-              {d.deadline ? formatDate(d.deadline) : "Check the closing date"}
+              {d.deadline ? formatDate(d.deadline, viewerTimeZone) : "Check the closing date"}
             </h2>
             <p className="mt-3 text-xs leading-6 text-muted-foreground">
               {d.deadlineLabel || "A closing date has not been confirmed."}
             </p>
             {d.deadline && (
               <p className="mt-2 text-[10px] text-muted-foreground">
-                Closing instant (UTC):{" "}
-                {new Date(d.deadline).toISOString().replace("T", " ").replace(".000Z", " UTC")}
+                Closes{" "}
+                {new Intl.DateTimeFormat("en-GB", {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                  timeZone: viewerTimeZone,
+                }).format(new Date(d.deadline))}{" "}
+                · {viewerTimeZone}
               </p>
             )}
             {d.deadlineState !== "confirmed" && (
@@ -313,8 +328,8 @@ export default async function ScholarshipDetail({
                         : "Scheduled checks not enabled"}{" "}
                       · {source.health.replaceAll("_", " ")}
                     </p>
-                    <p>Latest attempt: {formatDate(source.lastAttemptAt)}</p>
-                    <p>Last successful check: {formatDate(source.lastSuccessAt)}</p>
+                    <p>Latest attempt: {formatTimestamp(source.lastAttemptAt)}</p>
+                    <p>Last successful check: {formatTimestamp(source.lastSuccessAt)}</p>
                   </div>
                 ))
               ) : (

@@ -103,6 +103,22 @@ export const scholarshipDataSchema = z
         });
   });
 export type ScholarshipData = z.infer<typeof scholarshipDataSchema>;
+// Extraction candidates may be uncertain. Accepted operational labels require reviewed evidence.
+export const publicationSchema = scholarshipDataSchema.superRefine((data, ctx) => {
+  const checked = (field: string) =>
+    data.evidence.some((e) => e.field === field && e.state === "verified");
+  for (const field of [
+    ...(data.deadlineState === "confirmed" ? ["deadline"] : []),
+    ...(data.availability !== "unknown" ? ["availability"] : []),
+    ...(data.fundingType !== "unknown" ? ["funding"] : []),
+  ])
+    if (!checked(field))
+      ctx.addIssue({
+        code: "custom",
+        path: [field],
+        message: `Confirm official ${field} evidence before publishing this label, or retain an unknown state.`,
+      });
+});
 export const fundingLabels = {
   comprehensive: "Tuition + living support",
   tuition: "Tuition support",

@@ -3,7 +3,7 @@ import { sendEmail } from "@/server/accounts/email";
 import { preferencesSchema, type Topic } from "./index";
 import { availabilityOf, scholarshipDataSchema } from "@/server/scholarships/schema";
 import { ENGINE_VERSION } from "@/server/eligibility/engine";
-import { reminderEventKey } from "./events";
+import { reminderEventKey, inReminderWindow } from "./events";
 import type { Delivery, Prisma } from "@/generated/prisma/client";
 type Client = Prisma.TransactionClient;
 export async function deliveryDecision(
@@ -71,6 +71,7 @@ export async function deliveryDecision(
     const days = Number(delivery.eventId.match(/:d(7|1)$/)?.[1]);
     if (
       !s.deadline ||
+      !inReminderWindow(s.deadline, days, now) ||
       data.deadlineState !== "confirmed" ||
       availabilityOf(s, now) !== "open" ||
       delivery.eventId !== reminderEventKey(s.id, s.deadline.toISOString(), days) ||
@@ -80,7 +81,7 @@ export async function deliveryDecision(
       return {
         allowed: false,
         reason:
-          "Closing instant, provider window or personal plan changed; stale reminder suppressed.",
+          "Closing instant, reminder window, provider window or personal plan changed; stale reminder suppressed.",
       };
   }
   return { allowed: true, reason: "Current preference and relevance checks passed.", user };

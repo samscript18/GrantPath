@@ -1,13 +1,13 @@
 import { createHash } from "node:crypto";
 import { db } from "@/lib/db";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
-import { scholarshipDataSchema } from "./schema";
+import { publicationSchema } from "./schema";
 import type { Prisma } from "@/generated/prisma/client";
 export function canonical(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(canonical).sort().join(",")}]`;
   if (value && typeof value === "object")
     return `{${Object.entries(value)
-      .filter(([key]) => !["retrievedAt"].includes(key))
+      .filter(([key, value]) => key !== "retrievedAt" && value !== undefined)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([k, v]) => `${JSON.stringify(k)}:${canonical(v)}`)
       .join(",")}}`;
@@ -26,7 +26,7 @@ export async function publishScholarship(
   requireOperator(actor);
   if (reason.trim().length < 10)
     throw new Error("Explain the review decision in at least 10 characters.");
-  const data = scholarshipDataSchema.parse(input);
+  const data = publicationSchema.parse(input);
   const hash = semanticHash(data);
   return db().$transaction(async (tx) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${scholarshipId}))`;
@@ -69,6 +69,20 @@ export async function publishScholarship(
         deadlineLabel: data.deadlineLabel,
         version: number,
         published: true,
+      },
+    });
+    await tx.review.updateMany({
+      where: {
+        scholarshipId,
+        state: "pending",
+        baseVersion: { lt: number },
+        ...(reviewId ? { id: { not: reviewId } } : {}),
+      },
+      data: {
+        state: "superseded",
+        actorId: actor.id,
+        decidedAt: new Date(),
+        reason: `Superseded by accepted version ${number}; original candidate retained for audit.`,
       },
     });
     await tx.outbox.create({

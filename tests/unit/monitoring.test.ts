@@ -9,6 +9,27 @@ import { testScholarship } from "../fixtures/scholarship";
 import { semanticHash } from "../../src/server/scholarships/publish";
 import { uclSnapshot } from "../fixtures/source";
 describe("bounded explicit official adapters", () => {
+  it("detects application-link changes without guessing a new official destination or closing a cycle", () => {
+    const d = testScholarship();
+    const html = uclSnapshot().replace(
+      "</main>",
+      '<a href="/apply/first">Application portal</a></main>',
+    );
+    const first = extractSource("ucl-scholarship", html, d, d.officialUrl);
+    const accepted = { ...first.candidate, sourceFacts: first.facts };
+    const next = extractSource(
+      "ucl-scholarship",
+      html.replace("/apply/first", "/apply/next"),
+      accepted,
+      d.officialUrl,
+    );
+    expect(next.facts.applicationLinks).toContain("/apply/next");
+    expect(next.warnings).toContainEqual(expect.stringContaining("Application links changed"));
+    expect(next.candidate.applicationUrl).toBe(d.applicationUrl);
+    const removed = extractSource("ucl-scholarship", uclSnapshot(), accepted, d.officialUrl);
+    expect(removed.warnings).toContainEqual(expect.stringContaining("Application links changed"));
+    expect(removed.candidate.availability).toBe(d.availability);
+  });
   it("normalises scoped sections, detects changed study level and ignores unrelated navigation", () => {
     const d = testScholarship();
     const a = extractSource("ucl-scholarship", uclSnapshot(), d, d.officialUrl);
@@ -42,6 +63,8 @@ describe("bounded explicit official adapters", () => {
     expect(parseClosingInstant("5pm BST, Thursday 7 May 2026")).toBe("2026-05-07T16:00:00.000Z");
     expect(parseClosingInstant("31 February 2027, 16:00 GMT")).toBeNull();
     expect(parseClosingInstant("10 December 2026, 16:59 GMT")).toBe("2026-12-10T16:59:00.000Z");
+    expect(parseClosingInstant("Opens 1 May 2027; closes 7 May 2027, 5pm BST")).toBeNull();
+    expect(parseClosingInstant("7 May 2027, 5pm BST or 6pm BST")).toBeNull();
   });
   it("rejects arbitrary URLs, redirects targets, private and mapped addresses", () => {
     for (const url of [

@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: { default: "GrantPath — A clearer path to your next chapter", template: "%s · GrantPath" },
   description:
     "Discover real scholarships, understand your eligibility, and turn opportunity into a plan. Official evidence. Clear next steps.",
+  icons: { icon: "/icon.svg" },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

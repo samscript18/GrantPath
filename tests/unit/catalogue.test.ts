@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { reviewedCatalogue } from "../../src/data/catalogue";
-import { scholarshipDataSchema, availabilityOf } from "../../src/server/scholarships/schema";
+import {
+  scholarshipDataSchema,
+  publicationSchema,
+  availabilityOf,
+} from "../../src/server/scholarships/schema";
 import { semanticHash } from "../../src/server/scholarships/publish";
 import { testScholarship } from "../fixtures/scholarship";
 describe("accepted catalogue and evidence", () => {
@@ -8,6 +12,7 @@ describe("accepted catalogue and evidence", () => {
     expect(reviewedCatalogue).toHaveLength(20);
     for (const entry of reviewedCatalogue) {
       expect(scholarshipDataSchema.safeParse(entry.data).success, entry.slug).toBe(true);
+      expect(publicationSchema.safeParse(entry.data).success, entry.slug).toBe(true);
       expect(entry.data.title).not.toContain("TEST");
     }
   });
@@ -38,4 +43,25 @@ describe("accepted catalogue and evidence", () => {
     ).toBe("closed");
     expect(availabilityOf({ availability: "unknown", deadline: null })).toBe("unknown");
   });
+});
+
+it("cannot publish an extracted operational label before its official evidence is checked", () => {
+  for (const field of ["deadline", "availability", "funding"]) {
+    const d = testScholarship();
+    d.evidence = d.evidence.map((e) => (e.field === field ? { ...e, state: "missing" } : e));
+    expect(scholarshipDataSchema.safeParse(d).success).toBe(true);
+    expect(publicationSchema.safeParse(d).success).toBe(false);
+  }
+});
+
+it("keeps the ETH exclusion literal and distinguishes a general grant from tuition-only funding", () => {
+  const eth = reviewedCatalogue.find((e) => e.slug === "eth-esop-2027")!.data;
+  const leaf =
+    eth.requirements.kind === "all"
+      ? eth.requirements.rules.find((r) => r.id === "no-existing-master")
+      : null;
+  expect(leaf?.kind === "requirement" ? leaf.values : []).toEqual(["master"]);
+  const uts = reviewedCatalogue.find((e) => e.slug === "twente-uts-2027")!.data;
+  expect(uts.funding[0].component).toBe("other");
+  expect(uts.fundingType).toBe("partial");
 });

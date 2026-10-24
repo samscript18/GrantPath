@@ -13,6 +13,8 @@ async function main() {
     ? await checkSource(source, true)
     : await ingestBatch(limit);
   console.log(JSON.stringify(result, null, 2));
+  if ((Array.isArray(result) ? result : [result]).some((item) => item.state === "failed"))
+    process.exitCode = 1;
 }
 main()
   .catch((e) => {

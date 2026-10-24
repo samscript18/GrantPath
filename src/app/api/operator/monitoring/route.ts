@@ -33,6 +33,7 @@ const actions = z.discriminatedUnion("action", [
       confirmedFields: z.array(z.string()).max(100),
       reason,
       candidate: z.unknown().optional(),
+      sameCycleConfirmed: z.boolean().optional(),
     })
     .strict(),
   z.object({ action: z.literal("retry-event"), id: z.string(), reason }).strict(),

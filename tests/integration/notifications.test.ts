@@ -3,7 +3,11 @@ import { db } from "../../src/lib/db";
 import { createOpportunity } from "../../src/server/operator";
 import { saveOpportunity, unsaveOpportunity } from "../../src/server/applications";
 import { queueAlert, savePreferences, markRead } from "../../src/server/notifications";
-import { claimDelivery, deliverClaimed } from "../../src/server/notifications/delivery";
+import {
+  claimDelivery,
+  deliverClaimed,
+  deliveryDecision,
+} from "../../src/server/notifications/delivery";
 import {
   handleNotificationEvent,
   reminderEventKey,
@@ -46,6 +50,31 @@ async function deliver(id: string, now = new Date()) {
   return deliverClaimed(claimed, now);
 }
 describe("durable preference-aware notifications", () => {
+  it("advances a bounded reminder scan past already queued rows, including millisecond identities", async () => {
+    const data = testScholarship();
+    data.deadline = "2041-01-15T12:00:00.123Z";
+    const a = await fixture(data);
+    const b = await fixture(data);
+    const now = new Date("2041-01-08T12:00:00.123Z");
+    // Prior isolated runs are durable too. Fully scan this window first, then
+    // create a fresh pair so a limit of one must progress across both records.
+    for (let count = 0; count < 100; count++)
+      if ((await scheduleReminders(now, 100)).queued === 0) break;
+    const c = await fixture(data);
+    const d = await fixture(data);
+    expect((await scheduleReminders(now, 1)).queued).toBe(1);
+    expect((await scheduleReminders(now, 1)).queued).toBe(1);
+    expect((await scheduleReminders(now, 1)).queued).toBe(0);
+    for (const entry of [c, d])
+      expect(
+        await db().outbox.count({
+          where: { key: reminderEventKey(entry.s.id, data.deadline!, 7) },
+        }),
+      ).toBe(1);
+    await db().user.deleteMany({
+      where: { id: { in: [a.actor.id, b.actor.id, c.actor.id, d.actor.id] } },
+    });
+  });
   it("creates one inbox item and one isolated email across replay and concurrent queueing, with private read states", async () => {
     const { actor, s } = await fixture();
     await savePreferences(actor, all);
@@ -173,6 +202,14 @@ describe("durable preference-aware notifications", () => {
     await handleNotificationEvent(event);
     await handleNotificationEvent(event);
     expect(await db().delivery.count({ where: { userId: known.actor.id, eventId: key7 } })).toBe(2);
+    const delayed = await db().delivery.findFirstOrThrow({
+      where: { userId: known.actor.id, eventId: key7, channel: "inApp" },
+    });
+    expect((await deliveryDecision(delayed, db(), day7)).allowed).toBe(true);
+    expect((await deliver(delayed.id, new Date("2027-01-14T12:00:00Z"))).state).toBe("suppressed");
+    expect(
+      await db().notification.count({ where: { userId: known.actor.id, eventId: key7 } }),
+    ).toBe(0);
     expect(
       await db().outbox.count({
         where: {
