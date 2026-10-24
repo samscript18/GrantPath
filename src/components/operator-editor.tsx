@@ -13,7 +13,7 @@ export function OperatorEditor({
   const router = useRouter();
   return (
     <form
-      className="space-y-4"
+      className="space-y-6"
       onSubmit={async (e) => {
         e.preventDefault();
         setBusy(true);
@@ -83,7 +83,8 @@ export function OperatorEditor({
           required
           rows={15}
           defaultValue={record ? JSON.stringify(record.data, null, 2) : ""}
-          className="w-full rounded-md border border-border bg-background p-3 font-mono text-[11px]"
+          spellCheck={false}
+          className="w-full rounded-lg border border-border bg-background p-4 font-mono text-xs leading-7 focus:border-primary/60 focus:outline-none focus:ring-3 focus:ring-primary/10"
         />
       </div>
       <div>

@@ -1,7 +1,7 @@
 import { canonicalCountry } from "@/lib/countries";
 import type { StudentProfile } from "@/server/profiles/schema";
 import type { Requirement, Rule } from "./rules";
-export const ENGINE_VERSION = "1.1.0";
+export const ENGINE_VERSION = "1.2.0";
 export type State = "pass" | "fail" | "unknown";
 export type Outcome = "eligible" | "potential" | "not_eligible";
 export type RuleResult = {
@@ -165,6 +165,12 @@ function leaf(rule: Requirement, p: StudentProfile): RuleResult {
   }
   if (rule.op === "gpa") {
     if (!p.gpa) return result("unknown", "GPA_MISSING", "Add your result with its original scale.");
+    if (p.gpa.direction === "lower")
+      return result(
+        "unknown",
+        "GPA_DIRECTION_UNSUPPORTED",
+        "Your original grading scale uses lower values for stronger results. The provider must confirm an equivalence; no reversed or proportional conversion was invented.",
+      );
     const threshold =
       p.gpa.scale === rule.scale
         ? rule.threshold

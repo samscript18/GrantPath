@@ -1,11 +1,11 @@
 import { AuthLayout } from "@/components/auth-layout";
-import { RecoveryForm } from "@/components/recovery-form";
+import { VerificationResend } from "@/components/verification-resend";
 export default async function Verify({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; email?: string }>;
 }) {
-  const error = (await searchParams).error;
+  const { error, email } = await searchParams;
   return (
     <AuthLayout
       title="Check your inbox."
@@ -15,7 +15,7 @@ export default async function Verify({
           : "Follow the verification link to activate your account. The link expires in one hour. If delivery fails, request a new one below."
       }
     >
-      <RecoveryForm verify />
+      <VerificationResend initialEmail={email} />
     </AuthLayout>
   );
 }

@@ -50,6 +50,7 @@ export const profileSchema = z
           value: z.number().min(0),
           scale: z.number().positive().max(100),
           classification: text.optional(),
+          direction: z.enum(["higher", "lower"]).optional(),
         })
         .refine((g) => g.value <= g.scale, {
           message: "Result cannot exceed its original scale",

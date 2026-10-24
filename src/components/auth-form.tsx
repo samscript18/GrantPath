@@ -37,7 +37,7 @@ export function AuthForm({
   const router = useRouter();
   const [message, setMessage] = useState(
     oauthFailed
-      ? "Google sign-in did not finish. Try again or use your email and password. If you already registered by email, verify that address before using Google."
+      ? "Google sign-in did not finish. If you created your account with email and password, continue that way. Otherwise, please retry Google."
       : "",
   );
   const [googlePending, setGooglePending] = useState(false);
@@ -145,16 +145,9 @@ export function AuthForm({
         )}
       </div>
       <div>
-        <div className="flex justify-between">
-          <label className="field-label" htmlFor="password">
-            Password
-          </label>
-          {mode === "login" && (
-            <Link href="/forgot-password" className="text-xs underline">
-              Forgot password?
-            </Link>
-          )}
-        </div>
+        <label className="field-label" htmlFor="password">
+          Password
+        </label>
         <PasswordInput
           id="password"
           label="Password"
@@ -169,6 +162,16 @@ export function AuthForm({
           <p id="password-error" className="mt-2 text-xs text-danger-foreground" role="alert">
             {errors.password.message}
           </p>
+        )}
+        {mode === "login" && (
+          <div className="mt-3 text-right">
+            <Link
+              href="/forgot-password"
+              className="text-xs font-medium text-primary underline underline-offset-4"
+            >
+              Forgot password?
+            </Link>
+          </div>
         )}
       </div>
       {mode === "register" && (

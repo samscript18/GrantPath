@@ -51,13 +51,16 @@ export function ChangeTimeline({
   slug: string;
 }) {
   return (
-    <ol>
+    <ol className="ml-2 pt-2">
       {versions.map((v, i) => {
         const previous = versions[i + 1];
         const changes = previous ? materialChanges(previous.data, v.data) : [];
         return (
-          <li key={v.id} className="relative border-l border-primary/25 pb-8 pl-5">
-            <span aria-hidden className="absolute top-1 -left-1 size-2 rounded-full bg-primary" />
+          <li key={v.id} className="relative border-l border-primary/20 pb-9 pl-6 last:pb-2">
+            <span
+              aria-hidden
+              className="absolute top-1 -left-1 size-2 rounded-full bg-primary ring-4 ring-background"
+            />
             <p className="text-xs font-semibold">
               Accepted version {v.number} · {formatDate(v.createdAt)}
             </p>
@@ -76,13 +79,13 @@ export function ChangeTimeline({
                     <section key={c.field}>
                       <h3 className="mb-2 text-xs font-semibold">{labels[c.field] || c.field}</h3>
                       <div className="grid gap-2 sm:grid-cols-2">
-                        <div className="max-h-64 overflow-auto bg-muted p-3">
+                        <div className="max-h-64 overflow-auto rounded-lg border border-border bg-muted p-4">
                           <p className="eyebrow mb-2 text-[8px] text-muted-foreground">BEFORE</p>
                           <p className="whitespace-pre-wrap break-words text-[11px] leading-6">
                             {describe(c.field, c.before)}
                           </p>
                         </div>
-                        <div className="max-h-64 overflow-auto bg-secondary p-3">
+                        <div className="max-h-64 overflow-auto rounded-lg border border-primary/15 bg-secondary/65 p-4">
                           <p className="eyebrow mb-2 text-[8px] text-muted-foreground">
                             ACCEPTED CHANGE
                           </p>

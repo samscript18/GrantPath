@@ -29,10 +29,12 @@ async function registerVerified(email: string) {
     name: "Isolated Test Student",
     callbackURL: `${origin}/profile`,
     role: "operator",
+    authMethod: "google",
   });
   expect(res.status).toBe(200);
   const user = await db().user.findUniqueOrThrow({ where: { email } });
   expect(user.role).toBe("student");
+  expect(user.authMethod).toBe("email");
   expect(user.emailVerified).toBe(false);
   const mail = await db().emailSink.findFirstOrThrow({
     where: { recipient: email, subject: { contains: "Verify" } },

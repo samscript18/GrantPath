@@ -27,6 +27,9 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
     ["saved", "/saved"],
     ["applications", "/applications"],
     ["inbox", "/notifications"],
+    ["settings", "/settings"],
+    ["notification-settings", "/settings/notifications"],
+    ["account-settings", "/settings/account"],
   ]) {
     for (const width of [1440, 360]) {
       await page.setViewportSize({ width, height: 900 });

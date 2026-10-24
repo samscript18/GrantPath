@@ -1,3 +1,4 @@
+import { accountTopics, handleAccountEvent, maintainAccounts } from "@/server/accounts/jobs";
 import { drainOutbox } from "./outbox";
 import {
   handleNotificationEvent,
@@ -6,11 +7,15 @@ import {
 } from "@/server/notifications/events";
 import { deliverBatch } from "@/server/notifications/delivery";
 export async function runApplicationJobs(limit = 20) {
+  const accounts = await maintainAccounts(limit);
   const reminders = await scheduleReminders();
   const events = await drainOutbox(limit, {
-    topics: notificationTopics,
-    handler: handleNotificationEvent,
+    topics: [...notificationTopics, ...accountTopics],
+    handler: (event) =>
+      accountTopics.includes(event.topic)
+        ? handleAccountEvent(event)
+        : handleNotificationEvent(event),
   });
   const deliveries = await deliverBatch(limit);
-  return { reminders, events, deliveries };
+  return { accounts, reminders, events, deliveries };
 }

@@ -7,7 +7,7 @@ export function db() {
     throw new SetupError(
       "GrantPath needs DATABASE_URL. Copy .env.example and configure PostgreSQL.",
     );
-  if (!globalDb.grantpathDb)
+  if (!globalDb.grantpathDb) {
     globalDb.grantpathDb = new PrismaClient({
       adapter: new PrismaPg({
         connectionString: process.env.DATABASE_URL,
@@ -18,5 +18,6 @@ export function db() {
       // Preserve atomic publication on a remote database with bounded latency.
       transactionOptions: { maxWait: 10000, timeout: 20000 },
     });
+  }
   return globalDb.grantpathDb;
 }

@@ -23,3 +23,11 @@ A supplemental strict saved-code replay had a concrete reason: the App timeline 
 ## Google, appearance and password increment — before publication
 
 Observed read-only usage: **147 credits**, Free, **0.5 per test run**. The existing two-case automatic PR suite implies an estimated 1-credit debit for this meaningful product update. Local work passed before publication. No extra manual execution, strict replay or new exploration is requested. Record the actual App execution and balance after it completes; do not infer a pass or debit from this estimate.
+
+## Follow-up actual result
+
+Automatic execution `e0d65db9-7c39-42f3-b1ff-4ce8f31f2234` at head50570e1: **2/2 reported passed**. Observed balance before147, after**146**, actual debit**1**. Cumulative observed debit4 from150. Only the existing two cases ran; no strict replay, schedule, new exploration or duplicate manual run. New Google/theme/password assertions remain local/hosted-smoke evidence; Google real consent is user-confirmed. No additional credited execution is needed for final local evidence documents.
+
+Account-control follow-up: no TestSprite operation under the user's testing/publication pause. Latest observed balance remains146; no new portal observation or debit is claimed. OTP, privacy and Cloudinary flows are not covered by the earlier two-case App run.
+
+Full-worktree local commit and provider-image follow-up: no TestSprite operation or GitHub push. Latest observed balance146 is unchanged as an observation; no new balance lookup or debit is claimed.

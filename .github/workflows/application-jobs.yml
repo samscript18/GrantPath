@@ -1,4 +1,4 @@
-name: Durable matching and notifications
+name: Durable application and account jobs
 on:
   schedule:
     - cron: "41 * * * *"
@@ -25,6 +25,9 @@ jobs:
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       EMAIL_FROM: ${{ vars.EMAIL_FROM }}
       BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
       APP_ENV: production
       EMAIL_MODE: brevo
     steps:

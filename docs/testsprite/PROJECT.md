@@ -24,3 +24,5 @@ The automatic second execution `bec3b808-1c62-4735-897a-114ccf1c39fb` reported t
 Saved through the official code API without execution: discovery version `v-f8ff1573758e`, profile version `v-6ad74e9476aa`. The next automatic App execution must verify those scripts at the Brevo release head. No assertion was weakened.
 
 Final published Brevo head6b6399f: App execution daa54b31-5049-41d8-b1c5-e50d30b00675 reported2passes, debit1, balance147. Saved source remained identical, but its App timeline still replayed older recorded actions. Additional strict saved-code verification was declined before execution. This coverage gap stays explicit; do not report all intended assertions remotely established.
+
+Latest feature release50570e1: automatic execution e0d65db9-7c39-42f3-b1ff-4ce8f31f2234 reported2/2passed, run IDs9b6063c2-8e7c-4c9d-8df0-88d58a011097 and35cf5987-72af-4714-b863-3d7a68b690a1. Existing cases unchanged; no claim that Google/theme/password additions received new remote assertions. Balance146/debit1. Full evidence: ../evidence/features-release-checks.json.

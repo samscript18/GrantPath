@@ -20,7 +20,9 @@ test("registration, captured verification, staged profile, sign out and return",
   await page.goto(url);
   await expect(page).toHaveURL(/profile/);
   await page.getByLabel("Citizenship(s)").fill("Nigeria");
+  await page.getByRole("option", { name: "Nigeria", exact: true }).click();
   await page.getByLabel("Country of residence").fill("Ghana");
+  await page.getByRole("option", { name: "Ghana", exact: true }).click();
   await page.getByRole("button", { name: "Save & continue" }).click();
   await expect(page.getByLabel("Current qualification")).toBeVisible();
   await page.getByLabel("Current qualification").selectOption("bachelor");
@@ -51,7 +53,9 @@ test("registration, captured verification, staged profile, sign out and return",
   await expect(page).toHaveURL(/dashboard/);
   await page.goto("/profile");
   await page.getByRole("button", { name: /Your world/ }).click();
-  await expect(page.getByLabel("Citizenship(s)")).toHaveValue("Nigeria");
+  await expect(page.getByRole("list", { name: "Selected citizenship(s)" })).toContainText(
+    "Nigeria",
+  );
   await expect(page.getByLabel("Country of residence")).toHaveValue("Ghana");
 });
 test("discovery filters, evidence, private idempotent save and application progress", async ({

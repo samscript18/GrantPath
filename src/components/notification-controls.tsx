@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import type { Preferences } from "@/server/notifications";
+import { Switch } from "./ui/switch";
 export function NotificationPreferences({ preferences }: { preferences: Preferences }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const router = useRouter();
+  const [draft, setDraft] = useState(preferences);
   return (
     <form
       onSubmit={async (e) => {
@@ -31,7 +32,6 @@ export function NotificationPreferences({ preferences }: { preferences: Preferen
               ? "Preferences saved. Queued alerts use these settings before delivery."
               : body.message,
           );
-          if (r.ok) router.refresh();
         } catch {
           setMessage("Couldn’t save. Please retry.");
         } finally {
@@ -39,8 +39,8 @@ export function NotificationPreferences({ preferences }: { preferences: Preferen
         }
       }}
     >
-      <fieldset className="space-y-4">
-        <legend className="eyebrow mb-5 text-muted-foreground">UPDATES THAT MATTER TO YOU</legend>
+      <fieldset className="space-y-0">
+        <legend className="eyebrow mb-2 text-muted-foreground">UPDATES THAT MATTER TO YOU</legend>
         {(
           [
             [
@@ -60,48 +60,50 @@ export function NotificationPreferences({ preferences }: { preferences: Preferen
             ],
           ] as const
         ).map(([name, label, description]) => (
-          <label key={name} className="flex items-start gap-3">
-            <input
-              className="mt-1 accent-primary"
-              type="checkbox"
-              name={name}
-              defaultChecked={preferences[name]}
-            />
+          <div
+            key={name}
+            className="flex items-center justify-between gap-6 border-b border-border/70 py-6 last:border-0"
+          >
             <span>
-              <span className="block text-xs font-semibold">{label}</span>
-              <span className="mt-1 block text-[11px] leading-6 text-muted-foreground">
+              <span className="block text-[13px] font-semibold">{label}</span>
+              <span className="mt-1.5 block max-w-md text-xs leading-6 text-muted-foreground">
                 {description}
               </span>
             </span>
-          </label>
+            <Switch
+              name={name}
+              label={label}
+              checked={draft[name]}
+              disabled={busy}
+              onCheckedChange={(value) => setDraft({ ...draft, [name]: value })}
+            />
+          </div>
         ))}
       </fieldset>
-      <fieldset className="mt-6 space-y-4 border-t border-border pt-5">
-        <legend className="eyebrow px-1 text-muted-foreground">WHERE YOU HEAR FROM US</legend>
-        <label className="flex items-center gap-3 text-xs">
-          <input
-            type="checkbox"
-            name="inApp"
-            defaultChecked={preferences.inApp}
-            className="accent-primary"
-          />
-          In-app inbox
-        </label>
-        <label className="flex items-center gap-3 text-xs">
-          <input
-            type="checkbox"
-            name="email"
-            defaultChecked={preferences.email}
-            className="accent-primary"
-          />
-          Email
-        </label>
+      <fieldset className="mt-5 space-y-5 border-t border-border pt-6">
+        <legend className="eyebrow pr-4 text-muted-foreground">WHERE YOU HEAR FROM US</legend>
+        {(
+          [
+            ["inApp", "In-app inbox"],
+            ["email", "Email"],
+          ] as const
+        ).map(([name, label]) => (
+          <div key={name} className="flex items-center justify-between gap-4 text-xs">
+            <span>{label}</span>
+            <Switch
+              name={name}
+              label={label}
+              checked={draft[name]}
+              disabled={busy}
+              onCheckedChange={(value) => setDraft({ ...draft, [name]: value })}
+            />
+          </div>
+        ))}
       </fieldset>
-      <p className="mt-5 text-[10px] leading-6 text-muted-foreground">
-        Account verification and security messages are separate. Email provider acceptance does not
-        prove receipt. Unknown closing times do not produce reminders.
+      <p className="mt-6 max-w-lg text-[11px] leading-6 text-muted-foreground">
+        Account verification and security emails remain on to help keep your account safe.
       </p>
-      <Button className="mt-5 w-full" disabled={busy}>
+      <Button className="mt-6 w-full sm:w-auto" disabled={busy}>
         {busy ? "Saving…" : "Save my preferences"}
       </Button>
       {message && (

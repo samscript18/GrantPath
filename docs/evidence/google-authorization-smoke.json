@@ -6,5 +6,12 @@
   "canonicalCallback": true,
   "googlePageReached": true,
   "googleConfigurationError": false,
-  "googleAccountOrConsentCompleted": false
+  "googleAccountOrConsentCompleted": false,
+  "userReportedConsentAttempt": {
+    "initialResult": "blocked",
+    "initialError": "org_internal",
+    "audienceReported": "External",
+    "freshPrivateWindowResult": "works now",
+    "verificationSource": "User confirmation, not agent-controlled Google consent"
+  }
 }

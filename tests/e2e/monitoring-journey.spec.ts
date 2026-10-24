@@ -175,13 +175,13 @@ test("operator-reviewed change recalculates one alert, preserves history and sup
   await expect(page).toHaveURL(new RegExp(`version=${version}`));
   await expect(page.getByText("VALUE_NOT_ACCEPTED", { exact: false })).toBeVisible();
   await expect(page.locator("#evidence-levels")).toContainText("All Undergraduate degrees");
-  await page.goto("/notifications");
-  await page.getByRole("checkbox", { name: /^Accepted scholarship changes/ }).uncheck();
+  await page.goto("/settings/notifications");
+  await page.getByRole("switch", { name: /^Accepted scholarship changes/ }).click();
   await page.getByRole("button", { name: "Save my preferences" }).click();
   await expect(page.getByText("Preferences saved.", { exact: false })).toBeVisible();
   await page.reload();
   await expect(
-    page.getByRole("checkbox", { name: /^Accepted scholarship changes/ }),
+    page.getByRole("switch", { name: /^Accepted scholarship changes/ }),
   ).not.toBeChecked();
   // A real accepted reversal is a new event; current disabled preferences suppress its queued messages.
   const reversal = await processSourceHtml(source.id, uclSnapshot(), { controlled: true });

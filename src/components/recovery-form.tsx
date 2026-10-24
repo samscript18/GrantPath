@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Input } from "./ui/input";
@@ -6,13 +7,7 @@ import { Button } from "./ui/button";
 import { PasswordInput } from "./password-input";
 import { PasswordRequirements } from "./password-requirements";
 import { passwordConfirmationSchema } from "@/lib/password";
-export function RecoveryForm({
-  reset = false,
-  verify = false,
-}: {
-  reset?: boolean;
-  verify?: boolean;
-}) {
+export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [password, setPassword] = useState("");
@@ -41,15 +36,10 @@ export function RecoveryForm({
           const token = new URLSearchParams(window.location.search).get("token") || "";
           const result = reset
             ? await authClient.resetPassword({ newPassword: password, token })
-            : verify
-              ? await authClient.sendVerificationEmail({
-                  email: String(form.get("email")),
-                  callbackURL: "/profile",
-                })
-              : await authClient.requestPasswordReset({
-                  email: String(form.get("email")),
-                  redirectTo: "/reset-password",
-                });
+            : await authClient.requestPasswordReset({
+                email: String(form.get("email")),
+                redirectTo: "/reset-password",
+              });
           setMessage(
             result.error
               ? result.error.message || "Please try again."
@@ -118,22 +108,16 @@ export function RecoveryForm({
         </div>
       )}
       <Button className="w-full" disabled={busy}>
-        {busy
-          ? "One moment…"
-          : reset
-            ? "Update password"
-            : verify
-              ? "Resend verification link"
-              : "Request recovery link"}
+        {busy ? "One moment…" : reset ? "Update password" : "Request recovery link"}
       </Button>
       {message && (
         <p role="status" className="text-sm leading-6">
           {message}
         </p>
       )}
-      <a className="block text-center text-sm underline" href="/login">
+      <Link className="block text-center text-sm underline underline-offset-4" href="/login">
         Back to sign in
-      </a>
+      </Link>
     </form>
   );
 }

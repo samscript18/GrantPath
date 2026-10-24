@@ -54,7 +54,7 @@ export function ReviewPanel({
         Base version {review.baseVersion}. Automated extraction proposes values; only an operator’s
         evidence review can mark a proposed field checked.
       </p>
-      <fieldset className="space-y-2 border border-border p-4">
+      <fieldset className="space-y-4 rounded-lg border border-border bg-secondary/20 p-5">
         <legend className="px-2 text-xs font-semibold">
           Fields you checked against the official source
         </legend>
@@ -97,7 +97,8 @@ export function ReviewPanel({
           name="candidate"
           rows={14}
           defaultValue={JSON.stringify(review.candidate, null, 2)}
-          className="w-full rounded-md border border-border bg-background p-3 font-mono text-[10px]"
+          spellCheck={false}
+          className="w-full rounded-lg border border-border bg-background p-4 font-mono text-xs leading-7 focus:border-primary/60 focus:outline-none focus:ring-3 focus:ring-primary/10"
         />
       </details>
       <div>

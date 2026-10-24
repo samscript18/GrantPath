@@ -28,7 +28,13 @@ async def run_test():
             await page.goto(base_url.rstrip("/") + "/profile")
             await page.get_by_role("button", name=re.compile("Your world")).click()
             await page.get_by_label("Citizenship(s)").fill("Nigeria")
+            option = page.get_by_role("option", name="Nigeria", exact=True)
+            if await option.count():
+                await option.click()
             await page.get_by_label("Country of residence").fill("Ghana")
+            option = page.get_by_role("option", name="Ghana", exact=True)
+            if await option.count():
+                await option.click()
             await page.get_by_role("button", name="Save & continue").click()
             await page.get_by_label("Current qualification").select_option("bachelor")
             await page.get_by_label("Completion status").select_option("final_year")
@@ -70,7 +76,7 @@ async def run_test():
             await sign_in()
             await page.goto(base_url.rstrip("/") + "/profile")
             await page.get_by_role("button", name=re.compile("Your world")).click()
-            await expect(page.get_by_label("Citizenship(s)")).to_have_value("Nigeria")
+            await expect(page.get_by_role("list", name="Selected citizenship(s)")).to_contain_text("Nigeria")
             await expect(page.get_by_label("Country of residence")).to_have_value("Ghana")
             await page.get_by_role("button", name="Save & continue").click()
             await expect(page.get_by_label("Current qualification")).to_have_value("bachelor")

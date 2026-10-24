@@ -52,7 +52,11 @@ async function mockIdentity(email: string, verified = true) {
     tokenType: "bearer",
   });
   vi.spyOn(provider, "getUserInfo").mockResolvedValue({
-    user: { name: "[TEST ONLY] Google student", email, emailVerified: verified },
+    user: {
+      name: "[TEST ONLY] Google student",
+      email,
+      emailVerified: verified,
+    },
     data: { sub: `isolated-${email}`, email, email_verified: verified },
   });
 }
@@ -95,6 +99,7 @@ describe("Google OAuth with an isolated provider fixture (no Google network requ
     const user = await db().user.findUniqueOrThrow({ where: { email } });
     expect(user.emailVerified).toBe(true);
     expect(user.role).toBe("student");
+    expect(user.authMethod).toBe("google");
     const actor = { id: user.id, email, name: user.name, role: user.role };
     await saveProfile(actor, { citizenships: ["Nigeria"], residence: "Ghana" }, 0, 1);
     const account = await db().account.findFirstOrThrow({
@@ -112,7 +117,7 @@ describe("Google OAuth with an isolated provider fixture (no Google network requ
     expect(session?.user.id).toBe(user.id);
     expect(await db().emailSink.count({ where: { recipient: email } })).toBe(0);
   });
-  it("links a verified existing email account and preserves its identity", async () => {
+  it("refuses Google sign-in for an existing verified email/password account", async () => {
     const email = `google-link-${tag}@example.test`;
     emails.push(email);
     const signup = await post("sign-up/email", {
@@ -129,9 +134,10 @@ describe("Google OAuth with an isolated provider fixture (no Google network requ
     const before = await db().user.findUniqueOrThrow({ where: { email } });
     await mockIdentity(email);
     const response = await callback(await start());
-    expect(new URL(response.headers.get("location")!, origin).pathname).toBe("/dashboard");
+    expect(response.headers.get("location")).toContain("error=account_not_linked");
     expect((await db().user.findUniqueOrThrow({ where: { email } })).id).toBe(before.id);
-    expect(await db().account.count({ where: { userId: before.id } })).toBe(2);
+    expect(await db().account.count({ where: { userId: before.id } })).toBe(1);
+    expect((await post("sign-in/email", { email, password })).status).toBe(200);
   });
   it("rejects unverified Google email and refuses linking an unverified local account", async () => {
     const unverified = `google-unverified-${tag}@example.test`;
@@ -151,5 +157,35 @@ describe("Google OAuth with an isolated provider fixture (no Google network requ
     expect(user.emailVerified).toBe(false);
     expect(await db().account.count({ where: { userId: user.id, providerId: "google" } })).toBe(0);
     expect(await db().session.count({ where: { userId: user.id } })).toBe(0);
+  });
+  it("blocks email login, signup and recovery for Google accounts, including old reset tokens", async () => {
+    const email = `google-only-${tag}@example.test`;
+    emails.push(email);
+    await mockIdentity(email);
+    const response = await callback(await start());
+    expect(new URL(response.headers.get("location")!, origin).pathname).toBe("/profile");
+    const user = await db().user.findUniqueOrThrow({ where: { email } });
+    for (const [path, body] of [
+      ["sign-in/email", { email, password }],
+      ["sign-up/email", { email, password, name: "[TEST ONLY] Duplicate" }],
+      ["request-password-reset", { email, redirectTo: "/reset-password" }],
+    ] as const) {
+      expect((await post(path, body)).status).toBe(403);
+    }
+    const token = crypto.randomUUID();
+    await db().verification.create({
+      data: {
+        id: crypto.randomUUID(),
+        identifier: `reset-password:${token}`,
+        value: user.id,
+        expiresAt: new Date(Date.now() + 60000),
+      },
+    });
+    expect((await post("reset-password", { token, newPassword: password })).status).toBe(403);
+    await db().verification.deleteMany({ where: { identifier: `reset-password:${token}` } });
+    expect(await db().account.count({ where: { userId: user.id, providerId: "credential" } })).toBe(
+      0,
+    );
+    expect(await db().emailSink.count({ where: { recipient: email } })).toBe(0);
   });
 });
