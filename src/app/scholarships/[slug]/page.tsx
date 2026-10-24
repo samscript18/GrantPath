@@ -61,12 +61,13 @@ export default async function ScholarshipDetail({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ version?: string }>;
+  searchParams: Promise<{ version?: string; evaluation?: string }>;
 }) {
   const { slug } = await params;
   const [actor, s] = await Promise.all([currentUser(), scholarshipBySlug(slug)]);
   if (!s) notFound();
-  const requested = (await searchParams).version;
+  const query = await searchParams;
+  const requested = query.version;
   const selected = requested
     ? s.versions.find((v) => String(v.number) === requested)
     : s.versions[0];
@@ -74,7 +75,7 @@ export default async function ScholarshipDetail({
   const historical = selected.number !== s.version;
   const [match, application] = actor
     ? await Promise.all([
-        studentAssessment(actor, s.id, selected.number),
+        studentAssessment(actor, s.id, selected.number, query.evaluation),
         applicationForScholarship(actor, s.id),
       ])
     : [null, null];
@@ -188,8 +189,8 @@ export default async function ScholarshipDetail({
             <p className="eyebrow text-muted-foreground">FOLLOW THE SOURCE</p>
             <h2 className="editorial mt-3 text-3xl">Evidence you can inspect.</h2>
             <p className="mt-3 mb-5 text-xs leading-6 text-muted-foreground">
-              Supporting wording from the official provider. Version {s.version}, accepted{" "}
-              {formatDate(s.versions[0].createdAt)}. Unresolved fields are clearly labelled.
+              Supporting wording from the official provider. Version {selected.number}, accepted{" "}
+              {formatDate(selected.createdAt)}. Unresolved fields are clearly labelled.
             </p>
             {d.evidence.map((e, i) => (
               <article

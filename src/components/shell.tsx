@@ -12,6 +12,7 @@ import {
 import { Logo } from "./logo";
 import type { Actor } from "@/server/accounts/auth";
 import { SignOut } from "./sign-out";
+import { unreadCount } from "@/server/notifications";
 const nav = [
   ["/dashboard", "Overview", LayoutDashboard],
   ["/scholarships", "Discover scholarships", Compass],
@@ -20,7 +21,7 @@ const nav = [
   ["/notifications", "Notifications", Bell],
   ["/profile", "My profile", UserRound],
 ] as const;
-export function Shell({
+export async function Shell({
   children,
   actor,
   active,
@@ -29,6 +30,7 @@ export function Shell({
   actor: Actor | null;
   active?: string;
 }) {
+  const unread = actor ? await unreadCount(actor) : 0;
   return (
     <div className="min-h-screen lg:pl-[238px]">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex">
@@ -92,8 +94,17 @@ export function Shell({
             Explore opportunities <ArrowUpRight size={13} />
           </Link>
           {actor ? (
-            <Link href="/notifications" aria-label="Notification inbox">
+            <Link
+              href="/notifications"
+              aria-label={`Notification inbox${unread ? `, ${unread} unread updates` : ""}`}
+              className="flex items-center gap-2"
+            >
               <Bell size={18} strokeWidth={1.5} />
+              {unread > 0 && (
+                <span className="rounded-full bg-accent/25 px-1.5 py-0.5 text-[10px] font-semibold">
+                  {unread > 99 ? "99+" : unread}
+                </span>
+              )}
             </Link>
           ) : (
             <Link href="/login" className="font-semibold">

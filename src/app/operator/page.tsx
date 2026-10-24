@@ -10,6 +10,7 @@ import { ReviewPanel } from "@/components/review-panel";
 import { scholarshipDataSchema } from "@/server/scholarships/schema";
 import { materialChanges } from "@/server/scholarships/changes";
 import { formatDate } from "@/lib/utils";
+import { RetryEvent } from "@/components/delivery-diagnostics";
 import { OperatorEditor } from "@/components/operator-editor";
 export const metadata = { title: "Operator studio" };
 export default async function OperatorPage({
@@ -215,6 +216,72 @@ export default async function OperatorPage({
           {overview.failures.length} pending or failed deliveries · {overview.events.length} pending
           events.
         </p>
+        <p className="mt-3 text-[11px] leading-6 text-muted-foreground">
+          Email “accepted” means the provider accepted the request, not recipient receipt. Local
+          “captured” messages stay in the isolated sink. Uncertain requests are held for provider
+          investigation.
+        </p>
+        <div className="mt-5 space-y-4">
+          {overview.failures.map((delivery) => (
+            <article key={delivery.id} className="paper p-5">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h3 className="text-xs font-semibold">{delivery.subject}</h3>
+                <Badge
+                  tone={
+                    delivery.state === "failed" || delivery.state === "uncertain" ? "red" : "amber"
+                  }
+                >
+                  {delivery.state}
+                </Badge>
+              </div>
+              <p className="mt-3 text-[10px] text-muted-foreground">
+                Channel: {delivery.channel} · Attempts: {delivery.attempts} · Delivery ID:{" "}
+                {delivery.id}
+              </p>
+              {delivery.error && <p className="mt-3 text-xs leading-6">{delivery.error}</p>}
+              <details className="mt-3">
+                <summary className="cursor-pointer text-[11px] underline">Attempt history</summary>
+                {delivery.history.map((attempt) => (
+                  <p key={attempt.id} className="mt-2 text-[10px] leading-5">
+                    Attempt {attempt.number}: {attempt.state} · {attempt.createdAt.toISOString()}
+                    {attempt.error ? ` · ${attempt.error}` : ""}
+                  </p>
+                ))}
+              </details>
+            </article>
+          ))}
+        </div>
+        <h3 className="mt-7 font-serif text-xl">Persisted application events</h3>
+        <div className="mt-4 space-y-3">
+          {overview.events.map((event) => (
+            <article key={event.id} className="paper p-4">
+              <p className="text-xs font-semibold">
+                {event.topic} · {event.state}
+              </p>
+              <p className="mt-2 text-[10px] text-muted-foreground">
+                Attempts {event.attempts} · Available {formatDate(event.availableAt)}
+              </p>
+              {event.error && <p className="mt-2 text-xs">{event.error}</p>}
+              {event.state === "failed" && <RetryEvent id={event.id} />}
+            </article>
+          ))}
+        </div>
+        <details className="mt-8">
+          <summary className="cursor-pointer font-serif text-xl">
+            Recent operator audit trail
+          </summary>
+          <ol className="mt-4 space-y-3">
+            {overview.audits.map((a) => (
+              <li key={a.id} className="border-l border-border pl-4 text-[11px] leading-6">
+                <p className="font-semibold">{a.action}</p>
+                <p>{a.reason}</p>
+                <p className="text-[10px] text-muted-foreground">
+                  {a.createdAt.toISOString()} · Actor {a.actorId}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </details>
       </section>
     </Shell>
   );

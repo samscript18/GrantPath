@@ -1,0 +1,43 @@
+name: Durable matching and notifications
+on:
+  schedule:
+    - cron: "41 * * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Bounded event and delivery batch size"
+        type: choice
+        default: "20"
+        options: ["5", "10", "20", "50"]
+permissions:
+  contents: read
+concurrency:
+  group: grantpath-application-jobs
+  cancel-in-progress: false
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: application-jobs
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      BETTER_AUTH_URL: ${{ vars.APP_URL }}
+      BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+      EMAIL_FROM: ${{ vars.EMAIL_FROM }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      APP_ENV: production
+      EMAIL_MODE: resend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - name: Process persisted application events and deliveries (no source fetches)
+        env:
+          JOB_LIMIT: ${{ inputs.limit || '20' }}
+        run: npm run jobs:run -- --limit "$JOB_LIMIT"
+# Activate either this scheduler or Inngest after confirming free usage terms.
+# Both are idempotent, but running both routinely wastes resources.

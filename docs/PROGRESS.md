@@ -44,3 +44,7 @@ Phase 4 browser acceptance now passes locally: 3 focused Playwright journeys, wi
 ## Phase 5 local increment
 
 Implemented registry/cadence/manual requests, four explicit adapters, bounded allowlisted fetching with robots policy and persistent host pacing, observation/review/history, old/new timeline, operator acceptance/rejection with reasons, transactional publication, durable paginated matching fan-out and leased outbox recovery. Standalone CLI and scheduled/manual GitHub ingestion workflow are provided; ingestion does not run inside Vercel or share the matching worker. Controlled change/outage/replay integration passes. Live smoke coverage is one successful Twente extraction plus UCL/Oxford access blocks; schedules remain paused pending policy review. GitHub workflow activation is externally unverified.
+
+## Phase 6 local increment
+
+Implemented private paginated inbox/read states, topic/channel preferences, relevant new-match and accepted-change alerts, exact-version/evaluation links, seven-/one-day confirmed-instant reminders, durable deduplication and delivery leases/attempts/backoff, suppression using current preferences and saved/current-match relevance, email sink isolation, Resend idempotency and accepted-versus-captured diagnostics. Added optional signed Inngest steps and separate GitHub application-jobs scheduler; neither fetches sources. 35 unit and 11 PostgreSQL tests plus production build pass. Real Resend/Inngest account operation, hosted schedules and TestSprite remain externally unverified.

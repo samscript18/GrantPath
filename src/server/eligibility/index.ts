@@ -36,10 +36,8 @@ export async function evaluateStudent(
   return db().$transaction(async (tx) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${userId}))`;
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${scholarshipId}))`;
-    const [currentProfile, currentScholarship] = await Promise.all([
-      tx.profile.findUnique({ where: { userId } }),
-      tx.scholarship.findUnique({ where: { id: scholarshipId } }),
-    ]);
+    const currentProfile = await tx.profile.findUnique({ where: { userId } });
+    const currentScholarship = await tx.scholarship.findUnique({ where: { id: scholarshipId } });
     if (
       currentProfile?.version !== profile.version ||
       currentScholarship?.version !== scholarship.version
@@ -173,11 +171,21 @@ export async function matchOverview(actor: Actor) {
     pending: matches.filter((s) => !s.evaluationCurrent).length,
   };
 }
-export async function studentAssessment(actor: Actor, scholarshipId: string, version?: number) {
+export async function studentAssessment(
+  actor: Actor,
+  scholarshipId: string,
+  version?: number,
+  evaluationId?: string,
+) {
   const profile = await db().profile.findUnique({ where: { userId: actor.id } });
   const scholarship = await db().scholarship.findUniqueOrThrow({ where: { id: scholarshipId } });
   const latest = await db().evaluation.findFirst({
-    where: { userId: actor.id, scholarshipId, ...(version ? { scholarshipVersion: version } : {}) },
+    where: {
+      userId: actor.id,
+      scholarshipId,
+      ...(version ? { scholarshipVersion: version } : {}),
+      ...(evaluationId ? { id: evaluationId } : {}),
+    },
     orderBy: [{ profileVersion: "desc" }, { scholarshipVersion: "desc" }, { createdAt: "desc" }],
   });
   if (!latest) return { current: false, evaluation: null };
