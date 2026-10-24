@@ -1,5 +1,6 @@
 import { Logo } from "./logo";
 import Link from "next/link";
+import { ThemeControl } from "./theme-control";
 export function AuthLayout({
   title,
   subtitle,
@@ -11,7 +12,7 @@ export function AuthLayout({
 }) {
   return (
     <div className="grid min-h-screen lg:grid-cols-[1fr_1.1fr]">
-      <aside className="relative hidden overflow-hidden bg-primary p-14 text-white lg:flex lg:flex-col">
+      <aside className="relative hidden overflow-hidden bg-brand p-14 text-white lg:flex lg:flex-col">
         <Logo light />
         <div className="relative z-10 my-auto max-w-md py-20">
           <p className="eyebrow text-accent">POSSIBILITY STARTS HERE</p>
@@ -36,13 +37,14 @@ export function AuthLayout({
         />
       </aside>
       <main id="main" className="flex flex-col px-6 py-8 sm:px-12">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <span className="lg:hidden">
             <Logo />
           </span>
           <Link href="/scholarships" className="ml-auto text-xs text-muted-foreground">
             Explore scholarships ↗
           </Link>
+          <ThemeControl />
         </div>
         <div className="mx-auto my-auto w-full max-w-sm py-16">
           <p className="eyebrow mb-5 text-muted-foreground">THE NEXT CHAPTER</p>

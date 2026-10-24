@@ -43,6 +43,9 @@ export default defineConfig({
       BETTER_AUTH_URL: baseURL,
       NEXT_PUBLIC_APP_URL: baseURL,
       TRUSTED_ORIGINS: baseURL,
+      // Labelled OAuth fixtures. Browser tests intercept Google navigation; no external login.
+      GOOGLE_CLIENT_ID: "isolated.browser.apps.googleusercontent.com",
+      GOOGLE_CLIENT_SECRET: "isolated-browser-client-secret",
     },
   },
 });

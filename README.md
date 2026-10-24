@@ -11,7 +11,7 @@ Anyone can browse the real catalogue and official evidence. The preview uses an 
 Use Node 24 LTS (24.11+), npm, and PostgreSQL 18. Versions are pinned in `package-lock.json`; run `npm ci`.
 
 1. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your development PostgreSQL database. Neon uses pooled runtime and unpooled migration endpoints. Create separate databases containing `test` for `TEST_DATABASE_URL` and `E2E_DATABASE_URL`.
-2. Generate a private secret with `openssl rand -base64 32`. Set `BETTER_AUTH_SECRET`. Set `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL` and `TRUSTED_ORIGINS` to the same exact local origin, for example `http://127.0.0.1:3000`. Keep `APP_ENV=development` and `EMAIL_MODE=sink` locally.
+2. Generate a private secret with `openssl rand -base64 32`. Set `BETTER_AUTH_SECRET`. Set `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL` and `TRUSTED_ORIGINS` to the same exact local origin, for example `http://localhost:3000`, matching `.env.example`. Keep `APP_ENV=development` and `EMAIL_MODE=sink` locally.
 3. Run:
 
 ```sh
@@ -25,9 +25,19 @@ npm run dev
 
 Open the local origin you configured. Register, then inspect the newest matching recipient in the development `EmailSink` table using `npx prisma studio`. Open its verification URL privately. Sink mail is captured, never sent. Authentication recovery uses the same sink. Do not publish captured tokens.
 
+If Better Auth reports `Invalid origin`, compare the browser's full origin with those three settings. `localhost` and `127.0.0.1` are different origins, as are different ports or protocols. Align the settings with the URL you open, restart `npm run dev` after changes, and reload the page. Keep deployed settings on their exact HTTPS deployment origin; do not add local addresses or disable origin checks to fix local development.
+
 The seed persists 20 real source-backed records. It never overwrites accepted operator changes. Existing installations created before the final funding corrections can inspect `npm run catalogue:corrections`, then apply with `-- --apply`; this helper is restricted to local/test environments and preserves history.
 
 Grant a verified administrator access with `npm run operator:grant -- administrator@example.org`. Roles cannot be supplied by registration or profile requests. Operator bootstrap is an explicit database administrator command with an audit entry.
+
+## Google sign-in and appearance
+
+Google login and signup use Better Auth's Google provider. Set both server-only `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, and register the exact local/hosted callback URLs. See [Google setup, account linking and verification boundaries](docs/GOOGLE_OAUTH.md). Credentials are optional; email authentication works without them.
+
+Choose **System**, **Light** or **Dark** using the Appearance control on public, authentication and workspace pages. The choice persists in your browser and syncs between tabs. System follows OS changes. Theme colours are applied before content paints; forms, status labels, evidence and application columns have matching palettes.
+
+Signup and password reset include separate password/confirmation fields, independent show/hide buttons and a live automatic checklist. New passwords require 10–128 characters, lowercase, uppercase, a number and a symbol. The same policy runs on the server for signup/reset/change/set operations. Confirmation is checked in the form; only the chosen password is sent. Existing passwords continue to work at login without adopting new composition rules.
 
 ## Workflows
 
@@ -76,3 +86,7 @@ Use [isolated Neon/Vercel preview setup](docs/PREVIEW_SETUP.md). PR 1 uses a sep
 The native [TestSprite 3.0 project](docs/testsprite/PROJECT.md) contains two focused cases for discovery/evidence and profile/application persistence. Both passed in the first real PR execution and the App posted its report on PR 1. A second automatic execution also passed both cases; total observed debit 2, balance 148. Review found gaps in the generated replay assertions, so both saved scripts now contain explicit checks and passed locally before the next automatic verification. New commits require their own actual result. [Credit ledger](docs/TESTSPRITE_CREDITS.md).
 
 Follow [the demonstration outline](docs/DEMO.md) and [submission PR draft](docs/SUBMISSION_PR.md). Missing external credentials, remote verification, access-limited sources, time-zone/DST provider ambiguity and incomplete provider-rule mapping remain explicit release limitations.
+
+Final published Brevo head: `6b6399f`. [GitHub CI](https://github.com/samscript18/GrantPath/actions/runs/40103723073) and [App execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/daa54b31-5049-41d8-b1c5-e50d30b00675) passed; observed credits147. The App timeline retains older recorded actions, so some exact assertions remain locally verified only. The supplemental strict replay was declined before execution. Final ledger/evidence changes are kept as local documentation updates to avoid another documentation-only automatic credited run; the deployed product remains at the published head.
+
+The final PR-description update was declined before execution; it is not claimed as published. The deployed source/lockfile and authentic passing check results remain available on PR1.

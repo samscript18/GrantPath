@@ -13,6 +13,7 @@ import { Logo } from "./logo";
 import type { Actor } from "@/server/accounts/auth";
 import { SignOut } from "./sign-out";
 import { unreadCount } from "@/server/notifications";
+import { ThemeControl } from "./theme-control";
 const nav = [
   ["/dashboard", "Overview", LayoutDashboard],
   ["/scholarships", "Discover scholarships", Compass],
@@ -33,7 +34,7 @@ export async function Shell({
   const unread = actor ? await unreadCount(actor) : 0;
   return (
     <div className="min-h-screen lg:pl-[238px]">
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-brand px-6 py-8 text-white/75 lg:flex">
         <Logo light />
         <div className="eyebrow mt-13 mb-4 text-white/70">YOUR NEXT CHAPTER</div>
         <nav aria-label="Main navigation" className="space-y-1.5">
@@ -42,7 +43,7 @@ export async function Shell({
               key={href}
               href={href}
               aria-current={active === href ? "page" : undefined}
-              className={`flex items-center gap-3 rounded-md px-3 py-3 text-[12px] transition-colors ${active === href ? "bg-[#eceddd] text-primary" : "hover:bg-white/10"}`}
+              className={`flex items-center gap-3 rounded-md px-3 py-3 text-[12px] transition-colors ${active === href ? "bg-secondary text-primary" : "hover:bg-white/10"}`}
             >
               <Icon size={17} strokeWidth={1.5} />
               {label}
@@ -82,7 +83,7 @@ export async function Shell({
           </div>
         </div>
       </aside>
-      <header className="flex min-h-18 flex-wrap items-center justify-between gap-4 border-b border-border bg-[#faf9f5] px-5 py-4 sm:px-9">
+      <header className="flex min-h-18 flex-wrap items-center justify-between gap-4 border-b border-border bg-shell px-5 py-4 sm:px-9">
         <div className="lg:hidden">
           <Logo />
         </div>
@@ -90,6 +91,7 @@ export async function Shell({
           A little direction. A world of possibility.
         </p>
         <div className="flex items-center gap-5 text-xs">
+          <ThemeControl />
           <Link href="/scholarships" className="hidden items-center gap-1 sm:inline-flex">
             Explore opportunities <ArrowUpRight size={13} />
           </Link>

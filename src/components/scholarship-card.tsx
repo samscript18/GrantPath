@@ -19,7 +19,7 @@ export function ScholarshipCard({ row }: { row: CatalogueRow }) {
       <div className="flex items-start gap-4">
         <div
           aria-hidden
-          className="flex size-12 shrink-0 items-center justify-center border border-border bg-[#f0efe5] font-serif text-2xl text-primary/70"
+          className="flex size-12 shrink-0 items-center justify-center border border-border bg-muted font-serif text-2xl text-primary/70"
         >
           {row.programme.provider.name.replace("University of ", "").slice(0, 1)}
         </div>
@@ -50,7 +50,7 @@ export function ScholarshipCard({ row }: { row: CatalogueRow }) {
             href={`/scholarships/${row.slug}`}
             className="mt-2 flex items-start justify-between gap-3"
           >
-            <h2 className="font-serif text-[23px] leading-tight group-hover:text-[#617a4c]">
+            <h2 className="font-serif text-[23px] leading-tight group-hover:text-leaf">
               {row.title}
             </h2>
             <ArrowUpRight size={18} className="mt-1 shrink-0" />

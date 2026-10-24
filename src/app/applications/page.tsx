@@ -30,7 +30,7 @@ export default async function Applications({
             aria-label="Board view"
             aria-current={!list ? "page" : undefined}
             href="/applications"
-            className={`flex items-center gap-2 px-3 py-2 text-xs ${!list ? "bg-primary text-white" : ""}`}
+            className={`flex items-center gap-2 px-3 py-2 text-xs ${!list ? "bg-primary text-primary-foreground" : ""}`}
           >
             <Columns3 size={13} />
             Board
@@ -39,7 +39,7 @@ export default async function Applications({
             aria-label="List view"
             aria-current={list ? "page" : undefined}
             href="/applications?view=list"
-            className={`flex items-center gap-2 px-3 py-2 text-xs ${list ? "bg-primary text-white" : ""}`}
+            className={`flex items-center gap-2 px-3 py-2 text-xs ${list ? "bg-primary text-primary-foreground" : ""}`}
           >
             <List size={13} />
             List
@@ -67,7 +67,7 @@ export default async function Applications({
             const entries = rows.filter((a) => a.status === status);
             if (list && !entries.length) return null;
             return (
-              <section key={status} className={`${list ? "" : "bg-[#efeee7] p-4"}`}>
+              <section key={status} className={`${list ? "" : "bg-muted p-4"}`}>
                 <div className="mb-4 flex items-center gap-2 border-b border-border pb-4">
                   <span
                     className={`size-1.5 rounded-full ${status === "Awarded" ? "bg-primary" : status === "Applied" ? "bg-accent" : "bg-primary/35"}`}

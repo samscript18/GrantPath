@@ -14,3 +14,7 @@ The source PRD is `docs/GrantPath_PRD.docx` (read 24 October 2026). Implement ph
 ## Verification policy
 
 Run local typecheck, lint, Vitest and PostgreSQL integration tests before browser verification or remote paid checks. Do not buy services or activate paid plans. Do not invent verification, deadlines, deployments, TestSprite balances or results. Preserve approximately 50 of the user-reported 150 TestSprite credits for final verification; inspect actual balance and displayed cost before credited operations.
+
+## Requested follow-up — 24 October 2026
+
+Add optional Google OAuth through Better Auth, shared accounts and safe verified-email linking; persistent System/Light/Dark appearance across the connected product; password confirmation, independent visibility controls and live automatic requirements for signup/reset, enforced by shared server rules. Verify locally before one meaningful preview release; preserve the automatic App gate and record real Google consent separately from fixture/redirect checks.

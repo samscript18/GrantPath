@@ -9,6 +9,7 @@ test("registration, captured verification, staged profile, sign out and return",
   await page.getByLabel("Your name").fill("Test Explorer");
   await page.getByLabel("Email address").fill(email);
   await page.getByLabel("Password", { exact: true }).fill(password);
+  await page.getByLabel("Confirm password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Create your account" }).click();
   await expect(page).toHaveURL(/verify-email/);
   const mail = await db().emailSink.findFirstOrThrow({

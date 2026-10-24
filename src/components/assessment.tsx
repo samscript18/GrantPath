@@ -14,7 +14,7 @@ function Result({ result }: { result: RuleResult }) {
       <div className="flex gap-3">
         <Icon
           size={16}
-          className={`mt-1 shrink-0 ${result.state === "fail" ? "text-red-800" : result.state === "unknown" ? "text-[#795410]" : "text-primary"}`}
+          className={`mt-1 shrink-0 ${result.state === "fail" ? "text-danger-foreground" : result.state === "unknown" ? "text-warning-foreground" : "text-primary"}`}
         />
         <div className="min-w-0 flex-1">
           <p className="text-sm leading-6">{result.label}</p>
@@ -65,7 +65,7 @@ export function Assessment({
   return (
     <div className="mt-6">
       <div
-        className={`border-l-2 p-5 ${!current || assessment.outcome === "potential" ? "border-accent bg-[#f3eedf]" : assessment.outcome === "not_eligible" ? "border-red-700 bg-[#f7e9e3]" : "border-primary bg-secondary"}`}
+        className={`border-l-2 p-5 ${!current || assessment.outcome === "potential" ? "border-accent bg-warning" : assessment.outcome === "not_eligible" ? "border-danger-foreground bg-danger" : "border-primary bg-secondary"}`}
       >
         <Badge
           tone={

@@ -76,7 +76,7 @@ export default async function Dashboard() {
             : "Your journey starts here"}
         </span>
       </PageHeading>
-      <section className="relative grid overflow-hidden bg-primary px-7 py-8 text-white sm:px-9 md:grid-cols-[1fr_180px]">
+      <section className="relative grid overflow-hidden bg-brand px-7 py-8 text-white sm:px-9 md:grid-cols-[1fr_180px]">
         <div className="relative z-10">
           <p className="eyebrow text-[#c0cfac]">MAKE ROOM FOR WHAT COMES NEXT</p>
           <h2 className="editorial mt-4 max-w-xl text-4xl leading-tight">
@@ -260,7 +260,7 @@ export default async function Dashboard() {
                   href={`/scholarships/${a.scholarship.slug}`}
                   className="mt-5 block border-t border-border pt-4"
                 >
-                  <p className="text-[10px] font-semibold text-[#795410]">
+                  <p className="text-[10px] font-semibold text-warning-foreground">
                     {formatDate(a.scholarship.deadline, profile.timeZone)}
                   </p>
                   <h3 className="mt-2 font-serif text-lg leading-snug">{a.scholarship.title}</h3>
@@ -277,7 +277,7 @@ export default async function Dashboard() {
               </div>
             )}
           </div>
-          <div className="mt-8 bg-[#e9eddf] p-6">
+          <div className="mt-8 bg-secondary p-6">
             <p className="eyebrow text-muted-foreground">GOOD TO REMEMBER</p>
             <h2 className="mt-4 font-serif text-2xl leading-tight">
               A match is

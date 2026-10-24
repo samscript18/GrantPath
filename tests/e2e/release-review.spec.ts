@@ -12,9 +12,9 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
   await page.getByLabel("Email address").fill("invalid");
-  await page.getByLabel("Password", { exact: true }).fill("short");
+  await page.getByLabel("Password", { exact: true }).fill("");
   await page.getByRole("button", { name: "Welcome back" }).click();
-  await expect(page.getByText("Use at least 10 characters")).toBeVisible();
+  await expect(page.getByText("Enter your password", { exact: true })).toBeVisible();
   await page.getByLabel("Email address").fill("student@example.test");
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
@@ -38,6 +38,17 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
         `${name} at ${width}px`,
       ).toBe(true);
       await page.screenshot({ path: `test-results/release-${name}-${width}.png`, fullPage: true });
+      await page.getByLabel("Appearance").selectOption("dark");
+      await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+        `${name} dark at ${width}px`,
+      ).toBe(true);
+      await page.screenshot({
+        path: `test-results/release-dark-${name}-${width}.png`,
+        fullPage: true,
+      });
+      await page.getByLabel("Appearance").selectOption("light");
     }
   }
   // A student cannot render protected operator data, including on mobile.
@@ -74,6 +85,11 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
       true,
     );
     await page.screenshot({ path: `test-results/release-operator-${width}.png`, fullPage: true });
+    await page.getByLabel("Appearance").selectOption("dark");
+    await page.screenshot({
+      path: `test-results/release-dark-operator-${width}.png`,
+      fullPage: true,
+    });
   }
   expect(errors).toEqual([]);
 });

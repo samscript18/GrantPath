@@ -8,7 +8,7 @@ export function Recalculate({ pending }: { pending: number }) {
   const [busy, setBusy] = useState(false);
   const router = useRouter();
   return (
-    <div className="mb-6 border-l-2 border-accent bg-[#f3eedf] p-4">
+    <div className="mb-6 border-l-2 border-accent bg-warning p-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs font-semibold">{pending} assessments need updating</p>

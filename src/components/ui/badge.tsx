@@ -13,10 +13,10 @@ export function Badge({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[11px] font-semibold tracking-wide",
         {
-          green: "bg-[#e8f0e9] text-[#28553d]",
-          amber: "bg-[#f8edcf] text-[#795410]",
-          red: "bg-[#f9e8e3] text-[#973e30]",
-          neutral: "bg-[#eeede6] text-[#62665d]",
+          green: "bg-success text-success-foreground",
+          amber: "bg-warning text-warning-foreground",
+          red: "bg-danger text-danger-foreground",
+          neutral: "bg-muted text-muted-foreground",
         }[tone],
         className,
       )}

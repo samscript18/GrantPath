@@ -56,7 +56,7 @@ export default async function Scholarships({
                 aria-label="Search scholarships"
                 defaultValue={f.q}
                 placeholder="A scholarship, university, or field of possibility…"
-                className="h-12 bg-[#fffefa] pl-11 pr-22"
+                className="h-12 bg-paper pl-11 pr-22"
               />
               <Button size="sm" className="absolute top-1.5 right-1.5">
                 Search
@@ -226,7 +226,7 @@ export default async function Scholarships({
           )}
         </div>
         <aside className="space-y-7">
-          <div className="bg-[#e9eddf] p-6">
+          <div className="bg-secondary p-6">
             <BookOpen size={25} strokeWidth={1.2} />
             <p className="eyebrow mt-7 text-muted-foreground">A NOTE ON ELIGIBILITY</p>
             <h2 className="mt-3 font-serif text-[27px] leading-tight">

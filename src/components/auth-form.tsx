@@ -2,33 +2,82 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-const schema = z.object({
-  name: z.string().max(100).optional(),
-  email: z.email(),
-  password: z.string().min(10, "Use at least 10 characters").max(128),
-});
-type Values = z.infer<typeof schema>;
-export function AuthForm({ mode }: { mode: "login" | "register" }) {
+import { newPasswordSchema } from "@/lib/password";
+import { PasswordInput } from "./password-input";
+import { PasswordRequirements } from "./password-requirements";
+const schema = (mode: "login" | "register") =>
+  z
+    .object({
+      name: z.string().max(100).optional(),
+      email: z.email(),
+      password:
+        mode === "register" ? newPasswordSchema : z.string().min(1, "Enter your password").max(128),
+      confirmPassword: z.string().optional(),
+    })
+    .refine((values) => mode !== "register" || values.password === values.confirmPassword, {
+      path: ["confirmPassword"],
+      message: "Passwords must match.",
+    });
+type Values = z.infer<ReturnType<typeof schema>>;
+export function AuthForm({
+  mode,
+  googleEnabled = false,
+  oauthFailed = false,
+}: {
+  mode: "login" | "register";
+  googleEnabled?: boolean;
+  oauthFailed?: boolean;
+}) {
   const router = useRouter();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(
+    oauthFailed
+      ? "Google sign-in did not finish. Try again or use your email and password. If you already registered by email, verify that address before using Google."
+      : "",
+  );
+  const [googlePending, setGooglePending] = useState(false);
+  async function continueWithGoogle() {
+    setMessage("");
+    setGooglePending(true);
+    try {
+      const result = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/dashboard",
+        newUserCallbackURL: "/profile",
+        errorCallbackURL: "/login?oauth=failed",
+      });
+      if (result.error) {
+        setMessage("Google sign-in is unavailable. Please try again or use email and password.");
+        setGooglePending(false);
+      }
+    } catch {
+      setMessage("Unable to connect to Google. Please try again or use email and password.");
+      setGooglePending(false);
+    }
+  }
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
-  } = useForm<Values>({ resolver: zodResolver(schema) });
+  } = useForm<Values>({
+    resolver: zodResolver(schema(mode)),
+    defaultValues: { password: "", confirmPassword: "" },
+  });
+  const [password, confirmation] = useWatch({ control, name: ["password", "confirmPassword"] });
   const onSubmit = handleSubmit(async (values) => {
     setMessage("");
     try {
       const result =
         mode === "register"
           ? await authClient.signUp.email({
-              ...values,
+              email: values.email,
+              password: values.password,
               name: values.name || "Scholar",
               callbackURL: "/profile",
             })
@@ -46,6 +95,30 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   });
   return (
     <form onSubmit={onSubmit} className="space-y-5" noValidate>
+      {googleEnabled && (
+        <>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full bg-paper"
+            onClick={continueWithGoogle}
+            disabled={googlePending || isSubmitting}
+          >
+            <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M21.6 12.23c0-.71-.06-1.39-.18-2.05H12v3.88h5.38a4.6 4.6 0 0 1-2 3.02v2.51h3.24c1.89-1.74 2.98-4.3 2.98-7.36ZM12 22c2.7 0 4.96-.9 6.62-2.41l-3.24-2.51c-.9.6-2.05.97-3.38.97-2.6 0-4.8-1.76-5.59-4.12H3.07v2.59A10 10 0 0 0 12 22ZM6.41 13.93A6 6 0 0 1 6.1 12c0-.67.12-1.32.31-1.93V7.48H3.07A10 10 0 0 0 2 12c0 1.61.39 3.14 1.07 4.52l3.34-2.59ZM12 5.95c1.47 0 2.79.51 3.82 1.51l2.87-2.87A9.6 9.6 0 0 0 12 2a10 10 0 0 0-8.93 5.48l3.34 2.59C7.2 7.71 9.4 5.95 12 5.95Z"
+              />
+            </svg>
+            {googlePending ? "Connecting to Google…" : "Continue with Google"}
+          </Button>
+          <div className="flex items-center gap-4 text-[11px] text-muted-foreground">
+            <span className="h-px flex-1 bg-border" />
+            or continue with email
+            <span className="h-px flex-1 bg-border" />
+          </div>
+        </>
+      )}
       {mode === "register" && (
         <div>
           <label className="field-label" htmlFor="name">
@@ -66,7 +139,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           {...register("email")}
         />
         {errors.email && (
-          <p className="mt-2 text-xs text-red-800" role="alert">
+          <p className="mt-2 text-xs text-danger-foreground" role="alert">
             {errors.email.message}
           </p>
         )}
@@ -82,30 +155,59 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
             </Link>
           )}
         </div>
-        <Input
+        <PasswordInput
           id="password"
-          type="password"
+          label="Password"
           autoComplete={mode === "register" ? "new-password" : "current-password"}
           aria-invalid={!!errors.password}
+          aria-describedby={
+            mode === "register" ? "password-checklist password-error" : "password-error"
+          }
           {...register("password")}
         />
         {errors.password && (
-          <p className="mt-2 text-xs text-red-800" role="alert">
+          <p id="password-error" className="mt-2 text-xs text-danger-foreground" role="alert">
             {errors.password.message}
           </p>
         )}
-        {mode === "register" && (
-          <p className="mt-2 text-xs text-muted-foreground">
-            At least 10 characters. Make it uniquely yours.
-          </p>
-        )}
       </div>
+      {mode === "register" && (
+        <>
+          <div>
+            <label className="field-label" htmlFor="confirm-password">
+              Confirm password
+            </label>
+            <PasswordInput
+              id="confirm-password"
+              label="Confirm password"
+              autoComplete="new-password"
+              aria-invalid={!!errors.confirmPassword}
+              aria-describedby="confirmation-error"
+              {...register("confirmPassword")}
+            />
+            {errors.confirmPassword && (
+              <p
+                id="confirmation-error"
+                className="mt-2 text-xs text-danger-foreground"
+                role="alert"
+              >
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+          <PasswordRequirements
+            id="password-checklist"
+            password={password || ""}
+            confirmation={confirmation || ""}
+          />
+        </>
+      )}
       {message && (
-        <p role="alert" className="rounded-md bg-[#f9e8e3] p-3 text-sm text-red-900">
+        <p role="alert" className="rounded-md bg-danger p-3 text-sm text-danger-foreground">
           {message}
         </p>
       )}
-      <Button className="w-full" disabled={isSubmitting}>
+      <Button className="w-full" disabled={isSubmitting || googlePending}>
         {isSubmitting
           ? "One moment…"
           : mode === "register"

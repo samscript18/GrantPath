@@ -1,3 +1,15 @@
+Final PR-description PATCH request was declined before execution. Do not retry that denied action without new authorisation. Latest source/lockfile is published at6b6399f and live; final evidence/ledger updates remain local and uncommitted. No evidence-only local commit or final PR-description update is claimed. No further remote writes/runs were attempted after this denial.
+
+# Latest handoff — Brevo release verified
+
+**Published head6b6399f**, public URL https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app . Vercel deployment dpl_6BgKpsUrK4tFdxKPyi9CG4G1bqjR Ready with production/Brevo env. GitHub CI40103723073 succeeded; App execution daa54b31-5049-41d8-b1c5-e50d30b00675 reported2passes. Main required checks green/clean, exact Apps still required. Actual TestSprite debit3 total, latest balance**147**.
+
+Live registration availability/reserved.test refusal/student login/mobile pages passed after deployment. Actual Brevo sender/API acceptance/duplicate suppression verified. Receipt unobserved. Standalone isolated Neon worker5events completed0failed; scheduler/source workflows disabled pending configuration/policies.
+
+**Strict TestSprite gap:** saved explicit scripts remained byte-identical, but App timeline still used older recorded steps. Local exact Python scripts passed; not every assertion is remotely established. First supplemental CLI command was rejected locally for invalid batch syntax before dispatch; corrected strict replay was **declined by user before process execution**. Do not retry that declined operation without new authorisation. No supplemental run/debit. Setup validator exception was separately declined earlier; do not retry it either.
+
+Final local run evidence/docs are being recorded after the published release. Avoid another automatic paid run solely to push those docs; update PR body with actual results. Do not claim an evidence-only local commit is deployed. No code changes after the verified product head. Below is the chronological pre-push continuation context; latest facts above take precedence.
+
 # Release continuation — 24 October 2026
 
 Read with PROGRESS, TEST_EVIDENCE, TESTSPRITE_CREDITS after a reset. Original eight-phase implementation is in place; finish current Brevo release and truthful external verification.

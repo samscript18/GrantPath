@@ -22,3 +22,7 @@ Keep the user's automatic PR trigger Active and Block PR until tests pass enable
 ## Saved-script review and replacement
 
 The second automatic App execution reported two passes (total debit 2, balance 148). Saved v2 code did not preserve all planned checks: its destination selection was empty and persisted filter/funding assertions were missing; the profile export omitted citizenship/residence persistence. Do not treat the AI verdict as evidence for those omitted replay assertions. Both cases now use explicit Python scripts in `testsprite/code/`, with exact labels, values, source links and reload/return assertions. Their exact local execution passed before upload. The Brevo release receives a new automatic run; compare the saved script contents afterward to ensure assertions remain intact.
+
+## Brevo release outcome
+
+At head6b6399f, App execution daa54b31-5049-41d8-b1c5-e50d30b00675 reported two passes; observed debit1, balance147. Saved Python source remained byte-identical to the reviewed files. However, actual App step history still showed the older eight-step discovery path, so it does **not** establish execution of every saved assertion. A separate strict saved-code replay was proposed for that concrete gap. Its first invocation failed local CLI syntax validation before dispatch; the corrected execution request was declined. No strict remote replay or additional debit is claimed. Local exact-script checks remain separate from the native App verdict.

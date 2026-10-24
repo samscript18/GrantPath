@@ -6,14 +6,16 @@ import { connection } from "next/server";
 import { featuredScholarships } from "@/server/scholarships";
 import { fundingLabels } from "@/server/scholarships/schema";
 import { Badge } from "@/components/ui/badge";
+import { ThemeControl } from "@/components/theme-control";
 export default async function Home() {
   await connection();
   const featured = process.env.DATABASE_URL ? await featuredScholarships() : [];
   return (
     <div>
-      <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-7 sm:px-12">
+      <header className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-7 sm:px-12">
         <Logo />
-        <nav aria-label="Public navigation" className="flex items-center gap-6 text-xs">
+        <nav aria-label="Public navigation" className="flex items-center gap-3 text-xs sm:gap-6">
+          <ThemeControl />
           <Link className="hidden sm:inline" href="/scholarships">
             Find a scholarship
           </Link>
@@ -37,7 +39,7 @@ export default async function Home() {
               <br />
               Meet your
               <br />
-              <em className="text-[#688052]">next opportunity.</em>
+              <em className="text-leaf">next opportunity.</em>
             </h1>
             <p className="mt-7 max-w-md text-sm leading-7 text-muted-foreground">
               A scholarship can change your direction. Find real opportunities, understand where you
@@ -58,7 +60,7 @@ export default async function Home() {
               Official sources. Clear requirements. Your own pace.
             </p>
           </div>
-          <div className="relative min-h-[390px] overflow-hidden bg-[#e9eddf] p-8 sm:p-12">
+          <div className="relative min-h-[390px] overflow-hidden bg-secondary p-8 sm:p-12">
             <div
               aria-hidden
               className="absolute -top-20 -right-30 size-100 rounded-full border border-primary/15"
@@ -67,7 +69,7 @@ export default async function Home() {
               aria-hidden
               className="absolute -top-8 -right-18 size-76 rounded-full border border-primary/15"
             />
-            <Sprout size={60} strokeWidth={0.8} className="relative mt-4 text-[#688052]" />
+            <Sprout size={60} strokeWidth={0.8} className="relative mt-4 text-leaf" />
             <p className="editorial relative mt-8 text-[42px] leading-tight">
               The right opportunity
               <br />
@@ -90,7 +92,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section className="border-y border-border bg-[#eeeee5]">
+        <section className="border-y border-border bg-muted">
           <div className="mx-auto grid max-w-7xl gap-8 px-6 py-9 sm:grid-cols-3 sm:px-12">
             {[
               [
@@ -210,7 +212,7 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <footer className="bg-primary px-6 py-10 text-white/65 sm:px-12">
+      <footer className="bg-brand px-6 py-10 text-white/65 sm:px-12">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6">
           <Logo light />
           <p className="text-xs">Your ambition deserves a clearer path.</p>

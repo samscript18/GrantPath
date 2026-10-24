@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-24T14:04:13.741Z",
+  "checkedAt": "2026-10-24T14:49:16.500Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "15e6d7c5e379ecd5b0b4b29634273c6b5996e6d9",
-  "mergeableState": "blocked",
+  "head": "6b6399f9215f8195db0d43f108509147fea4961b",
+  "mergeableState": "clean",
   "enforceAdmins": true,
   "required": [
     {
@@ -26,8 +26,8 @@
       "name": "Typecheck, lint, domain and PostgreSQL checks",
       "app": "github-actions",
       "appId": 15368,
-      "result": null,
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40100772384/job/120892275411"
+      "result": "success",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40103723073/job/120900966296"
     },
     {
       "name": "GitGuardian Security Checks",
@@ -39,16 +39,16 @@
   ],
   "statuses": [
     {
-      "context": "TestSprite V3",
-      "state": "pending",
-      "description": "2 tests queued",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/bec3b808-1c62-4735-897a-114ccf1c39fb"
-    },
-    {
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/rGChNtm935ZWorqgZffM5KwKX3wq"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/6BgKpsUrK4tFdxKPyi9CG4G1bqjR"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "success",
+      "description": "All 2 tests passed",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/daa54b31-5049-41d8-b1c5-e50d30b00675"
     }
   ],
   "testSpriteGateVerified": true

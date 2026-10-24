@@ -6,6 +6,8 @@ import { readEnv } from "@/lib/env";
 import { sendEmail } from "./email";
 import { createHash } from "node:crypto";
 import { previewRegistrationAllowed } from "./preview";
+import { googleProvider } from "./google";
+import { newPasswordSchema } from "@/lib/password";
 let instance: ReturnType<typeof createAuth> | undefined;
 export function getAuth() {
   return (instance ??= createAuth());
@@ -17,13 +19,33 @@ function createAuth() {
     baseURL: env.BETTER_AUTH_URL,
     secret: env.BETTER_AUTH_SECRET,
     database: prismaAdapter(db(), { provider: "postgresql" }),
+    socialProviders: googleProvider(env),
+    account: {
+      encryptOAuthTokens: true,
+      accountLinking: {
+        enabled: true,
+        requireLocalEmailVerified: true,
+        allowDifferentEmails: false,
+        trustedProviders: [],
+      },
+    },
     trustedOrigins: (process.env.TRUSTED_ORIGINS || env.BETTER_AUTH_URL)
       .split(",")
       .map((s) => s.trim()),
-    user: { additionalFields: { role: { type: "string", defaultValue: "student", input: false } } },
+    user: {
+      additionalFields: { role: { type: "string", defaultValue: "student", input: false } },
+      validateUserInfo: ({ user, source }) => {
+        if (source.oauth?.providerId === "google" && !user.emailVerified)
+          return {
+            error: "email_not_verified",
+            errorDescription: "Use a verified Google email address.",
+          };
+      },
+    },
     emailAndPassword: {
       enabled: true,
       minPasswordLength: 10,
+      maxPasswordLength: 128,
       requireEmailVerification: true,
       resetPasswordTokenExpiresIn: 3600,
       revokeSessionsOnPasswordReset: true,
@@ -63,6 +85,20 @@ function createAuth() {
     },
     hooks: {
       before: createAuthMiddleware(async (ctx) => {
+        const password =
+          ctx.path === "/sign-up/email"
+            ? ctx.body?.password
+            : ["/reset-password", "/change-password", "/set-password"].includes(ctx.path)
+              ? ctx.body?.newPassword
+              : undefined;
+        if (password !== undefined) {
+          const checked = newPasswordSchema.safeParse(password);
+          if (!checked.success)
+            throw new APIError("BAD_REQUEST", {
+              message:
+                checked.error.issues[0]?.message || "Please check the password requirements.",
+            });
+        }
         if (
           ctx.path === "/sign-up/email" &&
           env.EMAIL_MODE === "brevo" &&

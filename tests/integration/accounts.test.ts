@@ -62,6 +62,36 @@ describe("first persistent journey", () => {
     await db().emailSink.deleteMany({ where: { recipient: { in: emails } } });
     await db().user.deleteMany({ where: { email: { in: emails } } });
   });
+  it("rejects weak new passwords at signup and reset before provisioning or token use", async () => {
+    for (const [i, weak] of [
+      "onlylowercaseletters",
+      "NOLOWERCASE123!",
+      "NoNumbersHere!",
+      "NoSymbolsHere123",
+    ].entries()) {
+      const email = `weak-${crypto.randomUUID()}@example.test`;
+      const response = await authPost("sign-up/email", {
+        name: "[TEST ONLY] Weak password",
+        email,
+        password: weak,
+      });
+      expect(response.status).toBe(400);
+      expect(await db().user.count({ where: { email } })).toBe(0);
+      const reset = await getAuth().handler(
+        new Request(`${origin}/api/auth/reset-password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: origin,
+            "x-forwarded-for": `192.0.2.${160 + i}`,
+          },
+          body: JSON.stringify({ token: "isolated-invalid-token", newPassword: weak }),
+        }),
+      );
+      expect(reset.status).toBe(400);
+      expect((await reset.json()).message).toContain("Include");
+    }
+  });
   it("registers, verifies, saves, isolates ownership, logs out and returns", async () => {
     const tag = crypto.randomUUID();
     const aEmail = `a-${tag}@example.test`;
@@ -144,7 +174,7 @@ describe("first persistent journey", () => {
         .status,
     ).toBe(200);
     expect(
-      (await authPost("reset-password", { token, newPassword: "Another-isolated-passphrase" }))
+      (await authPost("reset-password", { token, newPassword: "Another-isolated-passphrase-43" }))
         .status,
     ).toBeGreaterThanOrEqual(400);
     expect((await authPost("sign-in/email", { email, password })).status).toBe(401);

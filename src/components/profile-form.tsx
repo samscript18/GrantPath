@@ -437,7 +437,10 @@ export function ProfileForm({
             )}
           </div>
           {Object.keys(errors).length > 0 && (
-            <div role="alert" className="mt-5 rounded-md bg-[#f9e8e3] p-4 text-xs text-red-900">
+            <div
+              role="alert"
+              className="mt-5 rounded-md bg-danger p-4 text-xs text-danger-foreground"
+            >
               {validationMessages(errors).map((error) => (
                 <p key={error.path}>
                   {error.path.replace(/([A-Z])/g, " $1").replaceAll(".", " ")}: {error.message}

@@ -152,7 +152,7 @@ export default async function OperatorPage({
                     <p>
                       {o.attemptedAt.toISOString()} · {o.state}
                     </p>
-                    {o.error && <p className="mt-2 text-red-800">{o.error}</p>}
+                    {o.error && <p className="mt-2 text-danger-foreground">{o.error}</p>}
                     {o.excerpt && (
                       <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap">
                         {o.excerpt}

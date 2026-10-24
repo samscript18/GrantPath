@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-24T15:28:11.980Z",
+  "baseURL": "http://localhost:3000",
+  "googleButton": true,
+  "configuredClientIdUsed": true,
+  "canonicalCallback": true,
+  "googlePageReached": true,
+  "googleConfigurationError": false,
+  "googleAccountOrConsentCompleted": false
+}

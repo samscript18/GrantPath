@@ -180,7 +180,7 @@ export function ApplicationEditor({
           The scholarship is kept in the catalogue.
         </p>
         <button
-          className="text-red-800 underline"
+          className="text-danger-foreground underline"
           onClick={async () => {
             if (
               !window.confirm(

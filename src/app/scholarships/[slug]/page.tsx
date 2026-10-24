@@ -30,7 +30,7 @@ import type { Rule } from "@/server/eligibility/rules";
 function Rules({ rule }: { rule: Rule }) {
   return rule.kind === "requirement" ? (
     <li className="flex gap-3 border-b border-border py-4">
-      <CircleHelp size={16} className="mt-0.5 shrink-0 text-[#92722e]" />
+      <CircleHelp size={16} className="mt-0.5 shrink-0 text-warning-foreground" />
       <div>
         <p className="text-sm">{rule.label}</p>
         <p className="mt-2 text-[11px] text-muted-foreground">
@@ -94,7 +94,7 @@ export default async function ScholarshipDetail({
         Back to scholarships
       </Link>
       {historical && (
-        <div className="mb-6 border-l-2 border-accent bg-[#f3eedf] p-4 text-xs leading-6">
+        <div className="mb-6 border-l-2 border-accent bg-warning p-4 text-xs leading-6">
           You’re inspecting accepted version {selected.number}. Its evidence and assessment are
           historical; the current application window is shown separately.{" "}
           <Link href={`/scholarships/${s.slug}`} className="font-semibold underline">
@@ -136,7 +136,7 @@ export default async function ScholarshipDetail({
           </nav>
           <section id="overview">
             <p className="text-sm leading-7 text-muted-foreground">{d.summary}</p>
-            <div className="mt-7 bg-[#e9eddf] p-6">
+            <div className="mt-7 bg-secondary p-6">
               <p className="eyebrow text-muted-foreground">WHAT THE AWARD SUPPORTS</p>
               <h2 className="mt-3 font-serif text-2xl">{fundingLabels[d.fundingType]}</h2>
               <p className="mt-3 text-sm leading-6">{d.fundingSummary}</p>
@@ -278,7 +278,7 @@ export default async function ScholarshipDetail({
               </p>
             )}
             {d.deadlineState !== "confirmed" && (
-              <p className="mt-3 flex gap-2 text-[11px] leading-5 text-[#795410]">
+              <p className="mt-3 flex gap-2 text-[11px] leading-5 text-warning-foreground">
                 <CircleHelp size={14} className="mt-0.5 shrink-0" />
                 No exact countdown or reminder until the closing instant is confirmed.
               </p>

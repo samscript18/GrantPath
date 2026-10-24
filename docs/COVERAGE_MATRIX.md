@@ -23,3 +23,9 @@ Local results below refer to PostgreSQL, Vitest and Chromium, never TestSprite. 
 - Stale: exact historical evaluation and scholarship evidence, pending recalculation, distinct source failures/last success, accepted change timeline. Controlled outage/replay tested without changing accepted data.
 
 Bounded reference comparisons establish agreement for the tested grammar and cases; they do not prove every behaviour or factual scholarship interpretation. No optimisation proof is claimed.
+
+Final Brevo head6b6399f: full GitHub CI and two native App journeys passed, balance147. App recorded-step coverage omits some authored replay assertions; byte-identical explicit scripts passed locally, and supplemental strict remote execution was declined. See TEST_EVIDENCE.md for exact checked scope. Brevo provider acceptance/dedup and live-mail-enabled registration/login/mobile state were checked; recipient receipt remains unobserved.
+
+## Follow-up coverage
+
+Optional Google configuration and encrypted/persistent OAuth callbacks are covered by isolated-provider unit/PostgreSQL tests. Real localhost authorization reached Google; signed-in consent remains unobserved. Production Chromium covers System/Light/Dark persistence, OS/tab sync, blocked storage, dark/light desktop/mobile workspace screens, Google errors/redirect and live password checklist/confirmation/visibility/reset. Exact runs and boundaries are in TEST_EVIDENCE.md.
