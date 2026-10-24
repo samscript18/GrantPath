@@ -1,4 +1,5 @@
 import { getAuth, type Actor } from "@/server/accounts/auth";
+import { mutationQuota } from "@/server/rate-limit";
 import { z } from "zod";
 export async function apiActor(request: Request): Promise<Actor> {
   if (request.method !== "GET" && request.method !== "HEAD") {
@@ -8,6 +9,7 @@ export async function apiActor(request: Request): Promise<Actor> {
   }
   const session = await getAuth().api.getSession({ headers: request.headers });
   if (!session) throw new HttpError(401, "Please sign in to continue.");
+  if (!["GET", "HEAD"].includes(request.method) && !await mutationQuota(session.user.id, new URL(request.url).pathname)) throw new HttpError(429, "Too many updates. Please wait a minute and retry.");
   const user = session.user as typeof session.user & { role?: string };
   return { id: user.id, name: user.name, email: user.email, role: user.role || "student" };
 }
@@ -21,7 +23,9 @@ export function apiError(error: unknown) {
   return Response.json({ message: "Unable to complete this request. Please retry." }, { status: 503 });
 }
 export async function readBody(request: Request) {
-  const body = await request.text();
-  if (body.length > 100_000) throw new HttpError(413, "This request is too large.");
-  try { return JSON.parse(body) as unknown; } catch { throw new HttpError(400, "Expected valid JSON."); }
+  if (!request.body) throw new HttpError(400, "Expected a JSON body.");
+  const reader = request.body.getReader(); const chunks: Uint8Array[] = []; let bytes = 0;
+  while (true) { const part = await reader.read(); if (part.done) break; bytes += part.value.byteLength; if (bytes > 100_000) { await reader.cancel(); throw new HttpError(413, "This request is too large."); } chunks.push(part.value); }
+  const buffer = new Uint8Array(bytes); let offset = 0; for (const chunk of chunks) { buffer.set(chunk, offset); offset += chunk.byteLength; }
+  try { return JSON.parse(new TextDecoder().decode(buffer)) as unknown; } catch { throw new HttpError(400, "Expected valid JSON."); }
 }

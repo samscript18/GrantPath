@@ -19,6 +19,7 @@ async function registerVerified(email: string) {
   const url = mail.body.match(/https?:\/\/\S+/)?.[0]; expect(url).toBeTruthy();
   const verification = await getAuth().handler(new Request(url!));
   expect([200, 302]).toContain(verification.status);
+  expect((await getAuth().handler(new Request(url!))).status).toBe(400);
   const login = await authPost("sign-in/email", { email, password }); expect(login.status).toBe(200);
   return { user, cookie: login.headers.getSetCookie().map(c => c.split(";")[0]).join("; ") };
 }

@@ -30,3 +30,13 @@ Implemented strict Next.js/Tailwind/shadcn-style primitives, responsive navigati
 ## Phase 2 local increment
 
 20 source-backed catalogue records have been persisted through the accepted-version service. This includes historical closed cycles, four Warwick streams, and explicitly labelled scheme/uncertain-cycle overviews; it is not a claim of 20 currently open fully verified applications. Official pages were inspected; unknown deadlines, unitemised funding and additional provider conditions remain uncertain. Search, filters, pagination, public details, field evidence, accepted history, protected JSON rule/evidence authoring and duplicate-cycle protection are implemented. Unit checks pass; PostgreSQL catalogue tests and browser review are in progress. Supported registry sources are disabled pending access-policy review, not falsely shown as successfully monitored.
+
+## Phase 3 local increment
+
+Implemented a standalone three-valued rule engine, AND/OR alternatives and exemptions, citizenship/residence separation, present and completed qualifications distinct from future study, final-year completion boundaries, original-scale GPA/provider equivalences, language score/validity, declared experience units and provider-reference date conditions. Ranking cannot override ineligibility. Immutable evaluation records use exact profile/scholarship/engine versions, with stale-job rejection and explicit historical/updating UI. Added readable assessment breakdowns and rule/profile/outcome matrix. Local 24 unit tests pass; version/concurrency PostgreSQL tests are running. Initial real catalogue retains provider-confirmation clauses for unmapped conditions rather than claiming complete eligibility coverage.
+
+## Phase 4 local increment
+
+Implemented profile-driven dashboard and current/historical assessment states, private idempotent saves, preserved records on unsave, personal notes/checklists, all seven statuses with history, board/list views, saved collection and confirmed-deadline priorities. Private mutations have persistent per-user throttles and origin checks. Local typecheck/lint and 5 PostgreSQL tests pass; focused Playwright rerun is in progress after fixing save confirmation persistence. Source fetching and notification processing remain separate upcoming workers.
+
+Phase 4 browser acceptance now passes locally: 3 focused Playwright journeys, with a separate browser-test PostgreSQL database. The app is connected through account/profile → assessment/evidence → save → application plan → sign out/return. Browser and integration databases are isolated from the development catalogue. TestSprite and hosted acceptance remain externally unverified.

@@ -3,7 +3,7 @@ export const fields = ["citizenships", "residence", "qualification", "targetLeve
 export type ProfileField = typeof fields[number];
 export type Requirement = {
   kind: "requirement"; id: string; label: string; field: ProfileField;
-  op: "in" | "notIn" | "min" | "max" | "before" | "after" | "qualification" | "gpa" | "language" | "confirmed";
+  op: "in" | "notIn" | "min" | "max" | "before" | "after" | "onOrBefore" | "onOrAfter" | "qualification" | "gpa" | "language" | "confirmed";
   values?: string[]; threshold?: number; scale?: number; equivalents?: { scale: number; minimum: number }[];
   date?: string; referenceDate?: string; allowFinalYear?: boolean; completionBy?: string; maxAgeMonths?: number;
   verified: boolean; evidenceKey: string;
@@ -11,7 +11,7 @@ export type Requirement = {
 export type Rule = Requirement | { kind: "all" | "any"; id: string; label: string; rules: Rule[] };
 const requirementSchema = z.object({
   kind: z.literal("requirement"), id: z.string().min(1).max(80), label: z.string().min(3).max(500), field: z.enum(fields),
-  op: z.enum(["in", "notIn", "min", "max", "before", "after", "qualification", "gpa", "language", "confirmed"]),
+  op: z.enum(["in", "notIn", "min", "max", "before", "after", "onOrBefore", "onOrAfter", "qualification", "gpa", "language", "confirmed"]),
   values: z.array(z.string().max(150)).min(1).max(250).optional(), threshold: z.number().finite().optional(), scale: z.number().positive().optional(),
   equivalents: z.array(z.object({ scale: z.number().positive(), minimum: z.number().nonnegative() })).max(10).optional(),
   date: z.iso.date().optional(), referenceDate: z.iso.date().optional(), allowFinalYear: z.boolean().optional(), completionBy: z.iso.date().optional(), maxAgeMonths: z.number().int().positive().optional(),
@@ -21,7 +21,7 @@ const requirementSchema = z.object({
   if (["in", "notIn", "qualification", "language"].includes(r.op) && !r.values?.length) issue("This rule needs allowed values.");
   if (["min", "max", "gpa", "language"].includes(r.op) && r.threshold === undefined) issue("This rule needs a threshold.");
   if (r.op === "gpa" && (!r.scale || r.field !== "gpa")) issue("A GPA rule needs its original provider scale and GPA field.");
-  if (["before", "after"].includes(r.op) && !r.date) issue("A date comparison needs a reference date.");
+  if (["before", "after", "onOrBefore", "onOrAfter"].includes(r.op) && !r.date) issue("A date comparison needs a reference date.");
   if (r.op === "language" && r.field !== "language") issue("Language rules must use the language field.");
   if (r.op === "qualification" && r.field !== "qualification") issue("Qualification rules must use the qualification field.");
   if (r.allowFinalYear && !r.completionBy) issue("Final-year acceptance requires the provider completion date.");

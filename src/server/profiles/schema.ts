@@ -7,6 +7,7 @@ export const profileSchema = z.object({
   residence: text.optional(),
   timeZone: z.string().refine(v => { try { new Intl.DateTimeFormat("en", { timeZone: v }); return true; } catch { return false; } }, "Choose a valid IANA time zone").default("Africa/Lagos"),
   qualification: z.enum(["secondary", "bachelor", "master", "doctorate"]).optional(),
+  completedQualifications: z.array(z.enum(["secondary", "bachelor", "master", "doctorate"])).max(4).default([]),
   completion: z.enum(["completed", "final_year", "in_progress"]).optional(),
   graduationDate: date.optional(),
   currentField: text.optional(),
@@ -22,6 +23,7 @@ export const profileSchema = z.object({
     if (v.score > max) ctx.addIssue({ code: "custom", path: ["score"], message: `Maximum ${v.type} score is ${max}` });
   }).optional()),
   englishMedium: z.boolean().optional(),
+  experienceHours: z.number().min(0).max(500000).optional(),
   experienceMonths: z.number().int().min(0).max(720).optional(),
   birthDate: date.optional(),
   admission: z.enum(["none", "applied", "conditional", "unconditional"]).optional(),
