@@ -1,0 +1,336 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          String    @default("student")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  profile       Profile?
+  applications  Application[]
+  notifications Notification[]
+  preferences   NotificationPreference?
+  evaluations   Evaluation[]
+  deliveries    Delivery[]
+}
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  @@unique([providerId, accountId])
+  @@index([userId])
+}
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([identifier])
+}
+model RateLimit {
+  id          String @id @default(cuid())
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+}
+model Profile {
+  userId    String @id
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  version   Int @default(0)
+  stage     Int @default(0)
+  data      Json
+  updatedAt DateTime @updatedAt
+  versions  ProfileVersion[]
+}
+model ProfileVersion {
+  id        String @id @default(cuid())
+  userId    String
+  profile   Profile @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  number    Int
+  data      Json
+  createdAt DateTime @default(now())
+  @@unique([userId, number])
+}
+model Provider {
+  id        String @id @default(cuid())
+  slug      String @unique
+  name      String
+  url       String
+  programmes Programme[]
+}
+model Programme {
+  id         String @id @default(cuid())
+  slug       String @unique
+  name       String
+  providerId String
+  provider   Provider @relation(fields: [providerId], references: [id])
+  cycles     Scholarship[]
+}
+model Scholarship {
+  id             String @id @default(cuid())
+  slug           String @unique
+  programmeId    String
+  programme      Programme @relation(fields: [programmeId], references: [id])
+  cycle          String
+  version        Int @default(0)
+  title          String
+  destination    String
+  level          String
+  field          String
+  fundingType    String
+  availability   String @default("unknown")
+  deadline       DateTime?
+  deadlineLabel  String?
+  published      Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  versions       ScholarshipVersion[]
+  sources        Source[]
+  applications   Application[]
+  evaluations    Evaluation[]
+  reviews        Review[]
+  @@unique([programmeId, cycle])
+  @@index([published, availability, destination, level])
+}
+model ScholarshipVersion {
+  id            String @id @default(cuid())
+  scholarshipId String
+  scholarship   Scholarship @relation(fields: [scholarshipId], references: [id])
+  number        Int
+  data          Json
+  semanticHash  String
+  actorId       String
+  reason        String
+  createdAt     DateTime @default(now())
+  evidence      Evidence[]
+  @@unique([scholarshipId, number])
+}
+model Evidence {
+  id          String @id @default(cuid())
+  versionId   String
+  version     ScholarshipVersion @relation(fields: [versionId], references: [id])
+  field       String
+  url         String
+  passage     String
+  state       String
+  retrievedAt DateTime
+  @@index([versionId, field])
+}
+model Source {
+  id                  String @id @default(cuid())
+  scholarshipId       String
+  scholarship         Scholarship @relation(fields: [scholarshipId], references: [id])
+  url                 String @unique
+  adapter             String
+  cadenceHours        Int @default(24)
+  enabled             Boolean @default(true)
+  health              String @default("unchecked")
+  lastAttemptAt       DateTime?
+  lastSuccessAt       DateTime?
+  nextCheckAt         DateTime @default(now())
+  requestedAt         DateTime?
+  lockedUntil         DateTime?
+  leaseToken          String?
+  observations        Observation[]
+  @@index([enabled, nextCheckAt])
+}
+model Observation {
+  id          String @id @default(cuid())
+  sourceId    String
+  source      Source @relation(fields: [sourceId], references: [id])
+  state       String
+  httpStatus  Int?
+  error       String?
+  hash        String?
+  candidate   Json?
+  excerpt     String?
+  attemptedAt DateTime @default(now())
+  succeededAt DateTime?
+  reviews     Review[]
+  @@index([sourceId, attemptedAt])
+}
+model Review {
+  id             String @id @default(cuid())
+  scholarshipId  String
+  scholarship    Scholarship @relation(fields: [scholarshipId], references: [id])
+  observationId  String?
+  observation    Observation? @relation(fields: [observationId], references: [id])
+  baseVersion    Int
+  candidate      Json
+  fingerprint    String
+  state          String @default("pending")
+  reason         String?
+  actorId        String?
+  createdAt      DateTime @default(now())
+  decidedAt      DateTime?
+  @@unique([scholarshipId, baseVersion, fingerprint])
+  @@index([state])
+}
+model Evaluation {
+  id                 String @id @default(cuid())
+  userId             String
+  user               User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scholarshipId      String
+  scholarship        Scholarship @relation(fields: [scholarshipId], references: [id])
+  profileVersion     Int
+  scholarshipVersion Int
+  engineVersion      String
+  outcome            String
+  result             Json
+  rank               Int
+  createdAt          DateTime @default(now())
+  @@unique([userId, scholarshipId, profileVersion, scholarshipVersion, engineVersion])
+  @@index([userId, scholarshipId, createdAt])
+}
+model Application {
+  id            String @id @default(cuid())
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scholarshipId String
+  scholarship   Scholarship @relation(fields: [scholarshipId], references: [id])
+  saved         Boolean @default(true)
+  status        String @default("Interested")
+  notes         String @default("")
+  checklist     Json
+  revision      Int @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  history       ApplicationHistory[]
+  @@unique([userId, scholarshipId])
+}
+model ApplicationHistory {
+  id            String @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  fromStatus    String?
+  toStatus      String
+  createdAt     DateTime @default(now())
+}
+model Outbox {
+  id          String @id @default(cuid())
+  key         String @unique
+  topic       String
+  payload     Json
+  state       String @default("pending")
+  attempts    Int @default(0)
+  availableAt DateTime @default(now())
+  lockedUntil DateTime?
+  leaseToken  String?
+  error       String?
+  createdAt   DateTime @default(now())
+  completedAt DateTime?
+  @@index([state, availableAt])
+}
+model NotificationPreference {
+  userId   String @id
+  user     User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  newMatch Boolean @default(true)
+  change   Boolean @default(true)
+  deadline Boolean @default(true)
+  inApp    Boolean @default(true)
+  email    Boolean @default(false)
+  updatedAt DateTime @updatedAt
+}
+model Notification {
+  id            String @id @default(cuid())
+  key           String @unique
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scholarshipId String
+  eventId       String
+  topic         String
+  title         String
+  body          String
+  href          String
+  readAt        DateTime?
+  createdAt     DateTime @default(now())
+  @@index([userId, createdAt])
+}
+model Delivery {
+  id             String @id @default(cuid())
+  key            String @unique
+  userId         String
+  user           User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scholarshipId  String
+  eventId        String
+  topic          String
+  channel        String
+  subject        String
+  body           String
+  href           String
+  state          String @default("pending")
+  attempts       Int @default(0)
+  availableAt    DateTime @default(now())
+  lockedUntil    DateTime?
+  leaseToken     String?
+  error          String?
+  providerId     String?
+  acceptedAt     DateTime?
+  createdAt      DateTime @default(now())
+  history        DeliveryAttempt[]
+  @@index([state, availableAt])
+}
+model DeliveryAttempt {
+  id         String @id @default(cuid())
+  deliveryId String
+  delivery   Delivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+  number     Int
+  state      String
+  error      String?
+  createdAt  DateTime @default(now())
+  @@unique([deliveryId, number])
+}
+model Audit {
+  id        String @id @default(cuid())
+  actorId   String
+  action    String
+  recordId  String
+  before    Json?
+  after     Json?
+  reason    String
+  createdAt DateTime @default(now())
+  @@index([recordId, createdAt])
+}
+model EmailSink {
+  id         String @id @default(cuid())
+  key        String @unique
+  recipient  String
+  subject    String
+  body       String
+  createdAt  DateTime @default(now())
+}

@@ -1,0 +1,7 @@
+node_modules
+.next
+src/generated
+package-lock.json
+docs/GrantPath_PRD.docx
+playwright-report
+test-results
