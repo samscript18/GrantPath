@@ -31,7 +31,7 @@ export default async function OperatorPage({
         title="Keep the path trustworthy."
         description="Review official evidence, maintain accepted records, and inspect operational health."
       />
-      <div className="operator-summary mb-7 grid grid-cols-2 divide-x divide-border rounded-xl border border-border bg-paper sm:grid-cols-4">
+      <div className="operator-summary studio-overview mb-7 grid grid-cols-2 divide-x divide-border rounded-xl border border-border bg-paper sm:grid-cols-4">
         {[
           [overview.scholarships.length, "Catalogue records"],
           [overview.sources.length, "Registered sources"],
@@ -46,7 +46,7 @@ export default async function OperatorPage({
       </div>
       <nav
         aria-label="Operator sections"
-        className="section-navigation mb-8 flex gap-1 overflow-x-auto rounded-lg border border-border bg-paper p-1 text-xs"
+        className="section-navigation studio-navigation mb-8 flex gap-1 overflow-x-auto rounded-lg border border-border bg-paper p-1 text-xs"
       >
         <a href="#catalogue">Catalogue</a>
         <a href="#provider-images">Provider images</a>
@@ -103,7 +103,10 @@ export default async function OperatorPage({
         </div>
       </details>
       <section id="catalogue">
-        <h2 className="mb-5 font-serif text-2xl">Accepted catalogue</h2>
+        <div className="mb-5">
+          <p className="eyebrow text-leaf">THE PUBLISHED COLLECTION</p>
+          <h2 className="mt-3 font-serif text-3xl">Accepted catalogue</h2>
+        </div>
         <div className="operator-table paper overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-muted text-[10px] uppercase tracking-wide">

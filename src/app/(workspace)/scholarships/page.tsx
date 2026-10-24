@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
   BookOpen,
   Bookmark,
+  RotateCcw,
 } from "lucide-react";
 import { PageHeading } from "@/components/page-heading";
 import { Input } from "@/components/ui/input";
@@ -69,7 +70,7 @@ export default async function Scholarships({
                 name="q"
                 aria-label="Search scholarships"
                 defaultValue={f.q}
-                placeholder="A scholarship, university, or field of possibility…"
+                placeholder="Search scholarships"
                 className="h-12 bg-paper pl-11 pr-22"
               />
               <Button size="sm" className="absolute top-1.5 right-1.5">
@@ -191,8 +192,14 @@ export default async function Scholarships({
                 {f.availability === "active" ? "closed cycles excluded" : "your selected filters"}
               </p>
               <div className="flex items-center gap-4">
-                <Link className="underline underline-offset-4" href="/scholarships">
-                  Clear filters
+                <Link
+                  className="inline-flex min-h-9 min-w-9 shrink-0 items-center justify-center rounded-md text-muted-foreground underline-offset-4 hover:bg-secondary sm:min-w-0 sm:underline"
+                  href="/scholarships"
+                  aria-label="Clear filters"
+                  title="Clear filters"
+                >
+                  <RotateCcw size={15} className="sm:hidden" aria-hidden="true" />
+                  <span className="hidden sm:inline">Clear filters</span>
                 </Link>
                 <Button variant="outline" size="sm">
                   Apply filters

@@ -16,7 +16,7 @@ export function PageHeading({
           <span aria-hidden="true" className="h-px w-6 bg-accent" />
           {eyebrow}
         </p>
-        <h1 className="editorial text-[36px] leading-[1.12] sm:text-[46px] lg:text-[50px]">
+        <h1 className="editorial text-[36px] leading-[1.12] sm:text-[44px] lg:text-[46px]">
           {title}
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">{description}</p>

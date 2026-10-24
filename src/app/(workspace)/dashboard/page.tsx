@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Recalculate } from "@/components/recalculate";
 import { EmptyState } from "@/components/empty-state";
 import { formatDate } from "@/lib/utils";
-import { OpportunityArt } from "@/components/opportunity-art";
+import { profileReadiness } from "@/server/profiles/readiness";
 export const metadata = { title: "Your overview" };
 export default async function Dashboard() {
   const actor = await requireUser();
@@ -48,6 +48,8 @@ export default async function Dashboard() {
     .sort((a, b) => a.scholarship.deadline!.getTime() - b.scholarship.deadline!.getTime())
     .slice(0, 4);
   const profile = overview.profile.data;
+  const readiness = profileReadiness(profile);
+  const basics = readiness.fields.filter((field) => field.complete).length;
   const priorities = [
     !profile.citizenships.length && [
       "Tell us where you’re a citizen",
@@ -76,28 +78,54 @@ export default async function Dashboard() {
             : "Your journey starts here"}
         </span>
       </PageHeading>
-      <section className="dashboard-feature relative grid overflow-hidden bg-brand px-7 py-7 text-white sm:px-9 md:grid-cols-[1fr_210px]">
+      <section className="dashboard-feature dashboard-next-step relative grid gap-7 overflow-hidden rounded-2xl bg-brand p-6 text-white sm:p-8 md:grid-cols-[minmax(0,1fr)_250px]">
         <div className="relative z-10">
-          <p className="eyebrow text-[9px] text-[#c0cfac]">A NEW CHAPTER, AT YOUR OWN PACE</p>
-          <h2 className="editorial mt-4 max-w-xl text-[32px] leading-[1.15] sm:text-[38px]">
-            Your future has possibilities.
-            <br />
-            <em className="text-[#d8dfb9]">Let’s give them a direction.</em>
+          <p className="eyebrow text-[9px] text-[#c0cfac]">YOUR NEXT GOOD STEP</p>
+          <h2 className="editorial mt-4 max-w-xl text-[30px] leading-[1.18] sm:text-[36px]">
+            {readiness.ready ? (
+              <>
+                Your plans have direction.
+                <br />
+                <em className="text-[#d8dfb9]">Explore what’s possible.</em>
+              </>
+            ) : (
+              <>
+                A clearer picture of you.
+                <br />
+                <em className="text-[#d8dfb9]">A better place to begin.</em>
+              </>
+            )}
           </h2>
-          <p className="mt-5 max-w-lg text-xs leading-7 text-white/65">
-            {overview.profile.version
-              ? "Explore opportunities grounded in official evidence, see what needs checking, and build a plan that feels like yours."
-              : "Tell us about your education and plans. We’ll help you make sense of the requirements, one opportunity at a time."}
+          <p className="mt-4 max-w-lg text-[13px] leading-7 text-white/70">
+            {readiness.ready
+              ? "Your matching basics are saved. Explore explained opportunities and check any requirements that still need confirmation."
+              : "Add your education, circumstances and intended study plans. Each saved answer adds context to your scholarship assessments."}
           </p>
           <Button asChild variant="secondary" className="mt-6">
-            <Link href={overview.profile.version ? "/scholarships" : "/profile"}>
-              {overview.profile.version ? "Explore my possibilities" : "Build my profile"}
+            <Link href={readiness.ready ? "/scholarships" : "/settings/profile"}>
+              {readiness.ready ? "Explore opportunities" : "Continue my study profile"}
               <ArrowUpRight size={14} />
             </Link>
           </Button>
         </div>
-        <div aria-hidden className="relative hidden items-center justify-center md:flex">
-          <OpportunityArt dark className="absolute w-[285px] max-w-none" />
+        <div className="dashboard-profile-note rounded-xl border border-white/15 bg-white/5 p-5">
+          <p className="eyebrow text-[9px] text-white/65">YOUR MATCHING BASICS</p>
+          <p className="mt-4 font-serif text-[40px] leading-none">
+            {basics}
+            <span className="ml-2 text-lg text-white/50">/ {readiness.fields.length}</span>
+          </p>
+          <p className="mt-2 text-[11px] text-white/65">starting details saved</p>
+          <div className="mt-4 flex gap-1.5" aria-hidden="true">
+            {readiness.fields.map((field) => (
+              <span
+                key={field.label}
+                className={`h-1 flex-1 rounded-full ${field.complete ? "bg-[#c7d4ae]" : "bg-white/15"}`}
+              />
+            ))}
+          </div>
+          <p className="mt-5 border-t border-white/15 pt-4 text-[11px] leading-6 text-white/70">
+            Profile details help explain your matches. They are not an eligibility score.
+          </p>
         </div>
       </section>
       <div className="dashboard-summary my-8 grid grid-cols-3 divide-x divide-border border-b border-border pb-7 pt-1">

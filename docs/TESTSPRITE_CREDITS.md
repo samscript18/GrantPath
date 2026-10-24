@@ -31,3 +31,5 @@ Automatic execution `e0d65db9-7c39-42f3-b1ff-4ce8f31f2234` at head50570e1: **2/2
 Account-control follow-up: no TestSprite operation under the user's testing/publication pause. Latest observed balance remains146; no new portal observation or debit is claimed. OTP, privacy and Cloudinary flows are not covered by the earlier two-case App run.
 
 Full-worktree local commit and provider-image follow-up: no TestSprite operation or GitHub push. Latest observed balance146 is unchanged as an observation; no new balance lookup or debit is claimed.
+
+Second editorial design pass: no credited operation or balance lookup.146 remains the latest previously observed balance, not a fresh observation. Local screenshot review did not invoke TestSprite or its test suite.

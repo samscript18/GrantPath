@@ -32,3 +32,7 @@ Implement reference-inspired password/session and privacy/data screens with real
 ## Onboarding and institutional imagery follow-up
 
 Use two-column session rows and an automatically presented, resumable study-profile modal for unfinished student sign-ins. Separate persisted onboarding completion from actual eligibility. Add source-attributed institutional images on Provider, protected Cloudinary upload/edit controls, standalone policy-aware discovery/reviewed publication, compact accessible bookmark controls and shared editorial polish. Migrations005/006 and six real provider image imports are applied to development only. Commit all repository changes as explicitly requested, keeping ignored secrets local; tests, private browser journeys, preview updates and GitHub pushes remain paused.
+
+## Second editorial design pass
+
+Refine every page through shared navigation, typography, surfaces, forms and recovery layouts, plus distinct landing/catalogue/dashboard/application/inbox/profile/settings/reference/operator compositions. Keep current fonts/colors and deterministic domain behaviour. Use actual browser screenshots to refine public desktop/mobile/dark presentation; record private views as unreviewed where authenticated access is unavailable. Keep automated checks and GitHub publication paused; retain the user's preference for complete local commits.

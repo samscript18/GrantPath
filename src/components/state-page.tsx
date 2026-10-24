@@ -23,10 +23,10 @@ export function StatePage({
       </header>
       <main
         id="main"
-        className="mx-auto my-auto grid w-full max-w-4xl items-center gap-10 py-16 md:grid-cols-[1.2fr_.8fr]"
+        className="state-content mx-auto my-auto grid w-full max-w-5xl items-center gap-10 rounded-2xl border border-border bg-paper p-7 sm:p-12 md:grid-cols-[1.2fr_.8fr]"
       >
         <div>
-          <p className="eyebrow text-muted-foreground">{eyebrow}</p>
+          <p className="eyebrow text-leaf">{eyebrow}</p>
           <h1 className="editorial mt-5 text-[42px] leading-tight sm:text-5xl">{title}</h1>
           <p className="mt-6 max-w-md text-sm leading-8 text-muted-foreground">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">{children}</div>

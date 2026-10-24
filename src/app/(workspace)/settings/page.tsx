@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { ArrowUpRight, Bell, UserRound, SunMoon, ShieldCheck, Sprout } from "lucide-react";
+import {
+  ArrowUpRight,
+  Bell,
+  GraduationCap,
+  SunMoon,
+  KeyRound,
+  Database,
+  ShieldCheck,
+} from "lucide-react";
 import { requireUser } from "@/server/accounts/session";
 import { SettingsFrame } from "@/components/settings-frame";
 export const metadata = { title: "Settings" };
@@ -9,84 +17,86 @@ export default async function Settings() {
     <SettingsFrame
       actor={actor}
       active="/settings"
-      title="Make yourself at home."
-      description="Your profile, updates, appearance and account, in one place."
+      title="Make this space your own."
+      description="Your plans, your preferences, and the details that keep your account secure."
     >
-      <div className="grid items-start gap-10 xl:grid-cols-[minmax(0,1fr)_260px]">
-        <div className="border-t border-border">
-          {(
+      <Link
+        href="/settings/profile"
+        className="settings-profile-feature group relative mb-5 flex flex-col gap-6 overflow-hidden rounded-2xl border border-primary/15 bg-secondary/60 p-6 sm:flex-row sm:items-center sm:p-8"
+      >
+        <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/10 bg-paper text-primary">
+          <GraduationCap size={26} strokeWidth={1.2} aria-hidden="true" />
+        </span>
+        <div className="relative min-w-0 flex-1">
+          <p className="eyebrow text-leaf">THE STARTING POINT FOR YOUR MATCHES</p>
+          <h2 className="mt-3 font-serif text-3xl tracking-tight">Your study profile</h2>
+          <p className="mt-3 max-w-xl text-[13px] leading-7 text-muted-foreground">
+            Keep your circumstances, original qualifications and future plans together. Update them
+            as your next chapter takes shape.
+          </p>
+        </div>
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-primary/15 bg-paper transition-transform group-hover:translate-x-1">
+          <ArrowUpRight size={18} aria-hidden="true" />
+        </span>
+      </Link>
+      <div className="settings-directory grid gap-4 md:grid-cols-2">
+        {(
+          [
             [
-              [
-                "/settings/profile",
-                "Your student profile",
-                "Citizenship, education, study plans and original academic results.",
-                UserRound,
-              ],
-              [
-                "/settings/notifications",
-                "Notification preferences",
-                "Choose relevant topics and switch inbox or email updates on and off.",
-                Bell,
-              ],
-              [
-                "/settings/app",
-                "Appearance & app",
-                "Light, dark or system appearance, and your local time zone.",
-                SunMoon,
-              ],
-              [
-                "/settings/privacy",
-                "Privacy & data",
-                "Download your account information or manage a deletion request.",
-                ShieldCheck,
-              ],
-              [
-                "/settings/account",
-                "Password & sessions",
-                "Change your password with a verification code and manage signed-in devices.",
-                ShieldCheck,
-              ],
-            ] as const
-          ).map(([href, title, description, Icon]) => (
-            <Link
-              key={String(href)}
-              href={String(href)}
-              className="group -mx-3 flex items-start gap-5 rounded-lg border-b border-border px-3 py-7 transition-colors hover:bg-paper"
-            >
-              <span className="rounded-xl border border-border/50 bg-secondary/65 p-3 text-primary transition-colors group-hover:bg-secondary">
-                <Icon size={20} strokeWidth={1.4} />
-              </span>
-              <span className="flex-1">
-                <span className="block font-serif text-[25px] tracking-tight">{String(title)}</span>
-                <span className="mt-2 block text-xs leading-6 text-muted-foreground">
-                  {String(description)}
-                </span>
+              "/settings/notifications",
+              "Notifications",
+              "Choose the updates you want.",
+              "Topics, inbox alerts and scholarship emails, on your terms.",
+              Bell,
+            ],
+            [
+              "/settings/app",
+              "Appearance & app",
+              "Settle into your workspace.",
+              "Light, dark or system appearance, plus your local time zone.",
+              SunMoon,
+            ],
+            [
+              "/settings/account",
+              "Password & sessions",
+              "Keep access in your hands.",
+              "Change your password with email verification and manage signed-in devices.",
+              KeyRound,
+            ],
+            [
+              "/settings/privacy",
+              "Privacy & data",
+              "Your information. Your choice.",
+              "Take a copy of your account or manage a request to close it.",
+              Database,
+            ],
+          ] as const
+        ).map(([href, title, subtitle, description, Icon]) => (
+          <Link
+            key={href}
+            href={href}
+            className="settings-directory-link group rounded-xl border border-border bg-paper p-6 transition-colors hover:border-primary/25"
+          >
+            <div className="flex items-center justify-between">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-secondary/70 text-primary">
+                <Icon size={19} strokeWidth={1.4} aria-hidden="true" />
               </span>
               <ArrowUpRight
-                size={18}
-                className="mt-3 transition-transform group-hover:translate-x-1"
+                size={16}
+                className="text-muted-foreground transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
               />
-            </Link>
-          ))}
-        </div>
-        <aside className="relative overflow-hidden rounded-xl bg-secondary p-7">
-          <Sprout size={32} strokeWidth={1.1} className="text-leaf" aria-hidden="true" />
-          <p className="eyebrow mt-8 text-muted-foreground">A LITTLE MORE YOU</p>
-          <h2 className="editorial mt-4 text-3xl leading-tight">
-            Your plans evolve.
-            <br />
-            <em>So can your workspace.</em>
-          </h2>
-          <p className="mt-5 text-xs leading-7 text-muted-foreground">
-            Keep your profile up to date for clearer matches, and make room for the notifications
-            that matter to you.
-          </p>
-          <div className="mt-7 flex items-center gap-2 border-t border-primary/15 pt-5 text-[11px]">
-            <ShieldCheck size={14} aria-hidden="true" />
-            Your profile stays private.
-          </div>
-        </aside>
+            </div>
+            <h2 className="mt-6 font-serif text-[25px] tracking-tight">{title}</h2>
+            <p className="mt-2 text-xs font-medium">{subtitle}</p>
+            <p className="mt-3 text-[13px] leading-7 text-muted-foreground">{description}</p>
+          </Link>
+        ))}
       </div>
+      <p className="mt-7 flex items-center gap-2 text-[11px] leading-6 text-muted-foreground">
+        <ShieldCheck size={14} className="shrink-0 text-leaf" aria-hidden="true" />
+        Your profile and account settings stay private.
+      </p>
     </SettingsFrame>
   );
 }

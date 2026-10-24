@@ -51,7 +51,7 @@ export function ChangeTimeline({
   slug: string;
 }) {
   return (
-    <ol className="ml-2 pt-2">
+    <ol className="change-timeline ml-2 pt-2">
       {versions.map((v, i) => {
         const previous = versions[i + 1];
         const changes = previous ? materialChanges(previous.data, v.data) : [];

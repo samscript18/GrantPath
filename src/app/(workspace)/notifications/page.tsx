@@ -31,7 +31,7 @@ export default async function Notifications({
       </PageHeading>
       <div className="grid items-start gap-8 xl:grid-cols-[1fr_300px]">
         <section>
-          <div className="mb-5 flex items-center justify-between gap-3">
+          <div className="inbox-toolbar mb-5 flex flex-wrap items-center justify-between gap-3">
             <nav
               aria-label="Inbox filters"
               className="segmented-control flex gap-1 rounded-lg border border-border bg-paper p-1 text-xs"
@@ -54,7 +54,7 @@ export default async function Notifications({
             {data.unread > 0 && <MarkRead />}
           </div>
           {data.rows.length ? (
-            <div className="paper px-5 sm:px-7">
+            <div className="inbox-list paper px-5 sm:px-7">
               {data.rows.map((n) => {
                 const Icon =
                   n.topic === "deadline"

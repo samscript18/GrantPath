@@ -170,11 +170,11 @@ export default async function ProfilePage() {
             style={{ width: `${(added / foundations.length) * 100}%` }}
           />
         </div>
-        <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2.5">
+        <ul className="profile-foundations mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {foundations.map((item) => (
             <li
               key={item.label}
-              className={`flex items-center gap-1.5 text-[10px] ${item.added ? "text-primary" : "text-muted-foreground"}`}
+              className={`flex items-center gap-2 rounded-lg bg-muted/40 px-3 py-2.5 text-[11px] ${item.added ? "text-primary" : "text-muted-foreground"}`}
             >
               <span
                 aria-hidden="true"
@@ -208,11 +208,11 @@ export default async function ProfilePage() {
           <div className="mt-6 rounded-xl border border-border bg-muted/25 p-4">
             <AccountNameEditor initialName={account.name} />
           </div>
-          <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+          <dl className="account-facts mt-5 grid gap-x-5 sm:grid-cols-2">
             {details.map(({ label, value, Icon }) => (
               <div
                 key={label}
-                className="flex min-w-0 items-start gap-3 rounded-lg border border-border/65 bg-muted/30 px-3.5 py-4"
+                className="flex min-w-0 items-start gap-3 border-b border-border/70 py-5"
               >
                 <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md bg-secondary/60 text-leaf">
                   <Icon size={14} strokeWidth={1.4} aria-hidden="true" />

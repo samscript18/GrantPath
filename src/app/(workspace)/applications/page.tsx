@@ -22,7 +22,7 @@ export default async function Applications({
     <>
       <PageHeading
         eyebrow="POSSIBILITY, WITH A PLAN"
-        title="One step at a time."
+        title="Your applications, in motion."
         description="Organise your preparation, keep your notes close, and see how far you’ve come."
       >
         <div className="segmented-control flex gap-1 rounded-lg border border-border bg-paper p-1">
@@ -79,9 +79,9 @@ export default async function Applications({
             return (
               <section
                 key={status}
-                className={`${list ? "" : "board-column rounded-xl border border-border/60 bg-muted/60 p-4"}`}
+                className={`${list ? "" : "board-column rounded-xl bg-muted/55 p-4"}`}
               >
-                <div className="mb-4 flex items-center gap-2 border-b border-border pb-4">
+                <div className="board-stage-heading mb-4 flex items-center gap-2 border-b border-border pb-4">
                   <span
                     className={`size-1.5 rounded-full ${status === "Awarded" ? "bg-primary" : status === "Applied" ? "bg-accent" : "bg-primary/35"}`}
                   />
@@ -93,7 +93,11 @@ export default async function Applications({
                 <div className={list ? "grid gap-4 md:grid-cols-2 xl:grid-cols-3" : "space-y-4"}>
                   {entries.length ? (
                     entries.map((a) => (
-                      <article className="application-card paper p-5" key={a.id}>
+                      <article
+                        id={`application-${a.id}`}
+                        className="application-card paper p-5"
+                        key={a.id}
+                      >
                         <div className="flex items-center gap-3">
                           <ProviderImage
                             provider={a.scholarship.programme.provider}
@@ -127,7 +131,7 @@ export default async function Applications({
                             ? `Confirmed close: ${formatDate(a.scholarship.deadline)}`
                             : "Closing instant to confirm"}
                         </p>
-                        <div className="mt-4 border-t border-border pt-3">
+                        <div className="application-preparation mt-4 border-t border-border pt-4">
                           <p className="text-[10px] text-muted-foreground">
                             {a.checklist.filter((c) => c.done).length} of {a.checklist.length}{" "}
                             preparation steps checked

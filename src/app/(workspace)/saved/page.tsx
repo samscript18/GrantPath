@@ -15,7 +15,7 @@ export default async function Saved() {
     <>
       <PageHeading
         eyebrow="KEEP THE POSSIBILITIES CLOSE"
-        title="Worth coming back to."
+        title="Your scholarship shortlist."
         description="Your shortlist, at your own pace. Saved opportunities and personal progress belong only to you."
       >
         <Badge>
@@ -26,7 +26,7 @@ export default async function Saved() {
         <div className="space-y-5">
           {rows.length ? (
             rows.map((a) => (
-              <section key={a.id} className="paper overflow-hidden px-5 sm:px-7">
+              <section key={a.id} className="saved-opportunity paper overflow-hidden px-5 sm:px-7">
                 <ScholarshipCard
                   row={a.scholarship}
                   action={
@@ -39,10 +39,13 @@ export default async function Saved() {
                 />
                 <div className="-mx-5 flex flex-wrap items-center justify-between gap-4 border-t border-border bg-muted/35 px-5 py-4 sm:-mx-7 sm:px-7">
                   <Link
-                    href={`/scholarships/${a.scholarship.slug}#requirements`}
+                    href={`/applications?view=list#application-${a.id}`}
                     className="inline-flex items-center gap-2 text-xs font-medium"
                   >
-                    My progress: {a.status} <ArrowUpRight size={13} />
+                    <span className="text-muted-foreground">My plan</span>
+                    <Badge>{a.status}</Badge>
+                    <span>Open plan</span>
+                    <ArrowUpRight size={13} />
                   </Link>
                 </div>
               </section>
@@ -59,7 +62,7 @@ export default async function Saved() {
             </EmptyState>
           )}
         </div>
-        <aside className="rounded-xl border border-border bg-secondary/45 p-6">
+        <aside className="guide-note self-start rounded-xl border border-border bg-secondary/45 p-6">
           <Bookmark size={24} strokeWidth={1.3} className="mb-6 text-leaf" aria-hidden="true" />
           <p className="eyebrow">A NOTE FOR YOUR NEXT STEP</p>
           <h2 className="mt-4 font-serif text-2xl">

@@ -53,7 +53,7 @@ export function PasswordRequirements({
               Your password checklist
             </p>
             <p className="mt-1 text-[10px] leading-5 text-muted-foreground">
-              A few small steps to get set up.
+              A clear checklist for your new password.
             </p>
           </div>
           <span

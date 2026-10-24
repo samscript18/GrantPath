@@ -14,12 +14,12 @@ export function AuthLayout({
 }) {
   return (
     <div className="auth-scene min-h-screen p-3 sm:p-5 lg:p-6">
-      <div className="mx-auto grid min-h-[calc(100vh-24px)] max-w-[1600px] overflow-hidden rounded-2xl border border-border bg-paper sm:min-h-[calc(100vh-40px)] lg:min-h-[calc(100vh-48px)] lg:grid-cols-[.85fr_1.15fr]">
+      <div className="mx-auto grid min-h-[calc(100vh-24px)] auth-frame max-w-[1600px] overflow-hidden rounded-2xl border border-border bg-paper sm:min-h-[calc(100vh-40px)] lg:min-h-[calc(100vh-48px)] lg:grid-cols-[.85fr_1.15fr]">
         <aside className="auth-story relative hidden flex-col overflow-hidden bg-brand px-10 py-10 text-white lg:flex xl:px-14">
           <Logo light />
           <div className="relative z-10 mt-14">
             <p className="eyebrow text-[#d4a64e]">THE FUTURE IS STILL YOURS TO WRITE</p>
-            <h2 className="editorial mt-5 text-[48px] leading-[1.12] xl:text-[58px]">
+            <h2 className="editorial mt-5 text-[45px] leading-[1.15] xl:text-[54px]">
               A little direction.
               <br />
               <em className="text-[#d8dfb9]">A world of possibility.</em>
@@ -35,7 +35,10 @@ export function AuthLayout({
             Official evidence. Clearer next steps.
           </div>
         </aside>
-        <main id="main" className="flex min-w-0 flex-col px-6 py-6 sm:px-10 sm:py-8 xl:px-16">
+        <main
+          id="main"
+          className="auth-content flex min-w-0 flex-col px-6 py-6 sm:px-10 sm:py-8 xl:px-16"
+        >
           <div className="flex items-center justify-between gap-4">
             <div className="lg:hidden">
               <Logo />
@@ -48,7 +51,7 @@ export function AuthLayout({
             </Link>
             <ThemeControl compactOnMobile />
           </div>
-          <div className="mx-auto my-auto w-full max-w-[400px] py-12 sm:py-14">
+          <div className="auth-form-content mx-auto my-auto w-full max-w-[430px] py-10 sm:py-12">
             <p className="eyebrow mb-5 flex items-center gap-2.5 text-muted-foreground">
               <span className="h-px w-6 bg-accent" aria-hidden="true" />
               YOUR NEXT CHAPTER

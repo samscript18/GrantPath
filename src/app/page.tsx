@@ -53,6 +53,7 @@ const faqs = [
 export default async function Home() {
   await connection();
   const featured = process.env.DATABASE_URL ? await featuredScholarships() : [];
+  const spotlight = featured[0];
   return (
     <div className="landing-page">
       <header className="landing-header mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-x-4 gap-y-4 px-6 py-4 sm:px-10 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-14 lg:py-6">
@@ -93,7 +94,7 @@ export default async function Home() {
         </div>
       </header>
       <main id="main">
-        <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-12 pb-16 sm:px-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-8 lg:px-14 lg:pt-16 lg:pb-22">
+        <section className="landing-hero mx-auto grid max-w-7xl items-center gap-12 px-6 pt-12 pb-16 sm:px-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-8 lg:px-14 lg:pt-16 lg:pb-22">
           <div>
             <p className="eyebrow flex items-center gap-3 text-muted-foreground">
               <span className="h-px w-8 bg-accent" />
@@ -125,14 +126,35 @@ export default async function Home() {
               Official sources. Clear requirements. Your own pace.
             </p>
           </div>
-          <div className="landing-art relative mx-auto w-full max-w-[280px] rounded-t-[180px] rounded-b-2xl border border-border bg-secondary/55 px-5 pt-5 pb-7 sm:max-w-[440px] sm:px-7 lg:mt-3">
-            <OpportunityArt className="mx-auto w-full" />
-            <div className="mx-3 border-t border-primary/15 pt-5 text-center">
-              <p className="eyebrow text-[9px] text-muted-foreground">
-                EVERY PATH STARTS SOMEWHERE
-              </p>
-              <p className="mt-3 font-serif text-2xl italic">Make room for what’s next.</p>
+          <div className="landing-visual relative mx-auto w-full max-w-[440px]">
+            <div className="landing-art relative rounded-t-[180px] rounded-b-2xl border border-border bg-secondary/55 px-7 pt-5 pb-8">
+              <OpportunityArt className="landing-artwork mx-auto w-full" />
             </div>
+            {spotlight && (
+              <Link
+                href={`/scholarships/${spotlight.slug}`}
+                className="landing-spotlight group relative mt-4 flex items-center gap-4 rounded-xl border border-border bg-paper p-4 shadow-sm sm:-ml-8 sm:mr-8 sm:-mt-12 sm:p-5"
+              >
+                <ProviderImage
+                  provider={spotlight.programme.provider}
+                  className="size-12 text-4xl"
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="eyebrow text-[8px] text-leaf">FROM THE OFFICIAL-SOURCE CATALOGUE</p>
+                  <h2 className="mt-2 font-serif text-xl leading-tight tracking-tight">
+                    {spotlight.title}
+                  </h2>
+                  <p className="mt-2 text-[10px] text-muted-foreground">
+                    {spotlight.destination} · {fundingLabels[spotlight.data.fundingType]}
+                  </p>
+                </div>
+                <ArrowUpRight
+                  size={17}
+                  className="shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </Link>
+            )}
           </div>
         </section>
         <div className="border-y border-border bg-paper/70">

@@ -75,7 +75,7 @@ export function Assessment({
   return (
     <div className="mt-6">
       <div
-        className={`rounded-r-xl border-l-[3px] p-6 ${!current || assessment.outcome === "potential" ? "border-accent bg-warning" : assessment.outcome === "not_eligible" ? "border-danger-foreground bg-danger" : "border-primary bg-secondary"}`}
+        className={`assessment-summary rounded-r-xl border-l-[3px] p-6 ${!current || assessment.outcome === "potential" ? "border-accent bg-warning" : assessment.outcome === "not_eligible" ? "border-danger-foreground bg-danger" : "border-primary bg-secondary"}`}
       >
         <Badge
           tone={

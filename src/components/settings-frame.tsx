@@ -1,7 +1,23 @@
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
+import {
+  ShieldCheck,
+  LayoutGrid,
+  GraduationCap,
+  Bell,
+  SunMoon,
+  KeyRound,
+  Database,
+} from "lucide-react";
 import { PageHeading } from "./page-heading";
 import type { Actor } from "@/server/accounts/auth";
+const settingsLinks = [
+  ["/settings", "Overview", LayoutGrid],
+  ["/settings/profile", "Study profile", GraduationCap],
+  ["/settings/notifications", "Notifications", Bell],
+  ["/settings/app", "Appearance & app", SunMoon],
+  ["/settings/account", "Password & sessions", KeyRound],
+  ["/settings/privacy", "Privacy & data", Database],
+] as const;
 export function SettingsFrame({
   actor,
   active,
@@ -16,41 +32,33 @@ export function SettingsFrame({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="settings-page">
       <PageHeading eyebrow="YOUR WORKSPACE, YOUR WAY" title={title} description={description}>
         <span
-          className="hidden items-center gap-2 rounded-full border border-border bg-paper px-3 py-2 text-[11px] text-muted-foreground xl:inline-flex"
+          className="hidden items-center gap-2 text-[11px] text-muted-foreground xl:inline-flex"
           title={`Private settings for ${actor.name}`}
         >
-          <ShieldCheck size={14} strokeWidth={1.5} aria-hidden="true" />
+          <ShieldCheck size={14} className="text-leaf" strokeWidth={1.5} aria-hidden="true" />
           Your private workspace
         </span>
       </PageHeading>
       <nav
         aria-label="Settings navigation"
-        className="settings-navigation mb-9 flex gap-1 overflow-x-auto border-b border-border text-xs"
+        className="settings-dock mb-8 flex gap-1 overflow-x-auto rounded-xl border border-border bg-paper p-1.5 text-xs"
       >
-        {(
-          [
-            ["/settings", "Overview"],
-            ["/settings/profile", "Study profile"],
-            ["/settings/notifications", "Notifications"],
-            ["/settings/app", "Appearance & app"],
-            ["/settings/account", "Password & sessions"],
-            ["/settings/privacy", "Privacy & data"],
-          ] as const
-        ).map(([href, label]) => (
+        {settingsLinks.map(([href, label, Icon]) => (
           <Link
             key={href}
             href={href}
             aria-current={active === href ? "page" : undefined}
-            className={`relative shrink-0 px-4 py-4 transition-colors first:pl-0 ${active === href ? "font-semibold text-primary after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full after:bg-primary first:after:left-0" : "text-muted-foreground hover:text-foreground"}`}
+            className={`flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-3 transition-colors ${active === href ? "bg-primary font-medium text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary/60 hover:text-primary"}`}
           >
+            <Icon size={14} strokeWidth={1.5} aria-hidden="true" />
             {label}
           </Link>
         ))}
       </nav>
       {children}
-    </>
+    </div>
   );
 }

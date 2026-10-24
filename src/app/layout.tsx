@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./refinements.css";
 import { isIsolatedHostedPreview } from "@/server/accounts/preview";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 export const metadata: Metadata = {
