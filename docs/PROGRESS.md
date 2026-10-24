@@ -8,20 +8,20 @@
 
 ## Phase status
 
-| Phase           | State                                                              | Remaining acceptance                                                                                           |
-| --------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| 1 Foundation    | Implemented; locally verified                                      | Hosted auth/email/preview and authentic TestSprite gate pending                                                |
-| 2 Catalogue     | Implemented; locally verified                                      | Bounded catalogue and evidence; unresolved provider conditions explicit                                        |
-| 3 Eligibility   | Implemented; locally verified                                      | Engine 1.1.0; independent comparisons and domain matrix pass                                                   |
-| 4 Experience    | Implemented; locally verified                                      | Connected account, profile, evidence and application browser journeys pass                                     |
-| 5 Monitoring    | Implemented; locally verified                                      | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
-| 6 Notifications | Implemented; locally verified                                      | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending                 |
-| 7 Protection    | Local checks implemented and verified; external acceptance blocked | Authentic TestSprite/App required check and blocked-merge demonstration need accounts                          |
-| 8 Polish        | Local design and release review implemented; submission blocked    | Desktop/mobile review and release documents prepared; remote PR/live URL need accounts                         |
+| Phase           | State                                                      | Remaining acceptance                                                                                           |
+| --------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 1 Foundation    | Implemented; local and hosted preview journey verified     | Production sender and authentic TestSprite gate pending                                                        |
+| 2 Catalogue     | Implemented; locally verified                              | Bounded catalogue and evidence; unresolved provider conditions explicit                                        |
+| 3 Eligibility   | Implemented; locally verified                              | Engine 1.1.0; independent comparisons and domain matrix pass                                                   |
+| 4 Experience    | Implemented; locally verified                              | Connected account, profile, evidence and application browser journeys pass                                     |
+| 5 Monitoring    | Implemented; locally verified                              | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
+| 6 Notifications | Implemented; locally verified                              | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending                 |
+| 7 Protection    | Local checks and GitHub correctness gate verified          | Two real TestSprite cases passed; authentic App gate required; final-head rerun pending                        |
+| 8 Polish        | Local/hosted design inspected; public preview and PR exist | Final-head automatic check and submission timing/remaining provider setup                                      |
 
 ## External setup pending
 
-Neon pooled/direct database access, Resend API access, Vercel Hobby access and TestSprite API access are now configured in ignored .env. Neon migration and 20 accepted catalogue records are verified, with an idempotent zero-publication replay. TestSprite account inspection reports 150 credits and no projects. A Vercel Next.js project exists; deployment and Git linkage are underway. Resend has no verified custom domain, so mail stays in isolated sink mode. Neon branch API, Inngest signing keys, native TestSprite 3.0 suite/App trigger and authentic merge gate remain pending. No deployed URL or remote test result is claimed yet. See REMOTE_RELEASE.md for the current continuation state.
+Neon pooled/direct database access, Resend API access, Vercel Hobby access and TestSprite API access are now configured in ignored .env. Neon migration and 20 accepted catalogue records are verified, with an idempotent zero-publication replay. TestSprite account inspection reports 150 credits and no projects. A Vercel Next.js project exists; deployment and Git linkage are underway. Resend has no verified custom domain, so mail stays in isolated sink mode. Neon branch API, Inngest signing keys, native TestSprite 3.0 suite/App trigger and authentic merge gate remain pending. The live public preview and PR exist. Hosted browser checks and GitHub CI passed, as did the first two-case authentic TestSprite execution (balance 149). Main requires the exact TestSprite App status. See REMOTE_RELEASE.md for the current continuation state.
 
 ## Phase 1 local increment
 

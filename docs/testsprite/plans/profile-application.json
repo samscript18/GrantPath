@@ -1,0 +1,65 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "A student retains separate citizenship and residence and a private application plan",
+  "description": "The configured isolated student saves a final-year profile, receives explainable matches, and retains application notes and progress after signing out and returning.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in using the student account configured on this project environment, then navigate to /profile. If the Your world stage is not selected, click Your world."
+    },
+    {
+      "type": "action",
+      "description": "Set Citizenship(s) to Nigeria and Country of residence to Ghana. Click Save & continue."
+    },
+    {
+      "type": "action",
+      "description": "Set Current qualification to bachelor, Completion status to final_year, and Actual or expected graduation to 2027-06-01. Click Save & continue."
+    },
+    {
+      "type": "action",
+      "description": "Set Intended future qualification to master and Intended field of study to Computer Science. Click Save & continue, then Save & see my matches."
+    },
+    {
+      "type": "action",
+      "description": "On the dashboard, if Update my matches is available click it and wait until assessment updating finishes."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify explained opportunity results include Potential · confirm requirements, without labelling every missing provider condition eligible."
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /scholarships/twente-uts-2027. If Save opportunity is shown, click it. If Saved · click to unsave is already shown, keep it saved."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify Saved · click to unsave is displayed."
+    },
+    {
+      "type": "action",
+      "description": "Expand My application plan. Set My application progress to Preparing documents and Private notes to TestSprite verification: confirm provider language requirements. Click Save my plan."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify Your plan is saved. Reload, expand My application plan, and verify progress remains Preparing documents and the exact private note remains saved. Verify the provider window still says Open."
+    },
+    {
+      "type": "action",
+      "description": "Sign out, sign in again with the configured project account, and navigate to /profile. Select Your world if necessary."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify Citizenship(s) remains Nigeria and Country of residence remains Ghana."
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /applications."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the Twente scholarship appears in the Preparing documents personal application stage."
+    }
+  ]
+}

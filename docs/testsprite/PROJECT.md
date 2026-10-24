@@ -1,0 +1,18 @@
+# Native TestSprite 3.0 project
+
+Project: `a3f56241-4390-4269-8e0e-e88d61104094` ([portal](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094)). Created with official CLI 0.15.0, native V3 account confirmed. This is CLI-authored preparation visible in the 3.0 portal; no portal-authored/executed result is inferred.
+
+Target: https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app
+
+PR: https://github.com/samscript18/GrantPath/pull/1
+
+| Case                    | Native test ID                         | Exact scope                                                                                                   |
+| ----------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Discovery and evidence  | `32f78efb-a7b0-4a30-a838-bc5b020f84e5` | Search/filter persistence, real Twente record, partial funding, official evidence                             |
+| Profile and application | `52c1618f-923c-48e7-b2bb-e48a8dfddbb6` | Separate citizenship/residence, final-year future study, explained matches, private saved progress and return |
+
+Plans in `plans/` passed official offline lint: two valid, zero issues. Cases were saved without exploration, generation or execution. A randomly passworded example.test student is stored securely on the default environment; no credentials are committed. Its actual hosted login was checked independently with Playwright. Use this environment for the App's PR environment clone.
+
+The user reports GitHub App connected and supplied a screenshot showing detected Vercel commit status/check and `vercel[bot] PR comment`. Select the actual Ready bot comment and use URL pattern `https://grantpath-git-{branch-slug}-lammysam8-7688.vercel.app`. The user configured the trigger in the portal; execution 9e9aec5c-54f3-4e6f-84a0-d15e8ec68394 ran both cases and **both passed**. GitHub status TestSprite V3 from App 2756476 is required on main. Keep Active and Block PR until tests pass enabled once configured. No schedules or duplicate CLI/App runs.
+
+Account observation after preparation: 150 credits; 0.5 credits/run. First two-case execution estimated 1 credit; actual observed debit 1, balance 149. Broad exploration has no established estimate and is not requested. Preserve approximately 50 credits.

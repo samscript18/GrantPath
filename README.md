@@ -2,7 +2,9 @@
 
 A connected scholarship discovery, evidence, eligibility and application workspace. Next.js App Router, strict TypeScript, Tailwind and shadcn-style accessible primitives, PostgreSQL/Prisma, Better Auth, Resend and optional Inngest.
 
-**Live URL: not deployed.** Hosted services, GitHub PR protection and TestSprite are pending account configuration. Local tests are not TestSprite results.
+**[Open the live GrantPath preview](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)** · **[Release PR #1](https://github.com/samscript18/GrantPath/pull/1)**
+
+Anyone can browse the real catalogue and official evidence. The preview uses an isolated Neon database and test accounts; email is captured, not delivered, and real-email registration is explicitly unavailable until a sender domain is verified. The connected hosted student journey passed Playwright checks. [GitHub CI](https://github.com/samscript18/GrantPath/actions/runs/40098799050) and [both authentic TestSprite cases](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9e9aec5c-54f3-4e6f-84a0-d15e8ec68394) passed at head 81f2164. Main requires correctness CI and TestSprite V3 from their authentic Apps. Local checks remain separate from TestSprite results.
 
 ## Run locally
 
@@ -55,7 +57,7 @@ After building, use `PLAYWRIGHT_PRODUCTION=1 npm run test:e2e` to exercise the p
 
 Integration tests require the isolated `TEST_DATABASE_URL`. Browser tests migrate/seed a separate `E2E_DATABASE_URL`, use sink mail and repeatable `student@example.test`, `other@example.test` and `operator@example.test` accounts. Their default password exists only in guarded test tooling; optionally set `TEST_ACCOUNT_PASSWORD` before first creation. Synthetic records are labelled `[TEST ONLY]` and never seeded into development/production. Previous browser fixtures are archived, preserving test history. Browser setup changes its configured test database; never point it at a shared account database.
 
-Playwright starts its own server on port 3100. Stop an existing Next development process in this checkout first. The suite captures screenshots after page content renders, tests the connected journeys and checks mobile overflow and keyboard skip navigation. See [actual run evidence](docs/TEST_EVIDENCE.md), [coverage](docs/COVERAGE_MATRIX.md) and [release review](docs/RELEASE_REVIEW.md). Local CI YAML is prepared; its hosted execution is unverified.
+Playwright starts its own server on port 3100. Stop an existing Next development process in this checkout first. The suite captures screenshots after page content renders, tests the connected journeys and checks mobile overflow and keyboard skip navigation. See [actual run evidence](docs/TEST_EVIDENCE.md), [coverage](docs/COVERAGE_MATRIX.md) and [release review](docs/RELEASE_REVIEW.md). Latest local checks: 56 unit tests, 14 PostgreSQL tests, five production-browser journeys and production build passed. The same CI workflow completed on GitHub after correcting its build-only environment; the first failure remains linked in the evidence.
 
 ## Architecture and domain scope
 
@@ -69,8 +71,8 @@ The initial catalogue contains historical cycles and explicitly uncertain scheme
 
 ## Hosting, PRs and submission
 
-Use [isolated Neon/Vercel preview setup](docs/PREVIEW_SETUP.md). Provision a separate database branch and auth secret for each trusted PR; never use production data in previews. No account, paid plan, deployment or remote repository has been created by this implementation.
+Use [isolated Neon/Vercel preview setup](docs/PREVIEW_SETUP.md). PR 1 uses a separate database on the existing Neon compute and a unique auth secret; Neon branch API automation is not configured. Vercel Hobby hosts the preview in iad1 with Node 24. No paid plan or extra compute was activated. Never use main catalogue/student data in preview tests.
 
-The configured origin is `samscript18/GrantPath`; authenticated read inspection confirms an empty repository with admin/push access and no rulesets/workflows. Before publishing a PR, establish TestSprite trigger/cost configuration, deploy a healthy isolated preview, install/configure the TestSprite GitHub App and use its 3.0 portal. Inspect the actual credit balance and displayed estimate before a small [focused suite](docs/TESTSPRITE_SUITE.md). Configure the authentic App check as required without bypassing it. Preserve real failed-check/blocked-merge/fix/rerun evidence. The user-reported allowance is 150 credits; actual balance remains unobserved and no credited operation was initiated. [Credit ledger](docs/TESTSPRITE_CREDITS.md).
+The native [TestSprite 3.0 project](docs/testsprite/PROJECT.md) contains two focused cases for discovery/evidence and profile/application persistence. Both passed in the first real PR execution and the App posted its report on PR 1. Observed balance after that execution: 149, debit 1. New commits require their own actual result. [Credit ledger](docs/TESTSPRITE_CREDITS.md).
 
 Follow [the demonstration outline](docs/DEMO.md) and [submission PR draft](docs/SUBMISSION_PR.md). Missing external credentials, remote verification, access-limited sources, time-zone/DST provider ambiguity and incomplete provider-rule mapping remain explicit release limitations.

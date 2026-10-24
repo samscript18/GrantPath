@@ -1,13 +1,15 @@
 # TestSprite credit ledger
 
-User-reported total allowance: **150 credits**. Latest actual account balance, observed through the official CLI 0.15.0 `usage` command on 24 October 2026: **150 credits**, Free plan, **0.5 credits per run** reported by the account. Planning reserve: approximately **50 credits** for final verification and fixes. Generation/exploration costs are not established by that per-run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 24 October 2026: **149 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
-| Operation                                      | Displayed estimate                      | Observed debit                  | Observed balance | Result                               |
-| ---------------------------------------------- | --------------------------------------- | ------------------------------- | ---------------- | ------------------------------------ |
-| Read-only usage/project inspection, 24 October | Account rate: 0.5/run; no run requested | No credited operation initiated | 150              | API access works; project list empty |
+| Operation                                                                  | Estimate                           | Observed debit | Observed balance | Result                                                       |
+| -------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | ------------------------------------------------------------ |
+| Read-only account inspection                                               | No run                             | 0              | 150              | Native V3 account, initial project list empty                |
+| Create project, configure isolated account, save two plans                 | No exploration/execution requested | 0              | 150              | Two cases ready; official offline lint passed                |
+| User sends PR test event; execution `9e9aec5c-54f3-4e6f-84a0-d15e8ec68394` | 2 × observed 0.5/run = 1           | **1**          | **149**          | **2 passed** on head 81f2164; authentic App success observed |
 
-Do not treat allowance as observed balance. Inspect live balance and available estimate before each run; if cost is unknown, do not launch broad batches. Reuse reviewed tests, keep automatic PR checks enabled once configured, and do not duplicate manual/automatic checks for one commit without a concrete reason. No credit purchases or scheduled TestSprite runs.
+Execution: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9e9aec5c-54f3-4e6f-84a0-d15e8ec68394
 
-Final local release review, 24 October 2026: Vitest/PostgreSQL/Playwright, production builds and local screenshots used no TestSprite operation. Actual portal balance, operation cost and remote verification remain unobserved. No credits were purchased and no scheduled/automatic TestSprite run was configured. Automatic PR verification must remain enabled once authentic setup is available.
+Authentic PR comment: https://github.com/samscript18/GrantPath/pull/1#issuecomment-6385000740
 
-Earlier statements above describe the pre-credential local review. Subsequent configured API access established the observed balance and empty project list in the table. No TestSprite test, exploration, generation, schedule or trigger has been started. GitHub App installation and the native 3.0 portal suite/gate remain unverified. No existing trigger or merge gate was disabled.
+The user reports trigger Active after connecting the App. No duplicate CLI run, schedule, exploration or broad generation was requested. Keep automatic PR verification enabled. Both terminal per-case verdicts and the real App success status were observed. New commits require their own verification and debit observation. Local Vitest/PostgreSQL/Playwright operations are separate evidence and consume no TestSprite credits. No credits or paid plans purchased.

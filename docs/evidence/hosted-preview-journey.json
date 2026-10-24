@@ -1,0 +1,51 @@
+{
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "checkedAt": "2026-10-24T13:40:32.880Z",
+  "results": [
+    {
+      "name": "Public catalogue and official evidence",
+      "passed": true,
+      "durationMs": 4729
+    },
+    {
+      "name": "Preview rejects real-email registration",
+      "passed": true,
+      "durationMs": 857
+    },
+    {
+      "name": "Registration and actual captured email verification",
+      "passed": true,
+      "durationMs": 3172
+    },
+    {
+      "name": "Staged profile with citizenship separate from residence",
+      "passed": true,
+      "durationMs": 3806
+    },
+    {
+      "name": "Current explained matches",
+      "passed": true,
+      "durationMs": 6053
+    },
+    {
+      "name": "Save, private plan and persistence",
+      "passed": true,
+      "durationMs": 4200
+    },
+    {
+      "name": "Server ownership and operator denial",
+      "passed": true,
+      "durationMs": 1060
+    },
+    {
+      "name": "Sign out and return",
+      "passed": true,
+      "durationMs": 3229
+    },
+    {
+      "name": "360px hosted layout",
+      "passed": true,
+      "durationMs": 2926
+    }
+  ]
+}
