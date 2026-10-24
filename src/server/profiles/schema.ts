@@ -1,6 +1,7 @@
 import { z } from "zod";
 const text = z.string().trim().max(150);
 const date = z.iso.date();
+const emptyGroup = (v: unknown) => v && typeof v === "object" && Object.values(v).every(x => x === undefined || x === "") ? undefined : v;
 export const profileSchema = z.object({
   citizenships: z.array(text.min(2)).max(10).default([]),
   residence: text.optional(),
@@ -15,11 +16,11 @@ export const profileSchema = z.object({
   destinations: z.array(text.min(2)).max(20).default([]),
   preferredInstitutions: z.array(text).max(20).default([]),
   intendedStart: date.optional(),
-  gpa: z.object({ value: z.number().min(0), scale: z.number().positive().max(100), classification: text.optional() }).refine(g => g.value <= g.scale, { message: "Result cannot exceed its original scale", path: ["value"] }).optional(),
-  language: z.object({ type: z.enum(["IELTS", "TOEFL", "Other"]), score: z.number().min(0), takenAt: date }).superRefine((v, ctx) => {
+  gpa: z.preprocess(emptyGroup, z.object({ value: z.number().min(0), scale: z.number().positive().max(100), classification: text.optional() }).refine(g => g.value <= g.scale, { message: "Result cannot exceed its original scale", path: ["value"] }).optional()),
+  language: z.preprocess(emptyGroup, z.object({ type: z.enum(["IELTS", "TOEFL", "Other"]), score: z.number().min(0), takenAt: date }).superRefine((v, ctx) => {
     const max = v.type === "IELTS" ? 9 : v.type === "TOEFL" ? 120 : 1000;
     if (v.score > max) ctx.addIssue({ code: "custom", path: ["score"], message: `Maximum ${v.type} score is ${max}` });
-  }).optional(),
+  }).optional()),
   englishMedium: z.boolean().optional(),
   experienceMonths: z.number().int().min(0).max(720).optional(),
   birthDate: date.optional(),

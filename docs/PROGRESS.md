@@ -26,3 +26,7 @@ No project secrets are configured: Neon database/project, Resend API key and ver
 ## Phase 1 local increment
 
 Implemented strict Next.js/Tailwind/shadcn-style primitives, responsive navigation and account screens, Better Auth verification/recovery/session flow, private versioned staged profiles, PostgreSQL migration and transactional profile outbox, local CI configuration, preview isolation instructions/helper, and focused TestSprite setup/journey specification. Local typecheck, validation tests, two PostgreSQL account/ownership/recovery journeys and production build pass. Browser inspection and release-wide verification continue in later phases. Remote acceptance (Neon/Vercel/Resend/TestSprite/authentic merge blocking) remains pending access; it is not marked complete.
+
+## Phase 2 local increment
+
+20 source-backed catalogue records have been persisted through the accepted-version service. This includes historical closed cycles, four Warwick streams, and explicitly labelled scheme/uncertain-cycle overviews; it is not a claim of 20 currently open fully verified applications. Official pages were inspected; unknown deadlines, unitemised funding and additional provider conditions remain uncertain. Search, filters, pagination, public details, field evidence, accepted history, protected JSON rule/evidence authoring and duplicate-cycle protection are implemented. Unit checks pass; PostgreSQL catalogue tests and browser review are in progress. Supported registry sources are disabled pending access-policy review, not falsely shown as successfully monitored.
