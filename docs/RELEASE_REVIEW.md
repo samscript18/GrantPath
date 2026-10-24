@@ -43,3 +43,5 @@ No credited TestSprite operation was initiated. The user-reported allowance is 1
 - Development browser runs logged request cancellation/stream errors during navigation while asserted journeys and page-error checks passed. Production-server verification is recorded separately in TEST_EVIDENCE.md; these development logs are not reported as a clean server-log result.
 
 There are no currently known failing local assertions after the recorded fixes. External acceptance is pending, not passed. Consult PROGRESS.md before resuming and finish the blocking setup without weakening the merge gate or buying credits.
+
+The user reconfirmed 150 credits but does not know the App configuration. No local TestSprite credential/profile or connected tool was found. Its documented branch-push and Include Draft PRs options mean neither pushing nor creating a draft is an established zero-credit workaround. Remote publication is pending portal trigger/cost inspection; existing automatic verification was not disabled. GitHub administrator access is available and is no longer the missing dependency.

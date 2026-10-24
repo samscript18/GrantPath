@@ -19,3 +19,9 @@ Use exact assertions (including reason codes via API tests), stable labels, fixe
 5. In an isolated, explicitly labelled regression branch, preserve a failing result and GitHub blocked-merge evidence, restore the correct behaviour, and preserve fix SHA plus successful rerun. No production regression and no weakened assertions.
 
 No PR URL, check name, App ID, balance, debit, blocked merge or successful remote result is claimed until observed.
+
+## Final configuration audit
+
+GitHub repository access is now available for samscript18/GrantPath, but TestSprite account access is separate. Configure TESTSPRITE_API_KEY securely or authenticate the official CLI profile, then use its read-only `usage` command to observe the actual balance before a credited operation. The user has reconfirmed a 150-credit allowance; no portal observation or displayed cost has been obtained.
+
+The official [GitHub integration description](https://www.testsprite.com/solutions/ci) supports PR and branch-push triggers. The [GitHub App setup description](https://www.testsprite.com/hackathon-s4) exposes Include Draft PRs. Therefore a draft PR cannot be assumed to avoid credited execution. The CLI’s documented draft skip applies to its CI command and does not establish this repository’s App settings. Do not disable an already configured trigger/gate; inspect it with portal access.
