@@ -6,7 +6,9 @@ import { readEnv } from "@/lib/env";
 import { sendEmail } from "./email";
 import { createHash } from "node:crypto";
 let instance: ReturnType<typeof createAuth> | undefined;
-export function getAuth() { return instance ??= createAuth(); }
+export function getAuth() {
+  return (instance ??= createAuth());
+}
 function createAuth() {
   const env = readEnv();
   return betterAuth({
@@ -40,7 +42,16 @@ function createAuth() {
       sendVerificationEmail: async ({ user, url }) => {
         const token = new URL(url).searchParams.get("token")!;
         const hash = createHash("sha256").update(token).digest("hex");
-        await db().verification.upsert({ where: { id: `email-once:${hash}` }, create: { id: `email-once:${hash}`, identifier: `email-once:${hash}`, value: hash, expiresAt: new Date(Date.now() + 3600000) }, update: {} });
+        await db().verification.upsert({
+          where: { id: `email-once:${hash}` },
+          create: {
+            id: `email-once:${hash}`,
+            identifier: `email-once:${hash}`,
+            value: hash,
+            expiresAt: new Date(Date.now() + 3600000),
+          },
+          update: {},
+        });
         await sendEmail({
           to: user.email,
           subject: "Verify your GrantPath email",
@@ -49,13 +60,21 @@ function createAuth() {
         });
       },
     },
-    hooks: { before: createAuthMiddleware(async ctx => {
-      if (ctx.path !== "/verify-email") return;
-      const token = typeof ctx.query?.token === "string" ? ctx.query.token : "";
-      const hash = createHash("sha256").update(token).digest("hex");
-      const consumed = await db().verification.deleteMany({ where: { id: `email-once:${hash}`, expiresAt: { gt: new Date() } } });
-      if (consumed.count !== 1) throw new APIError("BAD_REQUEST", { message: "This verification link is invalid, expired or already used. Request a new link or sign in." });
-    }) },
+    hooks: {
+      before: createAuthMiddleware(async (ctx) => {
+        if (ctx.path !== "/verify-email") return;
+        const token = typeof ctx.query?.token === "string" ? ctx.query.token : "";
+        const hash = createHash("sha256").update(token).digest("hex");
+        const consumed = await db().verification.deleteMany({
+          where: { id: `email-once:${hash}`, expiresAt: { gt: new Date() } },
+        });
+        if (consumed.count !== 1)
+          throw new APIError("BAD_REQUEST", {
+            message:
+              "This verification link is invalid, expired or already used. Request a new link or sign in.",
+          });
+      }),
+    },
     session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
     rateLimit: { enabled: true, storage: "database", window: 60, max: 30 },
     advanced: { database: { generateId: () => crypto.randomUUID() } },

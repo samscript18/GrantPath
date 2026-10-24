@@ -1,13 +1,23 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, MapPin, GraduationCap, CalendarDays, ShieldCheck, CircleHelp, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  MapPin,
+  GraduationCap,
+  CalendarDays,
+  ShieldCheck,
+  CircleHelp,
+  ExternalLink,
+} from "lucide-react";
 import { Shell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { currentUser } from "@/server/accounts/session";
 import { scholarshipBySlug } from "@/server/scholarships";
 import { evidenceHealth } from "@/server/evidence";
-import { fundingLabels } from "@/server/scholarships/schema";
+import { fundingLabels, scholarshipDataSchema } from "@/server/scholarships/schema";
+import { ChangeTimeline } from "@/components/change-timeline";
 import { formatDate } from "@/lib/utils";
 import { applicationForScholarship } from "@/server/applications";
 import { SaveButton } from "@/components/save-button";
@@ -16,10 +26,305 @@ import { studentAssessment } from "@/server/eligibility";
 import { Assessment } from "@/components/assessment";
 import { Recalculate } from "@/components/recalculate";
 import type { Rule } from "@/server/eligibility/rules";
-function Rules({ rule }: { rule: Rule }) { return rule.kind === "requirement" ? <li className="flex gap-3 border-b border-border py-4"><CircleHelp size={16} className="mt-0.5 shrink-0 text-[#92722e]" /><div><p className="text-sm">{rule.label}</p><p className="mt-2 text-[11px] text-muted-foreground">{rule.verified ? "Official condition · add your profile to assess" : "Needs provider confirmation"} · <a href={`#evidence-${rule.evidenceKey}`} className="underline">Evidence</a></p></div></li> : <li><p className="eyebrow mt-5 text-muted-foreground">{rule.label} · {rule.kind === "all" ? "all required" : "any alternative"}</p><ul>{rule.rules.map(r => <Rules key={r.id} rule={r} />)}</ul></li>; }
-export default async function ScholarshipDetail({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params; const [actor, s] = await Promise.all([currentUser(), scholarshipBySlug(slug)]); if (!s) notFound();
-  const [match, application] = actor ? await Promise.all([studentAssessment(actor, s.id), applicationForScholarship(actor, s.id)]) : [null, null];
-  const d = s.data; const health = evidenceHealth(d);
-  return <Shell actor={actor} active="/scholarships"><Link href="/scholarships" className="mb-7 flex w-fit items-center gap-2 text-xs text-muted-foreground"><ArrowLeft size={13} />Back to scholarships</Link><div className="flex flex-wrap items-center gap-3"><p className="eyebrow text-muted-foreground">{s.programme.provider.name}</p><Badge tone={s.currentAvailability === "open" ? "green" : "amber"}>{s.currentAvailability === "unknown" ? "Availability to confirm" : `${s.currentAvailability[0].toUpperCase()}${s.currentAvailability.slice(1)}`}</Badge><span className="text-[10px] text-muted-foreground">{s.cycle}</span></div><h1 className="editorial mt-4 max-w-3xl text-4xl leading-tight sm:text-5xl">{s.title}</h1><div className="mt-5 flex flex-wrap gap-5 text-xs text-muted-foreground"><span className="flex items-center gap-2"><MapPin size={14} />{s.destination}</span><span className="flex items-center gap-2"><GraduationCap size={15} />{d.levels.join(" / ")}</span><span>{d.fields.join(" · ")}</span></div><div className="mt-9 grid gap-9 xl:grid-cols-[1fr_300px]"><div><nav aria-label="Opportunity sections" className="mb-7 flex flex-wrap gap-7 border-b border-border pb-4 text-xs"><a href="#overview">Overview</a><a href="#requirements">Requirements</a><a href="#evidence">Official evidence</a><a href="#history">Change history</a></nav><section id="overview"><p className="text-sm leading-7 text-muted-foreground">{d.summary}</p><div className="mt-7 bg-[#e9eddf] p-6"><p className="eyebrow text-muted-foreground">WHAT THE AWARD SUPPORTS</p><h2 className="mt-3 font-serif text-2xl">{fundingLabels[d.fundingType]}</h2><p className="mt-3 text-sm leading-6">{d.fundingSummary}</p><ul className="mt-4 space-y-2">{d.funding.map((f, i) => <li key={i} className="flex gap-3 text-xs leading-6"><span className="capitalize text-muted-foreground">{f.component}:</span>{f.description}</li>)}</ul><a href="#evidence-funding" className="mt-4 inline-flex items-center gap-2 text-xs underline underline-offset-4">Inspect funding evidence <ArrowUpRight size={12} /></a></div></section><section id="requirements" className="mt-10"><p className="eyebrow text-muted-foreground">KNOW WHERE YOU STAND</p><h2 className="editorial mt-3 text-3xl">A clearer look at the requirements.</h2><p className="mt-3 text-xs leading-6 text-muted-foreground">Eligibility and application availability are assessed separately. Missing information requires confirmation, rather than silently passing.</p><div>{match?.evaluation ? <Assessment assessment={match.evaluation.assessment} profileVersion={match.evaluation.profileVersion} scholarshipVersion={match.evaluation.scholarshipVersion} current={match.current} /> : <ul><Rules rule={d.requirements} /></ul>}{actor && !match?.current && <div className="mt-5"><Recalculate pending={1} /></div>}</div><Button asChild variant="outline" className="mt-5"><Link href={actor ? "/profile" : "/register"}>Personalise this assessment <ArrowUpRight size={14} /></Link></Button></section><section id="evidence" className="mt-12"><p className="eyebrow text-muted-foreground">FOLLOW THE SOURCE</p><h2 className="editorial mt-3 text-3xl">Evidence you can inspect.</h2><p className="mt-3 mb-5 text-xs leading-6 text-muted-foreground">Supporting wording from the official provider. Version {s.version}, accepted {formatDate(s.versions[0].createdAt)}. Unresolved fields are clearly labelled.</p>{d.evidence.map((e, i) => <article id={`evidence-${e.field}`} key={`${e.field}-${i}`} className="scroll-mt-6 border-t border-border py-5"><div className="flex flex-wrap items-center justify-between gap-2"><h3 className="text-xs font-semibold capitalize">{e.field.replaceAll("-", " ")}</h3><Badge tone={e.state === "verified" ? "green" : "amber"}>{e.state === "verified" ? "Checked against official source" : e.state === "conflicting" ? "Conflicting information" : e.state === "unavailable" ? "Source unavailable" : "Needs confirmation"}</Badge></div><blockquote className="mt-3 border-l-2 border-accent/60 pl-4 font-serif text-base leading-7">{e.passage}</blockquote><div className="mt-3 flex flex-wrap justify-between gap-2 text-[10px] text-muted-foreground"><a href={e.url} target="_blank" rel="noreferrer" className="inline-flex max-w-full items-center gap-1 break-all underline">{new URL(e.url).hostname}<ExternalLink size={10} /></a><span>{e.state === "verified" ? "Checked" : "Recorded"} {formatDate(e.retrievedAt)}</span></div></article>)}</section><section id="history" className="mt-10"><p className="eyebrow text-muted-foreground">THE ACCEPTED RECORD</p><h2 className="editorial mt-3 mb-5 text-3xl">A path you can trace.</h2>{s.versions.map(v => <article key={v.id} className="border-l border-primary/25 pb-7 pl-5"><p className="text-xs font-semibold">Version {v.number} · {formatDate(v.createdAt)}</p><p className="mt-2 text-xs leading-6 text-muted-foreground">{v.reason}</p><details className="mt-2 text-[11px]"><summary className="cursor-pointer underline">Inspect accepted version</summary><pre className="mt-3 max-h-80 overflow-auto whitespace-pre-wrap break-all bg-muted p-3 text-[10px]">{JSON.stringify(v.data, null, 2)}</pre></details></article>)}</section></div><aside><div className="paper sticky top-6 p-6"><p className="eyebrow flex items-center gap-2 text-muted-foreground"><CalendarDays size={14} />APPLICATION TIMING</p><h2 className="mt-4 font-serif text-2xl">{d.deadline ? formatDate(d.deadline) : "Check the closing date"}</h2><p className="mt-3 text-xs leading-6 text-muted-foreground">{d.deadlineLabel || "A closing date has not been confirmed."}</p>{d.deadline && <p className="mt-2 text-[10px] text-muted-foreground">Closing instant (UTC): {new Date(d.deadline).toISOString().replace("T", " ").replace(".000Z", " UTC")}</p>}{d.deadlineState !== "confirmed" && <p className="mt-3 flex gap-2 text-[11px] leading-5 text-[#795410]"><CircleHelp size={14} className="mt-0.5 shrink-0" />No exact countdown or reminder until the closing instant is confirmed.</p>}<Button asChild className="mt-6 w-full"><a href={d.applicationUrl} target="_blank" rel="noreferrer">Official application guidance <ArrowUpRight size={14} /></a></Button><div className="mt-3">{actor ? <SaveButton scholarshipId={s.id} saved={application?.saved || false} /> : <Button asChild variant="outline" className="w-full"><Link href="/login">Sign in to save</Link></Button>}</div>{application && <details className="mt-5 border-t border-border pt-4"><summary className="cursor-pointer text-xs font-semibold">My application plan · {application.status}</summary><div className="mt-5"><ApplicationEditor key={application.id} application={application} /></div></details>}<div className="mt-6 border-t border-border pt-5"><p className="flex items-center gap-2 text-xs"><ShieldCheck size={15} />Evidence & source freshness</p><p className="mt-3 text-[11px] leading-6 text-muted-foreground">Accepted evidence checked: {formatDate(health.lastVerified)}{health.stale ? " · A fresh check is needed." : ""}</p>{s.sources.length ? s.sources.map(source => <div key={source.id} className="mt-3 border-t border-border pt-3 text-[10px] leading-6 text-muted-foreground"><p>{source.enabled ? `${source.cadenceHours}-hour target cadence` : "Scheduled checks not enabled"} · {source.health.replaceAll("_", " ")}</p><p>Latest attempt: {formatDate(source.lastAttemptAt)}</p><p>Last successful check: {formatDate(source.lastSuccessAt)}</p></div>) : <p className="mt-3 text-[10px] leading-5 text-muted-foreground">Manually researched. Automated monitoring is not supported for this source.</p>}</div></div></aside></div></Shell>;
+function Rules({ rule }: { rule: Rule }) {
+  return rule.kind === "requirement" ? (
+    <li className="flex gap-3 border-b border-border py-4">
+      <CircleHelp size={16} className="mt-0.5 shrink-0 text-[#92722e]" />
+      <div>
+        <p className="text-sm">{rule.label}</p>
+        <p className="mt-2 text-[11px] text-muted-foreground">
+          {rule.verified
+            ? "Official condition · add your profile to assess"
+            : "Needs provider confirmation"}{" "}
+          ·{" "}
+          <a href={`#evidence-${rule.evidenceKey}`} className="underline">
+            Evidence
+          </a>
+        </p>
+      </div>
+    </li>
+  ) : (
+    <li>
+      <p className="eyebrow mt-5 text-muted-foreground">
+        {rule.label} · {rule.kind === "all" ? "all required" : "any alternative"}
+      </p>
+      <ul>
+        {rule.rules.map((r) => (
+          <Rules key={r.id} rule={r} />
+        ))}
+      </ul>
+    </li>
+  );
+}
+export default async function ScholarshipDetail({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ version?: string }>;
+}) {
+  const { slug } = await params;
+  const [actor, s] = await Promise.all([currentUser(), scholarshipBySlug(slug)]);
+  if (!s) notFound();
+  const requested = (await searchParams).version;
+  const selected = requested
+    ? s.versions.find((v) => String(v.number) === requested)
+    : s.versions[0];
+  if (!selected) notFound();
+  const historical = selected.number !== s.version;
+  const [match, application] = actor
+    ? await Promise.all([
+        studentAssessment(actor, s.id, selected.number),
+        applicationForScholarship(actor, s.id),
+      ])
+    : [null, null];
+  const d = scholarshipDataSchema.parse(selected.data);
+  const health = evidenceHealth(d);
+  return (
+    <Shell actor={actor} active="/scholarships">
+      <Link
+        href="/scholarships"
+        className="mb-7 flex w-fit items-center gap-2 text-xs text-muted-foreground"
+      >
+        <ArrowLeft size={13} />
+        Back to scholarships
+      </Link>
+      {historical && (
+        <div className="mb-6 border-l-2 border-accent bg-[#f3eedf] p-4 text-xs leading-6">
+          You’re inspecting accepted version {selected.number}. Its evidence and assessment are
+          historical; the current application window is shown separately.{" "}
+          <Link href={`/scholarships/${s.slug}`} className="font-semibold underline">
+            Return to the current record ↗
+          </Link>
+        </div>
+      )}
+      <div className="flex flex-wrap items-center gap-3">
+        <p className="eyebrow text-muted-foreground">{s.programme.provider.name}</p>
+        <Badge tone={s.currentAvailability === "open" ? "green" : "amber"}>
+          {s.currentAvailability === "unknown"
+            ? "Availability to confirm"
+            : `${s.currentAvailability[0].toUpperCase()}${s.currentAvailability.slice(1)}`}
+        </Badge>
+        <span className="text-[10px] text-muted-foreground">{s.cycle}</span>
+      </div>
+      <h1 className="editorial mt-4 max-w-3xl text-4xl leading-tight sm:text-5xl">{d.title}</h1>
+      <div className="mt-5 flex flex-wrap gap-5 text-xs text-muted-foreground">
+        <span className="flex items-center gap-2">
+          <MapPin size={14} />
+          {s.destination}
+        </span>
+        <span className="flex items-center gap-2">
+          <GraduationCap size={15} />
+          {d.levels.join(" / ")}
+        </span>
+        <span>{d.fields.join(" · ")}</span>
+      </div>
+      <div className="mt-9 grid gap-9 xl:grid-cols-[1fr_300px]">
+        <div>
+          <nav
+            aria-label="Opportunity sections"
+            className="mb-7 flex flex-wrap gap-7 border-b border-border pb-4 text-xs"
+          >
+            <a href="#overview">Overview</a>
+            <a href="#requirements">Requirements</a>
+            <a href="#evidence">Official evidence</a>
+            <a href="#history">Change history</a>
+          </nav>
+          <section id="overview">
+            <p className="text-sm leading-7 text-muted-foreground">{d.summary}</p>
+            <div className="mt-7 bg-[#e9eddf] p-6">
+              <p className="eyebrow text-muted-foreground">WHAT THE AWARD SUPPORTS</p>
+              <h2 className="mt-3 font-serif text-2xl">{fundingLabels[d.fundingType]}</h2>
+              <p className="mt-3 text-sm leading-6">{d.fundingSummary}</p>
+              <ul className="mt-4 space-y-2">
+                {d.funding.map((f, i) => (
+                  <li key={i} className="flex gap-3 text-xs leading-6">
+                    <span className="capitalize text-muted-foreground">{f.component}:</span>
+                    {f.description}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#evidence-funding"
+                className="mt-4 inline-flex items-center gap-2 text-xs underline underline-offset-4"
+              >
+                Inspect funding evidence <ArrowUpRight size={12} />
+              </a>
+            </div>
+          </section>
+          <section id="requirements" className="mt-10">
+            <p className="eyebrow text-muted-foreground">KNOW WHERE YOU STAND</p>
+            <h2 className="editorial mt-3 text-3xl">A clearer look at the requirements.</h2>
+            <p className="mt-3 text-xs leading-6 text-muted-foreground">
+              Eligibility and application availability are assessed separately. Missing information
+              requires confirmation, rather than silently passing.
+            </p>
+            <div>
+              {match?.evaluation ? (
+                <Assessment
+                  assessment={match.evaluation.assessment}
+                  profileVersion={match.evaluation.profileVersion}
+                  scholarshipVersion={match.evaluation.scholarshipVersion}
+                  current={match.current}
+                />
+              ) : (
+                <ul>
+                  <Rules rule={d.requirements} />
+                </ul>
+              )}
+              {actor && !match?.current && !historical && (
+                <div className="mt-5">
+                  <Recalculate pending={1} />
+                </div>
+              )}
+            </div>
+            <Button asChild variant="outline" className="mt-5">
+              <Link href={actor ? "/profile" : "/register"}>
+                Personalise this assessment <ArrowUpRight size={14} />
+              </Link>
+            </Button>
+          </section>
+          <section id="evidence" className="mt-12">
+            <p className="eyebrow text-muted-foreground">FOLLOW THE SOURCE</p>
+            <h2 className="editorial mt-3 text-3xl">Evidence you can inspect.</h2>
+            <p className="mt-3 mb-5 text-xs leading-6 text-muted-foreground">
+              Supporting wording from the official provider. Version {s.version}, accepted{" "}
+              {formatDate(s.versions[0].createdAt)}. Unresolved fields are clearly labelled.
+            </p>
+            {d.evidence.map((e, i) => (
+              <article
+                id={`evidence-${e.field}`}
+                key={`${e.field}-${i}`}
+                className="scroll-mt-6 border-t border-border py-5"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-xs font-semibold capitalize">
+                    {e.field.replaceAll("-", " ")}
+                  </h3>
+                  <Badge tone={e.state === "verified" ? "green" : "amber"}>
+                    {e.state === "verified"
+                      ? "Checked against official source"
+                      : e.state === "conflicting"
+                        ? "Conflicting information"
+                        : e.state === "unavailable"
+                          ? "Source unavailable"
+                          : "Needs confirmation"}
+                  </Badge>
+                </div>
+                <blockquote className="mt-3 border-l-2 border-accent/60 pl-4 font-serif text-base leading-7">
+                  {e.passage}
+                </blockquote>
+                <div className="mt-3 flex flex-wrap justify-between gap-2 text-[10px] text-muted-foreground">
+                  <a
+                    href={e.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex max-w-full items-center gap-1 break-all underline"
+                  >
+                    {new URL(e.url).hostname}
+                    <ExternalLink size={10} />
+                  </a>
+                  <span>
+                    {e.state === "verified" ? "Checked" : "Recorded"} {formatDate(e.retrievedAt)}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </section>
+          <section id="history" className="mt-10">
+            <p className="eyebrow text-muted-foreground">THE ACCEPTED RECORD</p>
+            <h2 className="editorial mt-3 mb-5 text-3xl">A path you can trace.</h2>
+            <ChangeTimeline
+              slug={s.slug}
+              versions={s.versions.map((v) => ({
+                ...v,
+                data: scholarshipDataSchema.parse(v.data),
+              }))}
+            />
+          </section>
+        </div>
+        <aside>
+          <div className="paper sticky top-6 p-6">
+            <p className="eyebrow flex items-center gap-2 text-muted-foreground">
+              <CalendarDays size={14} />
+              APPLICATION TIMING
+            </p>
+            <h2 className="mt-4 font-serif text-2xl">
+              {d.deadline ? formatDate(d.deadline) : "Check the closing date"}
+            </h2>
+            <p className="mt-3 text-xs leading-6 text-muted-foreground">
+              {d.deadlineLabel || "A closing date has not been confirmed."}
+            </p>
+            {d.deadline && (
+              <p className="mt-2 text-[10px] text-muted-foreground">
+                Closing instant (UTC):{" "}
+                {new Date(d.deadline).toISOString().replace("T", " ").replace(".000Z", " UTC")}
+              </p>
+            )}
+            {d.deadlineState !== "confirmed" && (
+              <p className="mt-3 flex gap-2 text-[11px] leading-5 text-[#795410]">
+                <CircleHelp size={14} className="mt-0.5 shrink-0" />
+                No exact countdown or reminder until the closing instant is confirmed.
+              </p>
+            )}
+            <Button asChild className="mt-6 w-full">
+              <a href={d.applicationUrl} target="_blank" rel="noreferrer">
+                Official application guidance <ArrowUpRight size={14} />
+              </a>
+            </Button>
+            <div className="mt-3">
+              {actor ? (
+                <SaveButton scholarshipId={s.id} saved={application?.saved || false} />
+              ) : (
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/login">Sign in to save</Link>
+                </Button>
+              )}
+            </div>
+            {application && (
+              <details className="mt-5 border-t border-border pt-4">
+                <summary className="cursor-pointer text-xs font-semibold">
+                  My application plan · {application.status}
+                </summary>
+                <div className="mt-5">
+                  <ApplicationEditor key={application.id} application={application} />
+                </div>
+              </details>
+            )}
+            <div className="mt-6 border-t border-border pt-5">
+              <p className="flex items-center gap-2 text-xs">
+                <ShieldCheck size={15} />
+                Evidence & source freshness
+              </p>
+              <p className="mt-3 text-[11px] leading-6 text-muted-foreground">
+                Accepted evidence checked: {formatDate(health.lastVerified)}
+                {health.stale ? " · A fresh check is needed." : ""}
+              </p>
+              {s.sources.length ? (
+                s.sources.map((source) => (
+                  <div
+                    key={source.id}
+                    className="mt-3 border-t border-border pt-3 text-[10px] leading-6 text-muted-foreground"
+                  >
+                    <p>
+                      {source.enabled
+                        ? `${source.cadenceHours}-hour target cadence`
+                        : "Scheduled checks not enabled"}{" "}
+                      · {source.health.replaceAll("_", " ")}
+                    </p>
+                    <p>Latest attempt: {formatDate(source.lastAttemptAt)}</p>
+                    <p>Last successful check: {formatDate(source.lastSuccessAt)}</p>
+                  </div>
+                ))
+              ) : (
+                <p className="mt-3 text-[10px] leading-5 text-muted-foreground">
+                  Manually researched. Automated monitoring is not supported for this source.
+                </p>
+              )}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </Shell>
+  );
 }

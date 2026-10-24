@@ -1,2 +1,12 @@
 import { Sprout } from "lucide-react";
-export function EmptyState({ title, children }: { title: string; children: React.ReactNode }) { return <div className="paper px-6 py-14 text-center"><Sprout className="mx-auto mb-5 text-primary/50" size={30} strokeWidth={1.2} /><h2 className="font-serif text-2xl">{title}</h2><div className="mx-auto mt-3 max-w-md text-sm leading-6 text-muted-foreground">{children}</div></div>; }
+export function EmptyState({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="paper px-6 py-14 text-center">
+      <Sprout className="mx-auto mb-5 text-primary/50" size={30} strokeWidth={1.2} />
+      <h2 className="font-serif text-2xl">{title}</h2>
+      <div className="mx-auto mt-3 max-w-md text-sm leading-6 text-muted-foreground">
+        {children}
+      </div>
+    </div>
+  );
+}

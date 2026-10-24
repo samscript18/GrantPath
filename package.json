@@ -25,7 +25,8 @@
     "setup:check": "tsx scripts/check-env.ts",
     "check": "npm run typecheck && npm run lint && npm test",
     "db:test-migrate": "tsx scripts/test-db.ts",
-    "operator:grant": "tsx scripts/grant-operator.ts"
+    "operator:grant": "tsx scripts/grant-operator.ts",
+    "sources:smoke": "tsx scripts/source-smoke.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "1.7.12",

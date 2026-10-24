@@ -1,4 +1,27 @@
 import "dotenv/config";
 import { db } from "../src/lib/db";
-async function main() { const email = process.argv[2]; if (!email || !email.includes("@")) throw new Error("Usage: npm run operator:grant -- verified-operator-email"); const user = await db().user.findUniqueOrThrow({ where: { email } }); if (!user.emailVerified) throw new Error("Verify this email before granting operator access."); await db().$transaction(async tx => { await tx.user.update({ where: { id: user.id }, data: { role: "operator" } }); await tx.audit.create({ data: { actorId: "operator-bootstrap-cli", action: "account.grant-operator", recordId: user.id, reason: "Explicit local administrator command." } }); }); console.log("Operator permission granted to the verified account."); }
-main().catch(e => { console.error(e.message); process.exitCode = 1; }).finally(async () => db().$disconnect());
+async function main() {
+  const email = process.argv[2];
+  if (!email || !email.includes("@"))
+    throw new Error("Usage: npm run operator:grant -- verified-operator-email");
+  const user = await db().user.findUniqueOrThrow({ where: { email } });
+  if (!user.emailVerified) throw new Error("Verify this email before granting operator access.");
+  await db().$transaction(async (tx) => {
+    await tx.user.update({ where: { id: user.id }, data: { role: "operator" } });
+    await tx.audit.create({
+      data: {
+        actorId: "operator-bootstrap-cli",
+        action: "account.grant-operator",
+        recordId: user.id,
+        reason: "Explicit local administrator command.",
+      },
+    });
+  });
+  console.log("Operator permission granted to the verified account.");
+}
+main()
+  .catch((e) => {
+    console.error(e.message);
+    process.exitCode = 1;
+  })
+  .finally(async () => db().$disconnect());

@@ -1,0 +1,38 @@
+name: Bounded official-source ingestion
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Maximum registered due sources (1–6)"
+        default: "3"
+        type: choice
+        options: ["1", "2", "3", "4", "5", "6"]
+permissions:
+  contents: read
+concurrency:
+  group: official-source-ingestion
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: ingestion
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      APP_ENV: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - name: Fetch registered due sources, respecting robots and cadence
+        env:
+          SOURCE_LIMIT: ${{ inputs.limit || '3' }}
+        run: npm run sources:ingest -- --limit "$SOURCE_LIMIT"
+# This workflow fetches only. Matching and delivery run in a separate workflow.
+# GitHub schedules are best effort; the application displays actual successful checks.

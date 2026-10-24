@@ -1,14 +1,143 @@
 import Link from "next/link";
-import { LayoutDashboard, Compass, Bookmark, Columns3, Bell, UserRound, ShieldCheck, ArrowUpRight } from "lucide-react";
+import {
+  LayoutDashboard,
+  Compass,
+  Bookmark,
+  Columns3,
+  Bell,
+  UserRound,
+  ShieldCheck,
+  ArrowUpRight,
+} from "lucide-react";
 import { Logo } from "./logo";
 import type { Actor } from "@/server/accounts/auth";
 import { SignOut } from "./sign-out";
-const nav = [ ["/dashboard", "Overview", LayoutDashboard], ["/scholarships", "Discover scholarships", Compass], ["/saved", "Saved opportunities", Bookmark], ["/applications", "My applications", Columns3], ["/notifications", "Notifications", Bell], ["/profile", "My profile", UserRound] ] as const;
-export function Shell({ children, actor, active }: { children: React.ReactNode; actor: Actor | null; active?: string }) {
-  return <div className="min-h-screen lg:pl-[238px]">
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex"><Logo light /><div className="eyebrow mt-13 mb-4 text-white/40">YOUR NEXT CHAPTER</div><nav aria-label="Main navigation" className="space-y-1.5">{nav.map(([href, label, Icon]) => <Link key={href} href={href} aria-current={active === href ? "page" : undefined} className={`flex items-center gap-3 rounded-md px-3 py-3 text-[12px] transition-colors ${active === href ? "bg-[#eceddd] text-primary" : "hover:bg-white/10"}`}><Icon size={17} strokeWidth={1.5} />{label}</Link>)}{actor?.role === "operator" && <Link href="/operator" className="flex items-center gap-3 px-3 py-3 text-xs"><ShieldCheck size={17} />Operator studio</Link>}</nav><div className="mt-auto"><div className="mb-7 border-l border-accent/60 pl-4"><p className="font-serif text-xl leading-relaxed text-[#ecebd8]">Big ambitions.<br />A clearer path.</p><Link href="/scholarships" className="mt-3 inline-flex items-center gap-2 text-[11px] text-white/65">Find your opportunity <ArrowUpRight size={13} /></Link></div><div className="flex items-center gap-3 border-t border-white/15 pt-5"><span className="flex size-9 items-center justify-center rounded-full bg-[#53705b] text-xs text-white">{actor?.name?.slice(0, 2).toUpperCase() || "GP"}</span><div className="min-w-0 flex-1"><p className="truncate text-xs text-white">{actor?.name || "Welcome, explorer"}</p><p className="mt-1 text-[10px] text-white/45">{actor ? "Your scholarship workspace" : "Explore your possibilities"}</p></div>{actor && <SignOut />}</div></div></aside>
-    <header className="flex min-h-18 flex-wrap items-center justify-between gap-4 border-b border-border bg-[#faf9f5] px-5 py-4 sm:px-9"><div className="lg:hidden"><Logo /></div><p className="hidden text-xs text-muted-foreground lg:block">A little direction. A world of possibility.</p><div className="flex items-center gap-5 text-xs"><Link href="/scholarships" className="hidden items-center gap-1 sm:inline-flex">Explore opportunities <ArrowUpRight size={13} /></Link>{actor ? <Link href="/notifications" aria-label="Notification inbox"><Bell size={18} strokeWidth={1.5} /></Link> : <Link href="/login" className="font-semibold">Sign in <span aria-hidden>↗</span></Link>}{actor && <span className="lg:hidden"><SignOut /></span>}</div><nav aria-label="Mobile navigation" className="flex w-full gap-5 overflow-x-auto pb-1 lg:hidden">{nav.map(([href, label, Icon]) => <Link key={href} href={href} aria-current={active === href ? "page" : undefined} className={`flex shrink-0 items-center gap-1.5 text-[11px] ${active === href ? "font-bold" : "text-muted-foreground"}`}><Icon size={13} />{label.replace(" scholarships", "").replace(" opportunities", "")}</Link>)}{actor?.role === "operator" && <Link href="/operator" className="text-[11px]">Operator</Link>}</nav></header>
-    <main id="main" className="mx-auto max-w-[1500px] px-5 py-8 sm:px-9 lg:px-10 lg:py-10 fade-in">{children}</main>
-    <footer className="mx-5 flex flex-wrap justify-between gap-3 border-t border-border py-6 text-[10px] text-muted-foreground sm:mx-9"><span>© {new Date().getFullYear()} GrantPath. Make room for what comes next.</span><span>Evidence first. Your ambition, always.</span></footer>
-  </div>;
+const nav = [
+  ["/dashboard", "Overview", LayoutDashboard],
+  ["/scholarships", "Discover scholarships", Compass],
+  ["/saved", "Saved opportunities", Bookmark],
+  ["/applications", "My applications", Columns3],
+  ["/notifications", "Notifications", Bell],
+  ["/profile", "My profile", UserRound],
+] as const;
+export function Shell({
+  children,
+  actor,
+  active,
+}: {
+  children: React.ReactNode;
+  actor: Actor | null;
+  active?: string;
+}) {
+  return (
+    <div className="min-h-screen lg:pl-[238px]">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex">
+        <Logo light />
+        <div className="eyebrow mt-13 mb-4 text-white/40">YOUR NEXT CHAPTER</div>
+        <nav aria-label="Main navigation" className="space-y-1.5">
+          {nav.map(([href, label, Icon]) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={active === href ? "page" : undefined}
+              className={`flex items-center gap-3 rounded-md px-3 py-3 text-[12px] transition-colors ${active === href ? "bg-[#eceddd] text-primary" : "hover:bg-white/10"}`}
+            >
+              <Icon size={17} strokeWidth={1.5} />
+              {label}
+            </Link>
+          ))}
+          {actor?.role === "operator" && (
+            <Link href="/operator" className="flex items-center gap-3 px-3 py-3 text-xs">
+              <ShieldCheck size={17} />
+              Operator studio
+            </Link>
+          )}
+        </nav>
+        <div className="mt-auto">
+          <div className="mb-7 border-l border-accent/60 pl-4">
+            <p className="font-serif text-xl leading-relaxed text-[#ecebd8]">
+              Big ambitions.
+              <br />A clearer path.
+            </p>
+            <Link
+              href="/scholarships"
+              className="mt-3 inline-flex items-center gap-2 text-[11px] text-white/65"
+            >
+              Find your opportunity <ArrowUpRight size={13} />
+            </Link>
+          </div>
+          <div className="flex items-center gap-3 border-t border-white/15 pt-5">
+            <span className="flex size-9 items-center justify-center rounded-full bg-[#53705b] text-xs text-white">
+              {actor?.name?.slice(0, 2).toUpperCase() || "GP"}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-xs text-white">{actor?.name || "Welcome, explorer"}</p>
+              <p className="mt-1 text-[10px] text-white/45">
+                {actor ? "Your scholarship workspace" : "Explore your possibilities"}
+              </p>
+            </div>
+            {actor && <SignOut />}
+          </div>
+        </div>
+      </aside>
+      <header className="flex min-h-18 flex-wrap items-center justify-between gap-4 border-b border-border bg-[#faf9f5] px-5 py-4 sm:px-9">
+        <div className="lg:hidden">
+          <Logo />
+        </div>
+        <p className="hidden text-xs text-muted-foreground lg:block">
+          A little direction. A world of possibility.
+        </p>
+        <div className="flex items-center gap-5 text-xs">
+          <Link href="/scholarships" className="hidden items-center gap-1 sm:inline-flex">
+            Explore opportunities <ArrowUpRight size={13} />
+          </Link>
+          {actor ? (
+            <Link href="/notifications" aria-label="Notification inbox">
+              <Bell size={18} strokeWidth={1.5} />
+            </Link>
+          ) : (
+            <Link href="/login" className="font-semibold">
+              Sign in <span aria-hidden>↗</span>
+            </Link>
+          )}
+          {actor && (
+            <span className="lg:hidden">
+              <SignOut />
+            </span>
+          )}
+        </div>
+        <nav
+          aria-label="Mobile navigation"
+          className="flex w-full gap-5 overflow-x-auto pb-1 lg:hidden"
+        >
+          {nav.map(([href, label, Icon]) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={active === href ? "page" : undefined}
+              className={`flex shrink-0 items-center gap-1.5 text-[11px] ${active === href ? "font-bold" : "text-muted-foreground"}`}
+            >
+              <Icon size={13} />
+              {label.replace(" scholarships", "").replace(" opportunities", "")}
+            </Link>
+          ))}
+          {actor?.role === "operator" && (
+            <Link href="/operator" className="text-[11px]">
+              Operator
+            </Link>
+          )}
+        </nav>
+      </header>
+      <main
+        id="main"
+        className="mx-auto max-w-[1500px] px-5 py-8 sm:px-9 lg:px-10 lg:py-10 fade-in"
+      >
+        {children}
+      </main>
+      <footer className="mx-5 flex flex-wrap justify-between gap-3 border-t border-border py-6 text-[10px] text-muted-foreground sm:mx-9">
+        <span>© {new Date().getFullYear()} GrantPath. Make room for what comes next.</span>
+        <span>Evidence first. Your ambition, always.</span>
+      </footer>
+    </div>
+  );
 }

@@ -8,16 +8,16 @@
 
 ## Phase status
 
-| Phase | State | Remaining acceptance |
-|---|---|---|
-| 1 Foundation | In progress | Implementation and local persistence/ownership journey; external preview/auth mail/TestSprite gates |
-| 2 Catalogue | Pending | Official evidence and persistent catalogue |
-| 3 Eligibility | Pending | Rules, matrix and independent verification |
-| 4 Experience | Pending | Connected private journey |
-| 5 Monitoring | Pending | Adapters and recovery verification |
-| 6 Notifications | Pending | Durable delivery and replay verification |
-| 7 Protection | Pending | Local suites and external merge-gate evidence |
-| 8 Polish | Pending | Browser review and release docs |
+| Phase           | State       | Remaining acceptance                                                                                |
+| --------------- | ----------- | --------------------------------------------------------------------------------------------------- |
+| 1 Foundation    | In progress | Implementation and local persistence/ownership journey; external preview/auth mail/TestSprite gates |
+| 2 Catalogue     | Pending     | Official evidence and persistent catalogue                                                          |
+| 3 Eligibility   | Pending     | Rules, matrix and independent verification                                                          |
+| 4 Experience    | Pending     | Connected private journey                                                                           |
+| 5 Monitoring    | Pending     | Adapters and recovery verification                                                                  |
+| 6 Notifications | Pending     | Durable delivery and replay verification                                                            |
+| 7 Protection    | Pending     | Local suites and external merge-gate evidence                                                       |
+| 8 Polish        | Pending     | Browser review and release docs                                                                     |
 
 ## External setup pending
 
@@ -40,3 +40,7 @@ Implemented a standalone three-valued rule engine, AND/OR alternatives and exemp
 Implemented profile-driven dashboard and current/historical assessment states, private idempotent saves, preserved records on unsave, personal notes/checklists, all seven statuses with history, board/list views, saved collection and confirmed-deadline priorities. Private mutations have persistent per-user throttles and origin checks. Local typecheck/lint and 5 PostgreSQL tests pass; focused Playwright rerun is in progress after fixing save confirmation persistence. Source fetching and notification processing remain separate upcoming workers.
 
 Phase 4 browser acceptance now passes locally: 3 focused Playwright journeys, with a separate browser-test PostgreSQL database. The app is connected through account/profile → assessment/evidence → save → application plan → sign out/return. Browser and integration databases are isolated from the development catalogue. TestSprite and hosted acceptance remain externally unverified.
+
+## Phase 5 local increment
+
+Implemented registry/cadence/manual requests, four explicit adapters, bounded allowlisted fetching with robots policy and persistent host pacing, observation/review/history, old/new timeline, operator acceptance/rejection with reasons, transactional publication, durable paginated matching fan-out and leased outbox recovery. Standalone CLI and scheduled/manual GitHub ingestion workflow are provided; ingestion does not run inside Vercel or share the matching worker. Controlled change/outage/replay integration passes. Live smoke coverage is one successful Twente extraction plus UCL/Oxford access blocks; schedules remain paused pending policy review. GitHub workflow activation is externally unverified.
