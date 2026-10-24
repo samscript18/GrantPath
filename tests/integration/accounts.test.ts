@@ -1,6 +1,7 @@
 import { describe, it, expect, afterAll, beforeAll } from "vitest";
 import { getAuth } from "../../src/server/accounts/auth";
 import { db } from "../../src/lib/db";
+import { GET as operatorGET } from "../../src/app/api/operator/route";
 import { GET, PUT } from "../../src/app/api/profile/route";
 const origin = "http://127.0.0.1:3000";
 const ips = new Map<string, string>();
@@ -67,6 +68,10 @@ describe("first persistent journey", () => {
     const bEmail = `b-${tag}@example.test`;
     emails.push(aEmail, bEmail);
     const a = await registerVerified(aEmail);
+    expect(
+      (await operatorGET(new Request(`${origin}/api/operator`, { headers: { Cookie: a.cookie } })))
+        .status,
+    ).toBe(403);
     const b = await registerVerified(bEmail);
     const put = await PUT(
       new Request(`${origin}/api/profile`, {

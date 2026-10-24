@@ -14,20 +14,44 @@ async function reserveHost(host: string, delaySeconds: number) {
     throw new Error("Host crawl-delay reservation exceeds this bounded check. Retry later.");
   if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
 }
+export async function claimSourceCheck(sourceId: string, now = new Date()) {
+  const token = crypto.randomUUID();
+  return db().$transaction(async (tx) => {
+    const claimed = await tx.source.updateMany({
+      where: { id: sourceId, OR: [{ lockedUntil: null }, { lockedUntil: { lt: now } }] },
+      data: {
+        lockedUntil: new Date(now.getTime() + 180000),
+        leaseToken: token,
+        lastAttemptAt: now,
+      },
+    });
+    if (!claimed.count) return null;
+    await tx.observation.updateMany({
+      where: { sourceId, state: "fetching" },
+      data: {
+        state: "failed",
+        error:
+          "Source worker was interrupted and its lease expired. A new bounded attempt has started.",
+      },
+    });
+    const observation = await tx.observation.create({
+      data: { sourceId, state: "fetching", attemptedAt: now },
+    });
+    return { token, observationId: observation.id };
+  });
+}
 export async function checkSource(sourceId: string, manual = false) {
   const source = await db().source.findUniqueOrThrow({ where: { id: sourceId } });
   if (!source.enabled && !source.requestedAt && !manual) return { state: "paused" };
-  const now = new Date();
-  const token = crypto.randomUUID();
-  const claimed = await db().source.updateMany({
-    where: { id: sourceId, OR: [{ lockedUntil: null }, { lockedUntil: { lt: now } }] },
-    data: { lockedUntil: new Date(now.getTime() + 180000), leaseToken: token, lastAttemptAt: now },
-  });
-  if (!claimed.count) return { state: "busy" };
+  const claimed = await claimSourceCheck(sourceId);
+  if (!claimed) return { state: "busy" };
+  const { token, observationId } = claimed;
+  let httpStatus: number | undefined;
   try {
     const url = validateSourceUrl(source.url, source.adapter);
     await reserveHost(url.hostname, 20);
     const robots = await boundedFetch(`${url.origin}/robots.txt`, source.adapter, true);
+    httpStatus = robots.status;
     if (robots.status !== 404 && robots.status !== 410 && robots.status !== 200)
       throw new Error(`Robots policy unavailable (${robots.status}); source check deferred.`);
     if (robots.status === 200 && /<html|<!doctype/i.test(robots.text))
@@ -44,15 +68,18 @@ export async function checkSource(sourceId: string, manual = false) {
       throw new Error("Provider crawl delay exceeds this worker’s supported bounded interval.");
     await reserveHost(url.hostname, policy.crawlDelaySeconds);
     const page = await boundedFetch(source.url, source.adapter);
+    httpStatus = page.status;
     if (page.status !== 200)
       throw new Error(`Source retrieval failed (${page.status}). Accepted information retained.`);
-    return await processSourceHtml(sourceId, page.text, { leaseToken: token });
+    return await processSourceHtml(sourceId, page.text, { leaseToken: token, observationId });
   } catch (e) {
     return recordSourceFailure(
       sourceId,
       e instanceof Error ? e.message : "Source retrieval failed",
-      undefined,
+      httpStatus,
       token,
+      new Date(),
+      observationId,
     );
   }
 }

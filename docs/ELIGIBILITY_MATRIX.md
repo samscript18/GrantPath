@@ -1,6 +1,6 @@
 # Requirement × profile × expected outcome
 
-Engine version: 1.0.0. Deterministic conditions are independent of Next.js, matching persistence and preference ranking. `tests/unit/eligibility.test.ts` asserts these cases and exact reason codes are exposed in per-rule explanations. Phase 7 adds the independently authored reference comparison.
+Engine version: 1.1.0. Deterministic conditions are independent of Next.js, matching persistence and preference ranking. `tests/unit/eligibility.test.ts` asserts these cases and exact reason codes are exposed in per-rule explanations. Phase 7 adds the independently authored reference comparison.
 
 | Requirement                                    | Profile state                                       | Rule result / reason                                      |
 | ---------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- |

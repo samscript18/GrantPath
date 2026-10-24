@@ -6,6 +6,8 @@ export const fields = [
   "targetLevel",
   "targetField",
   "currentField",
+  "degreeClassification",
+  "intendedStart",
   "graduationDate",
   "gpa",
   "language",
@@ -86,6 +88,40 @@ const requirementSchema = z
   .strict()
   .superRefine((r, ctx) => {
     const issue = (message: string) => ctx.addIssue({ code: "custom", message });
+    const membershipFields = [
+      "citizenships",
+      "residence",
+      "qualification",
+      "targetLevel",
+      "targetField",
+      "currentField",
+      "degreeClassification",
+      "admission",
+    ];
+    if (["in", "notIn"].includes(r.op) && !membershipFields.includes(r.field))
+      issue("Membership conditions require a supported categorical field.");
+    if (
+      ["min", "max"].includes(r.op) &&
+      !["experienceMonths", "experienceHours", "birthDate"].includes(r.field)
+    )
+      issue("Numeric comparisons require a supported numeric field and declared units.");
+    if (
+      ["before", "after", "onOrBefore", "onOrAfter"].includes(r.op) &&
+      !["graduationDate", "birthDate", "intendedStart"].includes(r.field)
+    )
+      issue("Date comparisons require a supported date field.");
+    if (r.op === "confirmed" && !["englishMedium", "providerConfirmation"].includes(r.field))
+      issue("Confirmation conditions require a supported boolean field.");
+    if (
+      r.op === "gpa" &&
+      r.threshold !== undefined &&
+      r.scale !== undefined &&
+      (r.threshold < 0 || r.threshold > r.scale)
+    )
+      issue("GPA threshold must be within the provider scale.");
+    if (r.equivalents?.some((e) => e.minimum > e.scale))
+      issue("A provider equivalence must fit its stated scale.");
+
     if (["in", "notIn", "qualification", "language"].includes(r.op) && !r.values?.length)
       issue("This rule needs allowed values.");
     if (["min", "max", "gpa", "language"].includes(r.op) && r.threshold === undefined)
@@ -116,20 +152,48 @@ const recursive: z.ZodType<Rule> = z.lazy(() =>
       .strict(),
   ]),
 );
-export const ruleSchema = recursive.superRefine((rule, ctx) => {
-  const ids = new Set<string>();
+const boundedInput = z.unknown().superRefine((input, ctx) => {
+  const stack = [{ node: input, depth: 0 }];
   let count = 0;
-  function visit(r: Rule, depth: number) {
-    count++;
-    if (depth > 8 || count > 200 || ids.has(r.id)) {
+  while (stack.length) {
+    const current = stack.pop()!;
+    if (++count > 200 || current.depth > 8) {
       ctx.addIssue({
         code: "custom",
-        message: "Rules must have unique IDs, depth ≤ 8 and at most 200 nodes.",
+        message: "Rule input exceeds the supported depth or node count.",
       });
       return;
     }
-    ids.add(r.id);
-    if (r.kind !== "requirement") r.rules.forEach((c) => visit(c, depth + 1));
+    if (
+      current.node &&
+      typeof current.node === "object" &&
+      "rules" in current.node &&
+      Array.isArray(current.node.rules)
+    ) {
+      if (current.node.rules.length > 50) {
+        ctx.addIssue({ code: "custom", message: "A group has too many rules." });
+        return;
+      }
+      for (const node of current.node.rules) stack.push({ node, depth: current.depth + 1 });
+    }
   }
-  visit(rule, 0);
 });
+export const ruleSchema = boundedInput.pipe(
+  recursive.superRefine((rule, ctx) => {
+    const ids = new Set<string>();
+    let count = 0;
+    function visit(r: Rule, depth: number) {
+      count++;
+      if (depth > 8 || count > 200 || ids.has(r.id)) {
+        ctx.addIssue({
+          code: "custom",
+          message: "Rules must have unique IDs, depth ≤ 8 and at most 200 nodes.",
+        });
+        return;
+      }
+      ids.add(r.id);
+      if (r.kind !== "requirement") r.rules.forEach((c) => visit(c, depth + 1));
+    }
+    visit(rule, 0);
+  }),
+);

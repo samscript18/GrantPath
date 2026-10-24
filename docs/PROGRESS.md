@@ -10,14 +10,14 @@
 
 | Phase           | State       | Remaining acceptance                                                                                |
 | --------------- | ----------- | --------------------------------------------------------------------------------------------------- |
-| 1 Foundation    | In progress | Implementation and local persistence/ownership journey; external preview/auth mail/TestSprite gates |
-| 2 Catalogue     | Pending     | Official evidence and persistent catalogue                                                          |
-| 3 Eligibility   | Pending     | Rules, matrix and independent verification                                                          |
-| 4 Experience    | Pending     | Connected private journey                                                                           |
-| 5 Monitoring    | Pending     | Adapters and recovery verification                                                                  |
-| 6 Notifications | Pending     | Durable delivery and replay verification                                                            |
-| 7 Protection    | Pending     | Local suites and external merge-gate evidence                                                       |
-| 8 Polish        | Pending     | Browser review and release docs                                                                     |
+| 1 Foundation | Implemented; locally verified | Hosted auth/email/preview and authentic TestSprite gate pending |
+| 2 Catalogue | Implemented; locally verified | Bounded catalogue and evidence; unresolved provider conditions explicit |
+| 3 Eligibility | Implemented; locally verified | Engine 1.1.0; independent comparisons and domain matrix pass |
+| 4 Experience | Implemented; locally verified | Initial connected browser journeys pass; full release browser review follows |
+| 5 Monitoring | Implemented; locally verified | 4 adapter contracts; 1 successful live extraction, 2 access-blocked smoke checks; scheduled activation pending |
+| 6 Notifications | Implemented; locally verified | Durable sink/inbox/preference/reminder checks pass; Resend/Inngest remote verification pending |
+| 7 Protection | In progress | Final integrated browser change/notification journey; authentic external gate remains pending |
+| 8 Polish | In progress | Full page/mobile screenshots, release docs and final review |
 
 ## External setup pending
 
@@ -48,3 +48,8 @@ Implemented registry/cadence/manual requests, four explicit adapters, bounded al
 ## Phase 6 local increment
 
 Implemented private paginated inbox/read states, topic/channel preferences, relevant new-match and accepted-change alerts, exact-version/evaluation links, seven-/one-day confirmed-instant reminders, durable deduplication and delivery leases/attempts/backoff, suppression using current preferences and saved/current-match relevance, email sink isolation, Resend idempotency and accepted-versus-captured diagnostics. Added optional signed Inngest steps and separate GitHub application-jobs scheduler; neither fetches sources. 35 unit and 11 PostgreSQL tests plus production build pass. Real Resend/Inngest account operation, hosted schedules and TestSprite remain externally unverified.
+
+
+## Phase 7 local increment
+
+50 local unit tests and 12 PostgreSQL integration tests pass. Independent logical reference comparison covers 2,000 generated and 882 exhaustive small-grammar cases. Exact reason codes, unknown alternatives, country identity, complete qualification history, stale work, ownership, interruption and exhausted leases are checked. Input is bounded before recursive rule parsing. Engine changes are versioned at 1.1.0. Final connected browser/operator/notification review continues. No remote TestSprite or merge-block evidence is claimed.

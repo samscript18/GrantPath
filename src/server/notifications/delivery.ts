@@ -86,6 +86,21 @@ export async function deliveryDecision(
   return { allowed: true, reason: "Current preference and relevance checks passed.", user };
 }
 export async function claimDelivery(id?: string, now = new Date()) {
+  await db().delivery.updateMany({
+    where: {
+      ...(id ? { id } : {}),
+      state: "processing",
+      attempts: { gte: 5 },
+      lockedUntil: { lt: now },
+    },
+    data: {
+      state: "uncertain",
+      leaseToken: null,
+      lockedUntil: null,
+      error:
+        "The final delivery attempt was interrupted. Check provider acceptance before any manual resend.",
+    },
+  });
   const token = crypto.randomUUID();
   const requested = id || null;
   const rows = await db().$queryRaw<

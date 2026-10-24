@@ -1,6 +1,7 @@
+import { canonicalCountry } from "@/lib/countries";
 import type { StudentProfile } from "@/server/profiles/schema";
 import type { Requirement, Rule } from "./rules";
-export const ENGINE_VERSION = "1.0.0";
+export const ENGINE_VERSION = "1.1.0";
 export type State = "pass" | "fail" | "unknown";
 export type Outcome = "eligible" | "potential" | "not_eligible";
 export type RuleResult = {
@@ -73,31 +74,18 @@ function leaf(rule: Requirement, p: StudentProfile): RuleResult {
     );
   if (rule.op === "qualification") {
     const accepted = rule.values || [];
-    if (p.completedQualifications.some((q) => accepted.includes(q)))
+    const held = [
+      ...p.completedQualifications,
+      ...(p.completion === "completed" && p.qualification ? [p.qualification] : []),
+    ];
+    if (held.some((q) => accepted.includes(q)))
       return result(
         "pass",
         "QUALIFICATION_HELD",
         "A recorded completed qualification meets the stated prerequisite.",
       );
-    if (!p.qualification || !p.completion)
-      return result(
-        "unknown",
-        "QUALIFICATION_MISSING",
-        "Add your current qualification and its completion status.",
-      );
-    if (p.completion === "completed")
-      return accepted.includes(p.qualification)
-        ? result(
-            "pass",
-            "QUALIFICATION_HELD",
-            "Your completed qualification meets this prerequisite.",
-          )
-        : result(
-            "fail",
-            "QUALIFICATION_NOT_ACCEPTED",
-            "Your recorded qualifications do not include the provider’s required qualification.",
-          );
     if (
+      p.qualification &&
       accepted.includes(p.qualification) &&
       rule.allowFinalYear &&
       p.completion === "final_year"
@@ -108,29 +96,72 @@ function leaf(rule: Requirement, p: StudentProfile): RuleResult {
           "COMPLETION_DATE_MISSING",
           "Confirm your expected completion date against the provider’s completion condition.",
         );
-      return p.graduationDate <= rule.completionBy
-        ? result(
-            "pass",
-            "FINAL_YEAR_COMPLETION_BY_DATE",
-            `Final-year applicants are permitted if they complete by ${rule.completionBy}; your expected date meets that condition.`,
-          )
-        : result(
-            "fail",
-            "COMPLETION_TOO_LATE",
-            `Your expected completion is after the required date ${rule.completionBy}.`,
-          );
+      if (p.graduationDate <= rule.completionBy)
+        return result(
+          "pass",
+          "FINAL_YEAR_COMPLETION_BY_DATE",
+          `Final-year applicants are permitted if they complete by ${rule.completionBy}; your expected date meets that condition.`,
+        );
+      if (p.qualificationHistoryComplete)
+        return result(
+          "fail",
+          "COMPLETION_TOO_LATE",
+          `Your expected completion is after the required date ${rule.completionBy}, and your confirmed qualification history has no accepted completed alternative.`,
+        );
     }
+    if (!p.qualificationHistoryComplete)
+      return result(
+        "unknown",
+        "QUALIFICATION_HISTORY_INCOMPLETE",
+        "Confirm all qualifications already completed. An unfinished current degree cannot rule out a prerequisite you already hold.",
+      );
     if (!rule.allowFinalYear)
       return result(
         "fail",
-        "QUALIFICATION_NOT_COMPLETED",
-        "The provider requires a completed qualification; your recorded study is not yet completed.",
+        p.completion === "completed" ? "QUALIFICATION_NOT_ACCEPTED" : "QUALIFICATION_NOT_COMPLETED",
+        "Your confirmed completed-qualification history does not meet the provider’s required completed qualification.",
       );
     return result(
       "unknown",
       "QUALIFICATION_CONFIRMATION",
-      "Confirm whether your existing qualifications or expected completion meet this provider’s conditions.",
+      "Confirm whether your current study and expected completion meet the provider’s final-year conditions.",
     );
+  }
+  if (rule.field === "qualification" && ["in", "notIn"].includes(rule.op)) {
+    const held = [
+      ...p.completedQualifications,
+      ...(p.completion === "completed" && p.qualification ? [p.qualification] : []),
+    ];
+    const intersects = held.some((q) => rule.values?.includes(q));
+    if (intersects)
+      return rule.op === "in"
+        ? result(
+            "pass",
+            "QUALIFICATION_HELD",
+            "A completed qualification satisfies this condition.",
+          )
+        : result(
+            "fail",
+            "EXCLUDED_QUALIFICATION_HELD",
+            "A recorded completed qualification is excluded by the provider.",
+          );
+    if (!p.qualificationHistoryComplete)
+      return result(
+        "unknown",
+        "QUALIFICATION_HOLDING_UNCONFIRMED",
+        "Confirm the full history of degrees you already hold. An unfinished current degree is not a completed qualification.",
+      );
+    return rule.op === "notIn"
+      ? result(
+          "pass",
+          "EXCLUDED_QUALIFICATION_NOT_HELD",
+          "Your explicitly confirmed full qualification history does not contain an excluded degree.",
+        )
+      : result(
+          "fail",
+          "QUALIFICATION_NOT_ACCEPTED",
+          "Your confirmed qualification history does not include an accepted degree.",
+        );
   }
   if (rule.op === "gpa") {
     if (!p.gpa) return result("unknown", "GPA_MISSING", "Add your result with its original scale.");
@@ -227,25 +258,12 @@ function leaf(rule: Requirement, p: StudentProfile): RuleResult {
             "This condition needs an explicit confirmed answer.",
           );
   if (rule.op === "in" || rule.op === "notIn") {
-    // Qualification exclusion is about held degrees, not unfinished current study.
-    if (rule.field === "qualification" && p.completion !== "completed") {
-      const held = p.completedQualifications;
-      if (rule.op === "notIn" && held.some((q) => rule.values?.includes(q)))
-        return result(
-          "fail",
-          "EXCLUDED_QUALIFICATION_HELD",
-          "A recorded completed qualification is excluded by the provider.",
-        );
-      return result(
-        "unknown",
-        "QUALIFICATION_HOLDING_UNCONFIRMED",
-        "Confirm which degrees you already hold; current study alone cannot establish this exclusion.",
-      );
-    }
     const values = (Array.isArray(value) ? value : [value])
       .filter((v) => typeof v === "string")
       .map((v) => normalise(v));
-    const intersects = values.some((v) => rule.values?.map(normalise).includes(v));
+    const countryField = rule.field === "citizenships" || rule.field === "residence";
+    const normal = (v: string) => normalise(countryField ? canonicalCountry(v) || v : v);
+    const intersects = values.some((v) => rule.values?.map(normal).includes(normal(v)));
     const pass = rule.op === "in" ? intersects : !intersects;
     return result(
       pass ? "pass" : "fail",

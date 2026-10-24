@@ -107,10 +107,11 @@ export async function recordSourceFailure(
   status?: number,
   leaseToken?: string,
   now = new Date(),
+  observationId?: string,
 ) {
   const [recent, source] = await Promise.all([
     db().observation.findMany({
-      where: { sourceId },
+      where: { sourceId, state: { not: "fetching" } },
       orderBy: { attemptedAt: "desc" },
       take: 2,
       select: { state: true },
@@ -123,7 +124,7 @@ export async function recordSourceFailure(
     const owned = await tx.source.updateMany({
       where: { id: sourceId, ...(leaseToken ? { leaseToken } : {}) },
       data: {
-        lastAttemptAt: now,
+        lastAttemptAt: observationId ? source.lastAttemptAt || now : now,
         health: failures >= 3 ? "needs_attention" : "unavailable",
         lockedUntil: null,
         leaseToken: null,
@@ -132,22 +133,20 @@ export async function recordSourceFailure(
       },
     });
     if (!owned.count) return { state: "stale" as const };
-    await tx.observation.create({
-      data: {
-        sourceId,
-        state: "failed",
-        error: message.slice(0, 1000),
-        httpStatus: status,
-        attemptedAt: now,
-      },
-    });
+    const data = { state: "failed", error: message.slice(0, 1000), httpStatus: status };
+    if (observationId)
+      await tx.observation.update({
+        where: { id: observationId, sourceId, state: "fetching" },
+        data,
+      });
+    else await tx.observation.create({ data: { ...data, sourceId, attemptedAt: now } });
     return { state: "failed" as const };
   });
 }
 export async function processSourceHtml(
   sourceId: string,
   html: string,
-  options: { now?: Date; leaseToken?: string; controlled?: boolean } = {},
+  options: { now?: Date; leaseToken?: string; controlled?: boolean; observationId?: string } = {},
 ) {
   if (options.controlled && process.env.APP_ENV !== "test")
     throw new Error("Controlled snapshots are restricted to isolated tests.");
@@ -168,6 +167,7 @@ export async function processSourceHtml(
       undefined,
       options.leaseToken,
       now,
+      options.observationId,
     );
   }
   const hash = semanticHash(extracted.facts);
@@ -179,7 +179,7 @@ export async function processSourceHtml(
       where: { id: sourceId, ...(options.leaseToken ? { leaseToken: options.leaseToken } : {}) },
       data: {
         health: "healthy",
-        lastAttemptAt: now,
+        lastAttemptAt: options.observationId ? source.lastAttemptAt || now : now,
         lastSuccessAt: now,
         nextCheckAt: new Date(now.getTime() + source.cadenceHours * 3600000),
         requestedAt: null,
@@ -189,21 +189,23 @@ export async function processSourceHtml(
     });
     if (!updated.count) return { state: "stale" as const };
     const unchanged = accepted.sourceFacts && semanticHash(accepted.sourceFacts) === hash;
-    const observation = await tx.observation.create({
-      data: {
-        sourceId,
-        state: unchanged ? "unchanged" : "review",
-        httpStatus: 200,
-        hash,
-        candidate: {
-          facts: extracted.facts,
-          warnings: extracted.warnings,
-        } as Prisma.InputJsonValue,
-        excerpt: extracted.excerpt,
-        attemptedAt: now,
-        succeededAt: now,
-      },
-    });
+    const observationData = {
+      state: unchanged ? "unchanged" : "review",
+      httpStatus: 200,
+      hash,
+      candidate: {
+        facts: extracted.facts,
+        warnings: extracted.warnings,
+      } as Prisma.InputJsonValue,
+      excerpt: extracted.excerpt,
+      succeededAt: now,
+    };
+    const observation = options.observationId
+      ? await tx.observation.update({
+          where: { id: options.observationId, sourceId, state: "fetching" },
+          data: observationData,
+        })
+      : await tx.observation.create({ data: { ...observationData, sourceId, attemptedAt: now } });
     if (unchanged) return { state: "unchanged" as const, observationId: observation.id };
     const review = await tx.review.upsert({
       where: {

@@ -26,3 +26,25 @@ describe("durable event leases", () => {
     await db().outbox.delete({ where: { id: event.id } });
   });
 });
+
+describe("exhausted interruption recovery", () => {
+  it("moves an interrupted final outbox attempt to an inspectable terminal state", async () => {
+    const topic = `isolated-final-${crypto.randomUUID()}`;
+    const now = new Date();
+    const event = await db().outbox.create({
+      data: {
+        key: topic,
+        topic,
+        payload: {},
+        state: "processing",
+        attempts: 6,
+        availableAt: now,
+        lockedUntil: new Date(now.getTime() - 1),
+        leaseToken: "expired-last-owner",
+      },
+    });
+    expect(await claimEvent([topic], now)).toBeNull();
+    expect((await db().outbox.findUniqueOrThrow({ where: { id: event.id } })).state).toBe("failed");
+    await db().outbox.delete({ where: { id: event.id } });
+  });
+});

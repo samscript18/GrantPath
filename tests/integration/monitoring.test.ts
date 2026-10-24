@@ -4,6 +4,7 @@ import { createOpportunity } from "../../src/server/operator";
 import { saveProfile } from "../../src/server/profiles";
 import { processSourceHtml, decideReview, recordSourceFailure } from "../../src/server/monitoring";
 import { evaluateStudent, studentAssessment } from "../../src/server/eligibility";
+import { claimSourceCheck } from "../../src/server/monitoring/worker";
 import { handleDomainEvent } from "../../src/server/jobs/outbox";
 import { saveOpportunity } from "../../src/server/applications";
 import { ENGINE_VERSION } from "../../src/server/eligibility/engine";
@@ -52,6 +53,23 @@ describe("controlled snapshots use the production processing path", () => {
         enabled: false,
       },
     });
+    const start = new Date("2026-10-24T11:55:00Z");
+    const lease = await claimSourceCheck(source.id, start);
+    expect(lease).not.toBeNull();
+    expect(await claimSourceCheck(source.id, new Date(start.getTime() + 1000))).toBeNull();
+    const takeover = await claimSourceCheck(source.id, new Date(start.getTime() + 181000));
+    expect(takeover).not.toBeNull();
+    expect(
+      (await db().observation.findUniqueOrThrow({ where: { id: lease!.observationId } })).state,
+    ).toBe("failed");
+    await recordSourceFailure(
+      source.id,
+      "Controlled interruption recovery",
+      undefined,
+      takeover!.token,
+      new Date(start.getTime() + 182000),
+      takeover!.observationId,
+    );
     const first = await processSourceHtml(source.id, uclSnapshot(), {
       controlled: true,
       now: new Date("2026-10-24T12:00:00Z"),

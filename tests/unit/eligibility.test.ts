@@ -76,6 +76,7 @@ describe("requirement × profile × outcome matrix", () => {
         qualification: "bachelor",
         completion: "final_year",
         graduationDate: "2027-09-02",
+        qualificationHistoryComplete: true,
       }),
     ).toBe("fail");
     expect(state(r, { qualification: "bachelor", completion: "final_year" })).toBe("unknown");
@@ -155,5 +156,99 @@ describe("requirement × profile × outcome matrix", () => {
   it("has deterministic versioned results under a fixed clock", () => {
     const now = new Date("2026-10-24T12:00:00Z");
     expect(evaluate(rule(), emptyProfile(), now)).toEqual(evaluate(rule(), emptyProfile(), now));
+  });
+});
+
+describe("exact explanations and original values", () => {
+  it.each([
+    [rule(), {}, "unknown", "PROFILE_MISSING"],
+    [rule(), { citizenships: ["Ghana"] }, "fail", "VALUE_NOT_ACCEPTED"],
+    [rule({ verified: false }), { citizenships: ["Ghana"] }, "unknown", "SOURCE_UNVERIFIED"],
+    [
+      rule({ field: "gpa", op: "gpa", scale: 4, threshold: 3.5 }),
+      { gpa: { value: 4.5, scale: 5 } },
+      "unknown",
+      "GPA_SCALE_UNSUPPORTED",
+    ],
+    [
+      rule({ field: "experienceHours", op: "min", threshold: 2800 }),
+      { experienceMonths: 24 },
+      "unknown",
+      "PROFILE_MISSING",
+    ],
+    [
+      rule({
+        field: "qualification",
+        op: "qualification",
+        values: ["bachelor"],
+        allowFinalYear: true,
+        completionBy: "2027-09-01",
+      }),
+      { qualification: "bachelor", completion: "final_year", graduationDate: "2027-09-01" },
+      "pass",
+      "FINAL_YEAR_COMPLETION_BY_DATE",
+    ],
+  ])("returns exact state and reason %#", (requirement, profile, expected, code) => {
+    const result = evaluate(requirement as Requirement, p(profile));
+    expect(result.state).toBe(expected);
+    expect(result.tree.code).toBe(code);
+    expect(result.tree.evidenceKey).toBe(requirement.evidenceKey);
+  });
+  it("treats source-backed country identities consistently and rejects ambiguous nationality descriptions", () => {
+    expect(
+      state(rule({ field: "residence", values: ["United Kingdom"] }), { residence: "UK" }),
+    ).toBe("pass");
+    expect(profileSchema.safeParse({ citizenships: ["Nigerian"] }).success).toBe(false);
+  });
+});
+
+describe("completed qualification evidence and negative knowledge", () => {
+  const excluded = rule({ field: "qualification", op: "notIn", values: ["master", "doctorate"] });
+  it("uses all recorded completed qualifications when checking an exclusion", () => {
+    expect(
+      state(excluded, {
+        qualification: "bachelor",
+        completion: "completed",
+        completedQualifications: ["master"],
+      }),
+    ).toBe("fail");
+    expect(state(excluded, { completedQualifications: ["master"] })).toBe("fail");
+  });
+  it("requires an explicitly complete history before passing the absence of an excluded degree", () => {
+    expect(state(excluded, { qualification: "bachelor", completion: "final_year" })).toBe(
+      "unknown",
+    );
+    expect(
+      state(excluded, {
+        qualification: "bachelor",
+        completion: "final_year",
+        qualificationHistoryComplete: true,
+        completedQualifications: ["secondary"],
+      }),
+    ).toBe("pass");
+  });
+  it("does not treat a late current degree as proof that no valid earlier prerequisite is held", () => {
+    const r = rule({
+      field: "qualification",
+      op: "qualification",
+      values: ["bachelor"],
+      allowFinalYear: true,
+      completionBy: "2027-09-01",
+    });
+    expect(
+      state(r, {
+        qualification: "bachelor",
+        completion: "final_year",
+        graduationDate: "2027-09-02",
+      }),
+    ).toBe("unknown");
+    expect(
+      state(r, {
+        qualification: "bachelor",
+        completion: "final_year",
+        graduationDate: "2027-09-02",
+        completedQualifications: ["bachelor"],
+      }),
+    ).toBe("pass");
   });
 });

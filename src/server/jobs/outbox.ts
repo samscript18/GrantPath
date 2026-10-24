@@ -142,6 +142,21 @@ export async function handleDomainEvent(event: Outbox) {
 }
 export const domainTopics = ["profile.changed", "scholarship.changed", "evaluation.requested"];
 export async function claimEvent(topics: string[] = domainTopics, now = new Date()) {
+  await db().outbox.updateMany({
+    where: {
+      topic: { in: topics },
+      state: "processing",
+      attempts: { gte: 6 },
+      lockedUntil: { lt: now },
+    },
+    data: {
+      state: "failed",
+      leaseToken: null,
+      lockedUntil: null,
+      error:
+        "The last permitted attempt was interrupted. Operator review is required before retrying.",
+    },
+  });
   const token = crypto.randomUUID();
   const rows = await db().$queryRaw<
     Outbox[]

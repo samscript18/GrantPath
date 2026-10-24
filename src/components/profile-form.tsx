@@ -7,8 +7,17 @@ import { profileSchema, type StudentProfile } from "@/server/profiles/schema";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Check, ArrowRight, ShieldCheck } from "lucide-react";
+import { countryNames } from "@/lib/countries";
 const stages = ["Your world", "Your education", "Your next chapter", "Other requirements"];
 const optional = (v: unknown) => (v === "" ? undefined : v);
+function validationMessages(value: unknown, path = ""): { path: string; message: string }[] {
+  if (!value || typeof value !== "object") return [];
+  if ("message" in value && typeof value.message === "string")
+    return [{ path, message: value.message }];
+  return Object.entries(value)
+    .filter(([key]) => key !== "ref" && key !== "type" && key !== "types")
+    .flatMap(([key, nested]) => validationMessages(nested, path ? `${path}.${key}` : key));
+}
 export function ProfileForm({
   initial,
   version: initialVersion,
@@ -55,6 +64,7 @@ export function ProfileForm({
       | "residence"
       | "timeZone"
       | "currentField"
+      | "degreeClassification"
       | "institution"
       | "targetField"
       | "graduationDate"
@@ -67,7 +77,13 @@ export function ProfileForm({
       <label className="field-label" htmlFor={name}>
         {label}
       </label>
-      <Input id={name} type={type} {...register(name, { setValueAs: optional })} />
+      <Input
+        id={name}
+        type={type}
+        list={name === "residence" ? "country-names" : undefined}
+        aria-invalid={!!errors[name]}
+        {...register(name, { setValueAs: optional })}
+      />
     </div>
   );
   const csv = (name: "citizenships" | "destinations" | "preferredInstitutions", label: string) => (
@@ -81,6 +97,7 @@ export function ProfileForm({
           </label>
           <Input
             id={name}
+            list={name === "citizenships" ? "country-names" : undefined}
             defaultValue={field.value?.join(", ")}
             onBlur={(e) =>
               field.onChange(
@@ -98,27 +115,55 @@ export function ProfileForm({
       )}
     />
   );
-  const save = handleSubmit(async (data) => {
-    setMessage("");
-    try {
-      const response = await fetch("/api/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data, version, stage: Math.min(stage + 1, 3) }),
-      });
-      const body = await response.json();
-      if (!response.ok) {
-        setMessage(body.message);
-        return;
+  const save = handleSubmit(
+    async (data) => {
+      setMessage("");
+      try {
+        const response = await fetch("/api/profile", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data, version, stage: Math.min(stage + 1, 3) }),
+        });
+        const body = await response.json();
+        if (!response.ok) {
+          setMessage(body.message);
+          return;
+        }
+        setVersion(body.version);
+        setMessage("Progress saved. Your matches will update shortly.");
+        if (stage < 3) setStage(stage + 1);
+        else router.push("/dashboard");
+      } catch {
+        setMessage("We couldn’t save this time. Your answers are still here. Please retry.");
       }
-      setVersion(body.version);
-      setMessage("Progress saved. Your matches will update shortly.");
-      if (stage < 3) setStage(stage + 1);
-      else router.push("/dashboard");
-    } catch {
-      setMessage("We couldn’t save this time. Your answers are still here. Please retry.");
-    }
-  });
+    },
+    (fields) => {
+      const first = Object.keys(fields)[0];
+      const stagesByField: Record<string, number> = {
+        citizenships: 0,
+        residence: 0,
+        timeZone: 0,
+        qualification: 1,
+        completedQualifications: 1,
+        qualificationHistoryComplete: 1,
+        completion: 1,
+        graduationDate: 1,
+        currentField: 1,
+        institution: 1,
+        gpa: 1,
+        degreeClassification: 1,
+        targetLevel: 2,
+        targetField: 2,
+        destinations: 2,
+        preferredInstitutions: 2,
+        intendedStart: 2,
+        fundingNeed: 2,
+        acceptPartial: 2,
+      };
+      setStage(stagesByField[first] ?? 3);
+      setMessage("");
+    },
+  );
   return (
     <div className="grid gap-9 xl:grid-cols-[1fr_260px]">
       <div>
@@ -137,6 +182,11 @@ export function ProfileForm({
           ))}
         </div>
         <form onSubmit={save} noValidate className="paper p-5 sm:p-8">
+          <datalist id="country-names">
+            {countryNames.map((name) => (
+              <option value={name} key={name} />
+            ))}
+          </datalist>
           <h2 className="font-serif text-2xl">{stages[stage]}</h2>
           <p className="mt-2 mb-7 text-xs leading-6 text-muted-foreground">
             You can leave uncertain answers blank. We’ll show what needs confirmation.
@@ -201,8 +251,18 @@ export function ProfileForm({
                   <p className="mt-2 text-[11px] text-muted-foreground">
                     Keep completed degrees separate from a qualification you are currently studying.
                   </p>
+                  <label className="mt-4 flex items-start gap-2 text-[11px] leading-6">
+                    <input
+                      type="checkbox"
+                      {...register("qualificationHistoryComplete")}
+                      className="mt-1.5 accent-primary"
+                    />
+                    I have listed all qualifications I have already completed. Leave unchecked if
+                    you need to confirm this history.
+                  </label>
                 </div>
                 {text("currentField", "Current field of study")}
+                {text("degreeClassification", "Original degree classification (if available)")}
                 {text("institution", "Current institution")}
                 {text("graduationDate", "Actual or expected graduation", "date")}
                 <div>
@@ -378,11 +438,9 @@ export function ProfileForm({
           </div>
           {Object.keys(errors).length > 0 && (
             <div role="alert" className="mt-5 rounded-md bg-[#f9e8e3] p-4 text-xs text-red-900">
-              {Object.entries(errors).map(([key, value]) => (
-                <p key={key}>
-                  {key}:{" "}
-                  {value.message ||
-                    "Complete the related fields together, or leave them all blank."}
+              {validationMessages(errors).map((error) => (
+                <p key={error.path}>
+                  {error.path.replace(/([A-Z])/g, " $1").replaceAll(".", " ")}: {error.message}
                 </p>
               ))}
             </div>
