@@ -21,7 +21,7 @@
 
 ## External setup pending
 
-No external project secrets are configured: Neon database/project, Resend API key and verified sender, Vercel project/account, Inngest keys, TestSprite portal/GitHub App and actual credit balance. Isolated local PostgreSQL and a generated local authentication secret are configured in ignored .env. GitHub origin is now configured as samscript18/GrantPath; authenticated read inspection confirms admin/push permissions, an empty repository, no rulesets and no workflows. No deployed URL or remote check results exist. Exact remaining setup and acceptance are in RELEASE_REVIEW.md.
+Neon pooled/direct database access, Resend API access, Vercel Hobby access and TestSprite API access are now configured in ignored .env. Neon migration and 20 accepted catalogue records are verified, with an idempotent zero-publication replay. TestSprite account inspection reports 150 credits and no projects. A Vercel Next.js project exists; deployment and Git linkage are underway. Resend has no verified custom domain, so mail stays in isolated sink mode. Neon branch API, Inngest signing keys, native TestSprite 3.0 suite/App trigger and authentic merge gate remain pending. No deployed URL or remote test result is claimed yet. See REMOTE_RELEASE.md for the current continuation state.
 
 ## Phase 1 local increment
 

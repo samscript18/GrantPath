@@ -9,7 +9,14 @@ export function db() {
     );
   if (!globalDb.grantpathDb)
     globalDb.grantpathDb = new PrismaClient({
-      adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL, max: 5 }),
+      adapter: new PrismaPg({
+        connectionString: process.env.DATABASE_URL,
+        max: 5,
+        connectionTimeoutMillis: 15000,
+        query_timeout: 20000,
+      }),
+      // Preserve atomic publication on a remote database with bounded latency.
+      transactionOptions: { maxWait: 10000, timeout: 20000 },
     });
   return globalDb.grantpathDb;
 }

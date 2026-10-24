@@ -20,3 +20,4 @@
 - **Release browser environment:** run critical journeys against the built production server as well as development. Independent browser tests use separate simulated documentation-range client IPs; server authentication throttles remain enabled.
 
 - **Bounded reminder progress:** exclude existing durable reminder identities before applying the batch limit. Explicit UTC clock parameters keep database session time zones from changing boundary comparisons; unique outbox keys still arbitrate concurrent schedulers. Application-link changes enter the review queue; operators decide the accepted destination.
+- **Observed Neon latency:** retain atomic publication with bounded 20-second interactive transactions rather than Prisma's five-second default, after an actual remote seed rollback. Batch outbox fan-out/reminder inserts to reduce network round trips. Optional Inngest steps handle one job/delivery each; the standalone worker remains separately runnable.

@@ -19,9 +19,9 @@ export const processApplicationJobs = inngest.createFunction(
       scheduleReminders(new Date(), 25),
     );
     const events = await step.run("drain-persisted-outbox", () =>
-      drainOutbox(5, { topics: notificationTopics, handler: handleNotificationEvent }),
+      drainOutbox(1, { topics: notificationTopics, handler: handleNotificationEvent }),
     );
-    const deliveries = await step.run("deliver-with-current-preferences", () => deliverBatch(5));
+    const deliveries = await step.run("deliver-with-current-preferences", () => deliverBatch(1));
     return { reminders, events, deliveries };
   },
 );
