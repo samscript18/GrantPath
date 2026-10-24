@@ -40,6 +40,8 @@ jobs:
       - run: npm run check
       - run: npm run test:integration
       - run: npm run build
+        env:
+          APP_ENV: development
       - run: npx playwright install --with-deps chromium
       - run: psql -h localhost -U grantpath -d grantpath_test -c 'CREATE DATABASE grantpath_e2e_test'
         env:

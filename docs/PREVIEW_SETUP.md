@@ -1,6 +1,6 @@
 # Isolated preview setup
 
-No Vercel or Neon project is provisioned. Free-plan availability and usage terms must be checked in the relevant accounts before activation. Never share the production database with a preview or test suite.
+A Vercel Hobby project is linked to samscript18/GrantPath. PR 1 has a separate `grantpath_pr_1_test` database on the existing Neon compute, migrated and seeded with the reviewed real catalogue. Branch-specific Vercel environment settings use a unique authentication secret and sink mail. No paid plan or extra compute was activated. This fallback isolates database records, not compute or the database-owner role. Neon branch API credentials remain absent; automation below is prepared for later configuration. Never share the main catalogue database with preview test fixtures.
 
 For each trusted same-repository PR, create a Neon branch from an empty schema baseline using `scripts/preview-branch.ts`, apply migrations to its unpooled endpoint, and seed only reviewed public catalogue records plus isolated test accounts. Store branch identifiers as workflow artifacts/environment state; deleting a preview must only delete its own PR branch. Use distinct preview auth secrets and APP_ENV=development with EMAIL_MODE=sink; test accounts must use example.test. Do not set APP_ENV=test with a Next production build.
 

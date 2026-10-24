@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { readEnv } from "@/lib/env";
 import { sendEmail } from "./email";
 import { createHash } from "node:crypto";
+import { previewRegistrationAllowed } from "./preview";
 let instance: ReturnType<typeof createAuth> | undefined;
 export function getAuth() {
   return (instance ??= createAuth());
@@ -62,6 +63,14 @@ function createAuth() {
     },
     hooks: {
       before: createAuthMiddleware(async (ctx) => {
+        if (
+          ctx.path === "/sign-up/email" &&
+          !previewRegistrationAllowed(typeof ctx.body?.email === "string" ? ctx.body.email : "")
+        )
+          throw new APIError("BAD_REQUEST", {
+            message:
+              "This preview accepts isolated test accounts only. Email delivery is not yet available.",
+          });
         if (ctx.path !== "/verify-email") return;
         const token = typeof ctx.query?.token === "string" ? ctx.query.token : "";
         const hash = createHash("sha256").update(token).digest("hex");
