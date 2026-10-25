@@ -33,3 +33,11 @@ Account-control follow-up: no TestSprite operation under the user's testing/publ
 Full-worktree local commit and provider-image follow-up: no TestSprite operation or GitHub push. Latest observed balance146 is unchanged as an observation; no new balance lookup or debit is claimed.
 
 Second editorial design pass: no credited operation or balance lookup.146 remains the latest previously observed balance, not a fresh observation. Local screenshot review did not invoke TestSprite or its test suite.
+
+## Fresh continuation observation — 25 October 2026
+
+Read `testsprite usage` through official CLI0.15.0: **146 credits**, Free, **0.5 credits per case execution**. This supersedes the user's recalled147 balance. No credited generation, exploration, replay or App run has been initiated in this continuation. Keep50 as reserve. Read-only project and saved-plan inspection succeeded. `ci trigger list` and `github status` are unsupported CLI commands and failed local validation before dispatch; no run/debit is inferred. The current saved discovery plan contains6 unstructured natural-language steps. Exact saved-code versus authentic App execution assertions still need reconciliation before credited release runs.
+
+Portal UI check: the user supplied a current screenshot of Run Behavior. It exposes login reuse, viewport and concurrency, but **does not expose “Always use planned steps”** despite the current documentation describing it. The user was told to leave settings unchanged. No toggle change is claimed. Update authored plans and inspect actual per-run steps/code; do not infer that a saved Python file was executed verbatim.
+
+25 October2026 preparation readback:146 credits remain after saving7 authored plans/scripts and two nonsecret account names. Observed debit0. No exploration, generation or execution was dispatched. Existing rate0.5/case suggests3.5 for a7-case App execution; the actual debit must be read after it completes. No missing portal plan option is claimed enabled.

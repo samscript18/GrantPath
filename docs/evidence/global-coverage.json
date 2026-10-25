@@ -1,0 +1,524 @@
+{
+  "checkedAt": "2026-10-25T06:22:39.714Z",
+  "opportunities": 32,
+  "countries": [
+    {
+      "code": "AU",
+      "name": "Australia"
+    },
+    {
+      "code": "CA",
+      "name": "Canada"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia"
+    },
+    {
+      "code": "DE",
+      "name": "Germany"
+    },
+    {
+      "code": "ES",
+      "name": "Spain"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "code": "GH",
+      "name": "Ghana"
+    },
+    {
+      "code": "JP",
+      "name": "Japan"
+    },
+    {
+      "code": "KR",
+      "name": "South Korea"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands"
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden"
+    },
+    {
+      "code": "TR",
+      "name": "Türkiye"
+    },
+    {
+      "code": "UG",
+      "name": "Uganda"
+    },
+    {
+      "code": "US",
+      "name": "United States"
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa"
+    }
+  ],
+  "records": [
+    {
+      "slug": "warwick-ahrc-doctoral-2027",
+      "title": "AHRC Doctoral Scholarships",
+      "provider": "University of Warwick",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "open",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://warwick.ac.uk/services/dc/schols_fund/applicants/competitions/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "academic-futures-2027",
+      "title": "Academic Futures Scholarships",
+      "provider": "University of Oxford",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/scholarships-a-z-listing",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "ashesi-mastercard-3d33bac4e0",
+      "title": "Ashesi Mastercard Foundation Scholars Program",
+      "provider": "Ashesi University",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["GH"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://ashesi.edu.gh/the-mastercard-foundation-scholars-programme/",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:19:03.845Z"
+    },
+    {
+      "slug": "australia-awards-cycle-unconfirmed",
+      "title": "Australia Awards Scholarships",
+      "provider": "Australian Government · DFAT",
+      "cycle": "Programme overview · cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["AU"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.dfat.gov.au/people-to-people/australia-awards/australia-awards-scholarships",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "chevening-2027",
+      "title": "Chevening Scholarships",
+      "provider": "UK Government · Chevening",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.chevening.org/scholarships/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "clarendon-2027",
+      "title": "Clarendon Scholarships",
+      "provider": "University of Oxford",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/funding/clarendon/applicants",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "commonwealth-masters-2027",
+      "title": "Commonwealth Master’s Scholarships",
+      "provider": "Commonwealth Scholarship Commission",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "closed",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "daad-epos-overview-3d33bac4e0",
+      "title": "DAAD EPOS — development-related postgraduate courses",
+      "provider": "German Academic Exchange Service (DAAD)",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["DE"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.daad.de/en/information-services-for-higher-education-institutions/further-information-on-daad-programmes/epos/",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:19:03.961Z"
+    },
+    {
+      "slug": "eth-esop-2027",
+      "title": "ETH Excellence Scholarship & Opportunity Programme",
+      "provider": "ETH Zurich",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["CH"],
+      "availability": "upcoming",
+      "deadlineState": "conflicting",
+      "version": 1,
+      "officialUrl": "https://ethz.ch/students/en/studies/financial/scholarships/excellencescholarship.html",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "ertegun-2027",
+      "title": "Ertegun Graduate Scholarships",
+      "provider": "University of Oxford",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/scholarships-a-z-listing",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "warwick-faculty-chancellors-2027",
+      "title": "Faculty Chancellors Scholarships",
+      "provider": "University of Warwick",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "open",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://warwick.ac.uk/services/dc/schols_fund/applicants/competitions/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "fulbright-foreign-student-3d33bac4e0",
+      "title": "Fulbright Foreign Student Program — country-administered routes",
+      "provider": "U.S. Department of State / Fulbright",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["US"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://foreign.fulbrightonline.org/about/foreign-student-program",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:20:58.211Z"
+    },
+    {
+      "slug": "erasmus-glocal-8adbfb712d",
+      "title": "GLOCAL — Erasmus Mundus Joint Master scholarship",
+      "provider": "GLOCAL Consortium",
+      "cycle": "September 2027 entry",
+      "recordKind": "cycle",
+      "destinations": ["GB", "DE", "ES", "SE", "CO", "JP", "NL"],
+      "availability": "open",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:16:31.889Z"
+    },
+    {
+      "slug": "gks-degree-3d33bac4e0",
+      "title": "Global Korea Scholarship — degree programmes",
+      "provider": "National Institute for International Education",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["KR"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.niied.go.kr/web/niied/contents/niiedEng/eng_gksDegree",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:18:26.260Z"
+    },
+    {
+      "slug": "warwick-interdisciplinary-chancellors-2027",
+      "title": "Interdisciplinary Chancellors Scholarships",
+      "provider": "University of Warwick",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "open",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://warwick.ac.uk/services/dc/schols_fund/applicants/competitions/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "jardine-oxford-2027",
+      "title": "Jardine-Oxford Graduate Scholarships",
+      "provider": "University of Oxford",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/scholarships-a-z-listing",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "stanford-knight-hennessy-3d33bac4e0",
+      "title": "Knight-Hennessy Scholars — graduate funding",
+      "provider": "Stanford University",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["US"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://knight-hennessy.stanford.edu/program-overview/funding",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:17:07.472Z"
+    },
+    {
+      "slug": "leiden-lexs-december-2026",
+      "title": "Leiden University Excellence Scholarship",
+      "provider": "Leiden University",
+      "cycle": "December 2026 selection",
+      "recordKind": "cycle",
+      "destinations": ["NL"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.universiteitleiden.nl/en/scholarships/sea/leiden-university-excellence-scholarship-lexs",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "mext-research-3d33bac4e0",
+      "title": "MEXT — research student scholarship route",
+      "provider": "Japan Student Services Organization",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["JP"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:18:27.842Z"
+    },
+    {
+      "slug": "makerere-mastercard-masters-c95359c2d2",
+      "title": "Makerere Mastercard Foundation — master's scholarships",
+      "provider": "Makerere University",
+      "cycle": "2026/2027",
+      "recordKind": "cycle",
+      "destinations": ["UG"],
+      "availability": "closed",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://apply.mastercardfoundation.mak.ac.ug/announcements/30",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:15:10.128Z"
+    },
+    {
+      "slug": "manaaki-tertiary-3d33bac4e0",
+      "title": "Manaaki New Zealand — tertiary scholarship routes",
+      "provider": "Education New Zealand / New Zealand Government",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["NZ"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.nzscholarships.govt.nz/check-eligible-countries/",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:21:00.097Z"
+    },
+    {
+      "slug": "mcgill-mastercard-31c752c934",
+      "title": "McGill Mastercard Foundation Scholars Program",
+      "provider": "McGill University",
+      "cycle": "Fall 2027",
+      "recordKind": "cycle",
+      "destinations": ["CA"],
+      "availability": "closed",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.mcgill.ca/mastercardfdn-scholars/apply",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:17:49.167Z"
+    },
+    {
+      "slug": "nl-scholarship-2026",
+      "title": "NL Scholarship",
+      "provider": "Nuffic · Study in NL",
+      "cycle": "2026/27",
+      "recordKind": "cycle",
+      "destinations": ["NL"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.studyinnl.org/finances/nl-scholarship",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "reach-oxford-2027",
+      "title": "Reach Oxford Scholarship",
+      "provider": "University of Oxford",
+      "cycle": "2027",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "upcoming",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/undergraduate/fees-and-funding/oxford-bursaries-and-scholarships/reach-oxford",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "bristol-think-big-2026",
+      "title": "Think Big Scholarships",
+      "provider": "University of Bristol",
+      "cycle": "2026 entry",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.bristol.ac.uk/students/support/finances/scholarships/think-big-scholarships/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "turkiye-graduate-3d33bac4e0",
+      "title": "Türkiye Scholarships — graduate programme",
+      "provider": "Presidency for Turks Abroad and Related Communities",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "recordKind": "overview",
+      "destinations": ["TR"],
+      "availability": "unknown",
+      "deadlineState": "unknown",
+      "version": 1,
+      "officialUrl": "https://www.turkiyeburslari.gov.tr/fulltimeprograms",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:19:39.026Z"
+    },
+    {
+      "slug": "ucl-global-masters-2026",
+      "title": "UCL Global Master’s Scholarship",
+      "provider": "University College London",
+      "cycle": "2026/27",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "closed",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://www.ucl.ac.uk/scholarships/ucl-global-masters-scholarship",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "ucl-global-undergraduate-2026",
+      "title": "UCL Global Undergraduate Scholarship",
+      "provider": "University College London",
+      "cycle": "2026/27",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "closed",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://www.ucl.ac.uk/scholarships/ucl-global-undergraduate-scholarship",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "uct-mastercard-postgraduate-fa76a36874",
+      "title": "UCT Mastercard Foundation — postgraduate scholarships",
+      "provider": "University of Cape Town",
+      "cycle": "2027 intake",
+      "recordKind": "cycle",
+      "destinations": ["ZA"],
+      "availability": "open",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://uct.ac.za/mastercardfdn/how-apply",
+      "publicationActor": "service:official-discovery",
+      "evidenceRetrievedAt": "2026-10-25T06:20:21.283Z"
+    },
+    {
+      "slug": "twente-uts-2027",
+      "title": "University of Twente Scholarship",
+      "provider": "University of Twente",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["NL"],
+      "availability": "open",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://www.utwente.nl/en/education/scholarship-finder/university-of-twente-scholarship/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "warwick-china-scholarship-council-2027",
+      "title": "Warwick China Scholarship Council",
+      "provider": "University of Warwick",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "open",
+      "deadlineState": "confirmed",
+      "version": 1,
+      "officialUrl": "https://warwick.ac.uk/services/dc/schols_fund/applicants/competitions/",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    },
+    {
+      "slug": "weidenfeld-hoffmann-2027",
+      "title": "Weidenfeld-Hoffmann Scholarships",
+      "provider": "University of Oxford",
+      "cycle": "2027/28",
+      "recordKind": "cycle",
+      "destinations": ["GB"],
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "version": 1,
+      "officialUrl": "https://www.ox.ac.uk/admissions/graduate/fees-and-funding/fees-funding-and-scholarship-search/weidenfeld-hoffmann-scholarships-and-leadership-programme",
+      "publicationActor": "official-source-research:2026-10-24",
+      "evidenceRetrievedAt": "2026-10-24T10:15:11.000Z"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-10-25T07:19:08.810Z",
+  "scope": "One disposable isolated test account; no existing student/provider image changed",
+  "uploadPersisted": true,
+  "publicImageStatus": 200,
+  "removedFromAccount": true,
+  "cleanupRecorded": true,
+  "cleanupReplayIdempotent": true
+}

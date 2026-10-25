@@ -1,3 +1,4 @@
+import { discoveryOverview } from "@/server/discovery/service";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
@@ -81,5 +82,6 @@ export async function operatorOverview(actor: Actor) {
     }),
     db().audit.findMany({ orderBy: { createdAt: "desc" }, take: 20 }),
   ]);
-  return { scholarships, sources, reviews, failures, events, audits };
+  const discovery = await discoveryOverview(actor);
+  return { scholarships, sources, reviews, failures, events, audits, discovery };
 }

@@ -291,7 +291,7 @@ export function ProfileForm({
                       label="Country of residence"
                       options={countryNames}
                       value={field.value ? [field.value] : []}
-                      onChange={(values) => field.onChange(values[0])}
+                      onChange={(values) => field.onChange(values[0] ?? "")}
                     />
                   )}
                 />
@@ -388,7 +388,7 @@ export function ProfileForm({
                         "Credit",
                       ]}
                       value={field.value ? [field.value] : []}
-                      onChange={(values) => field.onChange(values[0])}
+                      onChange={(values) => field.onChange(values[0] ?? "")}
                       custom
                       hint="Use the wording on your transcript. These labels do not convert your result."
                     />

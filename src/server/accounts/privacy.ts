@@ -280,6 +280,10 @@ export async function eraseAccount(userId: string) {
       where: { key: { startsWith: "mutation:", endsWith: `:${userId}` } },
     });
     // Shared source edits retain their history, attributed to an erased account.
+    await tx.publicationDecision.updateMany({
+      where: { actorId: userId },
+      data: { actorId: "deleted-account" },
+    });
     await tx.audit.updateMany({
       where: { actorId: userId },
       data: { actorId: "deleted-account", before: Prisma.DbNull, after: Prisma.DbNull },

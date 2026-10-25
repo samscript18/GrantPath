@@ -1,3 +1,5 @@
+import { globalDirectories } from "../src/data/global-sources";
+import { createOpportunity } from "../src/server/operator";
 import "dotenv/config";
 import { db } from "../src/lib/db";
 import { reviewedCatalogue } from "../src/data/catalogue";
@@ -61,8 +63,26 @@ async function main() {
         update: {},
       });
   }
+  for (const mapping of globalDirectories.flatMap((d) => d.mappings)) {
+    const existing = await db().scholarship.findFirst({
+      where: { programme: { slug: mapping.key }, cycle: mapping.cycle },
+    });
+    if (existing?.version) continue;
+    await createOpportunity(actor, {
+      slug: `${mapping.key}-${(await import("../src/server/scholarships/publish")).semanticHash(mapping.cycle).slice(0, 10)}`,
+      programmeSlug: mapping.key,
+      cycle: mapping.cycle,
+      providerSlug: mapping.provider.key,
+      providerName: mapping.provider.name,
+      providerUrl: mapping.provider.url,
+      data: mapping.data,
+      reason:
+        "Reviewed official-source baseline import; original retrieval timestamps and unresolved conditions preserved. This is not a live source check.",
+    });
+    changed++;
+  }
   console.log(
-    `Catalogue persisted: ${reviewedCatalogue.length} source-backed records; ${changed} initial versions published. Supported sources remain disabled until access-policy review.`,
+    `Catalogue persisted: ${reviewedCatalogue.length + globalDirectories.flatMap((d) => d.mappings).length} source-backed records; ${changed} initial versions published. Supported sources remain disabled until access-policy review.`,
   );
 }
 main()

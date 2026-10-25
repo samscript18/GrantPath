@@ -1,0 +1,59 @@
+import asyncio
+import os
+import re
+from playwright.async_api import async_playwright, expect
+
+
+def value(template, name):
+    return os.environ["GRANTPATH_" + name.upper()] if template.startswith("VAR_{") else template
+
+
+async def run_test():
+    base = value("VAR_{url}", "test_url").rstrip("/")
+    username = value("VAR_{username}", "test_username")
+    password = value("VAR_{password}", "test_password")
+    async with async_playwright() as p:
+        executable = os.environ.get("GRANTPATH_CHROMIUM_PATH")
+        browser = await p.chromium.launch(headless=True, **({"executable_path": executable} if executable else {}))
+        try:
+            async def login(email, secret):
+                context = await browser.new_context(reduced_motion="reduce")
+                # Honour the real authentication throttle; do not disable it for tests.
+                for attempt in range(4):
+                    response = await context.request.post(base + "/api/auth/sign-in/email", headers={"Origin": base}, data={"email": email, "password": secret})
+                    if response.status != 429 or attempt == 3:
+                        break
+                    retry_after = response.headers.get("retry-after", "16")
+                    await asyncio.sleep(min(60, max(1, int(retry_after) if retry_after.isdigit() else 16)))
+                assert response.status == 200, f"Isolated account login failed: {response.status}"
+                return context
+
+            async def call(context, method, path, data=None):
+                response = await context.request.fetch(base + path, method=method, headers={"Origin": base}, data=data)
+                assert response.ok, f"{method} {path}: {response.status}"
+                return await response.json()
+
+            page = await browser.new_page()
+            stable = None
+            for destination in ["DE", "ES", "SE", "CO", "JP", "GB", "NL"]:
+                await page.goto(base + "/scholarships?q=GLOCAL&destination=" + destination + "&availability=all")
+                await expect(page.get_by_role("heading", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True)).to_be_visible()
+                await page.reload()
+                await expect(page.get_by_label("Destination", exact=True)).to_have_value(destination)
+                response = await page.request.get(base + "/api/scholarships?q=GLOCAL&destination=" + destination + "&availability=all")
+                assert response.ok
+                result = await response.json()
+                assert result["total"] == 1, "One joint programme must not become country duplicates"
+                row = result["rows"][0]
+                assert destination in row["destinationCodes"]
+                stable = stable or row["id"]
+                assert row["id"] == stable, "Each destination must find the same programme/cycle"
+            await page.get_by_role("link", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True).click()
+            await expect(page.get_by_role("heading", name="Where you could study")).to_be_visible()
+            await expect(page.get_by_role("heading", name="Evidence you can inspect.")).to_be_visible()
+            await expect(page.get_by_text("Locations depend on your chosen programme pathway", exact=False)).to_be_visible()
+        finally:
+            await browser.close()
+
+
+asyncio.run(run_test())

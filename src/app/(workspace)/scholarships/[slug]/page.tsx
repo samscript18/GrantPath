@@ -149,6 +149,33 @@ export default async function ScholarshipDetail({
           <OpportunitySections key={`${s.id}:${selected.number}`} />
           <section id="overview">
             <p className="text-sm leading-7 text-muted-foreground">{d.summary}</p>
+            {d.recordKind === "overview" && (
+              <p className="mt-4 rounded-lg border border-border bg-secondary p-4 text-xs leading-6">
+                Scheme overview. This is guidance about the programme; an application cycle and
+                opening date have not been confirmed.
+              </p>
+            )}
+            {d.studyLocations && (
+              <div className="mt-6">
+                <h2 className="font-serif text-xl">Where you could study</h2>
+                <p className="mt-2 text-xs leading-6 text-muted-foreground">
+                  {d.studyLocations.scope === "participating"
+                    ? "Locations depend on your chosen programme pathway; you will not necessarily study in every listed country."
+                    : "Study locations listed in the official programme information."}
+                </p>
+                <ul className="mt-3 grid gap-2 text-xs sm:grid-cols-2">
+                  {d.studyLocations.institutions.map((institution) => (
+                    <li
+                      key={institution.name}
+                      className="border-l-2 border-primary/20 pl-3 leading-6"
+                    >
+                      {institution.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="funding-panel mt-7 rounded-xl border border-primary/10 bg-secondary/65 p-6 sm:p-7">
               <p className="eyebrow text-muted-foreground">WHAT THE AWARD SUPPORTS</p>
               <h2 className="mt-3 font-serif text-2xl">{fundingLabels[d.fundingType]}</h2>
@@ -344,6 +371,41 @@ export default async function ScholarshipDetail({
                 Accepted evidence checked: {formatDate(health.lastVerified)}
                 {health.stale ? " · A fresh check is needed." : ""}
               </p>
+              {s.monitored.length > 0 &&
+                s.monitored.map((source) => (
+                  <div
+                    key={source.id}
+                    className="mt-3 border-t border-border pt-3 text-[10px] leading-6 text-muted-foreground"
+                  >
+                    <p>
+                      {source.directory.enabled
+                        ? `${source.directory.cadenceHours}-hour target cadence`
+                        : "Scheduled checks paused"}
+                    </p>
+                    <p>
+                      Programme last successfully checked:{" "}
+                      {formatTimestamp(source.observations[0]?.retrievedAt)}
+                    </p>
+                    <p>
+                      Directory latest attempt: {formatTimestamp(source.directory.lastAttemptAt)}
+                    </p>
+                    <p>
+                      Directory last successful check:{" "}
+                      {formatTimestamp(source.directory.lastSuccessAt)}
+                    </p>
+                    {source.state === "failed" && (
+                      <p>
+                        A new programme check could not finish. Previously accepted information is
+                        retained.
+                      </p>
+                    )}
+                    {source.state === "review" && (
+                      <p>
+                        New information needs confirmation; the accepted details above are retained.
+                      </p>
+                    )}
+                  </div>
+                ))}
               {s.sources.length ? (
                 s.sources.map((source) => (
                   <div
@@ -360,11 +422,11 @@ export default async function ScholarshipDetail({
                     <p>Last successful check: {formatTimestamp(source.lastSuccessAt)}</p>
                   </div>
                 ))
-              ) : (
+              ) : !s.monitored.length ? (
                 <p className="mt-3 text-[10px] leading-5 text-muted-foreground">
                   Manually researched. Automated monitoring is not supported for this source.
                 </p>
-              )}
+              ) : null}
             </div>
           </div>
         </aside>

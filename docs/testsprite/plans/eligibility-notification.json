@@ -1,0 +1,33 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in isolated operator VAR_{operator_email} with VAR_{password}; select Eligibility and notifications in Isolated source verification, publish valid snapshot to establish target-level master."
+    },
+    {
+      "type": "assertion",
+      "description": "Using a separate authenticated browser context for VAR_{other_email} with the same configured secret, save complete matching basics with target master and save [TEST ONLY] Controlled change scholarship. Enable change/in-app notifications and disable email. Update matches to completion."
+    },
+    {
+      "type": "assertion",
+      "description": "Assert current evaluation eligible for this controlled fully mapped requirement. As operator publish changed requirement (bachelor) through actual policy pipeline."
+    },
+    {
+      "type": "assertion",
+      "description": "Process bounded application jobs. Assert the student evaluation now not_eligible with exact leaf reason VALUE_NOT_ACCEPTED and current profile/scholarship/engine context; exactly one change notification for the accepted version."
+    },
+    {
+      "type": "assertion",
+      "description": "Replay the changed snapshot and process jobs; assert unchanged version and exactly one same event alert."
+    },
+    {
+      "type": "assertion",
+      "description": "Publish valid reverse change, disable student change topic before processing queued jobs, then process to drain. Assert no reverse-version notification. Restore change preference."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "One real joint programme appears under each actual destination without duplicates",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /scholarships; search GLOCAL. Select destination Germany (DE), choose all application windows and click Apply filters."
+    },
+    {
+      "type": "assertion",
+      "description": "Assert exactly one GLOCAL joint programme result. Reload and assert the search and Germany filter persist. Capture its scholarship link."
+    },
+    {
+      "type": "assertion",
+      "description": "Repeat for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL; assert each shows exactly the same scholarship link once."
+    },
+    {
+      "type": "assertion",
+      "description": "Open that link; assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence."
+    }
+  ]
+}

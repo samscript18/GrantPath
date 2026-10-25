@@ -7,6 +7,7 @@ if (!database || !new URL(database).pathname.includes("test"))
   );
 const baseURL = "http://127.0.0.1:3100";
 process.env.DATABASE_URL = database;
+process.env.DATABASE_TRANSPORT = "tcp";
 process.env.DIRECT_URL = database;
 process.env.BETTER_AUTH_URL = baseURL;
 process.env.APP_ENV = "test";
@@ -37,9 +38,11 @@ export default defineConfig({
     timeout: 120000,
     env: {
       DATABASE_URL: database,
+      DATABASE_TRANSPORT: "tcp",
       DIRECT_URL: database,
       APP_ENV: "development",
       EMAIL_MODE: "sink",
+      ENABLE_CONTROLLED_FIXTURES: "1",
       BETTER_AUTH_URL: baseURL,
       NEXT_PUBLIC_APP_URL: baseURL,
       TRUSTED_ORIGINS: baseURL,

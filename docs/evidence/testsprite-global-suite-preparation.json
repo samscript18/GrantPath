@@ -1,0 +1,49 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "preparedAt": "2026-10-25T07:50:13.600Z",
+  "creditedExecution": false,
+  "cases": [
+    {
+      "file": "discovery_evidence",
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "codeVersion": "v-2e48585b511a",
+      "planSteps": 6
+    },
+    {
+      "file": "profile_application",
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "codeVersion": "v-e55bb7393e14",
+      "planSteps": 14
+    },
+    {
+      "file": "multi_destination",
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "codeVersion": "v-2cfd1ab5c20a",
+      "planSteps": 4
+    },
+    {
+      "file": "automatic_publication",
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "codeVersion": "v-c694bb97f279",
+      "planSteps": 4
+    },
+    {
+      "file": "publication_exception",
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "codeVersion": "v-0717056a519d",
+      "planSteps": 4
+    },
+    {
+      "file": "eligibility_notification",
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "codeVersion": "v-921eb5552c35",
+      "planSteps": 6
+    },
+    {
+      "file": "access_denial",
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "codeVersion": "v-4229a1c76bcb",
+      "planSteps": 4
+    }
+  ]
+}

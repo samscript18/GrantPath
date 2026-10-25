@@ -7,11 +7,11 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in using the student account configured on this project environment, then navigate to /profile. If the Your world stage is not selected, click Your world."
+      "description": "Sign in using the student account configured on this project environment, then navigate to /settings/profile. If the Your world stage is not selected, click Your world."
     },
     {
       "type": "action",
-      "description": "Set Citizenship(s) to Nigeria and Country of residence to Ghana. Click Save & continue."
+      "description": "Set Citizenship(s) to Nigeria and Country of residence to Ghana. Click Save & continue. Reload /settings/profile, select Your world, and assert saved Ghana is present. Click Remove Ghana and assert its selected chip disappears and the residence input is empty. Reselect Ghana and click Save & continue. Do not skip this clearing assertion or substitute typing over the old value."
     },
     {
       "type": "action",
@@ -27,15 +27,15 @@
     },
     {
       "type": "assertion",
-      "description": "Verify explained opportunity results include Potential · confirm requirements, without labelling every missing provider condition eligible."
+      "description": "Verify explained opportunity results include Potential \u00b7 confirm requirements, without labelling every missing provider condition eligible."
     },
     {
       "type": "action",
-      "description": "Navigate to /scholarships/twente-uts-2027. If Save opportunity is shown, click it. If Saved · click to unsave is already shown, keep it saved."
+      "description": "Navigate to /scholarships/twente-uts-2027. If Save scholarship is shown, click it. If Unsave scholarship is already shown, keep it saved."
     },
     {
       "type": "assertion",
-      "description": "Verify Saved · click to unsave is displayed."
+      "description": "Verify Unsave scholarship is displayed."
     },
     {
       "type": "action",
@@ -47,7 +47,7 @@
     },
     {
       "type": "action",
-      "description": "Sign out, sign in again with the configured project account, and navigate to /profile. Select Your world if necessary."
+      "description": "Sign out, sign in again with the configured project account, and navigate to /settings/profile. Select Your world if necessary."
     },
     {
       "type": "assertion",

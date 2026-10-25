@@ -5,6 +5,14 @@ const codes =
     " ",
   );
 const display = new Intl.DisplayNames(["en"], { type: "region" });
+export const countryCodes = codes;
+export function countryCode(input: string): string | undefined {
+  const canonical = canonicalCountry(input);
+  return canonical ? codes.find((code) => display.of(code) === canonical) : undefined;
+}
+export function countryName(code: string) {
+  return codes.includes(code) ? display.of(code)! : undefined;
+}
 export const countryNames = codes
   .map((code) => display.of(code)!)
   .sort((a, b) => a.localeCompare(b));

@@ -1,3 +1,25 @@
+# Current native suite — 25 October2026
+
+Existing project/trigger preserved. Seven focused cases are now saved via official CLI0.15.0, without exploration/generation/execution. The original two were updated for current route/filter/bookmark controls while retaining their assertions; five add the critical global/publication/ownership guarantees. [Preparation manifest](../evidence/testsprite-global-suite-preparation.json).
+
+| Case                     | Native ID                              | Authored plan steps |
+| ------------------------ | -------------------------------------- | ------------------- |
+| discovery evidence       | `32f78efb-a7b0-4a30-a838-bc5b020f84e5` | 6                   |
+| profile application      | `52c1618f-923c-48e7-b2bb-e48a8dfddbb6` | 14                  |
+| multi destination        | `a9233d93-6dd0-4c15-bcfd-da65091b8a64` | 4                   |
+| automatic publication    | `023cb43e-bf1e-4d64-a675-83561fb18b84` | 4                   |
+| publication exception    | `762677d6-c058-41bd-996d-a599b01981be` | 4                   |
+| eligibility notification | `630a42fb-fd1f-4aa7-ae23-ef6ba7c57806` | 6                   |
+| access denial            | `ca8b9978-5bbc-423f-8612-bfb879698279` | 4                   |
+
+The seven exact Python files passed against the isolated local production server before remote execution. Operator/other account emails are nonsecret environment variables; existing encrypted password credentials are reused only for isolated `.test` accounts. Cross-account testing uses an independent owner/application from the concurrent profile journey. Authentication throttling remains enabled; scripts honour retry intervals.
+
+Fresh account readback:146 credits, Free,0.5 per case execution. Seven-case execution estimate3.5 credits at that observed rate; generation/exploration costs are not inferred. Preserve50-credit reserve. Preparation is not a run.
+
+The user's Run Behavior screenshot shows login-once off,1920×1080, concurrency50 and no Always use planned steps toggle. No setting change is claimed. Updated plans invalidate stale authored content, but actual App execution artifacts must still establish which assertions were run. No new App result or failing-regression evidence exists until recorded below.
+
+## Historical project and release evidence
+
 # Native TestSprite 3.0 project
 
 Project: `a3f56241-4390-4269-8e0e-e88d61104094` ([portal](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094)). Created with official CLI 0.15.0, native V3 account confirmed. This is CLI-authored preparation visible in the 3.0 portal; no portal-authored/executed result is inferred.

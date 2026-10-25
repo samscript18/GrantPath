@@ -1,7 +1,7 @@
 import { canonicalCountry } from "@/lib/countries";
 import type { StudentProfile } from "@/server/profiles/schema";
 import type { Requirement, Rule } from "./rules";
-export const ENGINE_VERSION = "1.2.0";
+export const ENGINE_VERSION = "1.3.0";
 export type State = "pass" | "fail" | "unknown";
 export type Outcome = "eligible" | "potential" | "not_eligible";
 export type RuleResult = {

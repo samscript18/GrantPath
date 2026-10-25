@@ -92,7 +92,10 @@ export async function handleDomainEvent(event: Outbox) {
       });
       if (s) {
         const users = await tx.user.findMany({
-          where: p.cursor ? { id: { gt: p.cursor } } : {},
+          where: {
+            ...(p.cursor ? { id: { gt: p.cursor } } : {}),
+            ...(s.title.startsWith("[TEST ONLY]") ? { email: { endsWith: ".test" } } : {}),
+          },
           orderBy: { id: "asc" },
           take: 50,
           include: {

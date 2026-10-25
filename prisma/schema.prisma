@@ -102,6 +102,7 @@ model Provider {
   slug      String @unique
   name      String
   url       String
+  countryCode String?
   imageUrl String?
   imagePublicId String?
   imageSourceUrl String?
@@ -126,6 +127,8 @@ model Scholarship {
   version        Int @default(0)
   title          String
   destination    String
+  destinationCodes String[] @default([])
+  destinationScope String @default("unconfirmed")
   level          String
   field          String
   fundingType    String
@@ -401,4 +404,89 @@ model MediaAsset {
   createdAt DateTime @default(now())
   @@index([state, cleanupAfter])
   @@index([userId])
+}
+
+// Directory policies are distinct from existing programme source checks.
+model DiscoveryDirectory {
+  id String @id
+  url String @unique
+  adapter String
+  enabled Boolean @default(false)
+  autoPublish Boolean @default(false)
+  policyVersion Int @default(1)
+  policyReason String
+  cadenceHours Int @default(24)
+  health String @default("policy_review")
+  lastAttemptAt DateTime?
+  lastSuccessAt DateTime?
+  nextCheckAt DateTime @default(now())
+  lockedUntil DateTime?
+  leaseToken String?
+  candidates DiscoveredCandidate[]
+  checks DirectoryCheck[]
+}
+model DirectoryCheck {
+  id String @id @default(cuid())
+  directoryId String
+  directory DiscoveryDirectory @relation(fields: [directoryId], references: [id])
+  url String
+  attemptedAt DateTime @default(now())
+  succeededAt DateTime?
+  state String
+  httpStatus Int?
+  error String?
+  discoveredCount Int @default(0)
+  hash String?
+  @@index([directoryId, attemptedAt])
+}
+model DiscoveredCandidate {
+  id String @id @default(cuid())
+  directoryId String
+  directory DiscoveryDirectory @relation(fields: [directoryId], references: [id])
+  canonicalUrl String
+  discoveredFrom String
+  firstDiscoveredAt DateTime @default(now())
+  lastDiscoveredAt DateTime @default(now())
+  state String @default("pending")
+  attempts Int @default(0)
+  nextAttemptAt DateTime @default(now())
+  lockedUntil DateTime?
+  leaseToken String?
+  error String?
+  scholarshipId String?
+  observations DiscoveryObservation[]
+  @@unique([directoryId, canonicalUrl])
+  @@index([state, nextAttemptAt])
+}
+model DiscoveryObservation {
+  id String @id @default(cuid())
+  candidateId String
+  candidate DiscoveredCandidate @relation(fields: [candidateId], references: [id])
+  retrievedAt DateTime
+  contentHash String
+  adapterVersion String
+  schemaVersion String
+  data Json?
+  validation Json
+  excerpt String
+  controlled Boolean @default(false)
+  decisions PublicationDecision[]
+  @@index([candidateId, retrievedAt])
+}
+model PublicationDecision {
+  id String @id @default(cuid())
+  observationId String @unique
+  observation DiscoveryObservation @relation(fields: [observationId], references: [id])
+  decision String
+  reasonCodes String[]
+  policyVersion String
+  actorId String
+  scholarshipId String?
+  baseVersion Int @default(0)
+  resultingVersion Int?
+  eventIds String[]
+  before Json?
+  after Json?
+  createdAt DateTime @default(now())
+  @@index([decision, createdAt])
 }

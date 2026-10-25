@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-24T14:49:16.500Z",
+  "checkedAt": "2026-10-25T05:51:53.671Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "6b6399f9215f8195db0d43f108509147fea4961b",
-  "mergeableState": "clean",
+  "head": "50570e1075cf5a754cc1a9d18ad5513abcc187ae",
+  "mergeableState": "unstable",
   "enforceAdmins": true,
   "required": [
     {
@@ -27,13 +27,13 @@
       "app": "github-actions",
       "appId": 15368,
       "result": "success",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40103723073/job/120900966296"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40107749839/job/120912855850"
     },
     {
       "name": "GitGuardian Security Checks",
       "app": "gitguardian",
       "appId": 46505,
-      "result": "success",
+      "result": "failure",
       "url": "https://dashboard.gitguardian.com"
     }
   ],
@@ -42,13 +42,13 @@
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/6BgKpsUrK4tFdxKPyi9CG4G1bqjR"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/6X3iQXQB9VQWY6xCsL4naQJsVsU2"
     },
     {
       "context": "TestSprite V3",
       "state": "success",
       "description": "All 2 tests passed",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/daa54b31-5049-41d8-b1c5-e50d30b00675"
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e0d65db9-7c39-42f3-b1ff-4ce8f31f2234"
     }
   ],
   "testSpriteGateVerified": true

@@ -1,6 +1,7 @@
 import { z } from "zod";
 const schema = z.object({
   DATABASE_URL: z.url().refine((v) => /^postgres(ql)?:/.test(v), "Use a PostgreSQL connection URL"),
+  DATABASE_TRANSPORT: z.enum(["tcp", "neon-ws"]).default("tcp"),
   BETTER_AUTH_SECRET: z.string().min(32, "Generate a secret of at least 32 characters"),
   BETTER_AUTH_URL: z.url(),
   APP_ENV: z.enum(["development", "test", "production"]).default("development"),

@@ -6,7 +6,7 @@ on:
     inputs:
       limit:
         description: "Maximum registered due sources (1–6)"
-        default: "3"
+        default: "1"
         type: choice
         options: ["1", "2", "3", "4", "5", "6"]
 permissions:
@@ -17,10 +17,11 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     environment: ingestion
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_TRANSPORT: ${{ vars.DATABASE_TRANSPORT || 'tcp' }}
       APP_ENV: production
     steps:
       - uses: actions/checkout@v4
@@ -30,9 +31,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run db:generate
+      - name: Discover candidates from approved official directories
+        env:
+          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
+        run: npm run sources:discover -- --limit "$SOURCE_LIMIT"
+      - name: Retrieve bounded programme details and evaluate publication policy
+        env:
+          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
+        run: npm run sources:discover -- --details --limit "$SOURCE_LIMIT"
       - name: Fetch registered due sources, respecting robots and cadence
         env:
-          SOURCE_LIMIT: ${{ inputs.limit || '3' }}
+          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
         run: npm run sources:ingest -- --limit "$SOURCE_LIMIT"
 # This workflow fetches only. Matching and delivery run in a separate workflow.
 # GitHub schedules are best effort; the application displays actual successful checks.

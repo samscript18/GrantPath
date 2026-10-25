@@ -1,3 +1,34 @@
+# Global source coverage — 25 October 2026
+
+Actual persisted readback:32 real records,17 actual study countries; controlled fixtures excluded. Countries: AU, CA, CH, CO, DE, ES, GB, GH, JP, KR, NL, NZ, SE, TR, UG, US, ZA. Six regions: Europe, Africa, North America, Asia, Oceania, Latin America. Ghana, Uganda and South Africa satisfy the three-country African target. Colombia is an actual GLOCAL partner destination; the same joint programme is not duplicated to inflate opportunity counts. Coverage is not a claim that every track visits every listed country.
+
+Twelve additional official records were retrieved and published by the real deterministic pipeline. [Retrieval metadata](evidence/global-source-retrievals.json), [catalogue readback](evidence/global-coverage.json), [isolated preview publication provenance](evidence/preview-global-publication.json), [actual directory worker results](evidence/live-directory-checks.json).
+
+| Added programme                        | Destination(s)             | Published scope and limitations                                                                                                                                          |
+| -------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| GLOCAL Erasmus Mundus Joint Master     | GB, DE, ES, SE, CO, JP, NL | September2027 cycle; actual open scholarship call; choose one study track, Track H not recruiting. Date-only14 January2027 retained conservatively; no instant reminder. |
+| McGill Mastercard Foundation           | CA                         | Fall2027 master's call, closed; prescreen and admission stages differ.                                                                                                   |
+| Knight-Hennessy Scholars               | US                         | Graduate funding overview; up to three years, longer-degree funding caveat; no universal current deadline.                                                               |
+| Makerere Mastercard Foundation         | UG                         | 2026/27 master's call, historical and closed; category/admission/age conditions need confirmation.                                                                       |
+| Global Korea Scholarship               | KR                         | Degree scheme overview; route, citizenship/dual-nationality and age requirements depend on official call.                                                                |
+| MEXT research route                    | JP                         | Research/master's/doctoral overview; embassy/university nomination conditions differ.                                                                                    |
+| DAAD EPOS                              | DE                         | Course-specific development-related postgraduate overview, not a universal DAAD award/cycle.                                                                             |
+| Ashesi Mastercard Foundation           | GH                         | Undergraduate scheme overview; university financial-aid selection determines the award.                                                                                  |
+| UCT Mastercard Foundation postgraduate | ZA                         | 2027 intake open,31 October2026 date-only deadline; undergraduate30 September deadline is not applied to postgraduate.                                                   |
+| Türkiye Scholarships graduate          | TR                         | Graduate overview; medical/health-science exclusions and route conditions need confirmation; no invented next deadline.                                                  |
+| Fulbright Foreign Student              | US                         | Country-administered scheme overview; nationality/residence and administrator-specific processes unresolved.                                                             |
+| Manaaki tertiary                       | NZ                         | New Zealand tertiary route overview; country-specific levels and exclusions, no invented Pacific destination tags.                                                       |
+
+Each incomplete mapping retains a mandatory unknown provider-confirmation condition. Source-backed descriptive fields do not establish that all conditions have been encoded. Sponsor country, student citizenship/residence and actual study location are stored separately.
+
+## Live discovery versus curated registration
+
+GLOCAL, McGill and Makerere listing workers actually succeeded through the shared public-network/robots/pacing downloader.12 total approved directory configurations support bounded explicit paths;12 reviewed detail mappings are live-retrieved contracts. Unknown new links enter exception review, rather than inheriting generic programme rules. The initial12 live detail registrations used the documented manual registration fallback and then automatic publication; this is not claimed as12 automatically discovered new programmes. The controlled fixture adapter uses snapshots only, never live official URLs.
+
+Original four legacy adapters retain their review workflow. Twente previously succeeded live; Oxford robots and UCL were403. Additional research access limits: Pretoria403, KNUST fetch failure, original DAAD course/CMU/Ashesi paths404 (supported official overview/Scholars paths used where retrievable), Mastercard Foundation directory200 but no supported server-rendered partner links. Restrictions were not bypassed. Source failure retains accepted facts and previous success times.
+
+## Earlier20-record baseline and historical observations
+
 # Source catalogue and supported scope
 
 Research date: 24 October 2026. Initial collection: 20 real source-backed records across 11 provider identities. These include known closed cycles and labelled scheme overviews; this count is not an open-opportunity statistic. The database is the runtime catalogue. The researched bootstrap data lives in `src/data/catalogue.ts` and is persisted idempotently by `npm run db:seed`. Re-seeding never overwrites later operator versions.
@@ -39,3 +70,7 @@ Old Clarendon URL returned 404 and was replaced by the current Oxford page. Gate
 | Twente UTS       | 10:51:44 — extraction succeeded; candidate review persisted | Live retrieval and scoped extraction observed; no automatic publication   |
 
 All scheduled-source toggles remain paused. Four scoped adapters are implemented and tested against controlled HTML; **one of the three smoke-tested adapters currently has observed successful live retrieval/extraction**. CSC has not yet had a standalone live smoke check. Neither a 403 nor a layout failure alters an accepted scholarship or marks it closed. No workaround bypassed the access restrictions.
+
+## Previously unseen URLs and cycles
+
+Beyond the twelve curated contracts, an explicit Makerere announcement-template adapter recognises new numeric announcement URLs with a supported official main-campus identity, exact master/undergraduate heading and consecutive academic years. It derives stable programme/cycle identities rather than requiring an operator to register each new URL. Funding, deadlines and unmapped mandatory conditions remain unknown; the result cannot be definitively eligible. Unknown provider/layout/grammar and conflicting changes still reach review. Unit and shared-service PostgreSQL tests cover new URL→publication→replay→new cycle. This is not claimed as a live success on every future Makerere page.

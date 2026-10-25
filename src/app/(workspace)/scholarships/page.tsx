@@ -85,11 +85,17 @@ export default async function Scholarships({
                 className="form-select text-xs"
                 id="destination"
                 name="destination"
-                defaultValue={f.destination}
+                defaultValue={
+                  result.destinations.find(
+                    (d) => d.code === f.destination || d.destination === f.destination,
+                  )?.code || f.destination
+                }
               >
                 <option value="">All destinations</option>
                 {result.destinations.map((d) => (
-                  <option key={d.destination}>{d.destination}</option>
+                  <option key={d.code} value={d.code}>
+                    {d.destination}
+                  </option>
                 ))}
               </select>
               <label className="sr-only" htmlFor="level">

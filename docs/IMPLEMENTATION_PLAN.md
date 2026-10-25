@@ -36,3 +36,16 @@ Use two-column session rows and an automatically presented, resumable study-prof
 ## Second editorial design pass
 
 Refine every page through shared navigation, typography, surfaces, forms and recovery layouts, plus distinct landing/catalogue/dashboard/application/inbox/profile/settings/reference/operator compositions. Keep current fonts/colors and deterministic domain behaviour. Use actual browser screenshots to refine public desktop/mobile/dark presentation; record private views as unreviewed where authenticated access is unavailable. Keep automated checks and GitHub publication paused; retain the user's preference for complete local commits.
+
+## Continuation — 25 October 2026: global discovery and release
+
+The user resumed verification/publication and requested three connected outcomes. Preserve the existing application and data.
+
+1. Establish baseline: refresh PR/deployment/protection/TestSprite; run existing local checks; record stale generated-type recovery.
+2. Add country-code/multiple-destination modelling with additive backfill, preserving IDs, versions and profiles; update filters/ranking/presentation.
+3. Implement approved-directory discovery, persisted candidate jobs/observations, bounded network policies and deterministic publication decisions. Reuse the transactional publisher/outbox, retain exception review and pause controls.
+4. Research official opportunities across five regions/fifteen countries (three African destinations); import only retrieved, supported facts through the publication pipeline. Record actual coverage/blocked sources, distinguish overviews/cycles.
+5. Extend operator transparency and focused production-path unit/PostgreSQL/browser tests; complete existing unpublished account/UI verification.
+6. Configure one application scheduler and separate bounded source discovery, verify authorised manual runs; keep preview isolated and never copy private student data.
+7. Inspect saved TestSprite assertions/trigger, validate focused scripts locally, obtain authentic controlled-regression failure/blocked gate/fix/pass evidence within actual credits (50 reserve).
+8. Batch reviewable release pushes, reconcile PR/docs and verify final-head CI/deployment/App checks. Do not merge or submit externally.

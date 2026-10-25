@@ -1,3 +1,21 @@
+# Current focused release suite — 25 October2026
+
+Seven explicit reusable scripts in `docs/testsprite/code` and authored plans in `plans` cover existing discovery/profile/application persistence plus:
+
+1. A real GLOCAL joint programme under each of seven actual destinations, filter persistence and stable single identity.
+2. Approved controlled candidate publication through actual services, visible evidence/history/events and unchanged replay.
+3. An ambiguous mandatory level causing exact exception reason, no publication/event and a visible operator queue item.
+4. Exact eligible→not_eligible/VALUE_NOT_ACCEPTED after accepted source change, one version-scoped inbox event, replay dedup and disabled queued-topic suppression.
+5. Actual foreign application update404, private listing enforcement, unchanged owner data and student/operator403.
+
+All seven sources passed locally using Python Playwright against the production server and isolated PostgreSQL. This is local evidence, not a native TestSprite pass. Controlled source mutations are authenticated/operator-only and explicitly guarded to test databases. Live official sources are never mutated.
+
+Fresh current balance146; observed0.5 credits per executed case. Updated plans and scripts were saved without a credited run. The missing Always use planned steps option is confirmed in the user's actual portal screenshot; no unsupported settings are claimed configured. App artifact inspection must distinguish source storage from execution. Preserve existing required automatic checks; no schedules or duplicate same-head manual runs.
+
+An explicitly disclosed temporary Germany-filter regression is planned only on the isolated release branch/preview after healthy local verification, followed by an App failure, required-gate readback, fix and automatic rerun. No failure/pass is claimed before actual evidence is captured.
+
+## Historical executions and assertion-gap findings
+
 # Focused TestSprite 3.0 suite
 
 Native V3 project, reviewed plans, IDs and portal links: [PROJECT.md](testsprite/PROJECT.md). [First execution evidence](evidence/testsprite-first-execution.json).
@@ -26,3 +44,5 @@ The second automatic App execution reported two passes (total debit 2, balance 1
 ## Brevo release outcome
 
 At head6b6399f, App execution daa54b31-5049-41d8-b1c5-e50d30b00675 reported two passes; observed debit1, balance147. Saved Python source remained byte-identical to the reviewed files. However, actual App step history still showed the older eight-step discovery path, so it does **not** establish execution of every saved assertion. A separate strict saved-code replay was proposed for that concrete gap. Its first invocation failed local CLI syntax validation before dispatch; the corrected execution request was declined. No strict remote replay or additional debit is claimed. Local exact-script checks remain separate from the native App verdict.
+
+Actual defect found during complete browser review: clearing a persisted residence passed undefined to React Hook Form, restoring its default value. The fixed control sends an empty string and validation retains unknown residence. Native profile script/plan now explicitly reloads saved Ghana, removes it and asserts both chip removal and an empty input before reselecting/saving. This genuine defect replaces the earlier planned artificial Germany-filter regression; no Germany fault will be introduced. The isolated first verification head will retain the known defect briefly for authentic App failure evidence, followed by the already locally validated fix. No failing TestSprite result is claimed yet.

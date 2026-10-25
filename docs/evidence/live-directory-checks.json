@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-10-25T07:39:58.893Z",
+  "scope": "Development catalogue; actual standalone bounded workers",
+  "results": [
+    {
+      "id": "glocal-programmes",
+      "state": "success",
+      "pages": 1,
+      "discovered": 2
+    },
+    {
+      "id": "mcgill-scholars",
+      "state": "success",
+      "pages": 1,
+      "discovered": 8
+    },
+    {
+      "id": "makerere-scholarships",
+      "state": "success",
+      "pages": 1,
+      "discovered": 2
+    }
+  ],
+  "sources": [
+    {
+      "id": "mcgill-scholars",
+      "lastAttemptAt": "2026-10-25T07:39:27.979Z",
+      "lastSuccessAt": "2026-10-25T07:39:57.766Z",
+      "health": "healthy",
+      "_count": {
+        "candidates": 8
+      },
+      "checks": [
+        {
+          "url": "https://www.mcgill.ca/mastercardfdn-scholars/",
+          "state": "success",
+          "httpStatus": 200,
+          "error": null,
+          "discoveredCount": 8,
+          "succeededAt": "2026-10-25T07:39:57.417Z"
+        }
+      ]
+    },
+    {
+      "id": "makerere-scholarships",
+      "lastAttemptAt": "2026-10-25T07:39:27.979Z",
+      "lastSuccessAt": "2026-10-25T07:39:54.117Z",
+      "health": "healthy",
+      "_count": {
+        "candidates": 2
+      },
+      "checks": [
+        {
+          "url": "https://apply.mastercardfoundation.mak.ac.ug/scholarships",
+          "state": "success",
+          "httpStatus": 200,
+          "error": null,
+          "discoveredCount": 2,
+          "succeededAt": "2026-10-25T07:39:53.783Z"
+        }
+      ]
+    },
+    {
+      "id": "glocal-programmes",
+      "lastAttemptAt": "2026-10-25T07:39:27.971Z",
+      "lastSuccessAt": "2026-10-25T07:39:54.613Z",
+      "health": "healthy",
+      "_count": {
+        "candidates": 2
+      },
+      "checks": [
+        {
+          "url": "https://globallocal-erasmusmundus.eu/how-to-apply/",
+          "state": "success",
+          "httpStatus": 200,
+          "error": null,
+          "discoveredCount": 2,
+          "succeededAt": "2026-10-25T07:39:54.122Z"
+        }
+      ]
+    }
+  ]
+}

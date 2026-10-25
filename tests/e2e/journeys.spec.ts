@@ -1,4 +1,4 @@
-import { test, expect } from "./fixtures";
+import { dismissStudyPrompt, test, expect } from "./fixtures";
 import { db } from "../../src/lib/db";
 const password = process.env.TEST_ACCOUNT_PASSWORD || "Isolated-test-passphrase-42";
 test("registration, captured verification, staged profile, sign out and return", async ({
@@ -19,9 +19,9 @@ test("registration, captured verification, staged profile, sign out and return",
   const url = mail.body.match(/https?:\/\/\S+/)![0];
   await page.goto(url);
   await expect(page).toHaveURL(/profile/);
-  await page.getByLabel("Citizenship(s)").fill("Nigeria");
+  await page.getByRole("combobox", { name: "Citizenship(s)", exact: true }).fill("Nigeria");
   await page.getByRole("option", { name: "Nigeria", exact: true }).click();
-  await page.getByLabel("Country of residence").fill("Ghana");
+  await page.getByRole("combobox", { name: "Country of residence", exact: true }).fill("Ghana");
   await page.getByRole("option", { name: "Ghana", exact: true }).click();
   await page.getByRole("button", { name: "Save & continue" }).click();
   await expect(page.getByLabel("Current qualification")).toBeVisible();
@@ -35,6 +35,7 @@ test("registration, captured verification, staged profile, sign out and return",
   await page.getByRole("button", { name: "Save & continue" }).click();
   await page.getByRole("button", { name: "Save & see my matches" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  await dismissStudyPrompt(page);
   const updateResponse = page.waitForResponse(
     (r) => r.url().endsWith("/api/matches") && r.request().method() === "POST",
   );
@@ -51,12 +52,15 @@ test("registration, captured verification, staged profile, sign out and return",
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
   await expect(page).toHaveURL(/dashboard/);
-  await page.goto("/profile");
+  await dismissStudyPrompt(page);
+  await page.goto("/settings/profile");
   await page.getByRole("button", { name: /Your world/ }).click();
   await expect(page.getByRole("list", { name: "Selected citizenship(s)" })).toContainText(
     "Nigeria",
   );
-  await expect(page.getByLabel("Country of residence")).toHaveValue("Ghana");
+  await expect(
+    page.getByRole("combobox", { name: "Country of residence", exact: true }),
+  ).toHaveValue("Ghana");
 });
 test("discovery filters, evidence, private idempotent save and application progress", async ({
   page,
@@ -66,10 +70,11 @@ test("discovery filters, evidence, private idempotent save and application progr
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  await dismissStudyPrompt(page);
   await page.goto("/scholarships");
   await page.getByLabel("Search scholarships").fill("Twente");
-  await page.getByLabel("Destination", { exact: true }).selectOption("Netherlands");
-  await page.getByRole("button", { name: "Search", exact: true }).click();
+  await page.getByLabel("Destination", { exact: true }).selectOption("NL");
+  await page.getByRole("button", { name: "Apply filters", exact: true }).click();
   await expect(page).toHaveURL(/q=Twente/);
   await page.reload();
   await expect(page.getByLabel("Search scholarships")).toHaveValue("Twente");
@@ -77,9 +82,14 @@ test("discovery filters, evidence, private idempotent save and application progr
   await expect(page.getByRole("heading", { name: "Evidence you can inspect." })).toBeVisible();
   const source = page.locator("#evidence-funding");
   await expect(source).toContainText("€ 3,000 - € 22,000");
-  const save = page.getByRole("button", { name: "Save opportunity", exact: true });
+  const save = page.getByRole("button", {
+    name: "Save University of Twente Scholarship",
+    exact: true,
+  });
   if (await save.isVisible()) await save.click();
-  await expect(page.getByRole("button", { name: "Saved · click to unsave" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Unsave University of Twente Scholarship" }),
+  ).toBeVisible();
   const scholarship = await db().scholarship.findUniqueOrThrow({
     where: { slug: "twente-uts-2027" },
   });

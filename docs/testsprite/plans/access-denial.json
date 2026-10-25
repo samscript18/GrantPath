@@ -1,0 +1,25 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "Cross-account application modification is denied by the server and owner data stays unchanged",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in the configured student and save the real Twente scholarship. Record private application id, note and revision."
+    },
+    {
+      "type": "assertion",
+      "description": "Use an independent authenticated context for VAR_{other_email} with VAR_{password}. Send an update for the first student application to the normal protected application API."
+    },
+    {
+      "type": "assertion",
+      "description": "Assert the actual server responds404; another userId query cannot expose the first student application. Assert student access to /api/operator/discovery responds403."
+    },
+    {
+      "type": "assertion",
+      "description": "Read the application again as its owner and assert original note and revision are unchanged. Do not infer access denial from a hidden button alone."
+    }
+  ]
+}

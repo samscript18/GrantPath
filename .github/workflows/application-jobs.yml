@@ -21,6 +21,7 @@ jobs:
     environment: application-jobs
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_TRANSPORT: ${{ vars.DATABASE_TRANSPORT || 'tcp' }}
       BETTER_AUTH_URL: ${{ vars.APP_URL }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       EMAIL_FROM: ${{ vars.EMAIL_FROM }}

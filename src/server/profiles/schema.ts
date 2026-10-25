@@ -15,7 +15,7 @@ const emptyGroup = (v: unknown) =>
 export const profileSchema = z
   .object({
     citizenships: z.array(country).max(10).default([]),
-    residence: country.optional(),
+    residence: z.preprocess((value) => (value === "" ? undefined : value), country.optional()),
     timeZone: z
       .string()
       .refine((v) => {
@@ -40,7 +40,10 @@ export const profileSchema = z
     institution: text.optional(),
     targetLevel: z.enum(["bachelor", "master", "doctorate"]).optional(),
     targetField: text.optional(),
-    destinations: z.array(text.min(2)).max(20).default([]),
+    destinations: z
+      .array(text.min(2).transform((v) => canonicalCountry(v) || v))
+      .max(20)
+      .default([]),
     preferredInstitutions: z.array(text).max(20).default([]),
     intendedStart: date.optional(),
     gpa: z.preprocess(

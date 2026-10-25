@@ -1,3 +1,20 @@
+# Current global acceptance coverage — 25 October 2026
+
+| Area                         | Implemented / checked                                                                                                                                                                          | Remaining boundary                                                                                         |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Country model                | ISO identities, safe legacy backfill, multi-country institutions, all-country profile choices, actual published filter options, ranking separate from eligibility                              | Global/unconfirmed scope never creates a fictional country; a preference does not imply catalogue coverage |
+| Discovery                    | Approved listing pagination/dedup, strict detail paths, DNS/robots/size/time/redirect policy, quotas/leases/retry recovery; three actual live directory successes                              | Newly unmapped layouts/semantics require reviewed adapter contracts                                        |
+| Publication                  | Real shared transaction; field policies, explicit codes, pause, concurrent replay, new-cycle identity, audit/evidence/outbox, manual exception stale-version guard                             | Incomplete requirements retain mandatory confirmation; removed/ambiguous content held for review           |
+| Eligibility / notifications  | Existing independent reference evaluator preserved; exact accepted-level change, fresh evaluation, one alert, replay dedup and disabled queued-topic suppression checked through real services | Source facts are not mathematically proven; external recipient receipt remains unobserved                  |
+| Ownership / account controls | Server-enforced cross-account application denial with unchanged owner data; code attempts/cooldown/session revocation, one-time encrypted export concurrency and deletion grace                | No claim of all possible races or cross-browser security audit                                             |
+| Images / design              | Actual disposable Cloudinary upload/read/remove/cleanup smoke; responsive global details/operator screens implemented                                                                          | Final desktop/mobile screenshot inspection and hosted verification tracked in release evidence             |
+| Remote protection            | Existing authentic required Apps preserved; seven exact Python scripts locally passed                                                                                                          | New automatic App execution, artifact-equivalence and red/blocked/fix/green evidence pending               |
+| Operations                   | GitHub chosen, encrypted isolated preview environments configured; source work outside Vercel                                                                                                  | Actual dispatch and default-branch schedule activation still pending; Neon API lifecycle unavailable       |
+
+Local tests, production-browser checks and authentic TestSprite results are reported separately. Historical scope below applies to its named releases.
+
+---
+
 # Coverage and acceptance matrix
 
 Local results below refer to PostgreSQL, Vitest and Chromium, never TestSprite. Exact commands and failures are recorded in TEST_EVIDENCE.md. Hosted browser/Neon persistence and GitHub CI also passed; the two focused native TestSprite cases passed in their first authentic App execution (see testsprite/PROJECT.md).

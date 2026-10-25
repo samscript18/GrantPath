@@ -26,7 +26,10 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
           <p className="text-[11px] font-semibold leading-5 text-foreground">
             {row.programme.provider.name}
           </p>
-          <p className="mt-1 text-[10px] text-muted-foreground">Application cycle · {row.cycle}</p>
+          <p className="mt-1 text-[10px] text-muted-foreground">
+            {row.data.recordKind === "overview" ? "Scheme overview" : "Application cycle"} ·{" "}
+            {row.cycle}
+          </p>
         </div>
         {action}
       </div>

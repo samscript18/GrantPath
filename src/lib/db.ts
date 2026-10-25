@@ -1,4 +1,6 @@
 import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { neonConfig } from "@neondatabase/serverless";
 import { PrismaClient } from "@/generated/prisma/client";
 import { SetupError } from "./env";
 const globalDb = globalThis as unknown as { grantpathDb?: PrismaClient };
@@ -9,6 +11,16 @@ export function db() {
     );
   if (!globalDb.grantpathDb) {
     const connectionUrl = new URL(process.env.DATABASE_URL);
+    const transport = process.env.DATABASE_TRANSPORT || "tcp";
+    if (!["tcp", "neon-ws"].includes(transport))
+      throw new SetupError("DATABASE_TRANSPORT must be tcp or neon-ws.");
+    if (transport === "neon-ws") {
+      if (!connectionUrl.hostname.endsWith(".neon.tech") || !globalThis.WebSocket)
+        throw new SetupError(
+          "neon-ws requires an official Neon endpoint and Node22.18+ WebSocket support.",
+        );
+      neonConfig.webSocketConstructor = globalThis.WebSocket;
+    }
     // Preserve pg 8's verified TLS behaviour when provider URLs use an alias.
     // Leave explicit libpq compatibility and local non-TLS URLs unchanged.
     if (
@@ -17,13 +29,14 @@ export function db() {
     ) {
       connectionUrl.searchParams.set("sslmode", "verify-full");
     }
+    const connection = {
+      connectionString: connectionUrl.toString(),
+      max: 5,
+      connectionTimeoutMillis: 15000,
+      query_timeout: 20000,
+    };
     globalDb.grantpathDb = new PrismaClient({
-      adapter: new PrismaPg({
-        connectionString: connectionUrl.toString(),
-        max: 5,
-        connectionTimeoutMillis: 15000,
-        query_timeout: 20000,
-      }),
+      adapter: transport === "neon-ws" ? new PrismaNeon(connection) : new PrismaPg(connection),
       // Preserve atomic publication on a remote database with bounded latency.
       transactionOptions: { maxWait: 10000, timeout: 20000 },
     });

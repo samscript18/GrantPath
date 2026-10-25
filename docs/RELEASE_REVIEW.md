@@ -1,3 +1,21 @@
+# Current release review — 25 October 2026
+
+Global continuation implementation and local verification are in progress on `release/hosted-verification`. Previously published head50570e1 remains the historical reference until new deployment/check evidence is recorded. No merge or Discord submission is authorised.
+
+- Persisted32 real records,17 actual destination countries, six regions, three African countries. Incomplete scheme overviews and closed cycles remain clearly labelled; this is not32 open applications.
+- Additive multi-destination migration, actual-country filters, participating-institution ranking and immutable earlier IDs/history.
+- Approved listing/detail separation, bounded robots-aware CLI fetching, leased candidates, deterministic policy decisions, shared transactional publication/outbox and visible operator exceptions/pauses.
+- Actual live retrieval/policy publication of12 reviewed candidates in development and isolated PR1; three actual directory workers succeeded (GLOCAL, McGill, Makerere). Preview entries were temporarily staged while its older JSON parser remained deployed, retaining accepted history.
+- Account security/privacy/session ownership checks and actual disposable Cloudinary upload/read/remove cleanup are locally verified. Brevo and Google are preserved.
+- GitHub encrypted scheduler environments configured for the isolated PR1 database. Actual workflow dispatch/default-branch activation and hosted final checks are pending. Neon API lifecycle cannot be completed without absent API/project/baseline configuration.
+- Fresh TestSprite balance146, observed0.5 per case execution; no new debit yet. Seven exact scripts passed locally. Missing portal plan toggle is confirmed by the user's screenshot; automatic execution semantics still require artifact inspection.
+
+Final CI, deployment, exact App assertions, disclosed red/blocked/fix/green evidence and final SHA must be appended after actual operations. Older checks below apply only to their named heads.
+
+---
+
+# Historical release reviews (preserved)
+
 # Release review — 24 October 2026
 
 [Live public preview](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app) · [Release PR 1](https://github.com/samscript18/GrantPath/pull/1)
@@ -45,3 +63,9 @@ Vercel deployment dpl_6X3iQXQB9VQWY6xCsL4naQJsVsU2 is Ready at the existing publ
 GitGuardian reported six occurrences at tests/e2e/password.spec.ts lines14/24/28/30/49/56. Inspection found illustrative checklist input strings only, with no accounts provisioned using them; signup assertion deliberately stops at confirmation mismatch. Scan of219 repository files for configured secret values found0 matches. The external incidents remain open for classification; no scanner/gate disabled, assertion weakened or published history rewritten. No merge performed. Evidence features-release-checks.json, features-hosted-check.json and hosted-dark-register-mobile.png.
 
 The attempt to amend the unpublished Git commit with audience troubleshooting was declined, so those documentation changes stayed local. Publishing the existing tested feature commit was separately approved and succeeded. Final post-run evidence/ledger stays local to avoid another documentation-only credited check; the declined PR metadata update was not retried.
+
+Actual defect found during complete browser review: clearing a persisted residence passed undefined to React Hook Form, restoring its default value. The fixed control sends an empty string and validation retains unknown residence. Native profile script/plan now explicitly reloads saved Ghana, removes it and asserts both chip removal and an empty input before reselecting/saving. This genuine defect replaces the earlier planned artificial Germany-filter regression; no Germany fault will be introduced. The isolated first verification head will retain the known defect briefly for authentic App failure evidence, followed by the already locally validated fix. No failing TestSprite result is claimed yet.
+
+Current pre-push checks:82 unit and31 PostgreSQL cases, typecheck/lint, production build and normal repository formatting pass. The exact seven saved Python scripts match local bytes and passed focused production execution, including persisted-residence clearing; the complete13-journey rerun is in progress. A healthy implementation commit will be preserved before explicitly reintroducing the genuine original clearing defect on the isolated verification head. No App result is yet claimed.
+
+Healthy implementation checkpoint: final complete production-browser suite passed13/13 (2.5minutes), including all seven exact reusable Python scripts, settings/original-result persistence, appearance/OAuth redirect, verification cooldown, operator publication/exception flows and desktop/360px review. Latest82 unit/31 PostgreSQL tests, typecheck/lint, production build, formatting and configured development/preview secret scan0matches pass. Actual public images were inspected and preserved; local results are not TestSprite. The following isolated verification commit will explicitly reintroduce the genuine residence-clearing defect; it is not an unreported new organic remote bug and must not be merged.

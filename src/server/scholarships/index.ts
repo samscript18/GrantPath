@@ -1,3 +1,4 @@
+import { countryCode, countryName } from "@/lib/countries";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import type { Prisma } from "@/generated/prisma/client";
@@ -25,7 +26,10 @@ export async function catalogue(input: unknown) {
       { programme: { provider: { name: { contains: filters.q, mode: "insensitive" } } } },
       { field: { contains: filters.q, mode: "insensitive" } },
     ];
-  if (filters.destination) where.destination = { equals: filters.destination, mode: "insensitive" };
+  if (filters.destination) {
+    const code = countryCode(filters.destination);
+    where.destinationCodes = { has: code ?? "INVALID" };
+  }
   if (filters.level) where.level = { contains: filters.level };
   if (filters.field) where.field = { contains: filters.field, mode: "insensitive" };
   if (filters.provider) where.programme = { provider: { slug: filters.provider } };
@@ -62,9 +66,7 @@ export async function catalogue(input: unknown) {
     db().scholarship.count({ where }),
     db().scholarship.findMany({
       where: { published: true },
-      select: { destination: true },
-      distinct: ["destination"],
-      orderBy: { destination: "asc" },
+      select: { destinationCodes: true },
     }),
     db().provider.findMany({ orderBy: { name: "asc" } }),
   ]);
@@ -76,7 +78,10 @@ export async function catalogue(input: unknown) {
     })),
     total,
     filters,
-    destinations,
+    destinations: [...new Set(destinations.flatMap((row) => row.destinationCodes))]
+      .map((code) => ({ code, destination: countryName(code)! }))
+      .filter((item) => item.destination)
+      .sort((a, b) => a.destination.localeCompare(b.destination)),
     providers,
   };
 }
@@ -90,8 +95,29 @@ export async function scholarshipBySlug(slug: string) {
     },
   });
   if (!s) return null;
+  const monitored = await db().discoveredCandidate.findMany({
+    where: { scholarshipId: s.id },
+    select: {
+      id: true,
+      state: true,
+      directory: {
+        select: { enabled: true, cadenceHours: true, lastAttemptAt: true, lastSuccessAt: true },
+      },
+      observations: {
+        where: {
+          decisions: {
+            some: { decision: { in: ["auto_publish", "unchanged", "manual_publish"] } },
+          },
+        },
+        orderBy: { retrievedAt: "desc" },
+        take: 1,
+        select: { retrievedAt: true },
+      },
+    },
+  });
   return {
     ...s,
+    monitored,
     data: scholarshipDataSchema.parse(s.versions[0].data),
     currentAvailability: availabilityOf(s),
   };

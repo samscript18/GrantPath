@@ -1,4 +1,4 @@
-import { test, expect } from "./fixtures";
+import { dismissStudyPrompt, test, expect } from "./fixtures";
 const password = process.env.TEST_ACCOUNT_PASSWORD || "Isolated-test-passphrase-42";
 test("rendered release review: every main screen, mobile, keyboard and recoverable account states", async ({
   page,
@@ -19,6 +19,7 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  await dismissStudyPrompt(page);
   for (const [name, path] of [
     ["dashboard", "/dashboard"],
     ["catalogue", "/scholarships"],
@@ -80,6 +81,7 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  await dismissStudyPrompt(page);
   for (const width of [1440, 360]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/operator");

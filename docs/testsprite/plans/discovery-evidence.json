@@ -7,7 +7,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to /scholarships. In Search scholarships enter Twente. Set Destination to Netherlands and click Search."
+      "description": "Navigate to /scholarships. In Search scholarships enter Twente. Set Destination to Netherlands (NL) and click Apply filters."
     },
     {
       "type": "assertion",

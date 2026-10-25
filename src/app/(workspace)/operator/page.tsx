@@ -1,3 +1,7 @@
+import { ControlledSourceControls } from "@/components/controlled-source-controls";
+import { ProcessJobs } from "@/components/process-jobs";
+import { controlledFixturesEnabled } from "@/server/discovery/controlled";
+import { DiscoveryControls } from "@/components/discovery-controls";
 import { ProviderImageEditor } from "@/components/provider-image-editor";
 import { providerImageVersion } from "@/server/scholarships/images";
 import Link from "next/link";
@@ -51,9 +55,163 @@ export default async function OperatorPage({
         <a href="#catalogue">Catalogue</a>
         <a href="#provider-images">Provider images</a>
         <a href="#sources">Sources</a>
+        <a href="#discovery">Discovery & automatic publication</a>
         <a href="#reviews">Review queue ({overview.reviews.length})</a>
         <a href="#deliveries">Delivery diagnostics</a>
       </nav>
+      <ProcessJobs />
+      {controlledFixturesEnabled() && <ControlledSourceControls />}
+      {controlledFixturesEnabled() && (
+        <p className="my-4 border border-amber/30 bg-secondary p-4 text-xs">
+          Isolated release verification is enabled. Controlled snapshots require an authenticated
+          operator; fictional records are labelled [TEST ONLY] and cannot notify real email
+          accounts.
+        </p>
+      )}
+      <section id="discovery" className="mb-9 space-y-5">
+        <div>
+          <p className="eyebrow text-muted-foreground">APPROVED OFFICIAL DIRECTORIES</p>
+          <h2 className="mt-3 font-serif text-3xl">Discovery & publication</h2>
+          <p className="mt-3 text-xs leading-6 text-muted-foreground">
+            Sources run outside the app. Pause retrieval or automatic publication independently;
+            accepted records and evidence are retained.
+          </p>
+        </div>
+        {!overview.discovery.directories.length && (
+          <p className="paper p-6 text-sm">
+            No discovery policies registered. Use the approved-directory CLI to register a reviewed
+            source.
+          </p>
+        )}
+        <div className="grid gap-4 lg:grid-cols-2">
+          {overview.discovery.directories.map((directory) => (
+            <article key={directory.id} className="paper p-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h3 className="font-serif text-xl">{directory.id}</h3>
+                <Badge tone={directory.health === "healthy" ? "green" : "amber"}>
+                  {directory.health}
+                </Badge>
+              </div>
+              <a
+                className="mt-3 block break-all text-xs underline"
+                href={directory.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Official directory
+              </a>
+              <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <dt className="text-muted-foreground">Last attempted</dt>
+                  <dd className="mt-1">
+                    {directory.lastAttemptAt
+                      ? formatTimestamp(directory.lastAttemptAt)
+                      : "Not yet checked"}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-muted-foreground">Last successful</dt>
+                  <dd className="mt-1">
+                    {directory.lastSuccessAt
+                      ? formatTimestamp(directory.lastSuccessAt)
+                      : "No successful check"}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-muted-foreground">Candidates</dt>
+                  <dd>{directory._count.candidates}</dd>
+                </div>
+                <div>
+                  <dt className="text-muted-foreground">Policy version</dt>
+                  <dd>{directory.policyVersion}</dd>
+                </div>
+              </dl>
+              {directory.checks
+                .filter((c) => c.error)
+                .map((check) => (
+                  <p key={check.id} className="mt-3 text-xs text-error">
+                    {check.error}
+                  </p>
+                ))}
+              <DiscoveryControls directory={directory} />
+            </article>
+          ))}
+        </div>
+        <details
+          className="paper p-6"
+          open={overview.discovery.candidates.some((c) => c.state === "review")}
+        >
+          <summary className="cursor-pointer font-serif text-xl">
+            Candidate exceptions & work queue ({overview.discovery.candidates.length})
+          </summary>
+          <div className="mt-5 divide-y divide-border">
+            {overview.discovery.candidates.map((candidate) => (
+              <article key={candidate.id} className="py-5 first:pt-0">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge>{candidate.state}</Badge>
+                  <a
+                    className="break-all text-xs underline"
+                    href={candidate.canonicalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {candidate.canonicalUrl}
+                  </a>
+                </div>
+                <p className="mt-3 break-all text-xs text-muted-foreground">
+                  Discovered from: {candidate.discoveredFrom}
+                </p>
+                {candidate.error && <p className="mt-3 text-xs text-error">{candidate.error}</p>}
+                {candidate.observations[0]?.decisions.map((decision) => (
+                  <div key={decision.id} className="mt-3 text-xs leading-6">
+                    <p>{decision.reasonCodes.join(" · ")}</p>
+                    <p className="text-muted-foreground">
+                      {decision.policyVersion} · {decision.decision}
+                    </p>
+                  </div>
+                ))}
+                {candidate.state === "review" && candidate.observations[0] ? (
+                  <DiscoveryControls
+                    observation={{
+                      id: candidate.observations[0].id,
+                      data: candidate.observations[0].data,
+                    }}
+                  />
+                ) : (
+                  <DiscoveryControls candidate={candidate.id} />
+                )}
+              </article>
+            ))}
+          </div>
+        </details>
+        <details className="paper p-6">
+          <summary className="cursor-pointer font-serif text-xl">
+            Recent automatic publications ({overview.discovery.decisions.length})
+          </summary>
+          <ol className="mt-5 divide-y divide-border">
+            {overview.discovery.decisions.map((decision) => (
+              <li key={decision.id} className="py-4 text-xs leading-6">
+                <p>
+                  Version {decision.resultingVersion} · {formatTimestamp(decision.createdAt)}
+                </p>
+                <p>{decision.reasonCodes.join(" · ")}</p>
+                <p className="text-muted-foreground">
+                  {decision.policyVersion} · {decision.actorId} · {decision.eventIds.length} durable
+                  event(s)
+                </p>
+                <details>
+                  <summary className="cursor-pointer underline">
+                    Inspect before / after and evidence
+                  </summary>
+                  <pre className="mt-3 max-h-96 overflow-auto whitespace-pre-wrap break-all text-[10px]">
+                    {JSON.stringify({ before: decision.before, after: decision.after }, null, 2)}
+                  </pre>
+                </details>
+              </li>
+            ))}
+          </ol>
+        </details>
+      </section>
       {selected ? (
         <section className="paper mb-8 p-6">
           <div className="mb-6 flex justify-between">
