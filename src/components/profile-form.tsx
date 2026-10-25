@@ -291,7 +291,11 @@ export function ProfileForm({
                       label="Country of residence"
                       options={countryNames}
                       value={field.value ? [field.value] : []}
-                      onChange={(values) => field.onChange(values[0] ?? "")}
+                      onChange={(values) => {
+                        // DISCLOSED isolated release-preview regression: docs/REGRESSION_DISCLOSURE.md.
+                        // Retain the genuine original defect for one authentic required-App check.
+                        field.onChange(values[0]);
+                      }}
                     />
                   )}
                 />
