@@ -8,9 +8,18 @@ export function db() {
       "GrantPath needs DATABASE_URL. Copy .env.example and configure PostgreSQL.",
     );
   if (!globalDb.grantpathDb) {
+    const connectionUrl = new URL(process.env.DATABASE_URL);
+    // Preserve pg 8's verified TLS behaviour when provider URLs use an alias.
+    // Leave explicit libpq compatibility and local non-TLS URLs unchanged.
+    if (
+      connectionUrl.searchParams.get("uselibpqcompat") !== "true" &&
+      ["prefer", "require", "verify-ca"].includes(connectionUrl.searchParams.get("sslmode") ?? "")
+    ) {
+      connectionUrl.searchParams.set("sslmode", "verify-full");
+    }
     globalDb.grantpathDb = new PrismaClient({
       adapter: new PrismaPg({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: connectionUrl.toString(),
         max: 5,
         connectionTimeoutMillis: 15000,
         query_timeout: 20000,

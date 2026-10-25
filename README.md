@@ -12,7 +12,7 @@ Latest follow-up release: **50570e1** adds Google login/signup, persistent Syste
 
 Use Node 24 LTS (24.11+), npm, and PostgreSQL 18. Versions are pinned in `package-lock.json`; run `npm ci`.
 
-1. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your development PostgreSQL database. Neon uses pooled runtime and unpooled migration endpoints. Create separate databases containing `test` for `TEST_DATABASE_URL` and `E2E_DATABASE_URL`.
+1. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your development PostgreSQL database. Neon uses pooled runtime and unpooled migration endpoints. Use `sslmode=verify-full` for hosted connections to verify the server certificate and hostname explicitly. The runtime normalises pg's legacy `prefer`, `require` and `verify-ca` aliases to `verify-full`, unless libpq compatibility is explicitly enabled; local URLs without SSL settings remain unchanged. Create separate databases containing `test` for `TEST_DATABASE_URL` and `E2E_DATABASE_URL`.
 2. Generate a private secret with `openssl rand -base64 32`. Set `BETTER_AUTH_SECRET`. Set `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL` and `TRUSTED_ORIGINS` to the same exact local origin, for example `http://localhost:3000`, matching `.env.example`. Keep `APP_ENV=development` and `EMAIL_MODE=sink` locally.
 3. Run:
 
