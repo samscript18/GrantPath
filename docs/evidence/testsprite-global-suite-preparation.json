@@ -37,7 +37,7 @@
       "file": "eligibility_notification",
       "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
       "codeVersion": "v-b5d24f23e45d",
-      "planSteps": 7
+      "planSteps": 8
     },
     {
       "file": "access_denial",

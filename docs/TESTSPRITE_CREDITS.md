@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **127 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **123.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -61,3 +61,9 @@ Single automatic execution10178282 at f13ab93:3passed/1failed/3blocked. Observed
 Automatic6119d7be at0a7d332:4passed/2failed/1blocked; observed134→130.5, debit3.5, exactly one execution. Publication/exception/joint/discovery passed. Profile agent missed the required clearing assertion; notification agent saved bachelor despite intended master; preserved historical evaluation correctly accepted bachelor for bachelor. Access metadata remains blocked. All seven exact scripts separately passed hosted Playwright; not TestSprite. Saved plans now isolate clearing/master setup as required checkpoints. No weakened assertions or extra strict replay. Final coherent classification/backfill/evidence update estimates3.5 for its expected automatic run, with50reserve preserved.
 
 Automatic021fe90b at28c0d6e:5passed/1failed/1blocked; observed130.5→127, debit3.5, exactly one execution. Profile residence regression passed automatically. Notification run exposed misleading completed-event visibility in operator diagnostics; access metadata still blocked. A real bounded history-query/UI correction is being locally verified before one coherent follow-up; no manual same-head suite or strict retry.
+
+## Diagnostics-fix actual final source run
+
+Automatic7e86f4a2 at963149e:4passed/1failed/2blocked. Observed127→123.5, debit3.5, one execution. Profile passed. Multi case opened the GitHub PR page, access API remained blocked, notification agent mixed expected post-change failure with baseline and counted old alerts. Exact hosted7sources allpassed; historical native v12has1alert/no duplicate groups. User confirmed trigger target was the GitHub PR URL; correction requested. No further strict retries, no manual duplicate. A future coherent evidence push only after saved target correction would estimate3.5, preserving50reserve.
+
+User saved the corrected Vercel target and no test event. Next coherent evidence/plan publication will verify this concrete routing fix through one automatic seven-case run, estimated3.5 from actual123.5. No manual duplicate or strict replay. Record actual debit and exact-head outcome; do not infer success from the corrected setting.

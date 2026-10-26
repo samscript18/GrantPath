@@ -19,11 +19,15 @@
     },
     {
       "type": "assertion",
-      "description": "Assert current evaluation eligible for this controlled fully mapped requirement. As operator publish changed requirement (bachelor) through actual policy pipeline."
+      "description": "Baseline checkpoint BEFORE publishing any changed requirement: as the configured other student, verify [TEST ONLY] Controlled change scholarship is eligible for the persisted master profile and the current master requirement. Record the baseline accepted version. Do not evaluate this baseline checkpoint after changing the requirement."
+    },
+    {
+      "type": "action",
+      "description": "Sign in as operator, reopen Isolated source verification, explicitly select Eligibility and notifications again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
     },
     {
       "type": "assertion",
-      "description": "Process bounded application jobs. Assert the student evaluation now not_eligible with exact leaf reason VALUE_NOT_ACCEPTED and current profile/scholarship/engine context; exactly one change notification for the accepted version."
+      "description": "Process bounded application jobs until the current work drains. As the other student with target master, verify the current version C is now not_eligible with VALUE_NOT_ACCEPTED. This rejection is the EXPECTED post-change result. Verify exactly one change alert for version C, using its accepted-version/event context. Older alerts for other accepted versions must remain in history and do not count as duplicates. Total unread count or repeated scholarship titles cannot establish duplicate delivery."
     },
     {
       "type": "assertion",
