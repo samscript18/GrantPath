@@ -30,7 +30,8 @@
     "sources:smoke": "tsx scripts/source-smoke.ts",
     "catalogue:corrections": "tsx scripts/catalogue-corrections.ts",
     "providers:images": "tsx scripts/provider-images.ts",
-    "sources:discover": "tsx scripts/discover.ts"
+    "sources:discover": "tsx scripts/discover.ts",
+    "release:testsprite-gate": "tsx scripts/verify-testsprite.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "1.7.12",

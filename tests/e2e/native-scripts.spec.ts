@@ -2,7 +2,7 @@ import { test, expect } from "./fixtures";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { chromium } from "@playwright/test";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 const execute = promisify(execFile);
 test("exact reusable TestSprite sources assert the connected public, policy, eligibility, notification and ownership journeys locally", async () => {
   test.setTimeout(240000);
@@ -21,6 +21,15 @@ test("exact reusable TestSprite sources assert the connected public, policy, eli
     "eligibility_notification",
     "access_denial",
   ]) {
+    const placeholders = [
+      ...readFileSync(`docs/testsprite/code/${script}.py`, "utf8").matchAll(/VAR_\{([^}]+)\}/g),
+    ].map((match) => match[1]);
+    expect(
+      placeholders.every((name) =>
+        ["url", "username", "password", "operator_email", "other_email"].includes(name),
+      ),
+      `Unsupported provider template marker in ${script}`,
+    ).toBe(true);
     const result = await execute(python, [`docs/testsprite/code/${script}.py`], {
       timeout: 180000,
       maxBuffer: 250000,

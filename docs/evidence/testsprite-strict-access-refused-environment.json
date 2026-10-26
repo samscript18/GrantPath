@@ -1,0 +1,14 @@
+{
+  "startedAt": "2026-10-25T08:59:21.796Z",
+  "finishedAt": "2026-10-25T08:59:27.022Z",
+  "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "reason": "Native browser agent could not assert protected API ownership. One strict saved-code replay addresses that concrete gap; not a duplicate broad App suite.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 139,
+  "case": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "exitCode": 5,
+  "body": {
+    "output": ""
+  },
+  "diagnostic": "idempotency-key: cli-run-330da51b-6126-4f0e-ab24-10195ee9d127\n{\n  \"error\": {\n    \"code\": \"VALIDATION_ERROR\",\n    \"message\": \"Invalid request.\",\n    \"nextAction\": \"Field `environment` is invalid: unknown environment 'github-pr-1'; use one of: default.\",\n    \"requestId\": \"cli_8f85aa4a-7844-43b2-9357-21b2afb213aa\",\n    \"details\": {\n      \"field\": \"environment\",\n      \"reason\": \"unknown environment 'github-pr-1'; use one of: default\",\n      \"accepted\": [\n        \"default\"\n      ],\n      \"requested\": \"github-pr-1\",\n      \"available\": [\n        \"default\"\n      ]\n    }\n  }\n}\n"
+}

@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright, expect
 
 async def run_test():
     base_url = "VAR_{url}"
-    if base_url.startswith("VAR_{"):
+    if base_url.startswith("VAR_" + "{"):
         base_url = os.environ["GRANTPATH_TEST_URL"]
     async with async_playwright() as playwright:
         executable = os.environ.get("GRANTPATH_CHROMIUM_PATH")

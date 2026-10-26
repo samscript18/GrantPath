@@ -108,10 +108,18 @@ describe("actual persisted discovery and publication pipeline", () => {
 });
 
 it("automatically discovers a previously unregistered programme URL and preserves separate cycles through the actual publisher", async () => {
-  const id = "makerere-template-test-" + crypto.randomUUID();
+  const url = "https://apply.mastercardfoundation.mak.ac.ug/scholarships";
+  const existingDirectory = await db().discoveryDirectory.findUnique({ where: { url } });
+  if (existingDirectory && !existingDirectory.id.startsWith("makerere-template-test-"))
+    throw Error("Official-template fixture requires its own isolated directory");
+  const id = existingDirectory?.id ?? "makerere-template-test-" + crypto.randomUUID();
+  const existingCycles = await db().scholarship.findMany({
+    where: { programme: { slug: "makerere-mastercard-undergraduate" } },
+    select: { cycle: true },
+  });
   directoryDefinitions[id] = {
     id,
-    url: "https://apply.mastercardfoundation.mak.ac.ug/scholarships",
+    url,
     heading: "Scholarships",
     linkSelector: "a[href]",
     allowedDetails: [
@@ -132,12 +140,16 @@ it("automatically discovers a previously unregistered programme URL and preserve
     `<main><h1>Scholarships</h1><a href="/announcements/98765">Undergraduate call</a></main>`,
   );
   const first = await processDetailHtml(found.ids[0], html("2028/2029"), { controlled: true });
-  expect(first.decision).toBe("auto_publish");
+  expect(first.decision).toBe(
+    existingCycles.some((s) => s.cycle === "2028/2029") ? "unchanged" : "auto_publish",
+  );
   expect(
     (await processDetailHtml(found.ids[0], html("2028/2029"), { controlled: true })).decision,
   ).toBe("unchanged");
   const next = await processDetailHtml(found.ids[0], html("2029/2030"), { controlled: true });
-  expect(next.decision).toBe("auto_publish");
+  expect(next.decision).toBe(
+    existingCycles.some((s) => s.cycle === "2029/2030") ? "unchanged" : "auto_publish",
+  );
   if (!("scholarshipId" in first) || !first.scholarshipId || !("scholarshipId" in next))
     throw Error("Missing actual accepted cycle");
   expect(next.scholarshipId).not.toBe(first.scholarshipId);

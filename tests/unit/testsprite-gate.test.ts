@@ -1,0 +1,28 @@
+import { it, expect } from "vitest";
+import { assessNativeReport } from "../../src/server/operator/testsprite-gate";
+it("rejects a green native status with actual failed or blocked cases", () => {
+  expect(
+    assessNativeReport({ state: "success", description: "1/7 passed · 4 failed · 2 blocked" }, 7)
+      .state,
+  ).toBe("failed");
+});
+it("requires the entire reviewed suite rather than an earlier or partial case count", () => {
+  expect(assessNativeReport({ state: "success", description: "2/2 passed" }, 7).state).toBe(
+    "failed",
+  );
+  expect(
+    assessNativeReport({ state: "success", description: "7/7 passed · 1 blocked" }, 7).state,
+  ).toBe("failed");
+  expect(assessNativeReport({ state: "success", description: null }, 7).state).toBe("failed");
+});
+it("accepts all reviewed cases passed while preserving pending and failed outcomes", () => {
+  expect(assessNativeReport({ state: "success", description: "7/7 passed" }, 7).state).toBe(
+    "passed",
+  );
+  expect(assessNativeReport({ state: "pending", description: "7 tests queued" }, 7).state).toBe(
+    "pending",
+  );
+  expect(assessNativeReport({ state: "failure", description: "7/7 passed" }, 7).state).toBe(
+    "failed",
+  );
+});

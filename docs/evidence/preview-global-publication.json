@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-25T07:29:11.403Z",
+  "checkedAt": "2026-10-26T14:50:48.558Z",
   "scope": "Isolated PR1 preview; public catalogue metadata only",
   "opportunities": 32,
   "destinationCountries": [
@@ -393,6 +393,19 @@
       ]
     },
     {
+      "id": "cmvni0z9t001f7fuztmioo3p1",
+      "slug": "stanford-knight-hennessy-3d33bac4e0",
+      "title": "Knight-Hennessy Scholars — graduate funding",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["US"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
       "id": "cmvnhyef200097fuzhc9rfvzv",
       "slug": "makerere-mastercard-masters-c95359c2d2",
       "title": "Makerere Mastercard Foundation — master's scholarships",
@@ -411,19 +424,6 @@
       "title": "GLOCAL — Erasmus Mundus Joint Master scholarship",
       "cycle": "September 2027 entry",
       "destinationCodes": ["GB", "DE", "ES", "SE", "CO", "JP", "NL"],
-      "versions": [
-        {
-          "actorId": "service:official-discovery",
-          "number": 1
-        }
-      ]
-    },
-    {
-      "id": "cmvni0z9t001f7fuztmioo3p1",
-      "slug": "stanford-knight-hennessy-3d33bac4e0",
-      "title": "Knight-Hennessy Scholars — graduate funding",
-      "cycle": "Scheme overview — cycle unconfirmed",
-      "destinationCodes": ["US"],
       "versions": [
         {
           "actorId": "service:official-discovery",

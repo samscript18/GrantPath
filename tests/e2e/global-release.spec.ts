@@ -56,6 +56,16 @@ test("authenticated operator publishes and replays a valid source while uncertai
     "/api/scholarships?q=Unresolved%20source%20scholarship&availability=all",
   );
   expect((await response.json()).total).toBe(0);
+  await expect(
+    page.getByRole("heading", { name: "[TEST ONLY] Unresolved source scholarship", exact: true }),
+  ).toBeVisible();
+  const overview = await (await page.request.get("/api/operator/discovery")).json();
+  const accepted = overview.decisions.find(
+    (decision: { title: string }) => decision.title === "[TEST ONLY] Controlled joint scholarship",
+  );
+  expect(accepted?.eventIds.length).toBeGreaterThan(0);
+  await page.getByText(/^Recent automatic publications/).click();
+  await expect(page.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
   await page.screenshot({
     path: "test-results/global-operator-review-desktop.png",
     fullPage: true,

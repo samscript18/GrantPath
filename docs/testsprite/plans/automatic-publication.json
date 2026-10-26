@@ -19,7 +19,7 @@
     },
     {
       "type": "assertion",
-      "description": "Search catalogue for Controlled joint scholarship with all windows; assert exactly one [TEST ONLY] Controlled joint scholarship. Open it and inspect Evidence you can inspect and Change history containing publication-1.0.0. Assert durable publication event IDs are retained in operator decision provenance."
+      "description": "Search catalogue for Controlled joint scholarship with all windows; assert exactly one [TEST ONLY] Controlled joint scholarship. Open it and inspect Evidence you can inspect and Change history containing publication-1.0.0. Assert durable publication event IDs are retained in operator decision provenance. Expand Recent automatic publications in Discovery & publication and inspect the entry named [TEST ONLY] Controlled joint scholarship. Verify its Durable publication event IDs section contains actual IDs."
     }
   ]
 }

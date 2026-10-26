@@ -5,7 +5,7 @@ from playwright.async_api import async_playwright, expect
 
 
 def value(template, name):
-    return os.environ["GRANTPATH_" + name.upper()] if template.startswith("VAR_{") else template
+    return os.environ["GRANTPATH_" + name.upper()] if template.startswith("VAR_" + "{") else template
 
 
 async def run_test():
@@ -16,22 +16,39 @@ async def run_test():
         executable = os.environ.get("GRANTPATH_CHROMIUM_PATH")
         browser = await p.chromium.launch(headless=True, **({"executable_path": executable} if executable else {}))
         try:
+            async def fetch(page, method, path, data=None):
+                # Keep a real recorded browser page alive. The provider instruments
+                # new_context with video options unsupported by APIRequestContext.
+                return await page.evaluate("""async ({method, path, data}) => {
+                    const response = await window.fetch(path, {
+                        method, credentials: 'same-origin',
+                        headers: {'Content-Type': 'application/json'},
+                        ...(data === null ? {} : {body: JSON.stringify(data)})
+                    });
+                    const text = await response.text();
+                    return {status: response.status, ok: response.ok,
+                        headers: Object.fromEntries(response.headers),
+                        body: text ? JSON.parse(text) : null};
+                }""", {"method": method, "path": path, "data": data})
+
             async def login(email, secret):
                 context = await browser.new_context(reduced_motion="reduce")
+                page = await context.new_page()
+                await page.goto(base + "/login")
                 # Honour the real authentication throttle; do not disable it for tests.
                 for attempt in range(4):
-                    response = await context.request.post(base + "/api/auth/sign-in/email", headers={"Origin": base}, data={"email": email, "password": secret})
-                    if response.status != 429 or attempt == 3:
+                    response = await fetch(page, "POST", "/api/auth/sign-in/email", {"email": email, "password": secret})
+                    if response["status"] != 429 or attempt == 3:
                         break
-                    retry_after = response.headers.get("retry-after", "16")
+                    retry_after = response["headers"].get("retry-after", "16")
                     await asyncio.sleep(min(60, max(1, int(retry_after) if retry_after.isdigit() else 16)))
-                assert response.status == 200, f"Isolated account login failed: {response.status}"
-                return context
+                assert response["status"] == 200, f"Isolated account login failed: {response['status']}"
+                return page
 
             async def call(context, method, path, data=None):
-                response = await context.request.fetch(base + path, method=method, headers={"Origin": base}, data=data)
-                assert response.ok, f"{method} {path}: {response.status}"
-                return await response.json()
+                response = await fetch(context, method, path, data)
+                assert response["ok"], f"{method} {path}: {response['status']}"
+                return response["body"]
 
             page = await browser.new_page()
             stable = None
@@ -40,9 +57,9 @@ async def run_test():
                 await expect(page.get_by_role("heading", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True)).to_be_visible()
                 await page.reload()
                 await expect(page.get_by_label("Destination", exact=True)).to_have_value(destination)
-                response = await page.request.get(base + "/api/scholarships?q=GLOCAL&destination=" + destination + "&availability=all")
-                assert response.ok
-                result = await response.json()
+                response = await fetch(page, "GET", "/api/scholarships?q=GLOCAL&destination=" + destination + "&availability=all")
+                assert response["ok"]
+                result = response["body"]
                 assert result["total"] == 1, "One joint programme must not become country duplicates"
                 row = result["rows"][0]
                 assert destination in row["destinationCodes"]

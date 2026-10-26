@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 24 October 2026: **147 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **137.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -41,3 +41,13 @@ Read `testsprite usage` through official CLI0.15.0: **146 credits**, Free, **0.5
 Portal UI check: the user supplied a current screenshot of Run Behavior. It exposes login reuse, viewport and concurrency, but **does not expose “Always use planned steps”** despite the current documentation describing it. The user was told to leave settings unchanged. No toggle change is claimed. Update authored plans and inspect actual per-run steps/code; do not infer that a saved Python file was executed verbatim.
 
 25 October2026 preparation readback:146 credits remain after saving7 authored plans/scripts and two nonsecret account names. Observed debit0. No exploration, generation or execution was dispatched. Existing rate0.5/case suggests3.5 for a7-case App execution; the actual debit must be read after it completes. No missing portal plan option is claimed enabled.
+
+25 October2026 actual automatic operations at e09b64d: two seven-case executions were observed (08:31:22Z and08:34:03Z), not one. Credit readback146→139, observed total debit7; no manual duplicate was launched. Screenshot shows one active vercel[bot] comment trigger, so overlapping trigger rows are not established. Comment creation/update events are being investigated. The first execution started before the new deployment was ready. The user confirmed enabling the previously disabled Merge gate after its screenshot exposed the setting. Future pushes remain held while event deduplication is resolved. One focused strict saved-code access replay (estimated0.5) is authorised for the concrete gap where the App browser agent could not inspect protected responses; no broad/manual full-suite duplication is requested.
+
+## Strict replay and scheduler follow-up —26 October2026
+
+Fresh read:138.5 credits, Free,0.5 per case. Strict access replay c68e8a72 consumed0.5 (139→138.5), failing with APIRequestContext.post TargetClosedError before any reported assertion step. Refused environment/template attempts executed zero steps and had no observed debit. Independent APIRequestContext sources then passed all seven exact scripts locally. One focused retry, estimated0.5, is prepared for this concrete provider-runtime gap; no broad duplicate suite. Keep50 reserved. User confirms the single Vercel Commit status trigger is Active with Merge gate on and the old comment trigger removed; next automatic execution remains to be observed.
+
+Strict independent-context retry e57ecf1e failed before assertions: provider injected record_video_dir into APIRequest.new_context. Actual balance138.5→138, debit0.5. Preserve original browser-context failure separately. No further API-context trial will be launched; compatible browser-based requests must first pass locally.
+
+Final strict browser replay ce999aed: actual138→137.5, debit0.5; TargetClosedError before reported assertions. Stop additional strict retries. Next automatic seven-case run estimate3.5 at the observed rate;137.5 currentbalance leaves ample50reserve. No manual duplicate automatic execution will be launched.

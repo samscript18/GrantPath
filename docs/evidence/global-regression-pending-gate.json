@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-25T08:33:41.532Z",
+  "pr": "https://github.com/samscript18/GrantPath/pull/1",
+  "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "mergeableState": "blocked",
+  "enforceAdmins": true,
+  "required": [
+    {
+      "context": "Typecheck, lint, domain and PostgreSQL checks",
+      "app_id": 15368
+    },
+    {
+      "context": "TestSprite V3",
+      "app_id": 2756476
+    }
+  ],
+  "checks": [
+    {
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "app": "github-actions",
+      "appId": 15368,
+      "result": null,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40176950172/job/121119570629"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "app": "vercel",
+      "appId": 8329,
+      "result": "success",
+      "url": "https://vercel.com/github"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "app": "gitguardian",
+      "appId": 46505,
+      "result": "failure",
+      "url": "https://dashboard.gitguardian.com"
+    }
+  ],
+  "statuses": [
+    {
+      "context": "Vercel",
+      "state": "pending",
+      "description": "Vercel is deploying your app",
+      "url": "https://vercel.com/lammysam8-7688/grantpath/AsJ5hRjci83naQQPGhCEuQhuPG3W"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "pending",
+      "description": "7 tests queued",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3f38a024-b654-4821-9d50-50b1f39c3142"
+    }
+  ],
+  "testSpriteGateVerified": true
+}

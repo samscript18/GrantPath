@@ -300,7 +300,18 @@ export async function discoveryOverview(actor: Actor) {
       take: 30,
     }),
   ]);
-  return { directories, candidates, decisions };
+  const titleOf = (data: Prisma.JsonValue | null) =>
+    data && typeof data === "object" && !Array.isArray(data) && typeof data.title === "string"
+      ? data.title
+      : null;
+  return {
+    directories,
+    candidates: candidates.map((candidate) => ({
+      ...candidate,
+      title: titleOf(candidate.observations[0]?.data ?? null),
+    })),
+    decisions: decisions.map((decision) => ({ ...decision, title: titleOf(decision.after) })),
+  };
 }
 
 export async function registerMappedDetails(actor: Actor, directoryId: string) {

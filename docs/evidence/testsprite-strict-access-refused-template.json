@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-25T09:02:32.091Z",
+  "finishedAt": "2026-10-25T09:02:34.976Z",
+  "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "reason": "Native browser agent could not assert protected API ownership. One strict saved-code replay addresses that concrete gap; not a duplicate broad App suite.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 139,
+  "case": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "exitCode": 1,
+  "body": {
+    "runId": "83b94eaf-a46c-4ca9-8a0a-62e72c032053",
+    "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "testTitle": "Cross-account application modification is denied by the server and owner data stays unchanged",
+    "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+    "userId": "a4b85448-0081-7067-e263-693e586fe698",
+    "status": "blocked",
+    "source": "cli",
+    "createdAt": "2026-10-25T09:02:34.641Z",
+    "startedAt": "2026-10-25T09:02:34.641Z",
+    "finishedAt": "2026-10-25T09:02:34.700Z",
+    "codeVersion": null,
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "environment": {
+      "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+      "name": "default"
+    },
+    "createdFrom": null,
+    "failedStepIndex": null,
+    "failureKind": null,
+    "error": "unresolved_env_placeholder: the stored script is templated against VAR_{\") else template\n\n\nasync def run_test():\n    base = value(\"https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app\", \"test_url\").rstrip(\"/\")\n    username = value(\"student@example.test\", \"test_username\")\n    password = value(\"[REDACTED]\", \"test_password\")\n    async with async_playwright() as p:\n        executable = os.environ.get(\"GRANTPATH_CHROMIUM_PATH\")\n        browser = await p.chromium.launch(headless=True, **({\"executable_path\": executable}, which this run's environment no longer supplies, so it could not be made runnable. Restore those environment keys on this run's environment, or update the test code.",
+    "videoUrl": null,
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "replay": {
+      "path": "refused",
+      "reason": "unresolved_env_placeholder",
+      "caveat": null
+    },
+    "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e635af11-89a1-4015-80ab-ebc451e59589/test/83b94eaf-a46c-4ca9-8a0a-62e72c032053",
+    "apiOutput": null,
+    "trace": null
+  },
+  "diagnostic": "idempotency-key: cli-run-a175f263-13e8-46da-a1ec-2f7730522967\nRun 83b94eaf-a46c-4ca9-8a0a-62e72c032053\nDashboard: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279\nrequestId: cli_2e7bc32f-4e4d-4157-a802-a7e4761f602c\nRun finished with status: blocked. Use 'testsprite test artifact get 83b94eaf-a46c-4ca9-8a0a-62e72c032053' to download the failure bundle.\n{\n  \"error\": {\n    \"code\": \"CLI_ERROR\",\n    \"message\": \"Run 83b94eaf-a46c-4ca9-8a0a-62e72c032053 finished with status: blocked\",\n    \"nextAction\": \"\",\n    \"requestId\": \"local\",\n    \"details\": {}\n  }\n}\n"
+}

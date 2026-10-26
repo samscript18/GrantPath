@@ -15,7 +15,7 @@
     },
     {
       "type": "assertion",
-      "description": "Inspect the operator exception queue for the controlled unresolved candidate and the exact LEVEL_SEMANTICS_UNSUPPORTED reason."
+      "description": "Click Discovery exceptions in the operator section navigation. In Candidate exceptions & work queue verify the heading [TEST ONLY] Unresolved source scholarship and exact LEVEL_SEMANTICS_UNSUPPORTED reason. Verify no accepted version or downstream event was created for this candidate."
     },
     {
       "type": "assertion",

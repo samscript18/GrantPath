@@ -1,0 +1,129 @@
+{
+  "startedAt": "2026-10-25T09:19:00.495Z",
+  "reason": "One bounded fresh dispatch with workflows enabled until terminal, replacing zero-job orphan attempts; no TestSprite operation.",
+  "runs": [
+    {
+      "id": 40180139452,
+      "workflowId": 395123908,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40180139452",
+      "status": "completed",
+      "result": "success",
+      "jobs": [
+        {
+          "id": 121129259621,
+          "name": "process",
+          "status": "completed",
+          "result": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "result": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "result": "success"
+            },
+            {
+              "name": "Run actions/setup-node@v4",
+              "result": "success"
+            },
+            {
+              "name": "Run npm ci",
+              "result": "success"
+            },
+            {
+              "name": "Run npm run db:generate",
+              "result": "success"
+            },
+            {
+              "name": "Process persisted application events and deliveries (no source fetches)",
+              "result": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@v4",
+              "result": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "result": "success"
+            },
+            {
+              "name": "Complete job",
+              "result": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40180145842,
+      "workflowId": 395123912,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40180145842",
+      "status": "completed",
+      "result": "success",
+      "jobs": [
+        {
+          "id": 121129279997,
+          "name": "fetch",
+          "status": "completed",
+          "result": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "result": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "result": "success"
+            },
+            {
+              "name": "Run actions/setup-node@v4",
+              "result": "success"
+            },
+            {
+              "name": "Run npm ci",
+              "result": "success"
+            },
+            {
+              "name": "Run npm run db:generate",
+              "result": "success"
+            },
+            {
+              "name": "Discover candidates from approved official directories",
+              "result": "success"
+            },
+            {
+              "name": "Retrieve bounded programme details and evaluate publication policy",
+              "result": "success"
+            },
+            {
+              "name": "Fetch registered due sources, respecting robots and cadence",
+              "result": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@v4",
+              "result": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "result": "success"
+            },
+            {
+              "name": "Complete job",
+              "result": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-10-25T09:21:07.827Z",
+  "cleanup": {
+    "workflows": "disabled_manually until default branch updated by owner",
+    "originalEnvironmentPoliciesRestored": true
+  }
+}

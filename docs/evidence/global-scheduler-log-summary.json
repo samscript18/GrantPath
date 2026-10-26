@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-26T14:50:56.128Z",
+  "scope": "Actual authenticated GitHub job log excerpts; no credentials or student records",
+  "application": {
+    "run": 40180139452,
+    "job": 121129259621,
+    "output": "{\"accounts\":{\"abandonedUploads\":0,\"dueDeletions\":0},\"reminders\":{\"queued\":0},\"events\":{\"completed\":20,\"failed\":0},\"deliveries\":{\"suppressed\":6,\"published\":2}}"
+  },
+  "source": {
+    "run": 40180145842,
+    "job": 121129279997,
+    "output": [
+      "    \"id\": \"glocal-programmes\",",
+      "    \"state\": \"success\",",
+      "    \"pages\": 1,",
+      "    \"discovered\": 2",
+      "    \"state\": \"review_required\",",
+      "      \"UNSUPPORTED_DETAIL_MAPPING\",",
+      "      \"UNSUPPORTED_LAYOUT\""
+    ]
+  }
+}

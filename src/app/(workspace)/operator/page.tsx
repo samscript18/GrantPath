@@ -28,6 +28,9 @@ export default async function OperatorPage({
   const overview = await operatorOverview(actor);
   const { edit } = await searchParams;
   const selected = overview.scholarships.find((s) => s.id === edit);
+  const discoveryReviews = overview.discovery.candidates.filter(
+    (candidate) => candidate.state === "review",
+  ).length;
   return (
     <div className="operator-studio">
       <PageHeading
@@ -39,7 +42,7 @@ export default async function OperatorPage({
         {[
           [overview.scholarships.length, "Catalogue records"],
           [overview.sources.length, "Registered sources"],
-          [overview.reviews.length, "Awaiting review"],
+          [overview.reviews.length + discoveryReviews, "Awaiting review"],
           [overview.failures.length, "Delivery follow-up"],
         ].map(([value, label]) => (
           <div key={label} className="px-5 py-5">
@@ -56,7 +59,8 @@ export default async function OperatorPage({
         <a href="#provider-images">Provider images</a>
         <a href="#sources">Sources</a>
         <a href="#discovery">Discovery & automatic publication</a>
-        <a href="#reviews">Review queue ({overview.reviews.length})</a>
+        <a href="#discovery-exceptions">Discovery exceptions ({discoveryReviews})</a>
+        <a href="#reviews">Source-change review ({overview.reviews.length})</a>
         <a href="#deliveries">Delivery diagnostics</a>
       </nav>
       <ProcessJobs />
@@ -138,6 +142,7 @@ export default async function OperatorPage({
           ))}
         </div>
         <details
+          id="discovery-exceptions"
           className="paper p-6"
           open={overview.discovery.candidates.some((c) => c.state === "review")}
         >
@@ -147,6 +152,9 @@ export default async function OperatorPage({
           <div className="mt-5 divide-y divide-border">
             {overview.discovery.candidates.map((candidate) => (
               <article key={candidate.id} className="py-5 first:pt-0">
+                <h3 className="mb-3 font-serif text-lg">
+                  {candidate.title || "New official opportunity"}
+                </h3>
                 <div className="flex flex-wrap items-center gap-3">
                   <Badge>{candidate.state}</Badge>
                   <a
@@ -191,6 +199,7 @@ export default async function OperatorPage({
           <ol className="mt-5 divide-y divide-border">
             {overview.discovery.decisions.map((decision) => (
               <li key={decision.id} className="py-4 text-xs leading-6">
+                <h3 className="font-serif text-lg">{decision.title || "Accepted opportunity"}</h3>
                 <p>
                   Version {decision.resultingVersion} · {formatTimestamp(decision.createdAt)}
                 </p>
@@ -199,6 +208,24 @@ export default async function OperatorPage({
                   {decision.policyVersion} · {decision.actorId} · {decision.eventIds.length} durable
                   event(s)
                 </p>
+                <dl className="mt-3 space-y-2 rounded-lg border border-border bg-secondary/30 p-3">
+                  <div>
+                    <dt className="font-semibold">Publication decision</dt>
+                    <dd className="break-all font-mono text-[10px]">{decision.id}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold">Durable publication event IDs</dt>
+                    <dd>
+                      {decision.eventIds.length
+                        ? decision.eventIds.map((id) => (
+                            <code key={id} className="block break-all text-[10px]">
+                              {id}
+                            </code>
+                          ))
+                        : "No downstream events"}
+                    </dd>
+                  </div>
+                </dl>
                 <details>
                   <summary className="cursor-pointer underline">
                     Inspect before / after and evidence
@@ -367,7 +394,7 @@ export default async function OperatorPage({
         <RegisterSource scholarships={overview.scholarships} />
       </section>
       <section id="reviews" className="mt-10">
-        <h2 className="font-serif text-2xl">Review queue</h2>
+        <h2 className="font-serif text-2xl">Source-change review</h2>
         <p className="mt-3 text-sm text-muted-foreground">
           {overview.reviews.length
             ? `${overview.reviews.length} candidate changes await review.`

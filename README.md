@@ -4,9 +4,9 @@ A scholarship discovery, evidence, eligibility and application workspace built w
 
 **[Public preview](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)** · **[Release PR #1](https://github.com/samscript18/GrantPath/pull/1)**
 
-## Current release work — 25 October 2026
+## Current release work — 26 October 2026
 
-The global continuation is being prepared on `release/hosted-verification`; remote release verification is in progress. The previously deployed head was50570e1. Do not infer a new deployment or passing App result from local implementation. Exact final state belongs in [release review](docs/RELEASE_REVIEW.md).
+The global continuation is deployed for verification on `release/hosted-verification` at e09b64d. It deliberately retains the disclosed saved-residence defect for the isolated failure/gate/fix exercise and must not be merged. Local corrections are prepared; final hosted verification is still in progress. Exact state belongs in [release review](docs/RELEASE_REVIEW.md).
 
 The expanded persisted catalogue contains **32 real source-backed records across17 actual destination countries**, six regions including Ghana, Uganda and South Africa. Counts exclude controlled fixtures and include scheme overviews and historical/closed cycles; they are not counts of open applications. GLOCAL is one joint programme spanning seven participating countries, rather than seven duplicate awards. [Actual coverage and access limits](docs/SOURCE_COVERAGE.md), [public metadata readback](docs/evidence/global-coverage.json).
 

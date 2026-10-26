@@ -1,16 +1,17 @@
-# Current release review — 25 October 2026
+# Current release review —26 October2026
 
-Global continuation implementation and local verification are in progress on `release/hosted-verification`. Previously published head50570e1 remains the historical reference until new deployment/check evidence is recorded. No merge or Discord submission is authorised.
+Published verification head e09b64d is Ready at [its immutable deployment](https://grantpath-k70kfvwwg-lammysam8-7688.vercel.app). It deliberately retains the disclosed saved-residence defect for isolated failure/gate/fix evidence and must not be merged. The healthy correction and operator follow-up are locally implemented; final hosted verdict is pending. No merge or Discord submission is authorised.
 
-- Persisted32 real records,17 actual destination countries, six regions, three African countries. Incomplete scheme overviews and closed cycles remain clearly labelled; this is not32 open applications.
-- Additive multi-destination migration, actual-country filters, participating-institution ranking and immutable earlier IDs/history.
-- Approved listing/detail separation, bounded robots-aware CLI fetching, leased candidates, deterministic policy decisions, shared transactional publication/outbox and visible operator exceptions/pauses.
-- Actual live retrieval/policy publication of12 reviewed candidates in development and isolated PR1; three actual directory workers succeeded (GLOCAL, McGill, Makerere). Preview entries were temporarily staged while its older JSON parser remained deployed, retaining accepted history.
-- Account security/privacy/session ownership checks and actual disposable Cloudinary upload/read/remove cleanup are locally verified. Brevo and Google are preserved.
-- GitHub encrypted scheduler environments configured for the isolated PR1 database. Actual workflow dispatch/default-branch activation and hosted final checks are pending. Neon API lifecycle cannot be completed without absent API/project/baseline configuration.
-- Fresh TestSprite balance146, observed0.5 per case execution; no new debit yet. Seven exact scripts passed locally. Missing portal plan toggle is confirmed by the user's screenshot; automatic execution semantics still require artifact inspection.
+- Public preview readback:32 real records,17 actual destination countries, six regions and three African countries. Twelve official detail candidates passed deterministic publication. Overviews and historical/closed calls are explicitly labelled; these are not32 open applications.
+- Additive multi-destination migration, actual-country filters and separate preference ranking preserve earlier IDs/history. One GLOCAL joint programme appears under each of seven actual destinations without duplicate cycles.
+- Approved listing/detail separation, bounded robots-aware standalone fetching, durable leases/retries and shared transactional publication/evidence/outbox. Unsupported semantics, missing conditions, conflicting evidence and layout drift go to operator exceptions; source/policy pauses preserve facts.
+- Actual [application job](https://github.com/samscript18/GrantPath/actions/runs/40180139452) and [source job](https://github.com/samscript18/GrantPath/actions/runs/40180145842) succeeded on the release branch. Application output:20events/0failed; source output:2GLOCAL links and one unsupported-layout exception. Workflows are disabled until the owner separately merges current code; original environment policies were restored. No routine cron execution is claimed.
+- Typecheck/lint85unit/31PostgreSQL checks and production build pass locally. All13 refreshed production-browser journeys pass, including seven exact Python sources. Account security/privacy/session ownership and disposable Cloudinary cleanup have actual local evidence. Brevo sender/settings are verified; recipient receipt remains unobserved.
+- Actual native App second execution at e09b64d reported3passed/3failed/1blocked while posting success with Merge gate off. User now confirms one Vercel Commit status trigger, old comment trigger removed and Merge gate on. Required main contexts still include correctness App15368 and TestSprite App2756476. A new read-only CI guard rejects partial/blocked summaries; no check was removed.
+- Fresh TestSprite balance137.5 after three0.5 strict attempts; all failed before reported assertions because of provider browser/API-context instrumentation. Exact local scripts pass; remote exact assertion coverage remains unverified. Further credited work is bounded and retains50credits.
+- Neon API/project/baseline configuration is absent; automatic preview lifecycle is unverified. Existing isolated PR1 database is retained. Connected GitHub metadata update returned403; prepared description remains in SUBMISSION_PR.md without a bypass attempt.
 
-Final CI, deployment, exact App assertions, disclosed red/blocked/fix/green evidence and final SHA must be appended after actual operations. Older checks below apply only to their named heads.
+Final CI, immutable deployment, authentic App red/blocked/fix/green evidence and exact final SHA remain to be recorded. Older checks below apply only to their named heads.
 
 ---
 

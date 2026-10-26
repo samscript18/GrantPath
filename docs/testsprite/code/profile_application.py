@@ -6,7 +6,7 @@ from playwright.async_api import async_playwright, expect
 
 async def run_test():
     base_url, username, password = "VAR_{url}", "VAR_{username}", "VAR_{password}"
-    if base_url.startswith("VAR_{"):
+    if base_url.startswith("VAR_" + "{"):
         base_url = os.environ["GRANTPATH_TEST_URL"]
         username, password = os.environ["GRANTPATH_TEST_USERNAME"], os.environ["GRANTPATH_TEST_PASSWORD"]
     async with async_playwright() as playwright:

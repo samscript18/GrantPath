@@ -1,3 +1,5 @@
+> Current verification update —26 October2026: seven sources are saved. e09b64d native App latest3passed/3failed/1blocked; its green status was posted while Merge gate was off. New single Vercel Commit status trigger + Merge gate are user-confirmed, awaiting a new automatic verdict. Exact remote scripts are not established by regenerated App steps. Two strict access attempts failed before assertions due to provider context instrumentation; actual balance138. Earlier preparation/pass observations below are historical.
+
 # Current native suite — 25 October2026
 
 Existing project/trigger preserved. Seven focused cases are now saved via official CLI0.15.0, without exploration/generation/execution. The original two were updated for current route/filter/bookmark controls while retaining their assertions; five add the critical global/publication/ownership guarantees. [Preparation manifest](../evidence/testsprite-global-suite-preparation.json).
