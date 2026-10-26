@@ -21,12 +21,12 @@ export const metadata = { title: "Operator studio" };
 export default async function OperatorPage({
   searchParams,
 }: {
-  searchParams: Promise<{ edit?: string }>;
+  searchParams: Promise<{ edit?: string; publication?: string }>;
 }) {
   const actor = await requireUser();
   if (actor.role !== "operator") notFound();
-  const overview = await operatorOverview(actor);
-  const { edit } = await searchParams;
+  const { edit, publication } = await searchParams;
+  const overview = await operatorOverview(actor, publication);
   const selected = overview.scholarships.find((s) => s.id === edit);
   const discoveryReviews = overview.discovery.candidates.filter(
     (candidate) => candidate.state === "review",
@@ -205,10 +205,28 @@ export default async function OperatorPage({
             ))}
           </div>
         </details>
-        <details className="paper p-6">
+        <details
+          id="automatic-publications"
+          className="paper p-6 scroll-mt-28"
+          open={Boolean(publication)}
+        >
           <summary className="cursor-pointer font-serif text-xl">
-            Recent automatic publications ({overview.discovery.decisions.length})
+            {publication ? "Publication history" : "Recent automatic publications"} (
+            {overview.discovery.decisions.length})
           </summary>
+          {publication && (
+            <Link
+              className="mt-3 inline-block text-xs font-semibold underline"
+              href="/operator#automatic-publications"
+            >
+              Show recent publications across all opportunities
+            </Link>
+          )}
+          {!overview.discovery.decisions.length && (
+            <p className="mt-4 text-sm text-muted-foreground">
+              No accepted automatic publications found.
+            </p>
+          )}
           <ol className="mt-5 divide-y divide-border">
             {overview.discovery.decisions.map((decision) => (
               <li key={decision.id} className="py-4 text-xs leading-6">

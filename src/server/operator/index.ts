@@ -49,7 +49,7 @@ export async function createOpportunity(actor: Actor, input: unknown) {
   const result = await publishScholarship(actor, record.id, v.data, 0, v.reason);
   return { ...result, id: record.id, slug: record.slug };
 }
-export async function operatorOverview(actor: Actor) {
+export async function operatorOverview(actor: Actor, publication?: string) {
   requireOperator(actor);
   const [scholarships, sources, reviews, failures, events, audits, recentEvents] =
     await Promise.all([
@@ -84,6 +84,6 @@ export async function operatorOverview(actor: Actor) {
       db().audit.findMany({ orderBy: { createdAt: "desc" }, take: 20 }),
       db().outbox.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
     ]);
-  const discovery = await discoveryOverview(actor);
+  const discovery = await discoveryOverview(actor, publication);
   return { scholarships, sources, reviews, failures, events, recentEvents, audits, discovery };
 }

@@ -64,7 +64,7 @@ async def run_test():
             await expect(page.get_by_role("heading", name="[TEST ONLY] Controlled joint scholarship", exact=True)).to_be_visible()
             await expect(page.get_by_role("heading", name="Evidence you can inspect.")).to_be_visible()
             await expect(page.locator("#history")).to_contain_text("publication-1.0.0")
-            overview = await call(operator, "GET", "/api/operator/discovery")
+            overview = await call(operator, "GET", "/api/operator/discovery?scholarshipId=" + scholarship_id)
             decisions = [d for d in overview["decisions"] if d["scholarshipId"] == scholarship_id]
             assert decisions and decisions[0]["eventIds"], "Publication needs durable downstream provenance"
         finally:

@@ -1,5 +1,23 @@
 # Final release review —26October2026
 
+## Current verification work — 26 October 2026
+
+Published source before this increment is `3591af74281e3e0e5467ce954331c7106d61cf1e`, Ready at https://grantpath-9f446w9sh-lammysam8-7688.vercel.app. Public alias: https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app; PR: https://github.com/samscript18/GrantPath/pull/1. Later checkpoints below are historical unless a newer exact-head receipt is recorded.
+
+That head's automatic TestSprite execution1e3b1a12 reported4passed/1failed/2blocked. Exception handling passed; the notification scenario selector hit stale-node errors, cross-account HTTP inspection remained browser-blocked, and literal multi-destination comparisons were incomplete. Independent readback still confirms all7GLOCAL filters return one identical record/internal href and the canonical official URL. GitGuardian is green. CI40380815968 passed all software steps before its required native-outcome guard failed.
+
+This increment adds literal official scholarship links to catalogue cards, replaces the native scenario dropdown with persistent pressed buttons, and provides scholarship-scoped accepted publication history so old decisions remain inspectable outside the30entry recent list. No source facts, histories, authentication checks or eligibility assertions are weakened. A profile replay now waits for streamed dashboard readiness and honours real429Retry-After responses.
+
+The user confirmed App saved-code replay cannot be enabled and requested an alternative. Native backend project `d36cedef-a40e-4fb7-ae61-f3b2484ede06`, case `88b47334-232c-4665-a6a2-413b09c34eb5`, executes the actual protected HTTP assertions using separate cookie jars. Authentic run4253d3f6 passed with stored codeVersion and explicit404/foreign-read-exclusion/unchanged-owner-fields/403 output. Observed112→111.8credits (0.2debit). The frontend ownership slot now covers visible private-note isolation; it is a companion, not a substitute for server enforcement.
+
+Main protection now additionally requires **TestSprite API ownership** from GitHub Actions App15368, alongside original correctness/App15368 and TestSprite V3/App2756476. Strict freshness and administrator enforcement remain enabled. The additional CI job waits for the exact PR head at the isolated preview using a public read-only revision endpoint, verifies remote source bytes, preserves the50credit reserve, dispatches one idempotent native backend run without auto-heal, and requires matching codeVersion and exact assertion output. No Pro auto-auth, purchase or unsupported replay switch is used.
+
+Local typecheck/lint87unit/32PostgreSQL/build and the three impacted production-browser journeys pass, including all9exact scripts. Scoped history validation and operator denial are included in the actual PostgreSQL service test. Full13journey production-browser rerun also passes (3.0minutes), including all9exact sources. Desktop and360px scenario-button screenshots were inspected. Next exact-head automatic verification is pending at this preparation checkpoint. Expected one7case browser suite plus one backend case is3.7credits from observed111.8; no duplicate manual run. The next published head must receive its own actual checks before release readiness can be claimed.
+
+---
+
+## Earlier checkpoints (historical)
+
 ## Blocked-case follow-up — 26 October 2026
 
 GitGuardian is now independently confirmed green on PR1/source9461493; the password checklist tests remain intact. The linked correctness job passed every software step and failed only its retained native-outcome guard (5/7, two blocked).

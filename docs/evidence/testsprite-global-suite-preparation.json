@@ -12,19 +12,19 @@
     {
       "file": "profile_application",
       "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
-      "codeVersion": "v-bb625127f409",
+      "codeVersion": "v-6ebae73763fd",
       "planSteps": 16
     },
     {
       "file": "multi_destination",
       "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
-      "codeVersion": "v-89406061c04e",
+      "codeVersion": "v-ba7daaecadb5",
       "planSteps": 4
     },
     {
       "file": "automatic_publication",
       "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
-      "codeVersion": "v-f28e68163054",
+      "codeVersion": "v-dabe6cdebe80",
       "planSteps": 4
     },
     {
@@ -40,12 +40,12 @@
       "planSteps": 8
     },
     {
-      "file": "access_denial",
+      "file": "account_privacy",
       "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
-      "codeVersion": "v-8f6fadba327c",
+      "codeVersion": "v-6f565aec7999",
       "planSteps": 4
     }
   ],
-  "refreshedAt": "2026-10-26T18:43:00.902Z",
-  "reason": "Exception persisted publication-outcome assertions and independent HTTP cookie-jar ownership checks; no weakened assertions."
+  "refreshedAt": "2026-10-26T19:38:57.737Z",
+  "reason": "Browser privacy plus separate mandatory native HTTP ownership; literal catalogue source links, reliable scenario buttons and scoped accepted history. Original HTTP assertions retained."
 }

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 export function ControlledSourceControls() {
@@ -37,18 +38,28 @@ export function ControlledSourceControls() {
         Fictional, labelled source snapshots use the actual publication service in this isolated
         test database. They do not fetch official URLs or notify real email accounts.
       </p>
-      <label className="field-label mt-4" htmlFor="controlled-scenario">
-        Isolated scenario
-      </label>
-      <select
-        id="controlled-scenario"
-        className="input"
-        value={scenario}
-        onChange={(e) => setScenario(e.target.value)}
-      >
-        <option value="publication">Publication and replay</option>
-        <option value="change">Eligibility and notifications</option>
-      </select>
+      <fieldset className="mt-4" disabled={busy}>
+        <legend className="field-label">Isolated scenario</legend>
+        <div className="flex flex-wrap gap-2">
+          {[
+            ["publication", "Publication and replay"],
+            ["change", "Eligibility and notifications"],
+          ].map(([value, label]) => (
+            <Button
+              key={value}
+              size="sm"
+              variant={scenario === value ? "default" : "outline"}
+              aria-pressed={scenario === value}
+              onClick={() => {
+                setScenario(value);
+                setResult(null);
+              }}
+            >
+              {label}
+            </Button>
+          ))}
+        </div>
+      </fieldset>
       <div className="mt-4 flex flex-wrap gap-3">
         <Button size="sm" disabled={busy} onClick={() => run("valid")}>
           Publish valid snapshot
@@ -68,6 +79,14 @@ export function ControlledSourceControls() {
           <p>{result.message || result.decision}</p>
           {result.resultingVersion && <p>Accepted version {result.resultingVersion}</p>}
           <p>{result.reasonCodes?.join(" · ")}</p>
+          {result.scholarshipId && (
+            <Link
+              className="font-semibold underline underline-offset-4"
+              href={`/operator?publication=${encodeURIComponent(result.scholarshipId)}#automatic-publications`}
+            >
+              View publication history
+            </Link>
+          )}
         </div>
       )}
     </details>

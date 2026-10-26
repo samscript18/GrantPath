@@ -19,14 +19,23 @@ test("exact reusable TestSprite sources assert the connected public, policy, eli
     "automatic_publication",
     "publication_exception",
     "eligibility_notification",
+    "account_privacy",
     "access_denial",
+    "access_denial_api",
   ]) {
     const placeholders = [
       ...readFileSync(`docs/testsprite/code/${script}.py`, "utf8").matchAll(/VAR_\{([^}]+)\}/g),
     ].map((match) => match[1]);
     expect(
       placeholders.every((name) =>
-        ["url", "username", "password", "operator_email", "other_email"].includes(name),
+        [
+          "url",
+          "username",
+          "password",
+          "operator_email",
+          "other_email",
+          "expected_commit",
+        ].includes(name),
       ),
       `Unsupported provider template marker in ${script}`,
     ).toBe(true);
@@ -38,6 +47,7 @@ test("exact reusable TestSprite sources assert the connected public, policy, eli
         GRANTPATH_TEST_URL: "http://127.0.0.1:3100",
         GRANTPATH_TEST_USERNAME: "student@example.test",
         GRANTPATH_TEST_PASSWORD: password,
+        GRANTPATH_EXPECTED_COMMIT: process.env.APP_REVISION,
         GRANTPATH_OPERATOR_EMAIL: "operator@example.test",
         GRANTPATH_OTHER_EMAIL: "other@example.test",
         GRANTPATH_CHROMIUM_PATH: chromium.executablePath(),

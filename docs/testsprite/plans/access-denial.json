@@ -1,25 +1,25 @@
 {
   "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
   "type": "frontend",
-  "name": "Cross-account application modification is denied by the server and owner data stays unchanged",
-  "description": "Execute the saved Python HTTP assertions with independent authenticated cookie jars. This is a server-enforcement test: real 404/403 responses, foreign read exclusion, and unchanged owner data are mandatory. Browser visibility cannot replace these assertions.",
+  "name": "Private application notes stay with their owner across independent browser sessions",
+  "description": "Browser privacy companion to the mandatory native API ownership test 88b47334-232c-4665-a6a2-413b09c34eb5. Actual 404/403, foreign read exclusion and unchanged owner fields remain enforced by the separate required TestSprite API ownership check; browser visibility is not claimed as server enforcement.",
   "priority": "p1",
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in the independent owner VAR_{other_email} using VAR_{password}; save the real Twente scholarship and record its private application id, note and revision. This owner is separate from the concurrent profile/application journey."
+      "description": "Sign in VAR_{other_email} with VAR_{password}; open the real Twente scholarship. Save if needed. Expand My application plan, set Private notes to [TEST ONLY] Owner-only application note, and Save my plan. Verify saved confirmation."
+    },
+    {
+      "type": "action",
+      "description": "Sign out, then sign in VAR_{username} with VAR_{password}. Open the same Twente scholarship. Dismiss the unfinished-profile prompt if present."
     },
     {
       "type": "assertion",
-      "description": "Use an independent authenticated context for the configured student VAR_{username} with VAR_{password}. Send an update for the owner application to the normal protected application API."
+      "description": "Verify the owner-only note does not appear for this other account. If its own My application plan exists, expand it and verify Private notes is not [TEST ONLY] Owner-only application note. Verify there is no Operator navigation item."
     },
     {
       "type": "assertion",
-      "description": "Assert the actual server responds404; another userId query cannot expose the first student application. Assert student access to /api/operator/discovery responds403."
-    },
-    {
-      "type": "assertion",
-      "description": "Read the application again as its owner and assert original note and revision are unchanged. Do not infer access denial from a hidden button alone."
+      "description": "Sign out and return as VAR_{other_email}. Open Twente, expand My application plan, and verify Private notes still equals [TEST ONLY] Owner-only application note. Required HTTP ownership enforcement is checked separately by the native API test, not inferred from hidden UI."
     }
   ]
 }

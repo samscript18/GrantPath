@@ -10,7 +10,12 @@ import {
 } from "@/server/discovery/service";
 export async function GET(request: Request) {
   try {
-    return Response.json(await discoveryOverview(await apiActor(request)));
+    return Response.json(
+      await discoveryOverview(
+        await apiActor(request),
+        new URL(request.url).searchParams.get("scholarshipId") ?? undefined,
+      ),
+    );
   } catch (e) {
     return apiError(e);
   }

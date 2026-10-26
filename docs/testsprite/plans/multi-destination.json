@@ -15,7 +15,7 @@
     },
     {
       "type": "assertion",
-      "description": "Repeat for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL; assert each shows exactly the same scholarship link once. Capture and compare each literal internal href, not a destination filter URL; missing comparisons must fail. Catalogue officialUrl must be https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ under every destination."
+      "description": "Repeat filters for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL. Each must show exactly one GLOCAL result with the same literal internal scholarship href. In EACH result article inspect the visible Official scholarship button: its literal href must equal https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/. This button uses that catalogue record\u2019s officialUrl directly; compare the actual href under every destination, not the filter URL or a redirect. Missing comparisons must fail."
     },
     {
       "type": "assertion",

@@ -40,6 +40,15 @@ describe("actual persisted discovery and publication pipeline", () => {
     if (!("scholarshipId" in result) || !result.scholarshipId)
       throw new Error("Missing published record");
     const id = result.scholarshipId;
+    await expect(discoveryOverview({ ...operator, role: "student" }, id)).rejects.toThrow(
+      "Operator",
+    );
+    const scoped = await discoveryOverview(operator, id);
+    expect(scoped.decisions.length).toBeGreaterThan(0);
+    expect(scoped.decisions.every((decision) => decision.scholarshipId === id)).toBe(true);
+    expect(scoped.decisions[0].eventIds.length).toBeGreaterThan(0);
+    expect((await discoveryOverview(operator, "nonexistent-scholarship")).decisions).toEqual([]);
+    await expect(discoveryOverview(operator, "x".repeat(129))).rejects.toThrow();
     const s = await db().scholarship.findUniqueOrThrow({ where: { id } });
     expect(s.destinationCodes.sort()).toEqual(["DE", "GB"]);
     expect(s.version).toBe(1);

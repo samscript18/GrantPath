@@ -7,7 +7,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in isolated operator VAR_{operator_email} with VAR_{password}; select Eligibility and notifications in Isolated source verification, publish valid snapshot to establish target-level master."
+      "description": "Sign in isolated operator VAR_{operator_email} with VAR_{password}; click the Eligibility and notifications button (assert it is pressed) in Isolated source verification, publish valid snapshot to establish target-level master."
     },
     {
       "type": "action",
@@ -23,7 +23,7 @@
     },
     {
       "type": "action",
-      "description": "Sign in as operator, reopen Isolated source verification, explicitly select Eligibility and notifications again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
+      "description": "Sign in as operator, reopen Isolated source verification, explicitly click the Eligibility and notifications button (assert it is pressed) again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
     },
     {
       "type": "assertion",

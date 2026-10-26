@@ -66,6 +66,7 @@ async def run_test():
                 row = result["rows"][0]
                 assert destination in row["destinationCodes"]
                 assert row["data"]["officialUrl"] == official_url
+                await expect(page.get_by_role("link", name="Official scholarship information for GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True)).to_have_attribute("href", official_url)
                 href = await page.get_by_role("link", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True).get_attribute("href")
                 stable_href = stable_href or href
                 assert href == stable_href, "The exact internal detail href must match under every destination"

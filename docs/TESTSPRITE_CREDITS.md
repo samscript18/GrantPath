@@ -81,3 +81,9 @@ GLOCAL canonical source9461493 automatic7eb7869b:5passed/2blocked/no failed; GLO
 Fresh preflight116.5credits, observed0.5/case. Initial independent HTTP replay9e65f3be failed because the frontend runner requires an async callable; balance116 (0.5debit). Corrected async source passed live locally, then strict TestSprite169e6917passed with replay.path=replay. Balance after second debit is read separately; no broad exploration/generation. These two focused operations address explicit prior runtime errors; normal seven-case automatic PR verification remains required and enabled.
 
 Observed post-strict balance115.5:116→115.5debit0.5; two focused operations total1credit. One next automatic seven-case suite estimates3.5; no duplicate manual run.
+
+## Native API alternative — observed metering
+
+Source3591af7 automatic1e3b1a12:4passed/1failed/2blocked; exception passed, access stayed browser-blocked, multi comparisons incomplete and notification selector hit stale-node errors. Actual115.5→112, debit3.5. No repeated manual full suite. GLOCAL independent readback still confirms all7same href/ID/one record/canonical source URL.
+
+Native backend project preparation was uncredited. Backend4253d3f6 passed; actual112→111.8, debit0.2, compared with conservative0.5preflight. Saved codeVersion v-daf95e66fcb1 and actual assertion output are retained. Additional required API gate preserves the original mandatory HTTP checks and both existing requirements. Next coherent push expects one7case App suite (3.5observed) plus one backend case (0.2observed):3.7estimated, with50reserve retained. Do not duplicate either automatic operation manually for the same head.

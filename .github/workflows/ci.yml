@@ -69,3 +69,28 @@ jobs:
           path: |
             playwright-report/
             test-results/
+  api-ownership:
+    name: TestSprite API ownership
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: grantpath-api-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact deployed commit and native protected API assertions
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+          RELEASE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          RELEASE_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: node scripts/verify-api-ownership.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: testsprite-api-evidence
+          path: testsprite-api-summary.json

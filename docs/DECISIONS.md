@@ -85,3 +85,11 @@ Canonical GLOCAL final readback:9461493 Ready, live DOM/API all7destinations sam
 ## HTTP ownership verification and explicit publication absence
 
 Use independent cookie jars against the real protected API for saved access assertions. Server ownership cannot be established by hidden controls or public metadata. Keep the async entry point required by TestSprite’s frontend replay runner, while avoiding its problematic browser-context instrumentation. Operator decisions expose persisted resultingVersion/eventIds counts so negative publication outcomes are inspectable without inventing a scholarship page. No public test endpoint or private application identifier UI was added.
+
+## Native API gate replaces browser-only HTTP inspection
+
+User rejected relying on vendor enablement of App saved-code replay. Created a separate backend project because TestSprite rejects backend cases in frontend projects. Browser-only credentials are rejected at project creation, but the documented environment interface accepted encrypted account credentials without Pro auto-auth. Native backend4253d3f6 passed actual separate-cookie-jar404/403/read-exclusion/unchanged-owner assertions and reported reviewed codeVersion v-daf95e66fcb1 plus explicit API output. Keep the original HTTP source and all assertions; move their mandatory hosted enforcement to an additional required GitHub TestSprite API ownership job. The original App and correctness requirements/admin/strict settings remain. The old browser case becomes an explicit UI privacy companion; it is not described as server enforcement.
+
+Before each API run, require the exact public deployment revision, compare remote saved source byte-for-byte with the reviewed repo, enforce the50credit reserve, use a commit-scoped idempotency key, then require matching returned codeVersion, passed verdict and exact assertion output. Public GET /api/health exposes only application name and public commit SHA; no test mutations, private identifiers or credentials. No paid auto-auth, service purchase or gate bypass.
+
+Operator fixture scenario selection uses direct pressed-state buttons and retains state through router refresh. Catalogue official links use each projected record’s officialUrl directly, so destination comparisons are inspectable without an API console. Source evidence and application URLs remain distinct.

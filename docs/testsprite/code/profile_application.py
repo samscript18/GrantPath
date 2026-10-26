@@ -21,8 +21,18 @@ async def run_test():
                 await page.goto(base_url.rstrip("/") + "/login")
                 await page.get_by_label("Email address").fill(username)
                 await page.get_by_label("Password", exact=True).fill(password)
-                await page.get_by_role("button", name="Welcome back").click()
-                await expect(page).to_have_url(re.compile(r"/dashboard$"))
+                for attempt in range(4):
+                    async with page.expect_response(lambda r: r.url.endswith("/api/auth/sign-in/email") and r.request.method == "POST") as response_info:
+                        await page.get_by_role("button", name="Welcome back").click()
+                    response = await response_info.value
+                    if response.status != 429 or attempt == 3:
+                        break
+                    retry_after = response.headers.get("retry-after", "16")
+                    delay = int(retry_after) if retry_after.isdigit() else 16
+                    assert 0 < delay <= 60, "Authentication throttle exceeds bounded test wait"
+                    await asyncio.sleep(delay)
+                assert response.status == 200, f"Isolated account login failed: {response.status}"
+                await expect(page).to_have_url(re.compile(r"/dashboard$"), timeout=45000)
                 later = page.get_by_role("button", name="Continue study profile later", exact=True)
                 try:
                     await later.wait_for(state="visible", timeout=1500)
@@ -63,7 +73,9 @@ async def run_test():
             await page.get_by_role("form", name="Study profile", exact=True).get_by_label("Intended field of study").fill("Computer Science")
             await page.get_by_role("button", name="Save & continue").click()
             await page.get_by_role("button", name="Save & see my matches").click()
-            await expect(page).to_have_url(re.compile(r"/dashboard$"))
+            await expect(page).to_have_url(re.compile(r"/dashboard$"), timeout=45000)
+            # The URL can change before the streamed dashboard controls arrive.
+            await expect(page.get_by_role("heading", name=re.compile(r"^A little closer,"))).to_be_visible(timeout=45000)
             update = page.get_by_role("button", name="Update my matches")
             if await update.count():
                 async with page.expect_response(lambda response: response.url.endswith("/api/matches") and response.request.method == "POST", timeout=120000) as response_info:

@@ -116,12 +116,23 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
               ? "Evidence needs a fresh check"
               : `Official evidence checked ${formatDate(health.lastVerified)}`}
         </span>
-        <Link
-          href={`${href}#requirements`}
-          className="opportunity-open inline-flex items-center gap-2 rounded-md bg-secondary/50 px-3 py-2 text-[11px] font-semibold text-primary transition-colors hover:bg-secondary"
-        >
-          View opportunity <ArrowUpRight size={13} aria-hidden="true" />
-        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href={row.data.officialUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Official scholarship information for ${row.title}`}
+            className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-[11px] font-semibold text-primary transition-colors hover:bg-secondary"
+          >
+            Official scholarship <ArrowUpRight size={13} aria-hidden="true" />
+          </a>
+          <Link
+            href={`${href}#requirements`}
+            className="opportunity-open inline-flex items-center gap-2 rounded-md bg-secondary/50 px-3 py-2 text-[11px] font-semibold text-primary transition-colors hover:bg-secondary"
+          >
+            View opportunity <ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </article>
   );

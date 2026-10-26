@@ -1,10 +1,12 @@
 import "dotenv/config";
+import { execFileSync } from "node:child_process";
 import { defineConfig, devices } from "@playwright/test";
 const database = process.env.E2E_DATABASE_URL || process.env.TEST_DATABASE_URL;
 if (!database || !new URL(database).pathname.includes("test"))
   throw new Error(
     "Browser tests need an isolated E2E_DATABASE_URL or TEST_DATABASE_URL containing test.",
   );
+process.env.APP_REVISION = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 const baseURL = "http://127.0.0.1:3100";
 process.env.DATABASE_URL = database;
 process.env.DATABASE_TRANSPORT = "tcp";
@@ -37,6 +39,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI && process.env.PLAYWRIGHT_PRODUCTION !== "1",
     timeout: 120000,
     env: {
+      APP_REVISION: process.env.APP_REVISION,
       DATABASE_URL: database,
       DATABASE_TRANSPORT: "tcp",
       DIRECT_URL: database,

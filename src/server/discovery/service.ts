@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { controlledFixturesEnabled } from "./controlled";
 import { db } from "@/lib/db";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
@@ -276,8 +277,9 @@ export async function processDetailHtml(
     return decision;
   });
 }
-export async function discoveryOverview(actor: Actor) {
+export async function discoveryOverview(actor: Actor, scholarshipId?: string) {
   requireOperator(actor);
+  const selectedId = z.string().min(1).max(128).optional().parse(scholarshipId);
   const [directories, candidates, decisions] = await Promise.all([
     db().discoveryDirectory.findMany({
       include: {
@@ -295,7 +297,7 @@ export async function discoveryOverview(actor: Actor) {
       take: 100,
     }),
     db().publicationDecision.findMany({
-      where: { decision: "auto_publish" },
+      where: { decision: "auto_publish", ...(selectedId ? { scholarshipId: selectedId } : {}) },
       orderBy: { createdAt: "desc" },
       take: 30,
     }),

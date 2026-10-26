@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-26T19:18:44.192Z",
+  "secretConfigured": true,
+  "secretName": "TESTSPRITE_API_KEY",
+  "enforceAdmins": true,
+  "strict": true,
+  "required": [
+    {
+      "context": "Typecheck, lint, domain and PostgreSQL checks",
+      "app_id": 15368
+    },
+    {
+      "context": "TestSprite V3",
+      "app_id": 2756476
+    },
+    {
+      "context": "TestSprite API ownership",
+      "app_id": 15368
+    }
+  ],
+  "reason": "Add native API ownership requirement; preserve both original required checks and all original HTTP assertions."
+}
