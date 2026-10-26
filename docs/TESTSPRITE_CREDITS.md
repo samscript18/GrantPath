@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **130.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **127 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -59,3 +59,5 @@ Single automatic execution10178282 at f13ab93:3passed/1failed/3blocked. Observed
 ## Fix-head actual debit and coverage
 
 Automatic6119d7be at0a7d332:4passed/2failed/1blocked; observed134→130.5, debit3.5, exactly one execution. Publication/exception/joint/discovery passed. Profile agent missed the required clearing assertion; notification agent saved bachelor despite intended master; preserved historical evaluation correctly accepted bachelor for bachelor. Access metadata remains blocked. All seven exact scripts separately passed hosted Playwright; not TestSprite. Saved plans now isolate clearing/master setup as required checkpoints. No weakened assertions or extra strict replay. Final coherent classification/backfill/evidence update estimates3.5 for its expected automatic run, with50reserve preserved.
+
+Automatic021fe90b at28c0d6e:5passed/1failed/1blocked; observed130.5→127, debit3.5, exactly one execution. Profile residence regression passed automatically. Notification run exposed misleading completed-event visibility in operator diagnostics; access metadata still blocked. A real bounded history-query/UI correction is being locally verified before one coherent follow-up; no manual same-head suite or strict retry.

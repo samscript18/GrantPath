@@ -509,7 +509,36 @@ export default async function OperatorPage({
         </div>
         <details className="mt-7">
           <summary className="cursor-pointer font-serif text-xl">
-            Persisted application events · {overview.events.length} recent
+            Persisted application events · {overview.recentEvents.length} recent
+          </summary>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Completed events remain here after processing. The pending count above tracks unfinished
+            work.
+          </p>
+          <ol aria-label="Recent persisted event history" className="mt-4 space-y-3">
+            {overview.recentEvents.map((event) => (
+              <li key={event.id} className="paper p-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="text-xs font-semibold">{event.topic}</p>
+                  <Badge tone={event.state === "done" ? "green" : "amber"}>
+                    {event.state === "done" ? "Completed" : event.state}
+                  </Badge>
+                </div>
+                <p className="mt-2 break-all font-mono text-[10px]">{event.id}</p>
+                <p className="mt-2 break-all font-mono text-[10px] text-muted-foreground">
+                  Event key: {event.key}
+                </p>
+                <p className="mt-2 text-[10px] text-muted-foreground">
+                  Created {formatTimestamp(event.createdAt)} · Attempts {event.attempts}
+                  {event.completedAt && <> · Completed {formatTimestamp(event.completedAt)}</>}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </details>
+        <details className="mt-7">
+          <summary className="cursor-pointer font-serif text-xl">
+            Unfinished application events · {overview.events.length}
           </summary>
           <div className="mt-4 space-y-3">
             {overview.events.map((event) => (

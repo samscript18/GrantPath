@@ -9,6 +9,7 @@ import { savePreferences } from "../../src/server/notifications";
 import { handleDomainEvent } from "../../src/server/jobs/outbox";
 import { handleNotificationEvent } from "../../src/server/notifications/events";
 import { claimDelivery, deliverClaimed } from "../../src/server/notifications/delivery";
+import { operatorOverview } from "../../src/server/operator";
 const operator = {
   id: "controlled-test-operator",
   name: "[TEST ONLY] Operator",
@@ -84,6 +85,12 @@ describe("isolated controlled sources use the real service and event pipeline", 
       return alert;
     }
     const alert = await processChange(changed.resultingVersion);
+    const completed = await db().outbox.findUniqueOrThrow({
+      where: { key: `scholarship:${scholarshipId}:${changed.resultingVersion}` },
+    });
+    const overview = await operatorOverview(operator);
+    expect(overview.events.some((event) => event.id === completed.id)).toBe(false);
+    expect(overview.recentEvents.find((event) => event.id === completed.id)?.state).toBe("done");
     const assessment = await studentAssessment(student, scholarshipId);
     expect(assessment.evaluation?.outcome).toBe("not_eligible");
     expect(

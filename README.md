@@ -6,7 +6,7 @@ A scholarship discovery, evidence, eligibility and application workspace built w
 
 ## Current release work — 26 October 2026
 
-The global continuation is deployed at0a7d332. All seven exact scripts passed against the hosted app under local Playwright control. Authentic TestSprite red/blocked-gate evidence is preserved; its fix-head suite reported4passed/2failed/1blocked, so release verification remains blocked. A scoped legacy overview/backfill follow-up is prepared. Exact current state belongs in [release review](docs/RELEASE_REVIEW.md).
+The global continuation is deployed at28c0d6e. All seven exact scripts passed against the hosted app under local Playwright control. Authentic TestSprite red/blocked-gate evidence is preserved; its fix-head suite reported5passed/1failed/1blocked, so release verification remains blocked. The residence regression now passes automatically. A scoped operator history correction is being verified after the native run exposed misleading completed-event visibility. Exact current state belongs in [release review](docs/RELEASE_REVIEW.md).
 
 The expanded persisted catalogue contains **32 real source-backed records across17 actual destination countries**, six regions including Ghana, Uganda and South Africa. Counts exclude controlled fixtures and include scheme overviews and historical/closed cycles; they are not counts of open applications. GLOCAL is one joint programme spanning seven participating countries, rather than seven duplicate awards. [Actual coverage and access limits](docs/SOURCE_COVERAGE.md), [public metadata readback](docs/evidence/global-coverage.json).
 

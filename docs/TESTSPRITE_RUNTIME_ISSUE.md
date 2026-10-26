@@ -1,0 +1,21 @@
+# Exact-script execution limitation
+
+This is a prepared support handoff, not a message sent to TestSprite. Do not include account passwords, API keys, cookies or signed artifact URLs when sharing it.
+
+Project: a3f56241-4390-4269-8e0e-e88d61104094. CLI: official0.15.0. Plan: Free. The seven sources in `docs/testsprite/code` pass against both an isolated local production build and the actual hosted app/isolated Neon under local Playwright control. Those results are not TestSprite passes.
+
+The GitHub App's artifacts show regenerated browser steps and codeVersion null/v1 values rather than establishing execution of every saved Python assertion. Missing checkpoints and an incorrect bachelor setup produced native failures despite different explicit authored steps. The required main App check and the additional read-only outcome guard remain enabled.
+
+Three focused strict access runs used the supported default environment and `--no-auto-heal`. Each reported replay.path=replay but failed before any reported assertion step:
+
+| Run                                  | Observed failure                                             |
+| ------------------------------------ | ------------------------------------------------------------ |
+| c68e8a72-2c38-4eb5-9d72-0c47f740ea71 | TargetClosedError at APIRequestContext.post                  |
+| e57ecf1e-c18a-410e-b877-a4e66e8f2281 | APIRequest.new_context received unsupported record_video_dir |
+| ce999aed-46ee-4a33-9131-8a4a68aa16d9 | TargetClosedError at BrowserContext.new_page                 |
+
+The sources were adapted from context-bound API requests to independent API contexts, then normal same-origin fetches on recorded browser pages. All exact assertions remained and passed locally. The last version is saved in the native project. Total observed strict debit1.5credits; no further strict retry is planned without a concrete provider-side resolution.
+
+Relevant evidence: testsprite-strict-access-browser-context-failure.json, testsprite-strict-access-video-option-failure.json and testsprite-strict-access.json. The full exact hosted journeys include foreign application update404, private listing, unchanged owner revision/note and student/operator403. Internal IDs were not added to student screens and no public mutation/reset endpoint was introduced.
+
+Remaining action: investigate the cloud context instrumentation/lifecycle failures and provide an App execution path that runs the saved assertions faithfully. Then reuse the existing scripts for one focused verification; do not purchase credits, schedule runs, remove the access case or weaken the gate. A complete native automatic green remains necessary before claiming the requested release protection sequence complete.

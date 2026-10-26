@@ -69,17 +69,31 @@ test("authenticated operator publishes and replays a valid source while uncertai
   );
   expect(accepted?.eventIds.length).toBeGreaterThan(0);
   await page.getByText(/^Recent automatic publications/).click();
-  await expect(page.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
-  await page.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
+  const publications = page.getByText(/^Recent automatic publications/).locator("..");
+  await expect(publications.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
+  await page.getByText(/^Persisted application events/).click();
+  await expect(
+    page
+      .getByRole("list", { name: "Recent persisted event history" })
+      .getByText("Completed", { exact: true })
+      .first(),
+  ).toBeVisible();
+  await publications.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
   await page.screenshot({
     path: "test-results/global-operator-review-desktop.png",
     fullPage: false,
   });
   await page.setViewportSize({ width: 360, height: 850 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
+  await publications.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
   await page.screenshot({
     path: "test-results/global-operator-review-mobile.png",
     fullPage: false,
   });
+  const history = page.getByRole("list", { name: "Recent persisted event history" });
+  await history.locator("li").first().scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/global-completed-events-mobile.png" });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await history.locator("li").first().scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/global-completed-events-desktop.png" });
 });
