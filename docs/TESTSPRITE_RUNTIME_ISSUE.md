@@ -29,3 +29,7 @@ Routing follow-up26October: user explicitly confirmed “target corrected”: ac
 ## Corrected routing verified, execution gap remains
 
 Final62b0ac8 run1e8d5352 metadata actually targets the app, so the routing correction is confirmed. Native4pass/1fail/2blocked; exact7hosted scripts pass. GLOCAL exact href/ID matches under all7countries in an independent final DOM/API capture. Existing access failure bundle download succeeded: code.py byte-identical to saved six-assertion source, bundle metadata has stored versionv-d28835780596, result codeVersion null, and timeline reports UI metadata blockage. This establishes stored-source fidelity, not executed assertions. No further paid replay is justified without a concrete provider execution remedy.
+
+## Concrete runtime remedy verified
+
+26October: independent standard-library HTTP cookie jars remove instrumented browser contexts while retaining all ownership assertions. The frontend runner requires async run_test: initial9e65f3be failed with “An asyncio.Future, a coroutine or an awaitable is required”; corrected strict169e6917passed with replay.path=replay. Zero recorded browser steps is expected for this HTTP script; do not invent a browser timeline or infer complete automatic-suite success. Exact actual responses/unchanged owner data also passed hosted local execution. See testsprite-http-access.json and testsprite-http-access-async.json. Native automatic verification remains pending for the coherent follow-up.

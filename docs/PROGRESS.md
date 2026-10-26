@@ -1,5 +1,15 @@
 # Progress
 
+## Blocked-case follow-up — 26 October 2026
+
+GitGuardian is now independently confirmed green on PR1/source9461493; the password checklist tests remain intact. The linked correctness job passed every software step and failed only its retained native-outcome guard (5/7, two blocked).
+
+The operator exception queue now exposes persisted accepted-version and publication-event counts per decision. The unresolved controlled candidate explicitly shows None and 0; its saved assertions check those database-backed API values, visible outcome and zero catalogue results. Existing scholarships retain their prior accepted version when a later observation requires review.
+
+Access verification now uses independent standard-library HTTP cookie jars, retaining actual cross-account404, excluded foreign read, unchanged owner fields and operator403 assertions. The frontend replay runner requires an async entry point: initial HTTP attempt9e65f3be failed that runtime contract (0.5credit); corrected strict replay169e6917 passed (replay.path=replay, no browser steps). Hosted local execution of the same assertions also passed. This focused strict pass does not establish the complete automatic PR suite has passed.
+
+Local check/lint87unit/32PostgreSQL/build and13production-browser journeys passed. Final three-case async-script and desktop/mobile exception-outcome rerun passed (1.3minutes); both screenshots inspected. Saved sources/plans are updated without weakening the seven-case gate. One coherent source push will request the normal automatic verification; no duplicate manual suite or test event. Observed pre-push balance115.5; expected automatic seven-case debit3.5 at0.5/case, retaining the50credit reserve.
+
 ## Latest targeted follow-up — GLOCAL canonical URLs
 
 Published9461493cb65e9eb4ee1e22948127309f178194e9 is Ready at https://grantpath-97gi7pzwb-lammysam8-7688.vercel.app. All7destination filters have identical internal href/ID and1row; all7study-location links and scholarship:official-url metadata use https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/. Shared publication normalizes known variants before hashing; catalogue/detail/featured metadata use the same helper, rejecting conflicting URLs without rewriting original evidence. Application guidance keeps its separate how-to-apply URL. No migration/data reset needed.

@@ -1,5 +1,15 @@
 # Latest release verification —26 October2026
 
+## Blocked-case follow-up — 26 October 2026
+
+GitGuardian is now independently confirmed green on PR1/source9461493; the password checklist tests remain intact. The linked correctness job passed every software step and failed only its retained native-outcome guard (5/7, two blocked).
+
+The operator exception queue now exposes persisted accepted-version and publication-event counts per decision. The unresolved controlled candidate explicitly shows None and 0; its saved assertions check those database-backed API values, visible outcome and zero catalogue results. Existing scholarships retain their prior accepted version when a later observation requires review.
+
+Access verification now uses independent standard-library HTTP cookie jars, retaining actual cross-account404, excluded foreign read, unchanged owner fields and operator403 assertions. The frontend replay runner requires an async entry point: initial HTTP attempt9e65f3be failed that runtime contract (0.5credit); corrected strict replay169e6917 passed (replay.path=replay, no browser steps). Hosted local execution of the same assertions also passed. This focused strict pass does not establish the complete automatic PR suite has passed.
+
+Local check/lint87unit/32PostgreSQL/build and13production-browser journeys passed. Final three-case async-script and desktop/mobile exception-outcome rerun passed (1.3minutes); both screenshots inspected. Saved sources/plans are updated without weakening the seven-case gate. One coherent source push will request the normal automatic verification; no duplicate manual suite or test event. Observed pre-push balance115.5; expected automatic seven-case debit3.5 at0.5/case, retaining the50credit reserve.
+
 - Healthy software: typecheck/lint85unit/31PostgreSQL/13production-browser journeys and production build pass. Seven exact scripts additionally passed against actual deployed0a7d332/isolated Neon, including real policy publication, changed eligibility/notification suppression and cross-account HTTP denial. See evidence/global-hosted-exact-sources.json. These are not TestSprite passes.
 - Actual automatic TestSprite f13ab93 red gate:3passed/1failed/3blocked, profile clearing failure, native failure status and required-App/admin/blocked-merge readback. Source fix0a7d332 automatic result4passed/2failed/1blocked. Native artifacts show skipped clearing and a bachelor profile differing from the required master precondition; historical native-profile-precondition.json confirms correct evaluation for actual inputs. Access API assertions remain unobserved natively. Exact cloud replay runtime failed before assertions3times. No assertions removed or business rules changed to match erroneous test setup.
 - CI40347435380 passed all application checks including production browser, then correctly failed its native-outcome gate. It is not an all-green CI result. Actual failed gate/steps in global-ci-fix-result.json.

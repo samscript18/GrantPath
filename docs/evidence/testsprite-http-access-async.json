@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-26T18:44:10.234Z",
+  "finishedAt": "2026-10-26T18:44:26.938Z",
+  "head": "9461493cb65e9eb4ee1e22948127309f178194e9",
+  "reason": "Correct the explicit replay error: async run_test entry point required by frontend runner. Independent HTTP ownership assertions again passed hosted before this one focused retry.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 116,
+  "case": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "exitCode": 0,
+  "body": {
+    "runId": "169e6917-17a9-4bca-b738-8061caf13dfb",
+    "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "testTitle": "Cross-account application modification is denied by the server and owner data stays unchanged",
+    "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+    "userId": "a4b85448-0081-7067-e263-693e586fe698",
+    "status": "passed",
+    "source": "cli",
+    "createdAt": "2026-10-26T18:44:21.139Z",
+    "startedAt": "2026-10-26T18:44:21.139Z",
+    "finishedAt": "2026-10-26T18:44:26.199Z",
+    "codeVersion": null,
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "environment": {
+      "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+      "name": "default"
+    },
+    "createdFrom": null,
+    "failedStepIndex": null,
+    "failureKind": null,
+    "error": "",
+    "videoUrl": "",
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "replay": {
+      "path": "replay",
+      "reason": null,
+      "caveat": null
+    },
+    "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/2648febd-7a9a-47f7-9286-9e70bb5e0c5a/test/169e6917-17a9-4bca-b738-8061caf13dfb",
+    "apiOutput": null,
+    "trace": null
+  },
+  "diagnostic": "idempotency-key: cli-run-4d6c9950-d609-42ee-83db-7f23c9ca5fdc\nRun 169e6917-17a9-4bca-b738-8061caf13dfb\nDashboard: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279\nrequestId: cli_52bcd790-0db2-4fe8-b398-d8431d63c48c\n"
+}

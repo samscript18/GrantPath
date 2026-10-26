@@ -54,16 +54,22 @@ async def run_test():
             result = await call(operator, "POST", "/api/operator/discovery", {"action": "controlled-snapshot", "mode": "ambiguous"})
             assert result["decision"] == "review_required"
             assert "LEVEL_SEMANTICS_UNSUPPORTED" in result["reasonCodes"]
+            assert result["resultingVersion"] is None, "Unaccepted candidate cannot have an accepted version"
             assert result["eventIds"] == [], "Unaccepted evidence cannot create a confirmed-change event"
             catalogue = await call(operator, "GET", "/api/scholarships?q=Unresolved%20source%20scholarship&availability=all")
             assert catalogue["total"] == 0, "Unresolved candidate must not become an eligible published award"
             overview = await call(operator, "GET", "/api/operator/discovery")
             held = [c for c in overview["candidates"] if c["canonicalUrl"].endswith("/unresolved")]
             assert held and held[0]["state"] == "review"
-            assert "LEVEL_SEMANTICS_UNSUPPORTED" in held[0]["observations"][0]["decisions"][0]["reasonCodes"]
+            decision = held[0]["observations"][0]["decisions"][0]
+            assert "LEVEL_SEMANTICS_UNSUPPORTED" in decision["reasonCodes"]
+            assert decision["resultingVersion"] is None and decision["eventIds"] == []
             page = operator
             await page.goto(base + "/operator#discovery")
-            await expect(page.get_by_text("LEVEL_SEMANTICS_UNSUPPORTED", exact=False).first).to_be_visible()
+            candidate = page.get_by_role("article").filter(has=page.get_by_role("heading", name="[TEST ONLY] Unresolved source scholarship", exact=True))
+            await expect(candidate.get_by_text("LEVEL_SEMANTICS_UNSUPPORTED", exact=False)).to_be_visible()
+            await expect(candidate.get_by_role("definition").nth(0)).to_have_text("None")
+            await expect(candidate.get_by_role("definition").nth(1)).to_have_text("0")
         finally:
             await browser.close()
 

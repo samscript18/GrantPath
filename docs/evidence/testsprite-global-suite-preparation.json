@@ -30,7 +30,7 @@
     {
       "file": "publication_exception",
       "id": "762677d6-c058-41bd-996d-a599b01981be",
-      "codeVersion": "v-38faa8392ef6",
+      "codeVersion": "v-3b3f1d7077ba",
       "planSteps": 4
     },
     {
@@ -42,10 +42,10 @@
     {
       "file": "access_denial",
       "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
-      "codeVersion": "v-d28835780596",
+      "codeVersion": "v-8f6fadba327c",
       "planSteps": 4
     }
   ],
-  "refreshedAt": "2026-10-26T17:12:36.831Z",
-  "reason": "GLOCAL literal internal href, canonical official URL, seven institution anchors and source metadata assertions; all existing identity/persistence checks retained."
+  "refreshedAt": "2026-10-26T18:43:00.902Z",
+  "reason": "Exception persisted publication-outcome assertions and independent HTTP cookie-jar ownership checks; no weakened assertions."
 }

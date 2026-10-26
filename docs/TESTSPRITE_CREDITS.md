@@ -75,3 +75,9 @@ Head62b0ac8, automatic1e8d5352:4passed/1failed/2blocked. Metadata actually targe
 GLOCAL canonical-link follow-up: exact strengthened source/plan saved without execution; fresh account balance120, observed0.5/case. A coherent source implementation push is authorised by the continuing release work and expected to trigger one7case automatic suite, estimated3.5, retaining50reserve. Previous local receipts will be included in that push. No duplicate manual run will be launched; record actual final debit/outcome.
 
 GLOCAL canonical source9461493 automatic7eb7869b:5passed/2blocked/no failed; GLOCAL725cd8a3passed. Observed120→116.5, debit3.5,1execution. Exception navigation/access API cases remain blocked; required gate intact. No manual duplicate, generation/exploration, strict replay or purchase. Current receipts local-only after source publication.
+
+## HTTP access runtime correction
+
+Fresh preflight116.5credits, observed0.5/case. Initial independent HTTP replay9e65f3be failed because the frontend runner requires an async callable; balance116 (0.5debit). Corrected async source passed live locally, then strict TestSprite169e6917passed with replay.path=replay. Balance after second debit is read separately; no broad exploration/generation. These two focused operations address explicit prior runtime errors; normal seven-case automatic PR verification remains required and enabled.
+
+Observed post-strict balance115.5:116→115.5debit0.5; two focused operations total1credit. One next automatic seven-case suite estimates3.5; no duplicate manual run.

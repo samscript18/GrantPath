@@ -82,6 +82,20 @@ test("authenticated operator publishes and replays a valid source while uncertai
   await expect(
     page.getByRole("heading", { name: "[TEST ONLY] Unresolved source scholarship", exact: true }),
   ).toBeVisible();
+  const unresolved = page.getByRole("article").filter({
+    has: page.getByRole("heading", {
+      name: "[TEST ONLY] Unresolved source scholarship",
+      exact: true,
+    }),
+  });
+  await expect(unresolved.getByRole("definition").nth(0)).toHaveText("None");
+  await expect(unresolved.getByRole("definition").nth(1)).toHaveText("0");
+  await unresolved.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/exception-outcome-desktop.png" });
+  await page.setViewportSize({ width: 360, height: 850 });
+  await unresolved.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/exception-outcome-mobile.png" });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   const overview = await (await page.request.get("/api/operator/discovery")).json();
   const accepted = overview.decisions.find(
     (decision: { title: string }) => decision.title === "[TEST ONLY] Controlled joint scholarship",

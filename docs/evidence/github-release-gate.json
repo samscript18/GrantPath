@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-26T16:43:48.223Z",
+  "checkedAt": "2026-10-26T18:31:33.154Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "62b0ac8d71abda2e2f4849da607872f705b6bc63",
+  "head": "9461493cb65e9eb4ee1e22948127309f178194e9",
   "mergeableState": "blocked",
   "enforceAdmins": true,
   "required": [
@@ -16,6 +16,13 @@
   ],
   "checks": [
     {
+      "name": "GitGuardian Security Checks",
+      "app": "gitguardian",
+      "appId": 46505,
+      "result": "success",
+      "url": "https://dashboard.gitguardian.com"
+    },
+    {
       "name": "Vercel Preview Comments",
       "app": "vercel",
       "appId": 8329,
@@ -27,14 +34,7 @@
       "app": "github-actions",
       "appId": 15368,
       "result": "failure",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40359127982/job/121699492457"
-    },
-    {
-      "name": "GitGuardian Security Checks",
-      "app": "gitguardian",
-      "appId": 46505,
-      "result": "failure",
-      "url": "https://dashboard.gitguardian.com"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40366902405/job/121726950692"
     }
   ],
   "statuses": [
@@ -42,13 +42,13 @@
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/FQMq2B2iqFsE9iVuHGTMGKuJBGRu"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/5KZnZBN2NFKtEhirMmTzRcv1DFcC"
     },
     {
       "context": "TestSprite V3",
       "state": "failure",
-      "description": "4/7 passed · 1 failed · 2 blocked",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/1e8d5352-b575-40eb-8dc0-94d5d1036fb1"
+      "description": "5/7 passed · 2 blocked",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/7eb7869b-c74a-4cce-a1bb-ff4575419ff1"
     }
   ],
   "testSpriteGateVerified": true

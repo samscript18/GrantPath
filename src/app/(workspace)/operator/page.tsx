@@ -173,6 +173,19 @@ export default async function OperatorPage({
                 {candidate.observations[0]?.decisions.map((decision) => (
                   <div key={decision.id} className="mt-3 text-xs leading-6">
                     <p>{decision.reasonCodes.join(" · ")}</p>
+                    <dl
+                      className="mt-2 flex flex-wrap gap-x-6 gap-y-1"
+                      aria-label="Publication outcome"
+                    >
+                      <div className="flex gap-2">
+                        <dt>Accepted version after decision:</dt>
+                        <dd>{decision.resultingVersion ?? "None"}</dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt>Publication events:</dt>
+                        <dd>{decision.eventIds.length}</dd>
+                      </div>
+                    </dl>
                     <p className="text-muted-foreground">
                       {decision.policyVersion} · {decision.decision}
                     </p>

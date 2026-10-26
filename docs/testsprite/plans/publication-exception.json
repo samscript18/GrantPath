@@ -15,11 +15,11 @@
     },
     {
       "type": "assertion",
-      "description": "Click Discovery exceptions in the operator section navigation. In Candidate exceptions & work queue verify the heading [TEST ONLY] Unresolved source scholarship and exact LEVEL_SEMANTICS_UNSUPPORTED reason. Verify no accepted version or downstream event was created for this candidate."
+      "description": "Click Discovery exceptions in the operator section navigation. In the article headed [TEST ONLY] Unresolved source scholarship, assert LEVEL_SEMANTICS_UNSUPPORTED and inspect Publication outcome: Accepted version after decision is None and Publication events is 0. These persisted values establish that this candidate remains unpublished."
     },
     {
       "type": "assertion",
-      "description": "Search catalogue for Unresolved source scholarship with all windows; assert no published scholarship. Do not approve the exception or create a false eligibility/change alert."
+      "description": "Search catalogue for Unresolved source scholarship with all windows. Zero results is the required PASS outcome: assert the empty result state. Do not attempt to open a scholarship; no published detail page should exist. Keep the exception unapproved."
     }
   ]
 }
