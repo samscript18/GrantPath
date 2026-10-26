@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-26T21:02:33.024Z",
+  "checkedAt": "2026-10-26T21:58:33.139Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "a20139111e9e69243223525558c3b95c0152f924",
-  "mergeableState": "blocked",
+  "head": "448831d7edc080b34599c291de19d6f52540fb76",
+  "mergeableState": "clean",
   "enforceAdmins": true,
   "required": [
     {
@@ -20,6 +20,13 @@
   ],
   "checks": [
     {
+      "name": "GitGuardian Security Checks",
+      "app": "gitguardian",
+      "appId": 46505,
+      "result": "success",
+      "url": "https://dashboard.gitguardian.com"
+    },
+    {
       "name": "Vercel Preview Comments",
       "app": "vercel",
       "appId": 8329,
@@ -31,21 +38,14 @@
       "app": "github-actions",
       "appId": 15368,
       "result": "success",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243860"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40401191845/job/121847164756"
     },
     {
       "name": "Typecheck, lint, domain and PostgreSQL checks",
       "app": "github-actions",
       "appId": 15368,
-      "result": "failure",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243400"
-    },
-    {
-      "name": "GitGuardian Security Checks",
-      "app": "gitguardian",
-      "appId": 46505,
       "result": "success",
-      "url": "https://dashboard.gitguardian.com"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40401191845/job/121847164356"
     }
   ],
   "statuses": [
@@ -53,13 +53,13 @@
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/4QAajn5oUR3dX4Yt1tWtGuPTGnVd"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/CuhnKfKwEMyZYP6YhxgfDMe5nW9Y"
     },
     {
       "context": "TestSprite V3",
       "state": "success",
       "description": "All 7 tests passed",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e27c5455-351f-4d70-84b8-de0366ba8447"
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/12480f84-dcfe-4db0-8bff-d476687bbcd9"
     }
   ],
   "testSpriteGateVerified": true

@@ -1,71 +1,84 @@
-# GrantPath handoff — 26 October 2026
+# GrantPath final handoff — 26 October 2026
 
-All seven App cases and the required native API case passed at a201391. The correctness job remains red because its strict parser rejected the authentic All 7 tests passed wording. A narrow parser correction and90unit/typecheck/lint/build pass locally; its next published head still requires automatic verification. No merge, Discord submission, purchase or protection bypass was performed.
+All three required release checks passed at published source `448831d7edc080b34599c291de19d6f52540fb76`. The original TestSprite App passed seven of seven cases; the additional required native API case passed with its exact reviewed code version and assertion output. The PR remains unmerged. Operational activation limits below remain open.
 
-## Published revision
+## Published release
 
-- Source commit: [a20139111e9e69243223525558c3b95c0152f924](https://github.com/samscript18/GrantPath/commit/a20139111e9e69243223525558c3b95c0152f924), branch release/hosted-verification.
-- Public app: https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app
-- Immutable Ready deployment: https://grantpath-ifqjt915y-lammysam8-7688.vercel.app (dpl_4QAajn5oUR3dX4Yt1tWtGuPTGnVd).
-- PR: https://github.com/samscript18/GrantPath/pull/1
-- Post-run receipts are local documentation changes after this published head. No passing result is attributed to a later receipt commit. An extra paid seven-case run solely to upload receipts was avoided.
+- [Source commit](https://github.com/samscript18/GrantPath/commit/448831d7edc080b34599c291de19d6f52540fb76): `448831d7edc080b34599c291de19d6f52540fb76`, branch `release/hosted-verification`.
+- [Public app](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).
+- [Immutable Ready preview](https://grantpath-mdgg56q1p-lammysam8-7688.vercel.app), deployment `dpl_CuhnKfKwEMyZYP6YhxgfDMe5nW9Y`.
+- [Existing release PR](https://github.com/samscript18/GrantPath/pull/1).
+- [Automatic correctness workflow](https://github.com/samscript18/GrantPath/actions/runs/40401191845).
 
-## Implemented and locally verified
+Post-run receipt changes are committed locally after this published source. They are not claimed remotely verified. A documentation-only push would trigger another credited suite, so no such push was made. No merge, Discord submission, purchase, security bypass or history reset was performed.
 
-The existing application, data, design, authentication, Brevo and Cloudinary remain. Additive country/multiple-destination modelling preserves programme/cycle identity, saved applications and immutable accepted histories. Preference ranking remains separate from eligibility; missing provider conditions remain mandatory confirmation.
+## Changes and purpose
 
-Approved official directory discovery extracts bounded allowed links, deduplicates and queues detail retrieval outside Vercel. Adapters produce evidenced candidates with explicit unknowns. Deterministic reason-coded policies and manual review share the transactional publisher, immutable versions/evidence, audit and durable outbox. Published changes recalculate current matches and fan out preference-aware, deduplicated notifications; unchanged replay produces no event, reversals create new audited versions, source failure preserves accepted information.
+The existing application, brand, Better Auth, Brevo, Cloudinary, data and immutable histories are preserved. Additive country and multiple-destination modelling keeps citizenship, residence, preference, provider country and study location separate. Stable programme/cycle identities prevent a joint award becoming duplicate opportunities.
 
-This follow-up exposes the exact canonical GLOCAL officialUrl on each catalogue result, alongside all seven study-location links and metadata. All destinations use https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/. Read-only hosted DOM/API checks verify one ID, one detail href, one record per filter and identical literal official URL under GB/DE/ES/SE/CO/JP/NL. No destination-specific redirects or invented country tags.
+Approved directory workers discover bounded official detail links outside Vercel. Evidence-backed adapters and deterministic publication policies share the manual transaction service, immutable accepted versions, audit records and durable outbox. Matching and preference-aware notification delivery remain separate durable work. Unknown mandatory conditions require confirmation; ranking cannot override known ineligibility.
 
-Operator verification uses explicit pressed scenario buttons, retained after processing, and scholarship-scoped accepted publication history so old events remain inspectable outside the bounded recent30. Exception decisions show actual accepted version and publication-event count, including None/0 for an unpublished candidate. Student details separately show Provider application window and actual private application progress, or an honest sign-in/unsaved prompt. Desktop/360px screenshots were inspected locally and hosted.
+The GLOCAL comparison now exposes the exact same official scholarship URL on catalogue cards, all seven destination entries and metadata:
 
-Local89unit/typecheck/lint,33PostgreSQL, production build and13production-browser journeys pass. The final exact-source harness additionally passes all9scripts, including actual eligibility/notification/replay/preference/ownership assertions. Export-format tests reject changed assertions, unknown wrappers and added executable code. These local results are not TestSprite passes. See TEST_EVIDENCE.md for failures, fixes and exact run boundaries.
+`https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/`
 
-Operator jobs now expose persisted pending/runnable/review counts. Process queued jobs performs at most ten sequential batches of ten through the protected durable worker, reports remaining work and only declares drain when pending events and deliveries are both zero. This corrects the prior notification failure: the accepted change had recalculated correctly but its downstream alert remained queued after one bounded batch. No manual drain or history reset concealed that failure.
+Hosted read-only DOM/API checks confirm one scholarship ID, one internal detail href and one result under each of GB, DE, ES, SE, CO, JP and NL. There are no destination-specific official redirects, tracking strings or duplicate records. The automatic multi-destination case passed.
 
-## Actual coverage
+Operator scenario selection uses explicit pressed buttons that survive refreshed data. Scholarship-scoped publication history keeps older decisions inspectable beyond the recent-30 list. The exception and notification scenarios both passed automatically. Provider application windows and personal application progress have separate student-facing labels.
 
-Fresh hosted public metadata readback excludes labelled fixtures:32real records,23providers,17actual destination countries across six regions.23cycle records/9scheme overviews;7open/2upcoming/5closed/18unknown at the recorded snapshot. These are not32open applications.
+Queue processing now displays persisted pending events, deliveries, runnable work and review counts. The bounded drain control runs at most ten sequential batches of ten through the existing protected durable worker. It stops on failure or waiting work and only reports drain at zero pending events and deliveries. This fixes the prior version-22 failure, where evaluation was correct but the downstream alert was still queued after one ten-event batch. No manual drain or reset hid that failure.
 
-| Region        | Actual destinations                                              |
+The strict CI summary parser accepts both exact-count `7/7 passed` and the observed `All 7 tests passed` serialization. It retains the complete-suite requirement, App creator, project, exact commit, negative-result rejection and original required checks. Its regression tests reject wrong counts, missing counts, failed status and blocked/failed/skipped/error suffixes. It does not manually set a check green.
+
+## Actual scholarship coverage
+
+Public metadata readback excludes all labelled fixtures: **32 real records, 23 providers, 17 actual destination countries across six regions**. It contains 23 cycle records and nine scheme overviews; seven open, two upcoming, five closed and eighteen unknown at the recorded snapshot. These are not 32 open applications.
+
+| Region        | Actual study destinations                                        |
 | ------------- | ---------------------------------------------------------------- |
 | Europe        | United Kingdom, Switzerland, Netherlands, Germany, Spain, Sweden |
 | Africa        | Ghana, Uganda, South Africa                                      |
 | North America | Canada, United States                                            |
 | Asia          | Japan, South Korea, Türkiye                                      |
 | Oceania       | Australia, New Zealand                                           |
-| Latin America | Colombia, through the joint programme                            |
+| Latin America | Colombia, through GLOCAL                                         |
 
-Twelve official detail candidates have real automatic-publication provenance; three live directory workers succeeded (GLOCAL, McGill, Makerere). Some initial coverage used approved manual detail registration; not all records were newly discovered by a schedule. GLOCAL pathways vary; a student does not necessarily study in every listed country. See SOURCE_COVERAGE.md and evidence/preview-coverage-summary.json.
+Twelve official detail candidates have actual automatic-publication provenance. Three live official directory workers succeeded: GLOCAL, McGill and Makerere. Some initial coverage used approved manual detail registration; not every record was newly discovered by a schedule. GLOCAL pathways vary and do not imply every student studies in all seven countries. See [source coverage](SOURCE_COVERAGE.md) and `evidence/preview-coverage-summary.json`.
 
-## Exceptions and remaining operations
+## Publication policy and exceptions
 
-Conflicting sources, unsupported layouts/conditions, missing critical text, ambiguous dates or cycle interpretation, unsupported funding/requirement changes, and suspicious mass changes require operator review. Sources and policies can be paused without removing accepted data. No retrieval failure closes a scholarship or advances successful verification.
+Automatic acceptance requires approved source identity/path, established programme and explicit cycle interpretation, expected adapter structure, evidenced required display facts, duplicate checks and supported semantic mappings. Useful incomplete records retain uncertainty and mandatory confirmation conditions. A directory overview is not presented as one currently open award.
 
-Actual manual GitHub application40180139452 and source40180145842 executions succeeded. Application:20events/0failed,6deliveries suppressed,2in-app published. Source:2GLOCAL links, one unsupported detail/layout reached review; no new publication claimed for that dispatch. Routine cron remains disabled pending the owner's separate merge, binding intended database/origin/auth environment and enabling/verifying successful scheduled timestamps. Source execution remains outside Vercel. No merge was performed to enable schedules.
+Conflicting evidence, unsupported layouts or conditions, missing critical content, ambiguous dates/cycles, unsupported requirement/funding changes and suspicious mass changes go to operator review. Missing extracted text cannot remove accepted facts. New cycles remain separate, unchanged replay creates no event, and reversal appends a new audited version. Pausing a source or policy preserves accepted records. Retrieval failure never closes an award or advances successful verification.
 
-Automatic Neon preview lifecycle remains unavailable without API/project/sanitised baseline configuration. Existing isolated preview is retained; private student data was not copied. Brevo sender/provider acceptance/idempotence are verified historically and preserved; recipient receipt remains unobserved. Controlled notifications use isolated .test identities.
+## Local and hosted verification
 
-## Actual TestSprite and required checks
+Local checks: **90 unit tests**, typecheck, lint and production build pass for the parser correction. The preceding queue implementation also passed **33 PostgreSQL integration tests** and **13 production-browser journeys**, including all nine exact reusable Python sources. Full software/build/browser checks passed again in CI at the final head. Desktop and 360px screenshots were inspected; hosted anonymous DOM/API checks verify the final revision and canonical links. These local/browser results are not TestSprite results.
 
-- Original seven-case App: **All 7 tests passed**, [execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e27c5455-351f-4d70-84b8-de0366ba8447). App runtime may regenerate browser actions; a passing natural-language verdict is not claimed as proof that every saved Python assertion ran.
-- Additional required **TestSprite API ownership**: automatically passed at this exact head, [native run](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/d6746363-38a7-4ae0-bfd9-664dba3b5a1f/test/06d9858e-756c-40ff-93d6-37e070b3df6e). Returned codeVersion v-5e0325a9c69d matches reviewed source. Actual404cross-account update, foreign-read exclusion, every unchanged owner field and403operator denial were asserted. A revision assertion verifies the target commit before authentication; targetUrl metadata is null and is not invented. [CI job](https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243860).
-- [Correctness workflow](https://github.com/samscript18/GrantPath/actions/runs/40398337022): failure.
-- Main requires correctness/App15368, original TestSprite V3/App2756476 and additional TestSprite API ownership/App15368; strict freshness and administrator enforcement retained. Actual final readback belongs in evidence/github-release-gate.json.
+Authentic final TestSprite results:
 
-The user confirmed enabling saved-code replay for GitHub-triggered runs was unavailable and requested an alternative. A native backend project executes protected HTTP assertions directly; the browser privacy companion checks independent-session note isolation. No hidden mutation/reset endpoint, Pro auto-auth or security bypass was added. Backend export comparison allows only the exact observed public-auth prelude and one EOF newline difference; all assertion body bytes remain enforced. Parallel API and browser cases use separate awards to avoid legitimate owner-edit races.
+- [Original seven-case App execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/12480f84-dcfe-4db0-8bff-d476687bbcd9): **7/7 passed, zero failed or blocked**. Individual case results and recorded steps are preserved in `evidence/final-status-execution.json`.
+- [Native API ownership execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/e4d3c429-a42b-4f09-9332-e771177edc87/test/5eb82386-d083-4f5f-aadb-390dac395805): **passed**, reviewed code version `v-5e0325a9c69d`, exact output confirming cross-account update 404, foreign-read exclusion, every owner field unchanged and operator mutation 403. The script verifies the hosted commit before authentication. Native targetUrl metadata is null; it is not fabricated.
+- [Required-check readback](evidence/github-release-gate.json): correctness/App15368, TestSprite V3/App2756476 and native API ownership/App15368. Administrator enforcement and strict freshness remain enabled; GitGuardian recheck121861017132 is green, read back through GitHub at21:56UTC on26October2026 after the user resolved incident39071152 and requested recheck. The earlier failed check and unavailable API rerequest remain historical evidence; scanning was not disabled.
 
-## Authentic regression and historical failures
+The App may regenerate browser actions; saved source byte identity is not proof that every Python assertion executed remotely. This limitation is preserved. The native backend alternative directly executes the protected HTTP assertions with independent cookie jars, exact source-version comparison and assertion output. The browser privacy companion remains additional UI coverage. No unauthenticated mutation/reset/role escalation endpoint or paid auto-auth was added.
 
-The discovered residence-clearing defect was explicitly reintroduced only on isolated verification head f13ab930f03683f1cc716fd67f3605deabdeef04. [Native failure10178282](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc) caught Ghana remaining after removal; actual failed App status and blocked merge/required identities are preserved in evidence/global-native-red-gate.json. The empty-string fix and later automatic profile passes are preserved. No security regression or production history corruption was introduced.
+## Authentic red, blocked gate and fix
 
-At2be6624 the App reported6/7passed with no blocked cases; version22 correctly evaluated not_eligible/VALUE_NOT_ACCEPTED but its change.ready event remained pending with zero attempts amid39pending events. The new queue checkpoint addresses that observed failure. Its required API ownership check passed and the native guard correctly blocked merge.
+The residence-clearing defect was explicitly isolated on regression head `f13ab930f03683f1cc716fd67f3605deabdeef04`. [Authentic TestSprite failure](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc) caught Ghana remaining after removal. Actual failed status, required identities and blocked merge are preserved in `evidence/global-native-red-gate.json`. The empty-string fix and automatic profile passes, including this final head, provide the green evidence. No pending status or Actions failure is substituted for a TestSprite failure.
 
-Earlier partial App executions, provider instrumentation errors, incorrect trigger target, bounded-history lookup, stale scenario selector, incorrect literal search text and account-switch mistakes remain in TEST_EVIDENCE.md and evidence/. Source3591af7 had4pass/1fail/2blocked; b5bbce7 had4pass/1fail/2blocked and its new API job stopped before dispatch on the export-format mismatch. GitGuardian is green; old synthetic checklist findings were resolved by the user without deleting tests.
+Historical partial runs and fixes remain in TEST_EVIDENCE.md. At `2be6624`, six cases passed and the queued alert failed. At `a201391`, all seven App cases and native API passed but CI failed closed on the newly observed success wording; `evidence/queue-drain-status-format.json` preserves that failure. This final head fixes that parser and has its own automatic passes. GitGuardian historical synthetic checklist incidents were resolved by the user without deleting tests or weakening scanning. GitGuardian recheck121861017132 is green, read back through GitHub at21:56UTC on26October2026 after the user resolved incident39071152 and requested recheck. The earlier failed check and unavailable API rerequest remain historical evidence; scanning was not disabled.
 
-## Credits and handoff limits
+## Credits
 
-Observed balance **100.9credits** aftera201391:104.6→101.1for one7case App suite (3.5), then101.1→100.9for the native API case (0.2). The previous b5bbce7 App cost3.5; its API formatting failure incurred no dispatch/debit. No duplicate manual run, exploration/generation, schedule, purchase or paid plan. Fifty-credit reserve remains.
+Observed remaining balance: **97.2 credits**, Free plan. This final cycle observed 100.9 → 97.4 for the seven-case App suite, then 97.4 → 97.2 for native API ownership. The immediately preceding cycle was 104.6 → 101.1 → 100.9. Rates are observed execution debits, not estimates for generation/exploration. No duplicate manual run, scheduled TestSprite run, purchase or paid plan. Approximately 50 credits remain reserved. See TESTSPRITE_CREDITS.md.
 
-PR metadata update previously returned403; this permission boundary was respected. Prepared current description is SUBMISSION_PR.md for the owner to paste. Do not merge or submit without a separate instruction. Remaining setup: routine scheduler activation after separately authorised merge, optional automatic Neon lifecycle, recipient receipt observation, and final organiser submission. See exact final required-check outcome above before claiming submission readiness.
+## Operational limits and submission readiness
+
+Actual authorised manual GitHub application run40180139452 and source run40180145842 succeeded. Application processing handled 20 events, zero failures, six suppressed deliveries and two in-app publications. Source processing discovered two GLOCAL links and sent one unsupported detail/layout to review; no new publication is claimed for that dispatch.
+
+Routine cron remains disabled pending a separately authorised merge, intended database/origin/auth binding, then enablement and observation of successful scheduled timestamps. GitHub scheduling is best effort. Source fetching remains outside Vercel; no merge was performed to activate it.
+
+Automatic Neon preview lifecycle still lacks API/project/sanitised-baseline configuration. The existing isolated preview remains; private student records were never copied. Brevo verified sender/provider acceptance and idempotence are preserved; recipient receipt remains unobserved. Controlled tests use isolated `.test` identities.
+
+PR metadata updates previously returned 403; the permission boundary was respected. SUBMISSION_PR.md contains the final description for the owner to paste. The product and three required review checks are ready for owner review, with the operational limits above disclosed. No merge or organiser submission is implied or performed.
