@@ -49,3 +49,7 @@ The user resumed verification/publication and requested three connected outcomes
 6. Configure one application scheduler and separate bounded source discovery, verify authorised manual runs; keep preview isolated and never copy private student data.
 7. Inspect saved TestSprite assertions/trigger, validate focused scripts locally, obtain authentic controlled-regression failure/blocked gate/fix/pass evidence within actual credits (50 reserve).
 8. Batch reviewable release pushes, reconcile PR/docs and verify final-head CI/deployment/App checks. Do not merge or submit externally.
+
+## Release checkpoint —26 October2026
+
+Core global/discovery/publication work and local/hosted exact-script verification are implemented. Actual manual source/application jobs succeeded. Authentic native red/blocked gate is recorded and residence fix is deployed; full automatic green remains blocked by native missed/mismatched steps and cloud API replay runtime. Preserve all required checks and exact assertions. Last implementation follow-up adds explicit legacy overview classification/backfill and clearer plan checkpoints; final-head CI/deployment/App must be observed after its coherent push. Remaining external work: TestSprite exact replay/green gate, owner merge then schedule activation, unavailable Neon API lifecycle, rejected PR metadata update.

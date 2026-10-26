@@ -23,6 +23,7 @@ type Spec = {
   url: string;
   cycle: string;
   destination?: string;
+  recordKind?: ScholarshipData["recordKind"];
   levels: ScholarshipData["levels"];
   field?: string;
   fundingType: ScholarshipData["fundingType"];
@@ -131,6 +132,7 @@ function make(s: Spec): Entry {
       title: s.title,
       summary: s.summary,
       destination: s.destination || "United Kingdom",
+      ...(s.recordKind ? { recordKind: s.recordKind, cycleStatus: "unconfirmed" as const } : {}),
       institution: s.provider,
       levels: s.levels,
       fields: [s.field || "Various fields"],
@@ -571,6 +573,7 @@ const specs: Spec[] = [
     providerSlug: "dfat",
     url: "https://www.dfat.gov.au/people-to-people/australia-awards/australia-awards-scholarships",
     cycle: "Programme overview · cycle unconfirmed",
+    recordKind: "overview",
     destination: "Australia",
     levels: ["bachelor", "master", "doctorate"],
     fundingType: "comprehensive",

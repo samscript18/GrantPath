@@ -11,7 +11,15 @@
     },
     {
       "type": "action",
-      "description": "Set Citizenship(s) to Nigeria and Country of residence to Ghana. Click Save & continue. Reload /settings/profile, select Your world, and assert saved Ghana is present. Click Remove Ghana and assert its selected chip disappears and the residence input is empty. Reselect Ghana and click Save & continue. Do not skip this clearing assertion or substitute typing over the old value."
+      "description": "Set Citizenship(s) to Nigeria and Country of residence to Ghana. Click Save & continue and wait for Current qualification. Reload /settings/profile and click Your world."
+    },
+    {
+      "type": "assertion",
+      "description": "Required residence-clearing checkpoint: verify saved Ghana is selected in Country of residence. Click the Remove Ghana button within that field. Verify the selected Ghana chip disappears and the Country of residence input is empty. Fail if this checkpoint was not actually performed; typing over the value is not a substitute."
+    },
+    {
+      "type": "action",
+      "description": "Reselect Ghana as Country of residence and click Save & continue. Continue the existing final-year profile and saved application journey."
     },
     {
       "type": "action",

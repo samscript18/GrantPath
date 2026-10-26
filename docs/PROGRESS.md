@@ -1,5 +1,17 @@
 # Progress
 
+## Current release checkpoint —26 October2026
+
+Implemented and locally/hosted verified:32 official records,17actual countries/6regions/3African destinations; approved discovery/detail workers, deterministic automatic publication, exception review, durable events/matching/notifications, additive histories, existing auth/Brevo/UI. Public preview has23cycle records and9explicit overviews;7open/2upcoming/5closed/18unknown. Real official automatic publications12; live directory successes3.
+
+Local software:85unit/31PostgreSQL/13production-browser journeys, typecheck/lint/build/format pass. Seven exact saved Python scripts also passed against the actual hosted app/isolated Neon at0a7d332, including clearing, publication/replay, exact changed eligibility, one alert/suppression and ownership404/403. These are Playwright results, not TestSprite. A scoped Australia legacy overview correction published one new version, replay0changes, evidence timestamps retained; two focused production journeys pass afterward.
+
+Authentic native red/blocked evidence: f13ab93 execution10178282,3pass/1fail/3blocked, native failure plus unchanged required Apps/admin enforcement and blocked merge. Fix0a7d332 is deployed Ready; native6119d7be reports4pass/2fail/1blocked. Profile run missed the clearing checkpoint; notification run actually saved bachelor where its plan required master (historical inputs preserved, evaluator correct); access regenerated steps cannot inspect protected API metadata. Plans now explicitly assert setup/clearing without dropping any checks. Exact cloud replay failed3times before assertions with provider context instrumentation. Current credit balance130.5. Green final gate remains blocked; do not claim release complete.
+
+Operations: manual GitHub application/source runs40180139452/40180145842 succeeded. Workflows are disabled until owner separately merges current code into main and enables them; main still has old workflow code. Neon API/project/baseline missing, existing isolated preview retained. PR metadata write returned403; prepared description is SUBMISSION_PR.md. GitGuardian historical synthetic-string incidents remain unclassified, no scanner weakened. No merge/submission performed.
+
+## Historical implementation log (dated observations, superseded by checkpoint above)
+
 ## Inspection
 
 - Read the source PRD and user requirements. Initial repository contained only the PRD; no existing code, package configuration, Git repository, credentials or remote.
@@ -220,3 +232,5 @@ Strict third replay ce999aed failed before any reported assertion with BrowserCo
 Authentic corrected-trigger regression gate: f13ab93 deployed Ready at grantpath-lqrzlsmgb-lammysam8-7688.vercel.app; exactly one observed automatic execution10178282 reports3passed/1failed/3blocked. Actual profile failure says Ghana persisted after chip removal. Native testsprite[bot] status failure and required-App/admin/blocked-merge readback preserved in global-native-red-gate.json. This establishes the red/blocked portion, not green or the blocked API assertions. The already locally validated empty-string residence fix is restored; final native verdict is still pending.
 
 Pre-fix publication follow-up: actual balance134 after137.5→134 for exactly one seven-case automatic execution. Three passed (discovery, joint destinations, exception queue), residence failed, automatic publication and notification cases blocked after agent typed isolated passwords incorrectly, and access case blocked because regenerated steps could not inspect protected API responses. Stored exact scripts stayed byte-identical; native execution is not asserted equivalent. Rotated/revoked only the three isolated .test credentials, updated encrypted default TestSprite password and verified all three real hosted sign-ins200. Password-entry steps are generically redacted, including mistyped values. Readable operator desktop/360px screenshots captured and inspected; focused operator journey passed after capture adjustment. The fix retains all exact HTTP ownership assertions and merges no PR.
+
+Final scoped follow-up prepared: Australia Awards accepted version1→2 now explicitly overview/unconfirmed; all other accepted fields and evidence timestamps unchanged, durable outbox present, replay0publication. Same correction applied development and local browser setup; future seed input is explicit. New unit assertions retain85total, check/build pass; focused overview/joint/operator production journeys2pass. Seven exact hosted scripts at0a7d332 allpass. Native profile/notification plans now explicitly checkpoint clearing and persisted master setup; upcoming final head must receive its own automatic result.

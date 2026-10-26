@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **134 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **130.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -55,3 +55,7 @@ Final strict browser replay ce999aed: actual138→137.5, debit0.5; TargetClosedE
 ## Corrected-trigger actual debit
 
 Single automatic execution10178282 at f13ab93:3passed/1failed/3blocked. Observed137.5→134, debit3.5; one execution link, no duplicate comment-trigger run. The authentic App posted failure and PR was blocked with required Apps/admin enforcement intact. Strict total across three runtime failures1.5; exact remote assertions remain unverified. Next source-fix automatic suite estimate3.5; balance134,50reserve retained. Only three isolated .test credentials were rotated after evidence showed agent transcription errors; encrypted default password updated and all three hosted logins returned200. No real student credential changed.
+
+## Fix-head actual debit and coverage
+
+Automatic6119d7be at0a7d332:4passed/2failed/1blocked; observed134→130.5, debit3.5, exactly one execution. Publication/exception/joint/discovery passed. Profile agent missed the required clearing assertion; notification agent saved bachelor despite intended master; preserved historical evaluation correctly accepted bachelor for bachelor. Access metadata remains blocked. All seven exact scripts separately passed hosted Playwright; not TestSprite. Saved plans now isolate clearing/master setup as required checkpoints. No weakened assertions or extra strict replay. Final coherent classification/backfill/evidence update estimates3.5 for its expected automatic run, with50reserve preserved.

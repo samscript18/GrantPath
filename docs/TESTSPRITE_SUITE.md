@@ -1,4 +1,4 @@
-> Current verification update —26 October2026: seven sources are saved. e09b64d native App latest3passed/3failed/1blocked; its green status was posted while Merge gate was off. New single Vercel Commit status trigger + Merge gate are user-confirmed, awaiting a new automatic verdict. Exact remote scripts are not established by regenerated App steps. Two strict access attempts failed before assertions due to provider context instrumentation; actual balance138. Earlier preparation/pass observations below are historical.
+> Current verification —26 October2026: seven saved sources all pass locally and against deployed0a7d332 under local Playwright control. Native f13ab93 execution10178282 caught residence removal and posted failure with blocked merge. Native fix6119d7be reports4passed/2failed/1blocked: skipped clearing, wrong bachelor setup and inaccessible API metadata. Exact cloud replay has3pre-assertion provider-runtime failures. Balance130.5. Separate explicit plan checkpoints retain all assertions; final automatic green remains unverified. Earlier preparation and passing observations below are historical.
 
 # Current focused release suite — 25 October2026
 

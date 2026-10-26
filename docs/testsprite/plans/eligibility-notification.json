@@ -10,8 +10,12 @@
       "description": "Sign in isolated operator VAR_{operator_email} with VAR_{password}; select Eligibility and notifications in Isolated source verification, publish valid snapshot to establish target-level master."
     },
     {
+      "type": "action",
+      "description": "Sign in VAR_{other_email} in its independent browser context with VAR_{password}. Dismiss an unfinished-profile prompt if needed; open /settings/profile. Save Nigeria citizenship, Ghana residence, bachelor current qualification and completed status. In Your plans set the exact Intended future qualification field to master, not bachelor; set Computer Science. Save & continue, then Save & see my matches. Save [TEST ONLY] Controlled change scholarship. Enable in-app change notifications and disable email."
+    },
+    {
       "type": "assertion",
-      "description": "Using a separate authenticated browser context for VAR_{other_email} with the same configured secret, save complete matching basics with target master and save [TEST ONLY] Controlled change scholarship. Enable change/in-app notifications and disable email. Update matches to completion."
+      "description": "Mandatory setup checkpoint: reload /settings/profile, open Your plans, and verify Intended future qualification is still master. Fail setup if it is bachelor or was not saved. Return to matches and update until complete. Do not diagnose the evaluator using a profile that differs from this master requirement."
     },
     {
       "type": "assertion",

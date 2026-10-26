@@ -3,6 +3,10 @@ const password = process.env.TEST_ACCOUNT_PASSWORD || "Isolated-test-passphrase-
 test("real joint programme filters preserve identity across every actual study destination", async ({
   page,
 }) => {
+  await page.goto("/scholarships/australia-awards-cycle-unconfirmed");
+  await expect(
+    page.getByText(/Scheme overview\. This is guidance about the programme/),
+  ).toBeVisible();
   let id = "";
   for (const destination of ["GB", "DE", "ES", "SE", "CO", "JP", "NL"]) {
     await page.goto(`/scholarships?q=GLOCAL&destination=${destination}&availability=all`);

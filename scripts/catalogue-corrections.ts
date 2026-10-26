@@ -25,6 +25,18 @@ async function main() {
     const data = scholarshipDataSchema.parse(s.versions[0].data);
     // Only correct the specific source interpretations reviewed here, preserving
     // any other accepted/operator edits and the original retrieval timestamps.
+    if (
+      entry.slug === "australia-awards-cycle-unconfirmed" &&
+      s.cycle === entry.cycle &&
+      entry.data.recordKind === "overview" &&
+      !data.recordKind &&
+      !data.cycleStatus &&
+      data.availability === "unknown" &&
+      data.deadline === null
+    ) {
+      data.recordKind = "overview";
+      data.cycleStatus = "unconfirmed";
+    }
     if (entry.slug === "eth-esop-2027") {
       const fix = (rule: typeof data.requirements): typeof data.requirements =>
         rule.kind === "requirement"
@@ -85,7 +97,7 @@ async function main() {
         s.id,
         data,
         s.version,
-        "Source interpretation correction: preserve actual funding components and the stated degree exclusion; attach relevant supporting passages.",
+        "Source interpretation correction: preserve actual funding components, degree exclusion and unconfirmed scheme classification; retain original supporting passages and retrieval times.",
       );
   }
   console.log(

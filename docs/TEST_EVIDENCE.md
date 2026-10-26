@@ -1,3 +1,14 @@
+# Latest release verification —26 October2026
+
+- Healthy software: typecheck/lint85unit/31PostgreSQL/13production-browser journeys and production build pass. Seven exact scripts additionally passed against actual deployed0a7d332/isolated Neon, including real policy publication, changed eligibility/notification suppression and cross-account HTTP denial. See evidence/global-hosted-exact-sources.json. These are not TestSprite passes.
+- Actual automatic TestSprite f13ab93 red gate:3passed/1failed/3blocked, profile clearing failure, native failure status and required-App/admin/blocked-merge readback. Source fix0a7d332 automatic result4passed/2failed/1blocked. Native artifacts show skipped clearing and a bachelor profile differing from the required master precondition; historical native-profile-precondition.json confirms correct evaluation for actual inputs. Access API assertions remain unobserved natively. Exact cloud replay runtime failed before assertions3times. No assertions removed or business rules changed to match erroneous test setup.
+- CI40347435380 passed all application checks including production browser, then correctly failed its native-outcome gate. It is not an all-green CI result. Actual failed gate/steps in global-ci-fix-result.json.
+- Manual GitHub workers succeeded: application20events/0failed,6suppressed/2in-app published; source2GLOCAL links/one unsupported-layout review. No routine cron or recipient email receipt claimed. Original policies restored and workflows disabled pending separate owner merge.
+- Actual preview32records/23providers/17countries/6regions;23cycle records/9overviews;7open/2upcoming/5closed/18unknown. Final metadata audit found Australia lacked explicit overview classification: scoped shared-publisher correction added one version, replay0changes, preserving original source times. Updated seed metadata and two focused production journeys passed. Desktop/360px operator views inspected.
+- Latest observed credits130.5. Next coherent backfill/plan/evidence release requires its own automatic verdict. No claim that earlier SHA results cover a later final head.
+
+The dated evidence below is retained as history.
+
 # Test evidence
 
 Entries below record actual commands, outcomes, environment and limitations. Local tests are never TestSprite results.

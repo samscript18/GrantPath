@@ -15,6 +15,13 @@ describe("accepted catalogue and evidence", () => {
       expect(publicationSchema.safeParse(entry.data).success, entry.slug).toBe(true);
       expect(entry.data.title).not.toContain("TEST");
     }
+    const australia = reviewedCatalogue.find(
+      (e) => e.slug === "australia-awards-cycle-unconfirmed",
+    )!;
+    expect(australia.data.recordKind).toBe("overview");
+    expect(australia.data.cycleStatus).toBe("unconfirmed");
+    expect(australia.data.availability).toBe("unknown");
+    expect(australia.data.deadline).toBeNull();
   });
   it("rejects checked rules with no checked supporting evidence", () => {
     const d = testScholarship();
