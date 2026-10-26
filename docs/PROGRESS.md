@@ -1,5 +1,13 @@
 # Progress
 
+## Latest targeted follow-up — GLOCAL canonical URLs
+
+Published9461493cb65e9eb4ee1e22948127309f178194e9 is Ready at https://grantpath-97gi7pzwb-lammysam8-7688.vercel.app. All7destination filters have identical internal href/ID and1row; all7study-location links and scholarship:official-url metadata use https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/. Shared publication normalizes known variants before hashing; catalogue/detail/featured metadata use the same helper, rejecting conflicting URLs without rewriting original evidence. Application guidance keeps its separate how-to-apply URL. No migration/data reset needed.
+
+Typecheck/lint87unit/32PostgreSQL/build passed; local canonical browser test and7exact-source harness passed. Final CI40366902405 passed all software steps/13browser, then failed only the retained native guard. Native7eb7869b:5passed/2blocked/no failures; GLOCAL case725cd8a3 passed. Other blocked cases are exception navigation and access inspection; no overall green claimed. Actual credits120→116.5debit3.5,1automatic suite/no manual duplicate. Final hosted DOM/API readback confirms exact strings; initial observer read before streaming links appeared, corrected with an explicit readiness wait. Current receipts remain local-only after the published source to avoid another paid docs-only run.
+
+Previous full-release checkpoint below is retained as history.
+
 ## Current release checkpoint —26October2026
 
 Published head62b0ac8d71abda2e2f4849da607872f705b6bc63 is Ready at https://grantpath-57ghna4k4-lammysam8-7688.vercel.app and the public release alias. Final CI40359127982 passed all application checks (85unit/31PostgreSQL/build/13production-browser), then correctly failed only the native-outcome requirement. All7exact saved scripts pass against this exact deployed head under local Playwright control. Read-only DOM/API capture confirms the same GLOCAL href/ID and exactly1row under all7destinations. These are not TestSprite passes.

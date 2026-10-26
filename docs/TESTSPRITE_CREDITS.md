@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **120 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **116.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -73,3 +73,5 @@ User saved the corrected Vercel target and no test event. Next coherent evidence
 Head62b0ac8, automatic1e8d5352:4passed/1failed/2blocked. Metadata actually targets the Vercel app. Observed123.5→120, debit3.5, exactly1execution. Discovery/profile/exception/notification passed; multi equality was not captured, publication/access inspection blocked. All7exact scripts pass hosted Playwright, not TestSprite. Read-only failure-bundle download confirms stored source assertions but not their runtime execution. Stop paid retries until a concrete execution remedy. Post-run receipts are local-only to avoid another seven-case paid run solely for documentation; no remote pass is claimed for the receipt commit.
 
 GLOCAL canonical-link follow-up: exact strengthened source/plan saved without execution; fresh account balance120, observed0.5/case. A coherent source implementation push is authorised by the continuing release work and expected to trigger one7case automatic suite, estimated3.5, retaining50reserve. Previous local receipts will be included in that push. No duplicate manual run will be launched; record actual final debit/outcome.
+
+GLOCAL canonical source9461493 automatic7eb7869b:5passed/2blocked/no failed; GLOCAL725cd8a3passed. Observed120→116.5, debit3.5,1execution. Exception navigation/access API cases remain blocked; required gate intact. No manual duplicate, generation/exploration, strict replay or purchase. Current receipts local-only after source publication.
