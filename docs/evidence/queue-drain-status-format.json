@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-26T21:02:00Z",
+  "head": "a20139111e9e69243223525558c3b95c0152f924",
+  "workflow": "https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243400",
+  "nativeExecution": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e27c5455-351f-4d70-84b8-de0366ba8447",
+  "observedStatus": "All 7 tests passed",
+  "originalParserVerdict": "failed",
+  "originalReason": "App summary does not establish all 7 cases passed: All 7 tests passed",
+  "correction": "Accept only the exact anchored All N tests passed serialization with the exact reviewed case count; all creator/project/head checks and negative outcomes remain enforced."
+}

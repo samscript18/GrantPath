@@ -26,3 +26,23 @@ it("accepts all reviewed cases passed while preserving pending and failed outcom
     "failed",
   );
 });
+it("accepts the observed App all-tests format only for the exact reviewed count", () => {
+  expect(assessNativeReport({ state: "success", description: "All 7 tests passed" }, 7).state).toBe(
+    "passed",
+  );
+  for (const description of [
+    "All 2 tests passed",
+    "All tests passed",
+    "All 7 tests passed · 1 blocked",
+    "All 7 tests passed · 1 failed",
+    "All 7 tests passed · 1 skipped",
+    "All 7 tests passed · error",
+  ])
+    expect(assessNativeReport({ state: "success", description }, 7).state).toBe("failed");
+  expect(assessNativeReport({ state: "failure", description: "All 7 tests passed" }, 7).state).toBe(
+    "failed",
+  );
+  expect(assessNativeReport({ state: "success", description: "All 0 tests passed" }, 0).state).toBe(
+    "failed",
+  );
+});

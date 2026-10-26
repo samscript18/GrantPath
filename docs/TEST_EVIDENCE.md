@@ -298,3 +298,13 @@ New integration test creates12real profile events and confirms one10event batch 
 Next coherent implementation push estimates one3.5App suite plus0.2API case (3.7) from104.6, preserving50reserve. No duplicate manual or scheduled TestSprite run, purchase, security bypass or merge.
 
 Queue follow-up final local result:89unit/typecheck/lint,33PostgreSQL/build,13production-browser journeys (3.1minutes) pass, including9exact sources and persisted zero-pending UI checks. Desktop/360px queue screenshots inspected. Formatting/whitespace/configured-secret scan pass. Native plan-only update hash38343ae6825fc8e819688bc440244c37ccc16c632f669ea627abca8f4cc2e66b has8steps; no credited execution during preparation. Fresh balance104.6, frontend rate0.5/observed backend0.2; expected single next automatic cycle3.7.
+
+## a201391 final native results and strict status-format correction
+
+Published a20139111e9e69243223525558c3b95c0152f924 is Ready at https://grantpath-ifqjt915y-lammysam8-7688.vercel.app. Authentic App e27c5455-351f-4d70-84b8-de0366ba8447 reports all7passed, individually read back including notification2654f547 and multi-destinationcbfacbce. Native API06d9858e also automatically passed with exact reviewed codeVersion v-5e0325a9c69d and404/403/foreign-read/unchanged-owner output. This resolves the prior browser blockers and undrained notification. Hosted anonymous DOM/API readback confirms all7GLOCAL destinations have identical ID/detail href/literal officialUrl/metadata.
+
+CI40398337022 passed all software steps:89unit/33PostgreSQL/build/13production-browser at that head. Its read-only native guard correctly remained fail-closed because it recognised only 7/7 passed, whereas the authentic App success text was All 7 tests passed. The correction adds only that exact anchored observed format with the exact reviewed count, retaining original format, creator/project/head checks and rejection of failures/blocked/skipped/missing/wrong counts. A new unit case covers these boundaries. No check was removed or manually set green. Next corrected head needs its own automatic results.
+
+Observed104.6→101.1(App3.5)→100.9(API0.2). Official usage confirms100.9, Free; no duplicate manual suite, purchase or schedule. A coherent parser-correction push estimates3.7more, retaining50reserve. Historical failure and original blocked gate are retained in queue-drain receipts.
+
+Parser follow-up local check:90unit tests, typecheck, lint and production build pass. No domain, database, browser or source change was made by this narrow format correction; prior89unit/33PostgreSQL/13production-browser and9exact scripts remain evidence for a201391, with fresh complete CI required at the next head.

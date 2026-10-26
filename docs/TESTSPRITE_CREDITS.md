@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **116.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **100.9 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -107,3 +107,7 @@ Application workers now return persisted pending/runnable/review counts. Operato
 New integration test creates12real profile events and confirms one10event batch reports remaining work, exact persisted health and student denial. Its first draft incorrectly expected the entire shared historical fixture database to drain within800jobs; residual2509runnable jobs disproved that assumption. The test is scoped to bounded-backlog reporting; existing exact delivery/replay/preference assertions remain in their integration and source journeys.33PostgreSQL tests pass.89unit/typecheck/lint/build and focused3production-browser journeys including9exact scripts pass. Final full browser/screenshot review follows.
 
 Next coherent implementation push estimates one3.5App suite plus0.2API case (3.7) from104.6, preserving50reserve. No duplicate manual or scheduled TestSprite run, purchase, security bypass or merge.
+
+## a201391 automatic cycle — observed metering
+
+Fresh official usage read26October2026 confirms100.9credits, Free, frontend rate0.5. One seven-case App suite debited3.5 (104.6→101.1); the required backend case debited0.2 (101.1→100.9), as independently captured by its CI receipt. Backend06d9858e passed with matching codeVersion v-5e0325a9c69d and exact protected assertion output. Browser executione27c5455 subsequently passed all7cases; individual results were read back. No duplicate manual run, generation, purchase or scheduled TestSprite operation. Fifty-credit reserve remains.

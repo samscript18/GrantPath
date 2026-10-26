@@ -8,7 +8,13 @@ export function assessNativeReport(
     return { state: "failed", reason: "Native App status failed or errored." };
   const description = status.description || "";
   const counts = description.match(/^\s*(\d+)\/(\d+)\s+passed\b/i);
-  if (!counts || Number(counts[1]) !== expectedCases || Number(counts[2]) !== expectedCases)
+  const complete = description.match(/^\s*All (\d+) tests passed\s*$/i);
+  const fullCount =
+    Number.isInteger(expectedCases) &&
+    expectedCases > 0 &&
+    ((counts && Number(counts[1]) === expectedCases && Number(counts[2]) === expectedCases) ||
+      (complete && Number(complete[1]) === expectedCases));
+  if (!fullCount)
     return {
       state: "failed",
       reason: `App summary does not establish all ${expectedCases} cases passed: ${description}`,

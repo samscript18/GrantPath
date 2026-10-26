@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-26T18:31:33.154Z",
+  "checkedAt": "2026-10-26T21:02:33.024Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "9461493cb65e9eb4ee1e22948127309f178194e9",
+  "head": "a20139111e9e69243223525558c3b95c0152f924",
   "mergeableState": "blocked",
   "enforceAdmins": true,
   "required": [
@@ -12,16 +12,13 @@
     {
       "context": "TestSprite V3",
       "app_id": 2756476
+    },
+    {
+      "context": "TestSprite API ownership",
+      "app_id": 15368
     }
   ],
   "checks": [
-    {
-      "name": "GitGuardian Security Checks",
-      "app": "gitguardian",
-      "appId": 46505,
-      "result": "success",
-      "url": "https://dashboard.gitguardian.com"
-    },
     {
       "name": "Vercel Preview Comments",
       "app": "vercel",
@@ -30,11 +27,25 @@
       "url": "https://vercel.com/github"
     },
     {
+      "name": "TestSprite API ownership",
+      "app": "github-actions",
+      "appId": 15368,
+      "result": "success",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243860"
+    },
+    {
       "name": "Typecheck, lint, domain and PostgreSQL checks",
       "app": "github-actions",
       "appId": 15368,
       "result": "failure",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40366902405/job/121726950692"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40398337022/job/121837243400"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "app": "gitguardian",
+      "appId": 46505,
+      "result": "success",
+      "url": "https://dashboard.gitguardian.com"
     }
   ],
   "statuses": [
@@ -42,13 +53,13 @@
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/5KZnZBN2NFKtEhirMmTzRcv1DFcC"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/4QAajn5oUR3dX4Yt1tWtGuPTGnVd"
     },
     {
       "context": "TestSprite V3",
-      "state": "failure",
-      "description": "5/7 passed · 2 blocked",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/7eb7869b-c74a-4cce-a1bb-ff4575419ff1"
+      "state": "success",
+      "description": "All 7 tests passed",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e27c5455-351f-4d70-84b8-de0366ba8447"
     }
   ],
   "testSpriteGateVerified": true
