@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **123.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **120 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -67,3 +67,7 @@ Automatic021fe90b at28c0d6e:5passed/1failed/1blocked; observed130.5→127, debit
 Automatic7e86f4a2 at963149e:4passed/1failed/2blocked. Observed127→123.5, debit3.5, one execution. Profile passed. Multi case opened the GitHub PR page, access API remained blocked, notification agent mixed expected post-change failure with baseline and counted old alerts. Exact hosted7sources allpassed; historical native v12has1alert/no duplicate groups. User confirmed trigger target was the GitHub PR URL; correction requested. No further strict retries, no manual duplicate. A future coherent evidence push only after saved target correction would estimate3.5, preserving50reserve.
 
 User saved the corrected Vercel target and no test event. Next coherent evidence/plan publication will verify this concrete routing fix through one automatic seven-case run, estimated3.5 from actual123.5. No manual duplicate or strict replay. Record actual debit and exact-head outcome; do not infer success from the corrected setting.
+
+## Final corrected-target observed result
+
+Head62b0ac8, automatic1e8d5352:4passed/1failed/2blocked. Metadata actually targets the Vercel app. Observed123.5→120, debit3.5, exactly1execution. Discovery/profile/exception/notification passed; multi equality was not captured, publication/access inspection blocked. All7exact scripts pass hosted Playwright, not TestSprite. Read-only failure-bundle download confirms stored source assertions but not their runtime execution. Stop paid retries until a concrete execution remedy. Post-run receipts are local-only to avoid another seven-case paid run solely for documentation; no remote pass is claimed for the receipt commit.

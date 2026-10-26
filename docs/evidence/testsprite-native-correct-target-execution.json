@@ -1,0 +1,1627 @@
+{
+  "checkedAt": "2026-10-26T16:43:41.132Z",
+  "head": "62b0ac8d71abda2e2f4849da607872f705b6bc63",
+  "cases": [
+    {
+      "file": "discovery_evidence",
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "latest": {
+        "testId": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+        "status": "passed",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:29:28.445Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-162928-dfe35dc2.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_65000ff50acba8b9",
+        "runIdIfAvailable": "a4f3feab-e19a-4926-854b-82aea931bf74",
+        "codeVersion": "v5.0",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "passed",
+        "executionStatus": "completed",
+        "summary": "Test passed. Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_65000ff50acba8b9"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "a4f3feab-e19a-4926-854b-82aea931bf74",
+            "status": "passed",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:29:28.445Z",
+            "codeVersion": "v5.0",
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-50823b9f627b",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Find a scholarship link'",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'Twente' into Search scholarships text field",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 4,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'View opportunity link'",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        },
+        {
+          "stepIndex": 7,
+          "action": "visible",
+          "description": "The funding evidence links to the official UTwente source.",
+          "status": "passed",
+          "runId": "a4f3feab-e19a-4926-854b-82aea931bf74"
+        }
+      ]
+    },
+    {
+      "file": "profile_application",
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "latest": {
+        "testId": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+        "status": "passed",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:33:10.865Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-163310-8607f4ca.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_0c85a7e4a95249e1",
+        "runIdIfAvailable": "6c22aa89-e720-4290-8523-f30563b260c5",
+        "codeVersion": "v3.0",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "passed",
+        "executionStatus": "completed",
+        "summary": "Test passed. Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_0c85a7e4a95249e1"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "6c22aa89-e720-4290-8523-f30563b260c5",
+            "status": "passed",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:33:10.865Z",
+            "codeVersion": "v3.0",
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-bb625127f409",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Sign in link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'student@example.test' into email email field",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 4,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'Profile link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 7,
+          "action": "click",
+          "description": "Click 'Edit study profile link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 8,
+          "action": "click",
+          "description": "Click '0 1 Your world button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Remove Ghana button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 10,
+          "action": "click",
+          "description": "Click 'Search or choose… text field'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 11,
+          "action": "fill",
+          "description": "Fill 'Ghana' into Search or choose… text field",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 12,
+          "action": "click",
+          "description": "Click 'Ghana option'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'Save & continue button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 14,
+          "action": "fill",
+          "description": "Fill '2027-06-01' into graduationDate date field",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 15,
+          "action": "click",
+          "description": "Click 'Save & continue button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 16,
+          "action": "click",
+          "description": "Click 'Save & continue button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 17,
+          "action": "click",
+          "description": "Click 'Save & see my matches button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 18,
+          "action": "click",
+          "description": "Click 'Update my matches button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 19,
+          "action": "click",
+          "description": "Click 'Discover scholarships link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 20,
+          "action": "fill",
+          "description": "Fill 'University of Twente' into Search scholarships text field",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 21,
+          "action": "click",
+          "description": "Click 'Search button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 22,
+          "action": "click",
+          "description": "Click 'View opportunity link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 23,
+          "action": "click",
+          "description": "Click 'My application plan · Preparing documents'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 24,
+          "action": "click",
+          "description": "Click 'Save my plan button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 25,
+          "action": "click",
+          "description": "Click 'Sign out button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 26,
+          "action": "fill",
+          "description": "Fill 'student@example.test' into email email field",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 27,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 28,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 29,
+          "action": "click",
+          "description": "Click 'Profile link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 30,
+          "action": "click",
+          "description": "Click 'My applications link'",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 31,
+          "action": "visible",
+          "description": "The private note remains saved on the Twente application plan after reload.",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        },
+        {
+          "stepIndex": 32,
+          "action": "visible",
+          "description": "The University of Twente Scholarship appears in the Preparing documents stage.",
+          "status": "passed",
+          "runId": "6c22aa89-e720-4290-8523-f30563b260c5"
+        }
+      ]
+    },
+    {
+      "file": "multi_destination",
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "latest": {
+        "testId": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+        "status": "failed",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:33:24.539Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-163321-28ba9c52.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_f6c3a40a322de18e",
+        "runIdIfAvailable": "59c8c786-4ab2-462e-af0f-f1a70541dc75",
+        "codeVersion": null,
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": "unknown",
+        "verdict": "failed",
+        "executionStatus": "completed",
+        "summary": "Failed: The hosting/app is likely rendering inconsistent scholarship URLs across destinations for the GLOCAL opportunity. The visible content and official-source evidence exist, but the exact href value differs for UK, Spain, and Sweden in the rendered page or catalog data, so the automated check could not confirm link equality. This is commonly caused by destination-specific link generation, redirect wrappers, trailing-slash differences, query parameters, or mismatched canonicalization between… Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": "The hosting/app is likely rendering inconsistent scholarship URLs across destinations for the GLOCAL opportunity. The visible content and official-source evidence exist, but the exact href value differs for UK, Spain, and Sweden in the rendered page or catalog data, so the automated check could not confirm link equality. This is commonly caused by destination-specific link generation, redirect wrappers, trailing-slash differences, query parameters, or mismatched canonicalization between the page content and stored catalogue history. Underlying error: TEST FAILURE\n\nThe participating institutions and official-source evidence are visible on the GLOCAL opportunity page, but the same scholarship link could not be confirmed for every destination. The recorded checks did not capture exact link equality for United Kingdom, Spain, and Sweden.\n\nObservations:\n- The opportunity lists University of Glasgow, Universidad de Los Andes, and Kyoto University among its study locations.\n- Official evidence is shown with links to globallocal-erasmusmundus.eu and checked dates of 25 Oct 2026.\n- The catalogue history reports one GLOCAL result for each of the seven destinations; exact link equality was not verified for UK, Spain, and Sweden.",
+          "recommendedFixTarget": {
+            "kind": "unknown",
+            "reference": null,
+            "rationale": "Ensure the GLOCAL opportunity page renders one canonical, identical scholarship URL for every destination entry (including UK, Spain, and Sweden), rather than generating destination-specific variants or redirect/tracking URLs. If links are constructed dynamically, normalize them server-side so all study locations point to the same exact href string from globallocal-erasmusmundus.eu. Also make sure any metadata/catalogue records use the same canonical link string and not a redirected, encoded, or parameterized version for some destinations."
+          },
+          "failureKind": "unknown",
+          "snapshotId": "snap_f6c3a40a322de18e"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75",
+            "status": "failed",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:33:24.539Z",
+            "codeVersion": null,
+            "failureKind": "unknown",
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-f9391163b06a",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Find a scholarship link'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'GLOCAL' into Search scholarships text field",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 4,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 5,
+          "action": "select",
+          "description": "Select option in 'Exclude closed cycles All cycles, including... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 7,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app/scholarships?q=GLOCAL&destination=DE&level=&funding=&availability=all&provider=&field=&deadlineBefore=",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 8,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 10,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 11,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 12,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 14,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 15,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 16,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 17,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 18,
+          "action": "select",
+          "description": "Select option in 'All destinations Australia Canada Colombia... dropdown'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 19,
+          "action": "click",
+          "description": "Click 'Apply filters button'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 20,
+          "action": "click",
+          "description": "Click 'View opportunity link'",
+          "status": "passed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        },
+        {
+          "stepIndex": 21,
+          "action": "visible",
+          "description": "The GLOCAL opportunity’s official source evidence is available to inspect.",
+          "status": "failed",
+          "runId": "59c8c786-4ab2-462e-af0f-f1a70541dc75"
+        }
+      ]
+    },
+    {
+      "file": "automatic_publication",
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "latest": {
+        "testId": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+        "status": "blocked",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:31:02.773Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-163059-12a6f505.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_b70aee499a16ca32",
+        "runIdIfAvailable": "427dcda6-eecb-45fb-b1e5-16337b9d45f5",
+        "codeVersion": null,
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "blocked",
+        "executionStatus": "completed",
+        "summary": "Blocked before a verdict could be produced: The hosted app appears to be serving the wrong publication records for the requested scholarship, likely due to a data-binding, environment, or cache mismatch. Instead of retrieving recent automatic publications for “[TEST ONLY] Controlled joint scholarship,” the page is rendering entries for “[TEST ONLY] Controlled change scholarship,” suggesting either a stale cached response, an incorrect backend/staging database reference, or a bug in the scholars… Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_b70aee499a16ca32"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5",
+            "status": "blocked",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:31:02.773Z",
+            "codeVersion": null,
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-f28e68163054",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Sign in link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'operator@example.test' into email email field",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 4,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 7,
+          "action": "click",
+          "description": "Click 'Isolated source verification'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 8,
+          "action": "click",
+          "description": "Click 'Publish valid snapshot button'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Publish valid snapshot button'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 10,
+          "action": "click",
+          "description": "Click 'Discover scholarships link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 11,
+          "action": "select",
+          "description": "Select option in 'Exclude closed cycles All cycles, including... dropdown'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 12,
+          "action": "fill",
+          "description": "Fill 'Controlled joint scholarship' into Search scholarships text field",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'Search button'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 14,
+          "action": "click",
+          "description": "Click '[TEST ONLY] Controlled joint scholarship link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 15,
+          "action": "click",
+          "description": "Click 'Change history link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 16,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 17,
+          "action": "click",
+          "description": "Click 'Discovery & automatic publication link'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 18,
+          "action": "scroll",
+          "description": "Scroll down on the page",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 19,
+          "action": "click",
+          "description": "Click 'Recent automatic publications ( 28 )'",
+          "status": "passed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        },
+        {
+          "stepIndex": 20,
+          "action": "visible",
+          "description": "Recent automatic publications does not show the requested “[TEST ONLY] Controlled joint scholarship” entry.",
+          "status": "failed",
+          "runId": "427dcda6-eecb-45fb-b1e5-16337b9d45f5"
+        }
+      ]
+    },
+    {
+      "file": "publication_exception",
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "latest": {
+        "testId": "762677d6-c058-41bd-996d-a599b01981be",
+        "status": "passed",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:29:57.915Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-162957-6b777279.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_ec34a34145cb28b6",
+        "runIdIfAvailable": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d",
+        "codeVersion": "v5.0",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "passed",
+        "executionStatus": "completed",
+        "summary": "Test passed. Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_ec34a34145cb28b6"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d",
+            "status": "passed",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:29:57.915Z",
+            "codeVersion": "v5.0",
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-38faa8392ef6",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Sign in link'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'operator@example.test' into email email field",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 4,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 7,
+          "action": "click",
+          "description": "Click 'Inspect ambiguous snapshot button'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 8,
+          "action": "click",
+          "description": "Click 'Discovery exceptions ( 2 ) link'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Catalogue link'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 10,
+          "action": "click",
+          "description": "Click 'Discover scholarships link'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 11,
+          "action": "select",
+          "description": "Select option in 'Exclude closed cycles All cycles, including... dropdown'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 12,
+          "action": "fill",
+          "description": "Fill 'Unresolved source scholarship' into Search scholarships text field",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'Search button'",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        },
+        {
+          "stepIndex": 14,
+          "action": "visible",
+          "description": "No published scholarship matched the search for “Unresolved source scholarship” across all cycles.",
+          "status": "passed",
+          "runId": "3b7da4bc-f6f9-41fa-b360-ff8cd516b15d"
+        }
+      ]
+    },
+    {
+      "file": "eligibility_notification",
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "latest": {
+        "testId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+        "status": "passed",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:39:49.652Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-163949-294a8df9.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_33dae90f288f72e8",
+        "runIdIfAvailable": "6d12b809-ef2d-49c9-a934-7961ace9dbf2",
+        "codeVersion": null,
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "passed",
+        "executionStatus": "completed",
+        "summary": "Test passed. Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_33dae90f288f72e8"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2",
+            "status": "passed",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:39:49.652Z",
+            "codeVersion": null,
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-b5d24f23e45d",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Sign in link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'operator@example.test' into email email field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 4,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 7,
+          "action": "select",
+          "description": "Select option in 'Publication and replay Eligibility and... dropdown'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 8,
+          "action": "click",
+          "description": "Click 'Isolated source verification'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Publish valid snapshot button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 10,
+          "action": "click",
+          "description": "Click 'Sign out button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 11,
+          "action": "fill",
+          "description": "Fill 'other@example.test' into email email field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 12,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 14,
+          "action": "click",
+          "description": "Click 'Profile link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 15,
+          "action": "click",
+          "description": "Click 'Edit study profile link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 16,
+          "action": "click",
+          "description": "Click '0 3 Your next chapter button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 17,
+          "action": "click",
+          "description": "Click 'Save & continue button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 18,
+          "action": "click",
+          "description": "Click 'Save & see my matches button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 19,
+          "action": "click",
+          "description": "Click 'Profile link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 20,
+          "action": "click",
+          "description": "Click 'Edit study profile link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 21,
+          "action": "click",
+          "description": "Click '0 3 Your next chapter button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 22,
+          "action": "click",
+          "description": "Click 'Save & continue button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 23,
+          "action": "click",
+          "description": "Click 'Save & see my matches button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 24,
+          "action": "click",
+          "description": "Click 'Discover scholarships link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 25,
+          "action": "fill",
+          "description": "Fill '[TEST ONLY] Controlled change scholarship' into Search scholarships text field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 26,
+          "action": "click",
+          "description": "Click 'Search button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 27,
+          "action": "click",
+          "description": "Click '[TEST ONLY] Controlled change scholarship link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 28,
+          "action": "click",
+          "description": "Click 'Settings link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 29,
+          "action": "click",
+          "description": "Click 'Notifications link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 30,
+          "action": "click",
+          "description": "Click 'Save my preferences button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 31,
+          "action": "click",
+          "description": "Click 'Sign out button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 32,
+          "action": "fill",
+          "description": "Fill 'operator@example.test' into email email field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 33,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 34,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 35,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 36,
+          "action": "click",
+          "description": "Click 'Isolated source verification'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 37,
+          "action": "select",
+          "description": "Select option in 'Publication and replay Eligibility and... dropdown'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 38,
+          "action": "click",
+          "description": "Click 'Publish changed requirement button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 39,
+          "action": "click",
+          "description": "Click 'Process up to 10 pending jobs button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 40,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app/login",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 41,
+          "action": "fill",
+          "description": "Fill 'other@example.test' into email email field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 42,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 43,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 44,
+          "action": "click",
+          "description": "Click 'Discover scholarships link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 45,
+          "action": "fill",
+          "description": "Fill '[TEST ONLY] Controlled change scholarship' into Search scholarships text field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 46,
+          "action": "click",
+          "description": "Click 'Search button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 47,
+          "action": "click",
+          "description": "Click '[TEST ONLY] Controlled change scholarship link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 48,
+          "action": "click",
+          "description": "Click 'Assessment details'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 49,
+          "action": "click",
+          "description": "Click 'Notifications 16 link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 50,
+          "action": "click",
+          "description": "Click 'Sign out button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 51,
+          "action": "fill",
+          "description": "Fill 'operator@example.test' into email email field",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 52,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 53,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        },
+        {
+          "stepIndex": 54,
+          "action": "click",
+          "description": "Click 'Operator studio link'",
+          "status": "passed",
+          "runId": "6d12b809-ef2d-49c9-a934-7961ace9dbf2"
+        }
+      ]
+    },
+    {
+      "file": "access_denial",
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "latest": {
+        "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+        "status": "blocked",
+        "startedAt": "2026-10-26T16:27:22.758Z",
+        "finishedAt": "2026-10-26T16:30:22.954Z",
+        "videoUrl": "https://testsprite-videos.s3.us-east-1.amazonaws.com/20261026-163019-409bfcdc.webm",
+        "failureAnalysisUrl": null,
+        "snapshotId": "snap_f0852a703193e25e",
+        "runIdIfAvailable": "05b83bd2-1e4e-446e-a591-37778df25ce7",
+        "codeVersion": null,
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "targetUrlSource": null,
+        "environment": {
+          "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+          "name": "github-pr-1"
+        },
+        "failedStepIndex": null,
+        "failureKind": null,
+        "verdict": "blocked",
+        "executionStatus": "completed",
+        "summary": "Blocked before a verdict could be produced: The hosted deployment likely has an auth/routing/caching issue that prevents the verifier from seeing the protected API results and owner reread state in the UI. Possible causes include stale or incorrect build output, server-side caching of authenticated data, misconfigured role-based access that hides the owner view or API response details, or a deployment that no longer matches the expected revision/state used by the test. Because the required 404,… Target: environment github-pr-1 (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).",
+        "apiOutput": null,
+        "trace": null,
+        "analysis": {
+          "rootCauseHypothesis": null,
+          "recommendedFixTarget": null,
+          "failureKind": null,
+          "snapshotId": "snap_f0852a703193e25e"
+        }
+      },
+      "history": {
+        "runs": [
+          {
+            "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7",
+            "status": "blocked",
+            "source": "github_action",
+            "isRerun": false,
+            "createdFrom": null,
+            "createdAt": "2026-10-26T16:27:22.758Z",
+            "startedAt": "2026-10-26T16:27:22.758Z",
+            "finishedAt": "2026-10-26T16:30:22.954Z",
+            "codeVersion": null,
+            "failureKind": null,
+            "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+            "targetUrlSource": null,
+            "environment": {
+              "id": "05551b05-b1d1-4513-8b63-fc47d708c184",
+              "name": "github-pr-1"
+            }
+          }
+        ],
+        "nextCursor": null,
+        "meta": {
+          "testKind": "unknown",
+          "tier": "Free",
+          "retentionDays": 30,
+          "hiddenCount": 0,
+          "billingUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/settings/billing"
+        }
+      },
+      "storedCodeVersion": "v-d28835780596",
+      "savedSourceStillByteIdentical": true,
+      "steps": [
+        {
+          "stepIndex": 1,
+          "action": "navigate",
+          "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 2,
+          "action": "click",
+          "description": "Click 'Sign in link'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 3,
+          "action": "fill",
+          "description": "Fill 'other@example.test' into email email field",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 4,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 5,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 6,
+          "action": "click",
+          "description": "Click 'University of Twente Scholarship link'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 7,
+          "action": "click",
+          "description": "Click 'My application plan · Interested'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 8,
+          "action": "click",
+          "description": "Click 'Save my plan button'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 9,
+          "action": "click",
+          "description": "Click 'Sign out button'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 10,
+          "action": "fill",
+          "description": "Fill 'student@example.test' into email email field",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 11,
+          "action": "fill",
+          "description": "[REDACTED password entry step]",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 12,
+          "action": "click",
+          "description": "Click 'Welcome back → button'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 13,
+          "action": "click",
+          "description": "Click 'My applications link'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 14,
+          "action": "click",
+          "description": "Click 'Edit my plan'",
+          "status": "passed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        },
+        {
+          "stepIndex": 15,
+          "action": "visible",
+          "description": "The owner’s original application note remains unchanged after the cross-account access attempt.",
+          "status": "failed",
+          "runId": "05b83bd2-1e4e-446e-a591-37778df25ce7"
+        }
+      ]
+    }
+  ]
+}

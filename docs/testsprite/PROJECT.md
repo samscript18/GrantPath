@@ -1,4 +1,4 @@
-> Current checkpoint —26October:963149e deployed Ready; all7exact hosted sources pass under Playwright. Native7e86f4a2 reports4pass/1fail/2blocked, actual123.5credits. Profile passed, multi opened GitHub, notification interpreted baseline/change/history incorrectly, access HTTP assertions blocked. User confirmed the trigger was corrected from the PR URL to the Vercel branch pattern; its next actual verdict is pending. Both required checks remain; no complete native green claimed. Earlier observations below are history.
+> Final checkpoint —26October2026: published62b0ac8 Ready; all7exact hosted Playwright sources pass. Corrected-target native1e8d5352 reports4pass/1fail/2blocked, actual120credits. Profile/notification passed; multi equality not captured, publication/access inspection blocked. Required gate remains failed; no exact-script native pass or full completion claimed. Stored failure-bundle code is byte-identical, but run codeVersion is null and runtime fidelity remains unestablished. See FINAL_HANDOFF.md; earlier observations are dated history.
 
 # Current native suite — 25 October2026
 

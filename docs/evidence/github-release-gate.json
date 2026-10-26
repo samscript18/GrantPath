@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-26T16:17:53.248Z",
+  "checkedAt": "2026-10-26T16:43:48.223Z",
   "pr": "https://github.com/samscript18/GrantPath/pull/1",
-  "head": "963149ea1e7d4f75e387630554b1f0316417c570",
+  "head": "62b0ac8d71abda2e2f4849da607872f705b6bc63",
   "mergeableState": "blocked",
   "enforceAdmins": true,
   "required": [
@@ -27,7 +27,7 @@
       "app": "github-actions",
       "appId": 15368,
       "result": "failure",
-      "url": "https://github.com/samscript18/GrantPath/actions/runs/40355988253/job/121688463620"
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40359127982/job/121699492457"
     },
     {
       "name": "GitGuardian Security Checks",
@@ -42,13 +42,13 @@
       "context": "Vercel",
       "state": "success",
       "description": "Deployment has completed",
-      "url": "https://vercel.com/lammysam8-7688/grantpath/68NwC2drpGTFQjRqWYZoZam8BxZP"
+      "url": "https://vercel.com/lammysam8-7688/grantpath/FQMq2B2iqFsE9iVuHGTMGKuJBGRu"
     },
     {
       "context": "TestSprite V3",
       "state": "failure",
       "description": "4/7 passed · 1 failed · 2 blocked",
-      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/7e86f4a2-2b01-4597-a94e-e46be53acaf2"
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/1e8d5352-b575-40eb-8dc0-94d5d1036fb1"
     }
   ],
   "testSpriteGateVerified": true

@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-26T16:47:18.601Z",
+  "head": "62b0ac8d71abda2e2f4849da607872f705b6bc63",
+  "scope": "Read-only actual DOM href and API identity; not TestSprite",
+  "sameHref": true,
+  "sameId": true,
+  "rows": [
+    {
+      "code": "GB",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "DE",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "ES",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "SE",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "CO",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "JP",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "NL",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    }
+  ]
+}
