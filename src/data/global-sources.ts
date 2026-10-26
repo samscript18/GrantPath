@@ -2,6 +2,7 @@ import sourceRetrievals from "../../docs/evidence/global-source-retrievals.json"
 import type { DirectoryDefinition, DetailMapping } from "@/server/discovery/types";
 import type { ScholarshipData } from "@/server/scholarships/schema";
 import { countryName } from "@/lib/countries";
+import { GLOCAL_OFFICIAL_URL, GLOCAL_APPLICATION_URL } from "@/server/scholarships/links";
 // Reviewed mappings are semantic contracts, not mock source responses. Live extraction
 // must find these official passages before any automatic publication can succeed.
 const reviewedAt = sourceRetrievals.recordedAt;
@@ -124,9 +125,9 @@ function overview(v: MappingInput): DetailMapping {
     },
   };
 }
-const glocalUrl = "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/";
+const glocalUrl = GLOCAL_OFFICIAL_URL;
 const glocalFunding = "https://globallocal-erasmusmundus.eu/erasmus-mundus-scholarship/";
-const glocalApply = "https://globallocal-erasmusmundus.eu/how-to-apply/";
+const glocalApply = GLOCAL_APPLICATION_URL;
 const glocal = overview({
   key: "erasmus-glocal",
   provider: "GLOCAL Consortium",

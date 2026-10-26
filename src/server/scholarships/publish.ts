@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
 import { publicationSchema } from "./schema";
 import { studyLocationsOf, destinationLabel } from "./locations";
+import { normaliseScholarshipLinks } from "./links";
 import type { Prisma } from "@/generated/prisma/client";
 export function canonical(value: unknown): string {
   if (value === undefined) return "undefined";
@@ -42,11 +43,15 @@ export async function publishScholarshipTx(
   reason: string,
   reviewId?: string,
 ) {
-  const data = publicationSchema.parse(input);
+  const parsed = publicationSchema.parse(input);
+  await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${scholarshipId}))`;
+  const scholarship = await tx.scholarship.findUniqueOrThrow({
+    where: { id: scholarshipId },
+    include: { programme: { select: { slug: true } } },
+  });
+  const data = normaliseScholarshipLinks(scholarship.programme.slug, parsed);
   const hash = semanticHash(data);
   const locations = studyLocationsOf(data);
-  await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${scholarshipId}))`;
-  const scholarship = await tx.scholarship.findUniqueOrThrow({ where: { id: scholarshipId } });
   const previous = await tx.scholarshipVersion.findUnique({
     where: { scholarshipId_number: { scholarshipId, number: scholarship.version } },
   });

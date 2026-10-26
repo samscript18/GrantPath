@@ -1,4 +1,6 @@
 import { ProviderImage } from "@/components/provider-image";
+import type { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -29,6 +31,22 @@ import { Recalculate } from "@/components/recalculate";
 import { getProfile } from "@/server/profiles";
 import type { Rule } from "@/server/eligibility/rules";
 import { OpportunitySections } from "@/components/opportunity-sections";
+import { normaliseScholarshipLinks } from "@/server/scholarships/links";
+import { countryName } from "@/lib/countries";
+const readScholarship = cache(scholarshipBySlug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const scholarship = await readScholarship((await params).slug);
+  if (!scholarship) return {};
+  return {
+    title: scholarship.title,
+    description: scholarship.data.summary,
+    other: { "scholarship:official-url": scholarship.data.officialUrl },
+  };
+}
 function Rules({ rule }: { rule: Rule }) {
   return rule.kind === "requirement" ? (
     <li className="flex gap-3 border-b border-border py-4">
@@ -67,7 +85,7 @@ export default async function ScholarshipDetail({
   searchParams: Promise<{ version?: string; evaluation?: string }>;
 }) {
   const { slug } = await params;
-  const [actor, s] = await Promise.all([currentUser(), scholarshipBySlug(slug)]);
+  const [actor, s] = await Promise.all([currentUser(), readScholarship(slug)]);
   if (!s) notFound();
   const query = await searchParams;
   const requested = query.version;
@@ -84,7 +102,7 @@ export default async function ScholarshipDetail({
       ])
     : [null, null, null];
   const viewerTimeZone = viewerProfile?.data.timeZone || "UTC";
-  const d = scholarshipDataSchema.parse(selected.data);
+  const d = normaliseScholarshipLinks(s.programme.slug, scholarshipDataSchema.parse(selected.data));
   const health = evidenceHealth(d);
   return (
     <>
@@ -170,6 +188,20 @@ export default async function ScholarshipDetail({
                       className="border-l-2 border-primary/20 pl-3 leading-6"
                     >
                       {institution.name}
+                      {institution.countryCode && (
+                        <span className="block text-[11px] text-muted-foreground">
+                          {countryName(institution.countryCode)}
+                        </span>
+                      )}
+                      <a
+                        href={d.officialUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Official scholarship information for ${institution.name}`}
+                        className="mt-1 flex items-center gap-1 text-primary underline underline-offset-4"
+                      >
+                        Scholarship information <ExternalLink size={11} aria-hidden="true" />
+                      </a>
                     </li>
                   ))}
                 </ul>

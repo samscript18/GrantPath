@@ -53,3 +53,46 @@ describe("catalogue persistence and roles", () => {
     ).toBe(2);
   });
 });
+
+it("persists canonical GLOCAL links and treats equivalent URL replays as unchanged", async () => {
+  const tag = crypto.randomUUID();
+  const officialUrl = "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/";
+  const applicationUrl = "https://globallocal-erasmusmundus.eu/how-to-apply/";
+  const data = {
+    ...testScholarship(),
+    title: `[TEST ONLY] Canonical GLOCAL ${tag}`,
+    officialUrl:
+      "https://www.globallocal-erasmusmundus.eu/about-glocal/%70rogramme-overview?utm_source=spain#section",
+    applicationUrl: applicationUrl + "?utm_source=uk",
+    studyLocations: { scope: "multiple" as const, countries: ["GB", "DE"], institutions: [] },
+  };
+  const record = await createOpportunity(operator, {
+    slug: `test-canonical-glocal-${tag}`,
+    cycle: `TEST-${tag}`,
+    programmeSlug: "erasmus-glocal",
+    providerSlug: "canonical-glocal-test",
+    providerName: "[TEST ONLY] GLOCAL provider",
+    providerUrl: "https://globallocal-erasmusmundus.eu",
+    data,
+    reason: "Isolated canonical URL publication verification.",
+  });
+  const accepted = await db().scholarshipVersion.findUniqueOrThrow({
+    where: { scholarshipId_number: { scholarshipId: record.id, number: 1 } },
+  });
+  expect(accepted.data).toMatchObject({ officialUrl, applicationUrl });
+  const replay = await publishScholarship(
+    operator,
+    record.id,
+    { ...data, officialUrl, applicationUrl },
+    1,
+    "Replay equivalent canonical links without changing accepted facts.",
+  );
+  expect(replay.changed).toBe(false);
+  for (const destination of ["GB", "DE"]) {
+    const result = await catalogue({ q: tag, destination, availability: "all" });
+    expect(result.total).toBe(1);
+    expect(result.rows[0].id).toBe(record.id);
+    expect(result.rows[0].data.officialUrl).toBe(officialUrl);
+  }
+  expect(await db().outbox.count({ where: { key: `scholarship:${record.id}:1` } })).toBe(1);
+});

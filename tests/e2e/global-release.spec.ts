@@ -8,6 +8,8 @@ test("real joint programme filters preserve identity across every actual study d
     page.getByText(/Scheme overview\. This is guidance about the programme/),
   ).toBeVisible();
   let id = "";
+  let href = "";
+  const officialUrl = "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/";
   for (const destination of ["GB", "DE", "ES", "SE", "CO", "JP", "NL"]) {
     await page.goto(`/scholarships?q=GLOCAL&destination=${destination}&availability=all`);
     await expect(
@@ -26,11 +28,28 @@ test("real joint programme filters preserve identity across every actual study d
     expect(result.total).toBe(1);
     id ||= result.rows[0].id;
     expect(result.rows[0].id).toBe(id);
+    expect(result.rows[0].data.officialUrl).toBe(officialUrl);
+    const rowLink = await page
+      .getByRole("link", {
+        name: "GLOCAL — Erasmus Mundus Joint Master scholarship",
+        exact: true,
+      })
+      .getAttribute("href");
+    href ||= rowLink!;
+    expect(rowLink).toBe(href);
   }
   await page
     .getByRole("link", { name: "GLOCAL — Erasmus Mundus Joint Master scholarship", exact: true })
     .click();
   await expect(page.getByRole("heading", { name: "Where you could study" })).toBeVisible();
+  const officialLinks = page.getByRole("link", { name: /^Official scholarship information for / });
+  await expect(officialLinks).toHaveCount(7);
+  for (const link of await officialLinks.all())
+    await expect(link).toHaveAttribute("href", officialUrl);
+  await expect(page.locator('meta[name="scholarship:official-url"]')).toHaveAttribute(
+    "content",
+    officialUrl,
+  );
   await page.screenshot({ path: "test-results/global-joint-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 360, height: 850 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

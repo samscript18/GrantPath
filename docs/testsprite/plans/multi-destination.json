@@ -15,11 +15,11 @@
     },
     {
       "type": "assertion",
-      "description": "Repeat for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL; assert each shows exactly the same scholarship link once."
+      "description": "Repeat for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL; assert each shows exactly the same scholarship link once. Capture and compare each literal internal href, not a destination filter URL; missing comparisons must fail. Catalogue officialUrl must be https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ under every destination."
     },
     {
       "type": "assertion",
-      "description": "Open that link; assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence."
+      "description": "Open that link; assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence. Each of the seven study-location Scholarship information links must have the identical literal href https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ without query parameters or fragments. Funding evidence and the separate application guidance may use their specific official pages."
     }
   ]
 }

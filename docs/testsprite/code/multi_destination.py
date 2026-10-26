@@ -52,6 +52,8 @@ async def run_test():
 
             page = await browser.new_page()
             stable = None
+            stable_href = None
+            official_url = "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
             for destination in ["DE", "ES", "SE", "CO", "JP", "GB", "NL"]:
                 await page.goto(base + "/scholarships?q=GLOCAL&destination=" + destination + "&availability=all")
                 await expect(page.get_by_role("heading", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True)).to_be_visible()
@@ -63,10 +65,19 @@ async def run_test():
                 assert result["total"] == 1, "One joint programme must not become country duplicates"
                 row = result["rows"][0]
                 assert destination in row["destinationCodes"]
+                assert row["data"]["officialUrl"] == official_url
+                href = await page.get_by_role("link", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True).get_attribute("href")
+                stable_href = stable_href or href
+                assert href == stable_href, "The exact internal detail href must match under every destination"
                 stable = stable or row["id"]
                 assert row["id"] == stable, "Each destination must find the same programme/cycle"
             await page.get_by_role("link", name="GLOCAL — Erasmus Mundus Joint Master scholarship", exact=True).click()
             await expect(page.get_by_role("heading", name="Where you could study")).to_be_visible()
+            official_links = page.get_by_role("link", name=re.compile("^Official scholarship information for "))
+            await expect(official_links).to_have_count(7)
+            for link in await official_links.all():
+                await expect(link).to_have_attribute("href", official_url)
+            await expect(page.locator('meta[name="scholarship:official-url"]')).to_have_attribute("content", official_url)
             await expect(page.get_by_role("heading", name="Evidence you can inspect.")).to_be_visible()
             await expect(page.get_by_text("Locations depend on your chosen programme pathway", exact=False)).to_be_visible()
         finally:

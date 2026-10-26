@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import type { Prisma } from "@/generated/prisma/client";
 import { scholarshipDataSchema, availabilityOf } from "./schema";
+import { normaliseScholarshipLinks } from "./links";
 export const filtersSchema = z.object({
   q: z.string().trim().max(120).default(""),
   destination: z.string().max(100).default(""),
@@ -73,7 +74,10 @@ export async function catalogue(input: unknown) {
   return {
     rows: rows.map((s) => ({
       ...s,
-      data: scholarshipDataSchema.parse(s.versions[0].data),
+      data: normaliseScholarshipLinks(
+        s.programme.slug,
+        scholarshipDataSchema.parse(s.versions[0].data),
+      ),
       currentAvailability: availabilityOf(s),
     })),
     total,
@@ -118,7 +122,10 @@ export async function scholarshipBySlug(slug: string) {
   return {
     ...s,
     monitored,
-    data: scholarshipDataSchema.parse(s.versions[0].data),
+    data: normaliseScholarshipLinks(
+      s.programme.slug,
+      scholarshipDataSchema.parse(s.versions[0].data),
+    ),
     currentAvailability: availabilityOf(s),
   };
 }
@@ -148,7 +155,10 @@ export async function featuredScholarships() {
     .slice(0, 3)
     .map((row) => ({
       ...row,
-      data: scholarshipDataSchema.parse(row.versions[0].data),
+      data: normaliseScholarshipLinks(
+        row.programme.slug,
+        scholarshipDataSchema.parse(row.versions[0].data),
+      ),
       currentAvailability: availabilityOf(row),
     }));
 }

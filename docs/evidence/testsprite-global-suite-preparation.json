@@ -18,7 +18,7 @@
     {
       "file": "multi_destination",
       "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
-      "codeVersion": "v-f9391163b06a",
+      "codeVersion": "v-89406061c04e",
       "planSteps": 4
     },
     {
@@ -46,6 +46,6 @@
       "planSteps": 4
     }
   ],
-  "refreshedAt": "2026-10-26T14:58:38.496Z",
-  "reason": "Retain exact assertions, valid template markers and independent authenticated API contexts; name actual operator queue/provenance sections."
+  "refreshedAt": "2026-10-26T17:12:36.831Z",
+  "reason": "GLOCAL literal internal href, canonical official URL, seven institution anchors and source metadata assertions; all existing identity/persistence checks retained."
 }
