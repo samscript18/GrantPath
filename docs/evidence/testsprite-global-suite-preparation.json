@@ -6,7 +6,7 @@
     {
       "file": "discovery_evidence",
       "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
-      "codeVersion": "v-50823b9f627b",
+      "codeVersion": "v-522503c24345",
       "planSteps": 6
     },
     {
@@ -42,10 +42,10 @@
     {
       "file": "account_privacy",
       "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
-      "codeVersion": "v-6f565aec7999",
+      "codeVersion": "v-cd62d2bcd84b",
       "planSteps": 4
     }
   ],
-  "refreshedAt": "2026-10-26T19:38:57.737Z",
+  "refreshedAt": "2026-10-26T20:01:50.567Z",
   "reason": "Browser privacy plus separate mandatory native HTTP ownership; literal catalogue source links, reliable scenario buttons and scoped accepted history. Original HTTP assertions retained."
 }

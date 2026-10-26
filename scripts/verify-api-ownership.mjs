@@ -1,3 +1,4 @@
+import { matchesReviewedBackendSource } from "./lib/native-source.mjs";
 import { spawn } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 
@@ -106,7 +107,10 @@ if (config.code || config.data.environment?.variables?.expected_commit !== sha)
 const source = await cli(["test", "code", "get", test]);
 if (
   source.code ||
-  source.data.code !== (await readFile("docs/testsprite/code/access_denial_api.py", "utf8"))
+  !matchesReviewedBackendSource(
+    source.data.code,
+    await readFile("docs/testsprite/code/access_denial_api.py", "utf8"),
+  )
 )
   throw new Error("Native API source differs from reviewed repository assertions; no run started.");
 const run = await cli([

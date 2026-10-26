@@ -330,7 +330,7 @@ export default async function ScholarshipDetail({
           <div className="application-panel paper p-6 xl:sticky xl:top-24 xl:max-h-[calc(100dvh-7rem)] xl:overflow-y-auto">
             <p className="eyebrow flex items-center gap-2 text-muted-foreground">
               <CalendarDays size={14} />
-              APPLICATION TIMING
+              PROVIDER APPLICATION WINDOW
             </p>
             <h2 className="mt-4 font-serif text-2xl">
               {d.deadline ? formatDate(d.deadline, viewerTimeZone) : "Check the closing date"}
@@ -384,6 +384,22 @@ export default async function ScholarshipDetail({
                 </Button>
               )}
             </div>
+            <section
+              aria-label="Your application progress"
+              className="mt-6 border-t border-border pt-5"
+            >
+              <h3 className="text-xs font-semibold">Your application progress</h3>
+              <p className="mt-2 text-sm">
+                {application
+                  ? application.status
+                  : actor
+                    ? "No personal plan yet"
+                    : "Sign in to track your progress"}
+              </p>
+              <p className="mt-2 text-[11px] leading-6 text-muted-foreground">
+                Your private plan is separate from the provider’s application window.
+              </p>
+            </section>
             {application && (
               <details className="mt-5 border-t border-border pt-4">
                 <summary className="cursor-pointer text-xs font-semibold">

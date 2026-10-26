@@ -65,8 +65,10 @@ async def run_test():
     assert health["revision"] == expected, "API verification must target the requested commit"
     owner = login(value("VAR_{other_email}", "other_email"))
     other = login(value("VAR_{username}", "test_username"))
-    catalogue = call(owner, "GET", "/api/scholarships?q=Twente&availability=all")
-    scholarship = next(row for row in catalogue["rows"] if row["slug"] == "twente-uts-2027")
+    # Use a different owner's award from the parallel browser privacy journey.
+    # A legitimate owner edit in that case must not race this unchanged-data assertion.
+    catalogue = call(owner, "GET", "/api/scholarships?q=ETH&availability=all")
+    scholarship = next(row for row in catalogue["rows"] if row["slug"] == "eth-esop-2027")
     application = call(owner, "POST", "/api/applications", {"scholarshipId": scholarship["id"]})
     own = {key: application[key] for key in ("revision", "status", "notes", "saved", "checklist")}
     attack = {**own, "notes": "[TEST ONLY] Unauthorised replacement"}

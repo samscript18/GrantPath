@@ -1,11 +1,11 @@
 {
   "projectId": "d36cedef-a40e-4fb7-ae61-f3b2484ede06",
   "caseId": "88b47334-232c-4665-a6a2-413b09c34eb5",
-  "codeVersion": "v-df3cfaf48c96",
+  "codeVersion": "v-5e0325a9c69d",
   "source": "access_denial_api.py",
-  "preparedAt": "2026-10-26T19:39:01.506Z",
+  "preparedAt": "2026-10-26T20:04:05.302Z",
   "executed": false,
-  "credits": 111.8,
+  "credits": 108.3,
   "expectedCombinedAutomaticCost": 3.7,
   "reserve": 50
 }

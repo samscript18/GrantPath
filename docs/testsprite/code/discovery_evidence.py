@@ -33,6 +33,8 @@ async def run_test():
             await expect(funding).to_contain_text("€ 3,000 - € 22,000")
             await expect(funding).to_contain_text("Checked against official source")
             await expect(funding.get_by_role("link").first).to_have_attribute("href", re.compile(r"^https://(?:www\.)?utwente\.nl/"))
+            await expect(page.get_by_text("PROVIDER APPLICATION WINDOW", exact=True)).to_be_visible()
+            await expect(page.get_by_role("region", name="Your application progress", exact=True)).to_contain_text("Sign in to track your progress")
             await expect(page.get_by_role("link", name="Official guidance")).to_be_visible()
             await expect(page.get_by_role("link", name="Sign in to save University of Twente Scholarship", exact=True)).to_be_visible()
         finally:

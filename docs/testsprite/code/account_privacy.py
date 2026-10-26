@@ -46,9 +46,12 @@ async def run_test():
 
             owner = await login(value("VAR_{other_email}", "other_email"))
             save = owner.get_by_role("button", name="Save University of Twente Scholarship", exact=True)
+            unsave = owner.get_by_role("button", name="Unsave University of Twente Scholarship", exact=True)
+            # Streamed pages may resolve goto before either save control is ready.
+            await expect(save.or_(unsave)).to_be_visible(timeout=45000)
             if await save.count():
                 await save.click()
-            await expect(owner.get_by_role("button", name="Unsave University of Twente Scholarship", exact=True)).to_be_visible()
+            await expect(unsave).to_be_visible(timeout=45000)
             await owner.get_by_text(re.compile(r"My application plan ·")).click()
             await owner.get_by_label("Private notes", exact=True).fill(note)
             await owner.get_by_role("button", name="Save my plan", exact=True).click()

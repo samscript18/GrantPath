@@ -1,5 +1,13 @@
 # Final release review —26October2026
 
+## Native-alternative head b5bbce7 — actual result and correction
+
+Published b5bbce70bb2df46b07353b3fc27edd587c231917 is Ready at https://grantpath-dwsktflwj-lammysam8-7688.vercel.app. Native bcaa139c reports4passed/1failed/2blocked: profile, GLOCAL literal comparison, exceptions and browser privacy passed; public timing/progress distinction failed; publication search and notification account switching blocked. The publication agent literally searched Controlled joint scholarship with all windows rather than setting the separate window filter. Notification controls selected correctly, then the generated test reused an operator tab after student login, and the server correctly refused its mutation. Plans now specify exact search text and explicit logout/login for every account switch; no permission guard is changed.
+
+API job121805878985 stopped before dispatch: backend exports prepend an exact public-auth credential stub and strip one trailing newline. New matchesReviewedBackendSource accepts only the exact reviewed body, its EOF serialization, or that exact observed stub plus body. Tests reject altered404assertions, added executable code, changed auth wrappers and missing source. Actual saved v-df3cfaf48c96 matches; no assertion or arbitrary wrapper is ignored.89unit/typecheck/lint pass. Public detail pages now explicitly label Provider application window and separately show actual personal progress, or an honest signed-out/unsaved prompt. Exact discovery assertions are strengthened accordingly.
+
+Observed111.8→108.3credit debit3.5 is the single App suite; no API execution occurred at this head. Next coherent correction expects3.7 combined from108.3, retaining50reserve. Prior local production build/three focused journeys including9exact sources pass; final broader browser rerun pending. Required three checks, strict freshness and admin enforcement remain intact; PR remains blocked until actual corrected-head passes.
+
 ## Current verification work — 26 October 2026
 
 Published source before this increment is `3591af74281e3e0e5467ce954331c7106d61cf1e`, Ready at https://grantpath-9f446w9sh-lammysam8-7688.vercel.app. Public alias: https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app; PR: https://github.com/samscript18/GrantPath/pull/1. Later checkpoints below are historical unless a newer exact-head receipt is recorded.

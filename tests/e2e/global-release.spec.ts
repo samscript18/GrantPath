@@ -7,6 +7,21 @@ test("real joint programme filters preserve identity across every actual study d
   await expect(
     page.getByText(/Scheme overview\. This is guidance about the programme/),
   ).toBeVisible();
+  await page.goto("/scholarships/twente-uts-2027");
+  await expect(page.getByText("PROVIDER APPLICATION WINDOW", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Your application progress", exact: true }),
+  ).toContainText("Sign in to track your progress");
+  await page.screenshot({
+    path: "test-results/provider-personal-progress-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 360, height: 850 });
+  await page
+    .getByRole("region", { name: "Your application progress", exact: true })
+    .scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/provider-personal-progress-mobile.png" });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   let id = "";
   let href = "";
   const officialUrl = "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/";

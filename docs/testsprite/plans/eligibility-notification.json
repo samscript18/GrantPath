@@ -11,7 +11,7 @@
     },
     {
       "type": "action",
-      "description": "Sign in VAR_{other_email} in its independent browser context with VAR_{password}. Dismiss an unfinished-profile prompt if needed; open /settings/profile. Save Nigeria citizenship, Ghana residence, bachelor current qualification and completed status. In Your plans set the exact Intended future qualification field to master, not bachelor; set Computer Science. Save & continue, then Save & see my matches. Save [TEST ONLY] Controlled change scholarship. Enable in-app change notifications and disable email."
+      "description": "Click Sign out, open /login, enter VAR_{other_email} and VAR_{password}, and click Welcome back. Use one browser session sequentially; switching tabs does not switch authentication cookies. Dismiss an unfinished-profile prompt if needed; open /settings/profile. Save Nigeria citizenship, Ghana residence, bachelor current qualification and completed status. In Your plans set the exact Intended future qualification field to master, not bachelor; set Computer Science. Save & continue, then Save & see my matches. Save [TEST ONLY] Controlled change scholarship. Enable in-app change notifications and disable email."
     },
     {
       "type": "assertion",
@@ -23,19 +23,19 @@
     },
     {
       "type": "action",
-      "description": "Sign in as operator, reopen Isolated source verification, explicitly click the Eligibility and notifications button (assert it is pressed) again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
+      "description": "Explicitly click Sign out from the student workspace. Open /login, fill Email address with VAR_{operator_email} and Password with VAR_{password}, click Welcome back, then navigate fresh to /operator and verify Operator studio is accessible. Never reuse an old operator tab after student login because its session cookie is now a student. Reopen Isolated source verification, explicitly click the Eligibility and notifications button (assert it is pressed) again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
     },
     {
       "type": "assertion",
-      "description": "Process bounded application jobs until the current work drains. As the other student with target master, verify the current version C is now not_eligible with VALUE_NOT_ACCEPTED. This rejection is the EXPECTED post-change result. Verify exactly one change alert for version C, using its accepted-version/event context. Older alerts for other accepted versions must remain in history and do not count as duplicates. Total unread count or repeated scholarship titles cannot establish duplicate delivery."
+      "description": "While still authenticated as the operator, process bounded application jobs until the current work drains. Then click Sign out, open /login, fill VAR_{other_email} and VAR_{password}, and click Welcome back. As this student with target master, verify the current version C is now not_eligible with VALUE_NOT_ACCEPTED. This rejection is the EXPECTED post-change result. Verify exactly one change alert for version C, using its accepted-version/event context. Older alerts for other accepted versions must remain in history and do not count as duplicates. Total unread count or repeated scholarship titles cannot establish duplicate delivery."
     },
     {
       "type": "assertion",
-      "description": "Replay the changed snapshot and process jobs; assert unchanged version and exactly one same event alert."
+      "description": "Sign out of the student account. Log in through /login as VAR_{operator_email} with VAR_{password}, navigate fresh to /operator, choose Eligibility and notifications, and replay Publish changed requirement; assert unchanged version C. Process jobs as operator. Sign out, log in as VAR_{other_email} with VAR_{password}, and assert exactly one same event alert remains."
     },
     {
       "type": "assertion",
-      "description": "Publish valid reverse change, disable student change topic before processing queued jobs, then process to drain. Assert no reverse-version notification. Restore change preference."
+      "description": "Sign out and log in as VAR_{operator_email} with VAR_{password}. Open /operator fresh, choose Eligibility and notifications and publish valid reverse change, recording reverse version R. Do not process jobs yet. Sign out and log in as VAR_{other_email} with VAR_{password}; disable the Changes topic and save preferences before queued jobs process. Sign out and log in as VAR_{operator_email} with VAR_{password}, then process jobs to drain. Sign out and log in as VAR_{other_email} with VAR_{password}; assert no reverse-version R notification. Restore Changes preference. Every account switch must use Sign out plus a new /login; old tabs share cookies."
     }
   ]
 }

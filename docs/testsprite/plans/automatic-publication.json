@@ -19,7 +19,7 @@
     },
     {
       "type": "assertion",
-      "description": "Search catalogue for Controlled joint scholarship with all windows; assert exactly one [TEST ONLY] Controlled joint scholarship. Open it and inspect Evidence you can inspect and Change history containing publication-1.0.0. Assert durable publication event IDs are retained in operator decision provenance. Return to /operator, expand Isolated source verification, select Publication and replay and click Publish valid snapshot. Click View publication history to inspect retained accepted decisions for this opportunity, including older decisions outside the recent list. Inspect the entry named [TEST ONLY] Controlled joint scholarship. Verify its Durable publication event IDs section contains actual IDs."
+      "description": "In /scholarships enter EXACTLY Controlled joint scholarship in Search scholarships (do not append words such as with all windows). Set the separate Application window dropdown to All cycles, including closed, then click Apply filters. Assert exactly one [TEST ONLY] Controlled joint scholarship. Open it and inspect Evidence you can inspect and Change history containing publication-1.0.0. Assert durable publication event IDs are retained in operator decision provenance. Return to /operator, expand Isolated source verification, select Publication and replay and click Publish valid snapshot. Click View publication history to inspect retained accepted decisions for this opportunity, including older decisions outside the recent list. Inspect the entry named [TEST ONLY] Controlled joint scholarship. Verify its Durable publication event IDs section contains actual IDs."
     }
   ]
 }
