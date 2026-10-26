@@ -4,12 +4,13 @@ import { db } from "@/lib/db";
 import type { Prisma } from "@/generated/prisma/client";
 import { scholarshipDataSchema, availabilityOf } from "./schema";
 import { normaliseScholarshipLinks } from "./links";
+import { matchStudyField, type FieldMatching } from "./field-matching";
 export const filtersSchema = z.object({
   q: z.string().trim().max(120).default(""),
   destination: z.string().max(100).default(""),
   provider: z.string().max(100).default(""),
   level: z.enum(["", "bachelor", "master", "doctorate"]).default(""),
-  field: z.string().max(100).default(""),
+  field: z.string().trim().max(100).default(""),
   funding: z.enum(["", "comprehensive", "tuition", "partial", "unknown"]).default(""),
   availability: z
     .enum(["active", "all", "open", "upcoming", "unknown", "closed"])
@@ -32,7 +33,6 @@ export async function catalogue(input: unknown) {
     where.destinationCodes = { has: code ?? "INVALID" };
   }
   if (filters.level) where.level = { contains: filters.level };
-  if (filters.field) where.field = { contains: filters.field, mode: "insensitive" };
   if (filters.provider) where.programme = { provider: { slug: filters.provider } };
   if (filters.funding) where.fundingType = filters.funding;
   const now = new Date();
@@ -52,6 +52,35 @@ export async function catalogue(input: unknown) {
       ...(typeof where.deadline === "object" ? where.deadline : {}),
       lt: new Date(`${filters.deadlineBefore}T00:00:00Z`),
     };
+  let fieldMatching: FieldMatching | null = null;
+  if (filters.field) {
+    const candidates = await db().scholarship.findMany({
+      where,
+      orderBy: { id: "asc" },
+      select: {
+        id: true,
+        title: true,
+        field: true,
+        versions: { orderBy: { number: "desc" }, take: 1, select: { data: true } },
+      },
+    });
+    const result = await matchStudyField(
+      filters.field,
+      candidates.map((candidate) => {
+        const data = candidate.versions[0]?.data;
+        const summary =
+          data &&
+          typeof data === "object" &&
+          !Array.isArray(data) &&
+          typeof data.summary === "string"
+            ? data.summary
+            : "";
+        return { id: candidate.id, title: candidate.title, fields: candidate.field, summary };
+      }),
+    );
+    where.id = { in: result.ids };
+    fieldMatching = result.mode;
+  }
   const [rows, total, destinations, providers] = await Promise.all([
     db().scholarship.findMany({
       where,
@@ -82,6 +111,7 @@ export async function catalogue(input: unknown) {
     })),
     total,
     filters,
+    fieldMatching,
     destinations: [...new Set(destinations.flatMap((row) => row.destinationCodes))]
       .map((code) => ({ code, destination: countryName(code)! }))
       .filter((item) => item.destination)

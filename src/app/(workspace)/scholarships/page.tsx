@@ -177,7 +177,12 @@ export default async function Scholarships({
                     id="field"
                     defaultValue={f.field}
                     placeholder="e.g. Humanities"
+                    aria-describedby="field-help"
                   />
+                  <p id="field-help" className="mt-1 text-[11px] text-muted-foreground">
+                    Includes related subjects and specialisms, such as organic synthesis for
+                    Chemistry.
+                  </p>
                 </div>
                 <div>
                   <label className="field-label" htmlFor="deadlineBefore">
@@ -213,6 +218,11 @@ export default async function Scholarships({
               </div>
             </div>
           </Form>
+          {f.field && result.fieldMatching === "text_only" && (
+            <p role="status" className="mb-4 text-xs text-muted-foreground">
+              Related-subject matching is unavailable. Showing text matches for “{f.field}” only.
+            </p>
+          )}
           <div className="paper px-5 sm:px-7">
             {result.rows.length ? (
               result.rows.map((row) => (

@@ -52,6 +52,9 @@ export default defineConfig({
       // Labelled OAuth fixtures. Browser tests intercept Google navigation; no external login.
       GOOGLE_CLIENT_ID: "isolated.browser.apps.googleusercontent.com",
       GOOGLE_CLIENT_SECRET: "isolated-browser-client-secret",
+      // Browser journeys exercise the explicit text fallback without paid inference.
+      // Semantic provider decisions are isolated in unit/PostgreSQL tests.
+      VERTEX_PROJECT_ID: "",
     },
   },
 });
