@@ -7,6 +7,7 @@ import {
   vertexFieldConfig,
   vertexFieldEndpoint,
   type FieldCandidate,
+  fieldBatches,
 } from "../../src/server/scholarships/vertex-fields";
 
 const env = { VERTEX_PROJECT_ID: "verith-ai" };
@@ -52,6 +53,21 @@ afterEach(() => {
 });
 
 describe("Vertex subject classification", () => {
+  it("bounds subject, candidate and batch input without truncating exclusions", () => {
+    expect(() => fieldBatches("x".repeat(101), candidates)).toThrow();
+    expect(() => fieldBatches("Chemistry", Array(161).fill(candidates[0]))).toThrow();
+    expect(() =>
+      fieldBatches("Chemistry", [{ ...candidates[0], summary: "x".repeat(6001) }]),
+    ).toThrow();
+    const many = Array.from({ length: 41 }, (_, i) => ({ ...candidates[0], id: String(i) }));
+    expect(fieldBatches("Chemistry", many).map((batch) => batch.length)).toEqual([40, 1]);
+    const large = Array.from({ length: 30 }, (_, i) => ({
+      ...candidates[0],
+      id: String(i),
+      summary: "x".repeat(6000),
+    }));
+    expect(() => fieldBatches("Chemistry", large)).toThrow();
+  });
   it("uses Confiance's global/regional native endpoint and the requested model", () => {
     expect(vertexFieldEndpoint(vertexFieldConfig(env))).toBe(
       "https://aiplatform.googleapis.com/v1/projects/verith-ai/locations/global/publishers/google/models/gemini-3.8-flash:generateContent",

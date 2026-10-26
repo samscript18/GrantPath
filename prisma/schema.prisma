@@ -73,6 +73,16 @@ model RateLimit {
   count       Int
   lastRequest BigInt
 }
+// Public subject relevance only; never store student/profile data or credentials.
+model FieldSearchCache {
+  key String @id
+  state String
+  ids String[] @default([])
+  expiresAt DateTime
+  leaseUntil DateTime?
+  leaseToken String?
+  @@index([expiresAt])
+}
 model VerificationCooldown {
   key           String @id
   nextAllowedAt DateTime

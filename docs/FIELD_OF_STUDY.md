@@ -38,12 +38,29 @@ Keep credentials out of Git, chat and `NEXT_PUBLIC_` variables. Only the query a
 published scholarship data go to Google; no student profiles or private application
 data are sent. Calls use the configured Google Cloud billing account.
 
-Requests have a 15-second overall deadline, batches of 40 and no automatic retry.
-Successful query/content combinations are cached for one hour per server process,
-with at most 100 entries; concurrent identical requests share work. Updating
-accepted content changes the cache key. Failures are cached for 30 seconds.
-This cache is not a distributed spending limit; hosting instances have independent
-caches. Configure Google Cloud quotas for the public catalogue as appropriate.
+One classification has a 15-second deadline covering authentication and all batches,
+with no automatic inference retry. Inputs are limited to 100 subject characters,
+160 candidate records, 40 records and 32,000 UTF-8 JSON bytes per batch, and four
+batches per classification. Oversized content falls back instead of truncating
+away a subject exclusion. Output is bounded to 4,096 tokens per batch. A catalogue
+over 160 other-filter matches uses database text filtering without partial semantic
+selection. No model request runs when the subject filter is empty.
+
+Migration008 adds an ephemeral PostgreSQL result cache, keyed by the normalised
+subject, model configuration and exact accepted public content. Successful results
+last one hour and are shared across hosting instances; content changes invalidate
+the key. Up to 200 shared entries and 100 process-local entries are retained.
+Short-lived leases prevent duplicate inference; concurrent callers wait at most
+20 seconds for shared work. Failure entries last 30 seconds.
+
+Public spending is bounded globally per database by **12 provider calls per UTC
+hour and 60 per UTC day**. PostgreSQL reservations for every planned batch commit
+before inference. Failed or abandoned calls retain their reservations, and request
+retries cannot bypass the cap. The API and server-rendered catalogue share this
+path. Budget exhaustion explicitly falls back. These controls bound calls/input/
+output rather than promising a fixed currency cost; provider-side Google Cloud
+quotas remain a separate control. Direct `fields:check` is an explicitly invoked
+operator verification command, outside the public request path.
 
 Missing configuration, unavailable authentication or provider failure preserves
 the previous case-insensitive field-label text filter and explicitly displays
@@ -72,8 +89,11 @@ One real authenticated `gemini-3.8-flash` request through `verith-ai` passed the
 four-record Chemistry check in 2,927 ms. See the
 [live-check receipt](evidence/field-matching-live.json). This verifies the provider
 adapter and that subject example; it is not a live evaluation of every scholarship.
-These changes and checks are local. No deployment, push or TestSprite execution
-is claimed for this feature.
+On 27 October, the owner approved inclusion in the release. The pre-existing local
+feature is preserved at `feature/semantic-field-search` / `14b492e`. Shared-cache,
+budget and batch-limit checks bring the candidate to 101 unit and 37 database
+tests. Final-head hosted and App evidence is recorded separately in FINAL_HANDOFF.md;
+the earlier four-record request does not verify a later deployment by itself.
 
 References: [Google model documentation](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-8-flash),
 [structured responses](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference),

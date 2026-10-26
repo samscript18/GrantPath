@@ -57,6 +57,7 @@ export async function catalogue(input: unknown) {
     const candidates = await db().scholarship.findMany({
       where,
       orderBy: { id: "asc" },
+      take: 161,
       select: {
         id: true,
         title: true,
@@ -64,22 +65,26 @@ export async function catalogue(input: unknown) {
         versions: { orderBy: { number: "desc" }, take: 1, select: { data: true } },
       },
     });
-    const result = await matchStudyField(
-      filters.field,
-      candidates.map((candidate) => {
-        const data = candidate.versions[0]?.data;
-        const summary =
-          data &&
-          typeof data === "object" &&
-          !Array.isArray(data) &&
-          typeof data.summary === "string"
-            ? data.summary
-            : "";
-        return { id: candidate.id, title: candidate.title, fields: candidate.field, summary };
-      }),
-    );
-    where.id = { in: result.ids };
-    fieldMatching = result.mode;
+    const result =
+      candidates.length > 160
+        ? null
+        : await matchStudyField(
+            filters.field,
+            candidates.map((candidate) => {
+              const data = candidate.versions[0]?.data;
+              const summary =
+                data &&
+                typeof data === "object" &&
+                !Array.isArray(data) &&
+                typeof data.summary === "string"
+                  ? data.summary
+                  : "";
+              return { id: candidate.id, title: candidate.title, fields: candidate.field, summary };
+            }),
+          );
+    if (result) where.id = { in: result.ids };
+    else where.field = { contains: filters.field, mode: "insensitive" };
+    fieldMatching = result?.mode ?? "text_only";
   }
   const [rows, total, destinations, providers] = await Promise.all([
     db().scholarship.findMany({

@@ -3,6 +3,40 @@ import { z } from "zod";
 
 export type FieldCandidate = { id: string; title: string; fields: string; summary: string };
 
+// Refuse oversized input rather than truncating away an explicit subject exclusion.
+export function fieldBatches(query: string, candidates: FieldCandidate[]) {
+  z.string().trim().min(1).max(100).parse(query);
+  z.array(
+    z.object({
+      id: z.string().min(1).max(128),
+      title: z.string().max(240),
+      fields: z.string().max(3030),
+      summary: z.string().max(6000),
+    }),
+  )
+    .max(160)
+    .parse(candidates);
+  const batches: FieldCandidate[][] = [];
+  let batch: FieldCandidate[] = [];
+  for (const candidate of candidates) {
+    if (Buffer.byteLength(JSON.stringify({ query, scholarships: [candidate] }), "utf8") > 32_000)
+      throw new Error("Subject matching input exceeds its budget.");
+    const next = [...batch, candidate];
+    if (
+      next.length > 40 ||
+      Buffer.byteLength(JSON.stringify({ query, scholarships: next }), "utf8") > 32_000
+    ) {
+      if (!batch.length) throw new Error("Subject matching input exceeds its budget.");
+      batches.push(batch);
+      batch = [];
+    }
+    batch.push(candidate);
+  }
+  if (batch.length) batches.push(batch);
+  if (batches.length > 4) throw new Error("Subject matching input exceeds its budget.");
+  return batches;
+}
+
 const configSchema = z.object({
   VERTEX_PROJECT_ID: z
     .string()
@@ -80,7 +114,9 @@ export async function classifyFields(
   query: string,
   candidates: FieldCandidate[],
   env: Record<string, string | undefined> = process.env,
+  timeoutMs = 15_000,
 ) {
+  const batches = fieldBatches(query, candidates);
   const config = vertexFieldConfig(env);
   const credentials = env.VERTEX_CREDENTIALS_JSON?.trim()
     ? z
@@ -103,19 +139,21 @@ export async function classifyFields(
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout>;
   const timeout = new Promise<never>((_, reject) => {
-    timer = setTimeout(() => {
-      controller.abort();
-      reject(new Error("Subject matching timed out."));
-    }, 15_000);
+    timer = setTimeout(
+      () => {
+        controller.abort();
+        reject(new Error("Subject matching timed out."));
+      },
+      Math.max(1, Math.min(15_000, timeoutMs)),
+    );
   });
   const classify = async () => {
     const token = await auth.getAccessToken();
     if (!token) throw new Error("Vertex authentication unavailable.");
     const ids: string[] = [];
     // Evaluate every candidate, before pagination. Never return a partial batch result.
-    for (let offset = 0; offset < candidates.length; offset += 40) {
+    for (const batch of batches) {
       controller.signal.throwIfAborted();
-      const batch = candidates.slice(offset, offset + 40);
       const response = await fetch(vertexFieldEndpoint(config), {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },

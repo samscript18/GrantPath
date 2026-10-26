@@ -1,3 +1,27 @@
+# GrantPath final handoff
+
+## Submission preparation — 27 October 2026
+
+**Portal-generation compliance is unresolved.** Current account/project inspection shows all seven frontend cases are CLI-authored and no portal-authored cases. Project creation was through the CLI on 24 October. App execution and portal visibility do not establish portal generation. No generation event/estimate was supplied, no organiser exception is recorded, and no credited generation has been started. See [the exact owner procedure](PORTAL_GENERATION.md).
+
+The refreshed remote submission baseline is `448831d7edc080b34599c291de19d6f52540fb76`, with [PR #1](https://github.com/samscript18/GrantPath/pull/1) open and unmerged. The public repository is accessible; PR creation was 24 October 2026 at 13:26:20 UTC, within the user's supplied October 16–26 window. The [live app](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app) returns that exact revision. Its immutable deployment is [Ready](https://grantpath-mdgg56q1p-lammysam8-7688.vercel.app). Fresh GitHub reads confirm CI, GitGuardian, Vercel, TestSprite V3 (seven browser passes) and the separate native API ownership check passed at that baseline. The [App comment](https://github.com/samscript18/GrantPath/pull/1#issuecomment-6427296986) exists. This does not verify a later source.
+
+The owner explicitly approved including semantic field search on 27 October. Its original local work was preserved in `feature/semantic-field-search` at `14b492e`, then included in the release branch. Added shared PostgreSQL result caching, globally committed provider-call budgets (12/hour, 60/day), input/batch limits and explicit fallback are being verified before one coherent publication. **The new final-head hosted/App result is pending at this preparation checkpoint.** Existing receipt commit `d85c45a` remains in history. No earlier green result is attributed to the new feature.
+
+Fresh anonymous catalogue inspection excludes labelled fixtures: **32 real records, 23 providers, 17 actual destination countries, six regions; 23 cycle records and nine overviews; seven open, two upcoming, five closed and eighteen unknown**. These are not 32 open scholarships. GLOCAL remains one record across seven destinations and pathways vary.
+
+Official account readback: **Salman**, **lammysam8@gmail.com**, Free plan, **97.2 credits**. This preparation has spent **0 TestSprite credits** so far. Preserve approximately 50; the observed seven-case App plus native API execution estimate is 3.7 total, while portal generation has **no established estimate**. No manual duplicate, scheduled TestSprite run, purchase or paid plan.
+
+Both GitHub routine worker workflows are currently `disabled_manually`; no TestSprite schedules exist. Successful manual runs [application40180139452](https://github.com/samscript18/GrantPath/actions/runs/40180139452) and [source40180145842](https://github.com/samscript18/GrantPath/actions/runs/40180145842) are historical dispatch evidence, not recurring monitoring. Two old queued manual runs also remain; review them before any future enablement. See [operational activation handoff](OPERATIONS_HANDOFF.md). Optional automatic Neon lifecycle remains unconfigured; Brevo provider acceptance does not prove recipient receipt.
+
+Fresh branch-protection readback returned **403 Resource not accessible by integration**. No alternate identity was tried and no protection was changed. Historical strict/admin-enforced requirements remain recorded in `evidence/github-release-gate.json`; fresh success statuses are separate from that historical protection snapshot.
+
+Readbacks: [GitHub](evidence/submission-github-readback.json), [account and case origins](evidence/submission-testsprite-readback.json), [live catalogue](evidence/submission-live-readback.json), [deployment and workflows](evidence/submission-operations-readback.json). Final PR description is [SUBMISSION_PR.md](SUBMISSION_PR.md); draft entry is [DISCORD_SUBMISSION.md](DISCORD_SUBMISSION.md). No merge or Discord post has been made.
+
+---
+
+## Preserved historical record — dated claims below apply only to their named source
+
 # GrantPath final handoff — 26 October 2026
 
 All three required release checks passed at published source `448831d7edc080b34599c291de19d6f52540fb76`. The original TestSprite App passed seven of seven cases; the additional required native API case passed with its exact reviewed code version and assertion output. The PR remains unmerged. Operational activation limits below remain open.

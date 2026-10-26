@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { classifyFields, vertexFieldConfig, type FieldCandidate } from "./vertex-fields";
+import { persistedFieldClassifier } from "./field-search-store";
 
 export type FieldMatching = "semantic" | "text_only";
 type MatchResult = { ids: string[]; mode: FieldMatching };
@@ -57,4 +58,6 @@ export function createFieldMatcher(classify = classifyFields, now = Date.now) {
     return entry.result;
   };
 }
-export const matchStudyField = createFieldMatcher();
+export const matchStudyField = createFieldMatcher((query, candidates, env) =>
+  persistedFieldClassifier(query, candidates, env),
+);
