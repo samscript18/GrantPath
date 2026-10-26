@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-26T20:07:33.837Z",
+  "head": "2be6624def11fba477a5fcd41d85ab23bf193812",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "project": "d36cedef-a40e-4fb7-ae61-f3b2484ede06",
+  "test": "88b47334-232c-4665-a6a2-413b09c34eb5",
+  "runId": "cb578167-da2f-40cf-b15a-3fc90006bb52",
+  "codeVersion": "v-5e0325a9c69d",
+  "expectedCodeVersion": "v-5e0325a9c69d",
+  "status": "passed",
+  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/fd530f9a-a835-4915-b374-ee141cf2c842/test/cb578167-da2f-40cf-b15a-3fc90006bb52",
+  "balanceBefore": 104.8,
+  "balanceAfter": 104.6,
+  "observedDebit": 0.20000000000000284,
+  "assertionsReported": true
+}

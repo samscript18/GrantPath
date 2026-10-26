@@ -32,7 +32,7 @@ export default async function globalSetup() {
   });
   for (let batch = 0; batch < 40; batch++) {
     const result = await runApplicationJobs(50);
-    if (!result.events.completed && !result.deliveries.length) break;
+    if (!result.queue.ready) break;
   }
   await db().$disconnect();
 }

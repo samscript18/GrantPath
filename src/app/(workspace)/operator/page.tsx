@@ -63,7 +63,7 @@ export default async function OperatorPage({
         <a href="#reviews">Source-change review ({overview.reviews.length})</a>
         <a href="#deliveries">Delivery diagnostics</a>
       </nav>
-      <ProcessJobs />
+      <ProcessJobs initialQueue={overview.queue} />
       {controlledFixturesEnabled() && <ControlledSourceControls />}
       {controlledFixturesEnabled() && (
         <p className="my-4 border border-amber/30 bg-secondary p-4 text-xs">

@@ -1,3 +1,4 @@
+import { applicationQueueHealth } from "@/server/jobs/run";
 import { discoveryOverview } from "@/server/discovery/service";
 import { z } from "zod";
 import { db } from "@/lib/db";
@@ -84,6 +85,19 @@ export async function operatorOverview(actor: Actor, publication?: string) {
       db().audit.findMany({ orderBy: { createdAt: "desc" }, take: 20 }),
       db().outbox.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
     ]);
-  const discovery = await discoveryOverview(actor, publication);
-  return { scholarships, sources, reviews, failures, events, recentEvents, audits, discovery };
+  const [discovery, queue] = await Promise.all([
+    discoveryOverview(actor, publication),
+    applicationQueueHealth(),
+  ]);
+  return {
+    scholarships,
+    sources,
+    reviews,
+    failures,
+    events,
+    recentEvents,
+    audits,
+    discovery,
+    queue,
+  };
 }

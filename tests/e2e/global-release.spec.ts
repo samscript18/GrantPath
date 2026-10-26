@@ -163,6 +163,21 @@ test("authenticated operator publishes and replays a valid source while uncertai
   );
   const publications = page.locator("#automatic-publications");
   await expect(publications.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Process queued jobs", exact: true }).click();
+  await expect(page.getByRole("status").filter({ hasText: "Queue drained:" })).toBeVisible({
+    timeout: 120000,
+  });
+  const queue = page.locator('dl[aria-label="Queue status"]');
+  for (const label of ["Pending events", "Pending deliveries", "Runnable jobs"])
+    await expect(
+      queue.getByText(label, { exact: true }).locator("..").getByRole("definition"),
+    ).toHaveText("0");
+  await queue.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/operator-queue-desktop.png" });
+  await page.setViewportSize({ width: 360, height: 850 });
+  await queue.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/operator-queue-mobile.png" });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.getByText(/^Persisted application events/).click();
   await expect(
     page
