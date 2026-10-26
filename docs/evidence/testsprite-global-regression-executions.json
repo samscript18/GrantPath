@@ -263,7 +263,7 @@
         {
           "stepIndex": 4,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "f4f85de9-f0ae-41eb-a957-d6386ff30e24"
         },
@@ -698,7 +698,7 @@
         {
           "stepIndex": 4,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "7859b1e5-5dda-477a-b58e-397164816ce6"
         },
@@ -928,7 +928,7 @@
         {
           "stepIndex": 4,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "de26c98b-b93a-4d81-8a70-e7453d6edd4e"
         },
@@ -1112,7 +1112,7 @@
         {
           "stepIndex": 4,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "0132483b-ba35-4c5a-8385-a7dcbc35054c"
         },
@@ -1168,7 +1168,7 @@
         {
           "stepIndex": 12,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "0132483b-ba35-4c5a-8385-a7dcbc35054c"
         },
@@ -1203,7 +1203,7 @@
         {
           "stepIndex": 17,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "0132483b-ba35-4c5a-8385-a7dcbc35054c"
         },
@@ -1462,7 +1462,7 @@
         {
           "stepIndex": 54,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "0132483b-ba35-4c5a-8385-a7dcbc35054c"
         },
@@ -1611,7 +1611,7 @@
         {
           "stepIndex": 4,
           "action": "fill",
-          "description": "Fill '[REDACTED]' into password password field",
+          "description": "[REDACTED password entry step]",
           "status": "passed",
           "runId": "33c8b7b8-c729-4db8-a96c-6e1efb652d39"
         },

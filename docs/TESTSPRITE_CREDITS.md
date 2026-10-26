@@ -1,6 +1,6 @@
 # TestSprite credit ledger
 
-Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **137.5 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
+Allowance: **150 credits**. Latest actual balance, observed through official CLI 0.15.0 `usage` on 26 October 2026: **134 credits**, Free plan. Account-reported rate: **0.5 credits/run**. Reserve approximately **50 credits** for final verification and fixes. Generation/exploration cost is not established by the run rate.
 
 | Operation                                                                                          | Estimate                           | Observed debit | Observed balance | Result                                                                                                   |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | -------------- | ---------------- | -------------------------------------------------------------------------------------------------------- |
@@ -51,3 +51,7 @@ Fresh read:138.5 credits, Free,0.5 per case. Strict access replay c68e8a72 consu
 Strict independent-context retry e57ecf1e failed before assertions: provider injected record_video_dir into APIRequest.new_context. Actual balance138.5→138, debit0.5. Preserve original browser-context failure separately. No further API-context trial will be launched; compatible browser-based requests must first pass locally.
 
 Final strict browser replay ce999aed: actual138→137.5, debit0.5; TargetClosedError before reported assertions. Stop additional strict retries. Next automatic seven-case run estimate3.5 at the observed rate;137.5 currentbalance leaves ample50reserve. No manual duplicate automatic execution will be launched.
+
+## Corrected-trigger actual debit
+
+Single automatic execution10178282 at f13ab93:3passed/1failed/3blocked. Observed137.5→134, debit3.5; one execution link, no duplicate comment-trigger run. The authentic App posted failure and PR was blocked with required Apps/admin enforcement intact. Strict total across three runtime failures1.5; exact remote assertions remain unverified. Next source-fix automatic suite estimate3.5; balance134,50reserve retained. Only three isolated .test credentials were rotated after evidence showed agent transcription errors; encrypted default password updated and all three hosted logins returned200. No real student credential changed.

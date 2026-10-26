@@ -66,11 +66,16 @@ test("authenticated operator publishes and replays a valid source while uncertai
   expect(accepted?.eventIds.length).toBeGreaterThan(0);
   await page.getByText(/^Recent automatic publications/).click();
   await expect(page.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
+  await page.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
   await page.screenshot({
     path: "test-results/global-operator-review-desktop.png",
-    fullPage: true,
+    fullPage: false,
   });
   await page.setViewportSize({ width: 360, height: 850 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.screenshot({ path: "test-results/global-operator-review-mobile.png", fullPage: true });
+  await page.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
+  await page.screenshot({
+    path: "test-results/global-operator-review-mobile.png",
+    fullPage: false,
+  });
 });

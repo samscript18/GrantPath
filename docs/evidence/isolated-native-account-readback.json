@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-26T15:11:45.351Z",
+  "scope": "Three isolated .test accounts only",
+  "passwordsRotated": true,
+  "defaultEnvironmentCredentialUpdated": true,
+  "signInChecks": [
+    {
+      "isolatedEmail": "student@example.test",
+      "status": 200
+    },
+    {
+      "isolatedEmail": "operator@example.test",
+      "status": 200
+    },
+    {
+      "isolatedEmail": "other@example.test",
+      "status": 200
+    }
+  ],
+  "containsCredentials": false
+}

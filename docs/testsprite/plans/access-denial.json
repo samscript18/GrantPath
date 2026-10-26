@@ -7,11 +7,11 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in the configured student and save the real Twente scholarship. Record private application id, note and revision."
+      "description": "Sign in the independent owner VAR_{other_email} using VAR_{password}; save the real Twente scholarship and record its private application id, note and revision. This owner is separate from the concurrent profile/application journey."
     },
     {
       "type": "assertion",
-      "description": "Use an independent authenticated context for VAR_{other_email} with VAR_{password}. Send an update for the first student application to the normal protected application API."
+      "description": "Use an independent authenticated context for the configured student VAR_{username} with VAR_{password}. Send an update for the owner application to the normal protected application API."
     },
     {
       "type": "assertion",

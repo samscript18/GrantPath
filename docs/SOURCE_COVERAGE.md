@@ -1,4 +1,4 @@
-# Global source coverage — 25 October 2026
+# Global source coverage — 26 October 2026
 
 Actual persisted readback:32 real records,17 actual study countries; controlled fixtures excluded. Countries: AU, CA, CH, CO, DE, ES, GB, GH, JP, KR, NL, NZ, SE, TR, UG, US, ZA. Six regions: Europe, Africa, North America, Asia, Oceania, Latin America. Ghana, Uganda and South Africa satisfy the three-country African target. Colombia is an actual GLOCAL partner destination; the same joint programme is not duplicated to inflate opportunity counts. Coverage is not a claim that every track visits every listed country.
 
@@ -74,3 +74,7 @@ All scheduled-source toggles remain paused. Four scoped adapters are implemented
 ## Previously unseen URLs and cycles
 
 Beyond the twelve curated contracts, an explicit Makerere announcement-template adapter recognises new numeric announcement URLs with a supported official main-campus identity, exact master/undergraduate heading and consecutive academic years. It derives stable programme/cycle identities rather than requiring an operator to register each new URL. Funding, deadlines and unmapped mandatory conditions remain unknown; the result cannot be definitively eligible. Unknown provider/layout/grammar and conflicting changes still reach review. Unit and shared-service PostgreSQL tests cover new URL→publication→replay→new cycle. This is not claimed as a live success on every future Makerere page.
+
+## Actual hosted scheduled-worker path
+
+Authorised manual dispatch [40180145842](https://github.com/samscript18/GrantPath/actions/runs/40180145842) completed successfully on release head e09b64d: one GLOCAL directory page, two discovered links, one detail routed to review with UNSUPPORTED_DETAIL_MAPPING / UNSUPPORTED_LAYOUT. No legacy source was due. This verifies bounded GitHub execution and conservative exception routing; it does not establish that this run published a new live opportunity. The12 official automatic publications were separately observed through the same detail service after manual approved-detail registration. Three directory adapters have earlier actual successful checks. Routine workflows remain disabled pending a separate owner merge of current workflow code into main; GitHub schedules remain best effort.

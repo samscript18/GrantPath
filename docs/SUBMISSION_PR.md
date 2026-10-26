@@ -21,3 +21,11 @@ Public app: https://grantpath-git-release-hosted-verification-lammysam8-7688.ver
 GitHub scheduler environments are configured for isolated PR1; application jobs and source fetching are separate. The older default-branch application workflow still uses Resend, so schedules must remain disabled until the owner separately merges this Brevo release and enables the workflows. Authorised release-branch manual verification is recorded independently. Automatic Neon branch lifecycle remains unavailable without API/project/baseline configuration; existing isolated preview is retained.
 
 No private student data copied, paid plan/credits purchased, source restrictions bypassed, merge performed or Discord submission sent. Provider email acceptance is not recipient receipt. The reported organiser extension is user-supplied context.
+
+## Latest verification before the fix head
+
+Local:85unit,31PostgreSQL,13production-browser journeys including seven exact Python sources; typecheck/lint/build/format pass. Actual manual application/source GitHub dispatches succeeded (40180139452,40180145842), with routine activation deliberately pending the owner’s separate merge.
+
+Authentic native regression: [execution10178282](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc) at f13ab93,3passed/1failed/3blocked. Exact residence defect caught; testsprite[bot] posted failure, both required App IDs/admin enforcement read back, PR blocked. The prepared empty-string correction is restored; automatic final fix result remains pending.
+
+Actual TestSprite balance134. Strict remote ownership scripts failed before assertions due to provider browser-context instrumentation; generated App steps could not inspect private API metadata. Do not infer those assertions passed or expose private IDs for testing. Partial native verdicts fail the required CI outcome guard. No required check is weakened.

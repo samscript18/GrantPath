@@ -6,7 +6,7 @@ A scholarship discovery, evidence, eligibility and application workspace built w
 
 ## Current release work — 26 October 2026
 
-The global continuation is deployed for verification on `release/hosted-verification` at e09b64d. It deliberately retains the disclosed saved-residence defect for the isolated failure/gate/fix exercise and must not be merged. Local corrections are prepared; final hosted verification is still in progress. Exact state belongs in [release review](docs/RELEASE_REVIEW.md).
+The global continuation is deployed for verification on `release/hosted-verification` at f13ab93 with authentic failed-App/blocked-merge evidence. The locally verified residence correction is being published; final hosted verification is still in progress. Exact state belongs in [release review](docs/RELEASE_REVIEW.md).
 
 The expanded persisted catalogue contains **32 real source-backed records across17 actual destination countries**, six regions including Ghana, Uganda and South Africa. Counts exclude controlled fixtures and include scheme overviews and historical/closed cycles; they are not counts of open applications. GLOCAL is one joint programme spanning seven participating countries, rather than seven duplicate awards. [Actual coverage and access limits](docs/SOURCE_COVERAGE.md), [public metadata readback](docs/evidence/global-coverage.json).
 
