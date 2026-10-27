@@ -2,7 +2,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in to VAR_{url} using the isolated VAR_{other_email} and VAR_{password}. Open /notifications with All updates selected. Do not change profile answers, notification preferences, source facts or publication scenarios."
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}, as supplied by this execution environment. Sign in if needed and verify the workspace opens; never invent/example/guess a password or use VAR_{other_email}, which belongs to the independent accepted-change scenario. Open /notifications with All updates selected. Do not change profile answers, notification preferences, source facts or publication scenarios."
     },
     {
       "type": "assertion",

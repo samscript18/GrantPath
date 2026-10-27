@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-10-27T01:06:20.658Z",
-  "head": "254f781df4dccdb05d429184fe46cc4281f7ff31",
-  "id": "dpl_3FuzZZkvLGjqLSEZCZJ1NnTihCGP",
+  "checkedAt": "2026-10-27T01:36:22.164Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "id": "dpl_5vH6YkYp3FN1u3KyfZ9VfnG1KhSF",
   "state": "READY",
-  "url": "https://grantpath-knca34bf9-lammysam8-7688.vercel.app",
+  "url": "https://grantpath-noxo4kk1d-lammysam8-7688.vercel.app",
   "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
   "health": {
     "application": "GrantPath",
-    "revision": "254f781df4dccdb05d429184fe46cc4281f7ff31"
+    "revision": "5d9960f0e1088283eb3a9213abac3cc40cb744f6"
   }
 }

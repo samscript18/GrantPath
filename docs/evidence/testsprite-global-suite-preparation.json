@@ -157,5 +157,12 @@
     "aiGeneratedPortalCases": 10,
     "configurationEvidence": "Owner confirmed existing trigger only supports all20; no trigger or blocking setting changed by agent."
   },
-  "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad"
+  "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad",
+  "latestPlanClarification": {
+    "evidence": "portal-final-notification-plan-clarifications.json",
+    "verification": "pending supported selective retry; current automatic result18passed/1failed/1blocked",
+    "caseCountUnchanged": 20,
+    "mandatoryAssertionsPreserved": true,
+    "reusableSourcesUnchanged": true
+  }
 }

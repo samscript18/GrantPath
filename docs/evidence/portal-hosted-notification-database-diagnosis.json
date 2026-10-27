@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-27T01:30:53.108Z",
+  "scope": "Read-only deployed preview database using actual inbox() backend query, isolated other@example.test account only. No notification/profile/preference/source mutations. HTTP route inspection confirms it passes this query through without topic filtering.",
+  "allUpdates": {
+    "total": 31,
+    "topics": {
+      "change": 20
+    }
+  },
+  "acceptedChangeCount": 20,
+  "metadataChecks": [
+    {
+      "readableAcceptedVersionExplanation": true,
+      "hasVersionContext": true,
+      "hasHistoryAnchor": true,
+      "createdAt": "2026-10-27T01:12:39.047Z"
+    },
+    {
+      "readableAcceptedVersionExplanation": true,
+      "hasVersionContext": true,
+      "hasHistoryAnchor": true,
+      "createdAt": "2026-10-27T01:12:29.205Z"
+    },
+    {
+      "readableAcceptedVersionExplanation": true,
+      "hasVersionContext": true,
+      "hasHistoryAnchor": true,
+      "createdAt": "2026-10-27T01:12:28.392Z"
+    }
+  ],
+  "conclusion": "The actual All updates query includes persisted accepted-change records. Original accepted-change test passed after companion inspected earlier setup. No topic filter or fallback hides these rows."
+}
