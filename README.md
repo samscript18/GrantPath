@@ -1,5 +1,7 @@
 # GrantPath
 
+The owner subsequently requested a **30.5-credit API starting minimum**. The updated script preserves a **30-credit reserve** plus the conservative0.5-credit run allowance; authentication, exact-source verification and ownership assertions are unchanged. This coherent publication also carries the confirmed18-case manifest. Preflight balance48.1; one automatic18-case App run plus native API verification estimates9.2 total, leaving38.9. New-head results are pending; earlier budget-stop receipts remain historical.
+
 A scholarship discovery, evidence, eligibility and application workspace built with Next.js App Router, strict TypeScript, PostgreSQL/Prisma, Better Auth, Brevo and Cloudinary. The existing off-white/forest/amber design and typography are preserved.
 
 **[Public preview](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)** · **[Release PR #1](https://github.com/samscript18/GrantPath/pull/1)**

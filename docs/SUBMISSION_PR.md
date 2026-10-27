@@ -1,5 +1,7 @@
 # Exact replacement PR metadata — 27 October 2026
 
+The owner subsequently requested a **30.5-credit API starting minimum**. The updated script preserves a **30-credit reserve** plus the conservative0.5-credit run allowance; authentication, exact-source verification and ownership assertions are unchanged. This coherent publication also carries the confirmed18-case manifest. Preflight balance48.1; one automatic18-case App run plus native API verification estimates9.2 total, leaving38.9. New-head results are pending; earlier budget-stop receipts remain historical.
+
 The title already matches. The fresh authorised body edit returned **403 Resource not accessible by integration** on27October2026. The old body remains. Owner: paste the exact replacement below; update its current-gate section only after a genuine complete passing check exists. No alternate identity was attempted.
 
 ## Title

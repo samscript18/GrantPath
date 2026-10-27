@@ -86,10 +86,11 @@ async function cli(args) {
 }
 const usage = await cli(["usage"]);
 const before = usage.data.credits;
-// Conservative cap: account currently reports 0.5; observed native backend debit is read after every run.
-if (usage.code || typeof before !== "number" || before - 0.5 < 50)
+// Owner-approved reserve: 30 credits, with a conservative 0.5-credit run cap.
+// The job therefore requires at least 30.5 credits before dispatch.
+if (usage.code || typeof before !== "number" || before - 0.5 < 30)
   throw new Error(
-    "Credit balance unavailable or 50-credit reserve would be crossed; no run started.",
+    "Credit balance unavailable or 30-credit reserve would be crossed (30.5 credits required); no run started.",
   );
 const config = await cli([
   "project",

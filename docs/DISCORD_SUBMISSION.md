@@ -1,5 +1,7 @@
 # Prepared Discord entry — complete PR gate still unresolved
 
+The owner subsequently requested a **30.5-credit API starting minimum**. The updated script preserves a **30-credit reserve** plus the conservative0.5-credit run allowance; authentication, exact-source verification and ownership assertions are unchanged. This coherent publication also carries the confirmed18-case manifest. Preflight balance48.1; one automatic18-case App run plus native API verification estimates9.2 total, leaving38.9. New-head results are pending; earlier budget-stop receipts remain historical.
+
 **GrantPath — evidence-backed scholarship discovery and application planning.** Explains eligibility and unknown requirements with official sources, supports global/multiple-destination programmes and semantic subject discovery, and keeps private application progress. Validated publication and exception handling preserve accepted history.
 
 **PR carrying the TestSprite App check:** https://github.com/samscript18/GrantPath/pull/1
