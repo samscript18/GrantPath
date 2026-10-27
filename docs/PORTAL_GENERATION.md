@@ -3,14 +3,14 @@
 The organiser requires generation in the TestSprite 3.0 web portal against the live
 app. The original seven cases were authored/saved using the official CLI. Fresh
 project metadata says `createdFrom: cli`, every frontend case is marked `cli`,
-and the supported `--created-from portal` read returns no cases. These observations
+and the preflight `--created-from portal` read returned no cases. The owner later manually created three portal cases; see PORTAL_CASE_REVIEW.md. These observations
 do not prove that no exploration ever occurred; the portal Activity Log still
 needs inspection. No generation event, generated-case provenance or organiser
 exception has been supplied. App execution is separate evidence.
 
 Portal controls cannot be operated in this agent session: the Browser integration's
 required browser-control tool is not exposed. No CLI generation is substituted.
-The generation/exploration estimate is unknown, so no credited generation is run.
+The generation/exploration estimate is unknown, so no credited generation is run by this agent. The owner expressly confirmed manual portal creation, not AI generation.
 
 ## Exact owner procedure
 
@@ -31,8 +31,8 @@ The generation/exploration estimate is unknown, so no credited generation is run
    > regenerate the whole app, create schedules, or modify accounts.
 
    Inspect the proposed action and **displayed total estimate**, including any
-   prerequisite exploration/strategy. Current observed balance is 97.2; preserve
-   50 plus enough for final App/API execution (currently observed estimate 3.7).
+   prerequisite exploration/strategy. After the semantic release, observed balance is 92.0; preserve
+   50 plus enough for final App/API execution (seven-case estimate 3.7; an eight-case suite plus API would be 4.2 at observed rates).
    If a focused scope or cost estimate is unavailable, stop before starting it.
    Do not guess a button name or accept broad exploration as equivalent scope.
 

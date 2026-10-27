@@ -98,3 +98,7 @@ the earlier four-record request does not verify a later deployment by itself.
 References: [Google model documentation](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-8-flash),
 [structured responses](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference),
 [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials).
+
+## Published verification — 27 October 2026
+
+Source `4245853398a25c59a64273c1f119bdf9508be6d5` is Ready at https://grantpath-6k7mdx6bb-lammysam8-7688.vercel.app. Hosted Humanities returns four relevant results, including GLOCAL through History, with stable repeated IDs/counts. Chemistry returns zero from the current catalogue; no organic-synthesis award is invented. The earlier standalone provider fixture proves the Chemistry relationship separately. Final-head App 7/7, native API, CI and GitGuardian passed; these do not establish portal generation. [Hosted evidence](evidence/submission-semantic-hosted.json), [final status](evidence/submission-semantic-status.json).

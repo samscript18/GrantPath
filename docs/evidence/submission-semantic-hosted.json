@@ -1,0 +1,100 @@
+{
+  "checkedAt": "2026-10-26T23:38:37.735Z",
+  "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "health": {
+    "application": "GrantPath",
+    "revision": "4245853398a25c59a64273c1f119bdf9508be6d5"
+  },
+  "queries": [
+    {
+      "field": "Chemistry",
+      "total": 0,
+      "mode": "semantic",
+      "stableRepeatedResult": true,
+      "records": [],
+      "serverRenderedHelperPresent": true
+    },
+    {
+      "field": "Humanities",
+      "total": 4,
+      "mode": "semantic",
+      "stableRepeatedResult": true,
+      "records": [
+        {
+          "id": "cmvmfs81c003viruzyzrvcw8x",
+          "slug": "warwick-ahrc-doctoral-2027",
+          "title": "AHRC Doctoral Scholarships",
+          "fields": [
+            "Arts and humanities"
+          ]
+        },
+        {
+          "id": "cmvmfpg28000uiruztsxdnb1j",
+          "slug": "ertegun-2027",
+          "title": "Ertegun Graduate Scholarships",
+          "fields": [
+            "Humanities"
+          ]
+        },
+        {
+          "id": "cmvni02ey000q7fuz3kfdye3l",
+          "slug": "erasmus-glocal-8adbfb712d",
+          "title": "GLOCAL — Erasmus Mundus Joint Master scholarship",
+          "fields": [
+            "Business",
+            "Economics",
+            "History"
+          ]
+        },
+        {
+          "id": "cmvni4csc004h7fuzskxtreu2",
+          "slug": "turkiye-graduate-3d33bac4e0",
+          "title": "Türkiye Scholarships — graduate programme",
+          "fields": [
+            "Provider-approved fields"
+          ]
+        }
+      ],
+      "serverRenderedHelperPresent": true
+    }
+  ],
+  "jointProgramme": [
+    {
+      "destination": "GB",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "DE",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "ES",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "SE",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "CO",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "JP",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    },
+    {
+      "destination": "NL",
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+    }
+  ],
+  "scope": "Real hosted DOM/API and provider checks; no private account data; repeat responses reuse cache; no TestSprite execution dispatched."
+}

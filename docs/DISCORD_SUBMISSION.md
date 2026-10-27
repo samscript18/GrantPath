@@ -1,32 +1,19 @@
-# Discord submission draft — do not post until portal compliance is resolved
+# Ready-to-paste Discord entry — portal requirement still unresolved
 
-**GrantPath — evidence-backed scholarship discovery and application planning.**
-Explains eligibility and unknown requirements using official evidence, supports
-global and multiple-destination programmes, and preserves private application progress.
+**GrantPath — evidence-backed scholarship discovery and application planning.** Explains eligibility and unknown requirements with official evidence, supports global/joint-programme destinations, and keeps private application progress. Includes semantic subject discovery and validated publication/exception handling.
 
-**PR:** https://github.com/samscript18/GrantPath/pull/1
+**PR with TestSprite App check:** https://github.com/samscript18/GrantPath/pull/1
 
-**Live app:** https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app
+**Public live app:** https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app
 
 **TestSprite account name:** Salman
 
 **TestSprite account email:** lammysam8@gmail.com
 
-**Verification:** The original seven-case TestSprite GitHub App suite covers discovery
-and evidence, profile/application persistence, joint-programme identity, validated
-publication, exceptions, changed eligibility/alerts and private notes. Separate native
-API verification checks cross-account denial and unchanged owner data. An authentic
-residence-clearing regression failed TestSprite, blocked merge, was fixed and passed:
-https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc
+**Coverage:** [Seven App cases passed](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3e453883-20eb-4466-bce3-f77723bb73c5) at `4245853`, covering discovery/evidence, profile/application persistence, joint identity, validated publication/replay, exceptions, changed eligibility/alerts and private notes. Separate native API ownership verification passed; CI and GitGuardian passed. An actual residence-clearing bug was [caught by TestSprite](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc), blocked merge, was fixed and subsequently passed.
 
-**Current limitation:** Portal generation is unresolved; existing cases are CLI-authored.
-Semantic-search inclusion is approved and its final-head hosted/App verification is
-pending at this draft checkpoint. Routine monitoring is disabled. No demo video is supplied.
+**Disclosure:** The original seven cases are CLI-authored. Three later portal cases were manually created, so the required AI web-portal generation event remains unresolved. Routine monitoring schedules are disabled. No demo video is supplied.
 
-## Optional two-minute demo outline
+---
 
-Show discovery and official evidence; explain unknown mandatory conditions; compare
-one joint programme under two destinations; demonstrate Chemistry subject relevance;
-show private application progress; finish with PR checks and authentic red/fix/green
-evidence. Use isolated test accounts only. A video is optional and does not delay the
-required portal compliance or submission preparation.
+Owner: resolve portal generation and retain its event/case evidence plus the resulting complete App pass before claiming full compliance. Do not remove the disclosure without that evidence. This entry has not been posted. Optional demo: discovery/evidence → a joint programme under two destinations → Humanities matching History/GLOCAL → private progress → authentic red/fix/green PR evidence. A video is optional.

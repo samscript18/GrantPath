@@ -1,22 +1,40 @@
-# GrantPath testsprite credits
+# Testsprite Credits — 27 October 2026
 
-## Submission preparation — 27 October 2026
+Official account readback: **Salman / lammysam8@gmail.com**, **Free**, **92.0 credits remaining** after the release and later owner manual runs. Prior balance was 97.2. The single seven-case App execution debited **3.5** (97.2 → 93.7), then native API ownership debited **0.2** (93.7 → 93.5). The automatic cycle total is **3.7**; the owner’s later three manual executions account for another **1.5**, so the total account reduction is **5.2**. Preserve approximately **50**, leaving 42 above that reserve.
 
-**Portal-generation compliance is unresolved.** Current account/project inspection shows all seven frontend cases are CLI-authored and no portal-authored cases. Project creation was through the CLI on 24 October. App execution and portal visibility do not establish portal generation. No generation event/estimate was supplied, no organiser exception is recorded, and no credited generation has been started. See [the exact owner procedure](PORTAL_GENERATION.md).
+No portal exploration/generation was started: its displayed estimate is unavailable, so its cost is not inferred from execution rates. No purchase, plan activation, agent-started duplicate manual execution or TestSprite schedule. [Native CI debit receipt](evidence/submission-semantic-api-ci.json), [current account](evidence/submission-final-account-catalogue.json), [App status](evidence/submission-semantic-status.json).
 
-The refreshed remote submission baseline is `448831d7edc080b34599c291de19d6f52540fb76`, with [PR #1](https://github.com/samscript18/GrantPath/pull/1) open and unmerged. The public repository is accessible; PR creation was 24 October 2026 at 13:26:20 UTC, within the user's supplied October 16–26 window. The [live app](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app) returns that exact revision. Its immutable deployment is [Ready](https://grantpath-mdgg56q1p-lammysam8-7688.vercel.app). Fresh GitHub reads confirm CI, GitGuardian, Vercel, TestSprite V3 (seven browser passes) and the separate native API ownership check passed at that baseline. The [App comment](https://github.com/samscript18/GrantPath/pull/1#issuecomment-6427296986) exists. This does not verify a later source.
+A future eight-case suite would estimate 4.0 for browser execution plus the observed 0.2 API rate; generation must leave that verification budget plus the reserve. This is an execution estimate, not a generation quote. [Portal cost/action guard](PORTAL_GENERATION.md).
 
-The owner explicitly approved including semantic field search on 27 October. Its original local work was preserved in `feature/semantic-field-search` at `14b492e`, then included in the release branch. Added shared PostgreSQL result caching, globally committed provider-call budgets (12/hour, 60/day), input/batch limits and explicit fallback are being verified before one coherent publication. **The new final-head hosted/App result is pending at this preparation checkpoint.** Existing receipt commit `d85c45a` remains in history. No earlier green result is attributed to the new feature.
+### Late portal/manual-run reconciliation — 27 October
 
-Fresh anonymous catalogue inspection excludes labelled fixtures: **32 real records, 23 providers, 17 actual destination countries, six regions; 23 cycle records and nine overviews; seven open, two upcoming, five closed and eighteen unknown**. These are not 32 open scholarships. GLOCAL remains one record across seven destinations and pathways vary.
+The owner explicitly confirmed **“manual creation in the portal”** for three new
+cases and supplied [Activity Log](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/activity)
+and three execution links. The project now contains **ten cases: the original
+seven CLI-authored cases plus three manually portal-authored cases**. The new
+cases cover GLOCAL, notifications and private notes, overlapping original coverage.
+**This still does not establish AI exploration/generation through the web portal.**
+[Owner statement/run links](evidence/submission-owner-portal-history.json),
+[new case metadata/export review](PORTAL_CASE_REVIEW.md).
 
-Official account readback: **Salman**, **lammysam8@gmail.com**, Free plan, **97.2 credits**. This preparation has spent **0 TestSprite credits** so far. Preserve approximately 50; the observed seven-case App plus native API execution estimate is 3.7 total, while portal generation has **no established estimate**. No manual duplicate, scheduled TestSprite run, purchase or paid plan.
+The final automatic App result at `4245853` covers the original seven cases;
+it does not verify the later three as part of an App-connected ten-case suite.
+Preserve all histories. Before another automatic run, reconcile App selection and
+the exact-count manifest; do not delete cases or weaken the guard. No ten-case App
+pass is claimed. New manual cases are not silently substituted for the original
+reviewed cases. The agent started no extra manual run or generation.
 
-Both GitHub routine worker workflows are currently `disabled_manually`; no TestSprite schedules exist. Successful manual runs [application40180139452](https://github.com/samscript18/GrantPath/actions/runs/40180139452) and [source40180145842](https://github.com/samscript18/GrantPath/actions/runs/40180145842) are historical dispatch evidence, not recurring monitoring. Two old queued manual runs also remain; review them before any future enablement. See [operational activation handoff](OPERATIONS_HANDOFF.md). Optional automatic Neon lifecycle remains unconfigured; Brevo provider acceptance does not prove recipient receipt.
+**Final observed balance is 92.0 credits**: 97.2 → 93.7 (App 3.5) → 93.5
+(API 0.2) → 92.0 (additional owner-confirmed manual executions, aggregate 1.5).
+Total account reduction **5.2**, with **50 reserved**. Generation has no displayed
+estimate and was not started by this agent. The 1.5 aggregate is consistent with
+three executions at the observed 0.5 rate, rather than a claimed per-run invoice.
+[Final account/catalogue readback](evidence/submission-final-account-catalogue.json).
 
-Fresh branch-protection readback returned **403 Resource not accessible by integration**. No alternate identity was tried and no protection was changed. Historical strict/admin-enforced requirements remain recorded in `evidence/github-release-gate.json`; fresh success statuses are separate from that historical protection snapshot.
-
-Readbacks: [GitHub](evidence/submission-github-readback.json), [account and case origins](evidence/submission-testsprite-readback.json), [live catalogue](evidence/submission-live-readback.json), [deployment and workflows](evidence/submission-operations-readback.json). Final PR description is [SUBMISSION_PR.md](SUBMISSION_PR.md); draft entry is [DISCORD_SUBMISSION.md](DISCORD_SUBMISSION.md). No merge or Discord post has been made.
+The PR title matches the prepared title on independent readback, but its body
+remains the old version after the connector returned **403**. **Owner action is
+paste the replacement body only** from SUBMISSION_PR.md. No alternate write
+identity or second metadata write was attempted.
 
 ---
 
