@@ -10,10 +10,10 @@
 
 **TestSprite account email:** lammysam8@gmail.com
 
-**Coverage:** The owner used portal exploration and Add Tests with AI; ten generated cases passed10/10. The20-case App-connected suite covers discovery/evidence, profiles/applications, joint identity, publication/replay, exceptions, eligibility/alerts, privacy and navigation. Separate native API ownership verification, GitGuardian and software/build/browser checks passed. A real [residence-clearing bug](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc) was caught by TestSprite, blocked merge, was fixed and subsequently passed.
+**Coverage:** The owner used portal exploration/Add Tests with AI; ten generated cases passed10/10. The current required suite has19cases covering discovery/evidence, profiles/applications, joint identity, publication/replay, exceptions, privacy, notifications and navigation. The owner retired the controlled eligibility/change-notification case and removed that TestSprite requirement. Native API ownership remains separately required. The notification companion’s targeted rerun passed11recorded steps. A real residence-clearing bug was caught by TestSprite, blocked merge, was fixed and subsequently passed.
 
-**Current gate disclosure:** At source `5d9960f`, the [complete automatic PR run](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/060daa19-5134-4241-9443-39a5c0bcec3e) has18passed,1failed and1blocked; it is not yet a final green submission candidate. Notification test-action/sign-in clarifications await supported retry. Earlier7/7or10/10results do not substitute for this final complete check. Routine monitoring schedules remain disabled. No video is supplied.
+**Verification disclosure:** A fresh complete19-case automatic PR check is pending for this publication. Older10/10orfailed20-case runs do not establish that final result. Routine monitoring schedules remain disabled. No video is supplied.
 
 ---
 
-Prepared only; not posted. Replace the current-gate disclosure only after an actual complete passing PR check exists. Do not claim organiser approval or byte-identical replay of all saved Python assertions. Optional demo: discovery/evidence → GLOCAL under two destinations → semantic Humanities/History → private progress → genuine regression and current PR checks.
+Prepared only; not posted. Update this disclosure using actual final-head results. Do not claim organiser approval or byte-identical browser replay.

@@ -1,20 +1,20 @@
 import { it, expect } from "vitest";
 import { assessNativeReport } from "../../src/server/operator/testsprite-gate";
-it("requires the complete twenty-case App suite including portal-generated coverage", () => {
+it("requires the complete nineteen-case App suite after the owner retired one case", () => {
   expect(
-    assessNativeReport({ state: "success", description: "All 20 tests passed" }, 20).state,
+    assessNativeReport({ state: "success", description: "All 19 tests passed" }, 19).state,
   ).toBe("passed");
-  expect(assessNativeReport({ state: "success", description: "20/20 passed" }, 20).state).toBe(
+  expect(assessNativeReport({ state: "success", description: "19/19 passed" }, 19).state).toBe(
     "passed",
   );
   for (const description of [
     "7/7 passed",
     "10/10 passed",
-    "17/17 passed",
-    "19/20 passed",
-    "20/20 passed · 1 blocked",
+    "18/19 passed",
+    "20/20 passed",
+    "19/19 passed · 1 blocked",
   ])
-    expect(assessNativeReport({ state: "success", description }, 20).state).toBe("failed");
+    expect(assessNativeReport({ state: "success", description }, 19).state).toBe("failed");
 });
 it("rejects a green native status with actual failed or blocked cases", () => {
   expect(

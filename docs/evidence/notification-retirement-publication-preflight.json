@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-27T03:52:44.407Z",
+  "live": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "health": {
+    "application": "GrantPath",
+    "revision": "5d9960f0e1088283eb3a9213abac3cc40cb744f6"
+  },
+  "healthyCatalogue": true,
+  "projectCaseCount": 19,
+  "manifestCaseCount": 19,
+  "frontendRate": 0.5,
+  "balance": 58.6,
+  "automaticNineteenCaseEstimate": 9.5,
+  "nativeApiEstimate": 0.2,
+  "estimatedTotal": 9.7,
+  "originalReserve": 50,
+  "ownerAuthorisedPublicationAfterCostDisclosure": true,
+  "authorisedProjectedBalance": 48.9,
+  "projectedRemaining": 48.9,
+  "manualExecutionDispatched": false
+}

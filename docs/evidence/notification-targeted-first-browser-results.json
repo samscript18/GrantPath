@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-27T03:41:24.516Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "scope": "Only two user-authorised targeted CLI reruns, separate from the earlier complete automatic GitHub App execution; no new all20 run or GitHub status mutation.",
+  "cases": [
+    {
+      "runId": "b51398d2-6ae7-440d-bda1-a83c32e3d477",
+      "testId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "testTitle": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+      "status": "failed",
+      "source": "cli",
+      "createdAt": "2026-10-27T03:41:02.716Z",
+      "startedAt": "2026-10-27T03:41:02.716Z",
+      "finishedAt": "2026-10-27T03:41:10.304Z",
+      "codeVersion": null,
+      "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "failedStepIndex": null,
+      "failureKind": "unknown",
+      "error": "TargetClosedError: BrowserContext.new_page: Target page, context or browser has been closed",
+      "stepSummary": {
+        "total": 0,
+        "completed": 0,
+        "passedCount": 0,
+        "failedCount": 0
+      },
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/a129c3d5-3226-496f-986b-a07316663073/test/b51398d2-6ae7-440d-bda1-a83c32e3d477"
+    },
+    {
+      "runId": "e1ba24d1-b515-4784-96a6-64968b24945e",
+      "testId": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "testTitle": "Review delivered notifications and official evidence",
+      "status": "passed",
+      "source": "cli",
+      "createdAt": "2026-10-27T03:38:33.901Z",
+      "startedAt": "2026-10-27T03:38:33.901Z",
+      "finishedAt": "2026-10-27T03:40:31.513Z",
+      "codeVersion": "v2.0",
+      "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "failedStepIndex": null,
+      "failureKind": null,
+      "error": "",
+      "stepSummary": {
+        "total": 11,
+        "completed": 11,
+        "passedCount": 11,
+        "failedCount": 0
+      },
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/0ca44127-76f2-4221-843c-c0ef96f84b21/test/e1ba24d1-b515-4784-96a6-64968b24945e"
+    }
+  ],
+  "balanceBefore": 60.1,
+  "balanceAfter": 59.1,
+  "observedDebit": 1,
+  "allPassed": false
+}
