@@ -1,0 +1,18 @@
+{
+  "caseId": "90536332-1d3a-44de-96b7-fba37fa62836",
+  "name": "Review notifications and mark them read",
+  "questionScope": "Owner was asked whether the second case was deleted and whether its requirement should also be removed.",
+  "ownerAnswer": "yes, i deleted it",
+  "remoteDeletionConfirmed": true,
+  "activeRequirementRemoved": true,
+  "replacementCreated": false,
+  "requiredCount": 18,
+  "remainingComposition": {
+    "originalCli": 6,
+    "manualPortal": 3,
+    "portalAiGenerated": 9
+  },
+  "originalTenCaseGenerationEventRetainedAsHistoricalFact": true,
+  "nativeApiOwnershipCheckUnchanged": true,
+  "noFurtherPushOrRun": true
+}

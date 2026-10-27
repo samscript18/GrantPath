@@ -29,10 +29,12 @@ async function registerVerified(email: string) {
     name: "Isolated Test Student",
     callbackURL: `${origin}/profile`,
     role: "operator",
+    authMethod: "google",
   });
   expect(res.status).toBe(200);
   const user = await db().user.findUniqueOrThrow({ where: { email } });
   expect(user.role).toBe("student");
+  expect(user.authMethod).toBe("email");
   expect(user.emailVerified).toBe(false);
   const mail = await db().emailSink.findFirstOrThrow({
     where: { recipient: email, subject: { contains: "Verify" } },
@@ -61,6 +63,36 @@ describe("first persistent journey", () => {
   afterAll(async () => {
     await db().emailSink.deleteMany({ where: { recipient: { in: emails } } });
     await db().user.deleteMany({ where: { email: { in: emails } } });
+  });
+  it("rejects weak new passwords at signup and reset before provisioning or token use", async () => {
+    for (const [i, weak] of [
+      "onlylowercaseletters",
+      "NOLOWERCASE123!",
+      "NoNumbersHere!",
+      "NoSymbolsHere123",
+    ].entries()) {
+      const email = `weak-${crypto.randomUUID()}@example.test`;
+      const response = await authPost("sign-up/email", {
+        name: "[TEST ONLY] Weak password",
+        email,
+        password: weak,
+      });
+      expect(response.status).toBe(400);
+      expect(await db().user.count({ where: { email } })).toBe(0);
+      const reset = await getAuth().handler(
+        new Request(`${origin}/api/auth/reset-password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Origin: origin,
+            "x-forwarded-for": `192.0.2.${160 + i}`,
+          },
+          body: JSON.stringify({ token: "isolated-invalid-token", newPassword: weak }),
+        }),
+      );
+      expect(reset.status).toBe(400);
+      expect((await reset.json()).message).toContain("Include");
+    }
   });
   it("registers, verifies, saves, isolates ownership, logs out and returns", async () => {
     const tag = crypto.randomUUID();
@@ -144,7 +176,7 @@ describe("first persistent journey", () => {
         .status,
     ).toBe(200);
     expect(
-      (await authPost("reset-password", { token, newPassword: "Another-isolated-passphrase" }))
+      (await authPost("reset-password", { token, newPassword: "Another-isolated-passphrase-43" }))
         .status,
     ).toBeGreaterThanOrEqual(400);
     expect((await authPost("sign-in/email", { email, password })).status).toBe(401);

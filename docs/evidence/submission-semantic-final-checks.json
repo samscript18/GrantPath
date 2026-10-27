@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-27T00:14:59.267Z",
+  "head": "4245853398a25c59a64273c1f119bdf9508be6d5",
+  "checks": [
+    {
+      "id": 121914998069,
+      "name": "Vercel Preview Comments",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 8329,
+      "url": "https://github.com/samscript18/GrantPath/runs/121914998069"
+    },
+    {
+      "id": 121914426375,
+      "name": "TestSprite API ownership",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40420797802/job/121914426375"
+    },
+    {
+      "id": 121914426174,
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40420797802/job/121914426174"
+    },
+    {
+      "id": 121914412201,
+      "name": "GitGuardian Security Checks",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 46505,
+      "url": "https://github.com/samscript18/GrantPath/runs/121914412201"
+    }
+  ],
+  "app": {
+    "state": "success",
+    "countPassed": 7,
+    "executionId": "3e453883-20eb-4466-bce3-f77723bb73c5",
+    "source": "Authenticated GitHub combined-status response and actual CI native-guard log reporting all 7 native cases passed."
+  },
+  "publicPollStopped": "Public polling read returned 403; the process stopped. No administration-denial bypass or protection change occurred."
+}

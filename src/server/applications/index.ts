@@ -123,3 +123,11 @@ export async function applications(actor: Actor, savedOnly = false) {
     },
   }));
 }
+
+export async function savedOpportunityIds(actor: Actor, scholarshipIds: string[]) {
+  const rows = await db().application.findMany({
+    where: { userId: actor.id, scholarshipId: { in: scholarshipIds.slice(0, 50) }, saved: true },
+    select: { scholarshipId: true },
+  });
+  return rows.map((row) => row.scholarshipId);
+}

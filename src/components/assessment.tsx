@@ -10,15 +10,22 @@ const icons = { pass: CheckCircle2, fail: XCircle, unknown: CircleHelp };
 function Result({ result }: { result: RuleResult }) {
   const Icon = icons[result.state];
   return (
-    <li className="border-b border-border py-4 last:border-0">
+    <li className="border-b border-border py-5 last:border-0">
       <div className="flex gap-3">
         <Icon
           size={16}
-          className={`mt-1 shrink-0 ${result.state === "fail" ? "text-red-800" : result.state === "unknown" ? "text-[#795410]" : "text-primary"}`}
+          className={`mt-1 shrink-0 ${result.state === "fail" ? "text-danger-foreground" : result.state === "unknown" ? "text-warning-foreground" : "text-primary"}`}
         />
         <div className="min-w-0 flex-1">
-          <p className="text-sm leading-6">{result.label}</p>
-          <p className="mt-1 text-[11px] leading-6 text-muted-foreground">{result.explanation}</p>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <p className="text-[13px] font-medium leading-6">{result.label}</p>
+            <Badge
+              tone={result.state === "pass" ? "green" : result.state === "fail" ? "red" : "amber"}
+            >
+              {result.state === "pass" ? "Met" : result.state === "fail" ? "Not met" : "To confirm"}
+            </Badge>
+          </div>
+          <p className="mt-2 text-xs leading-7 text-muted-foreground">{result.explanation}</p>
           {result.evidenceKey && (
             <a
               href={`#evidence-${result.evidenceKey}`}
@@ -41,7 +48,10 @@ function Result({ result }: { result: RuleResult }) {
               </ul>
             </details>
           )}
-          <span className="mt-2 block text-[9px] text-muted-foreground">Reason: {result.code}</span>
+          <details className="mt-3 text-[10px] text-muted-foreground">
+            <summary className="w-fit cursor-pointer">Assessment details</summary>
+            <p className="mt-2 font-mono">Reason: {result.code}</p>
+          </details>
         </div>
       </div>
     </li>
@@ -65,7 +75,7 @@ export function Assessment({
   return (
     <div className="mt-6">
       <div
-        className={`border-l-2 p-5 ${!current || assessment.outcome === "potential" ? "border-accent bg-[#f3eedf]" : assessment.outcome === "not_eligible" ? "border-red-700 bg-[#f7e9e3]" : "border-primary bg-secondary"}`}
+        className={`assessment-summary rounded-r-xl border-l-[3px] p-6 ${!current || assessment.outcome === "potential" ? "border-accent bg-warning" : assessment.outcome === "not_eligible" ? "border-danger-foreground bg-danger" : "border-primary bg-secondary"}`}
       >
         <Badge
           tone={
@@ -95,8 +105,13 @@ export function Assessment({
           const entries = results.filter((r) => r.state === state);
           if (!entries.length) return null;
           return (
-            <section key={state}>
-              <h3 className="eyebrow border-b border-border pb-3 text-muted-foreground">{label}</h3>
+            <section key={state} className="paper px-5 py-5 sm:px-6">
+              <h3 className="flex items-center justify-between gap-3 border-b border-border pb-4 text-xs font-semibold">
+                {label}
+                <span className="flex size-6 items-center justify-center rounded-full bg-muted text-[10px] text-muted-foreground">
+                  {entries.length}
+                </span>
+              </h3>
               <ul>
                 <ResultList results={entries} />
               </ul>

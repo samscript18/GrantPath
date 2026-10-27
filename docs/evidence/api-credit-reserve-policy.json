@@ -1,0 +1,16 @@
+{
+  "ownerRequest": "reduce it to 30.5 credits",
+  "startingBalanceMinimum": 30.5,
+  "preservedReserve": 30,
+  "conservativeRunCap": 0.5,
+  "previousStartingMinimum": 50.5,
+  "assertionsAndRequiredChecksUnchanged": true,
+  "beforePublicationBalance": 48.1,
+  "requiredFrontendCases": 18,
+  "frontendEstimate": 9,
+  "nativeApiObservedEstimate": 0.2,
+  "estimatedTotal": 9.2,
+  "conservativeTotalCap": 9.5,
+  "projectedRemainingAtObservedRates": 38.9,
+  "noPurchaseOrPaidPlan": true
+}

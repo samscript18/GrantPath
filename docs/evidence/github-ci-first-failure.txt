@@ -1,0 +1,14 @@
+Observed 24 October 2026, PR 1 head 4c0cf6dc1dcfeef110040a0abf62b837f0551a24.
+Run: https://github.com/samscript18/GrantPath/actions/runs/40098135936
+Install, generation, migrations, typecheck, lint, unit and PostgreSQL checks passed.
+Build log excerpt:
+2026-10-24T13:27:43.6432271Z Error occurred prerendering page "/dashboard".
+2026-10-24T13:27:44.0294121Z Error [SetupError]: APP_ENV=test cannot run in production.
+2026-10-24T13:27:44.0301967Z Export encountered an error on /dashboard/page: /dashboard, exiting the build.
+2026-10-24T13:27:44.0912520Z Process completed with exit code 1.
+
+Fix 81f2164e2bb988c9a8403f1614366a3b01b7f3b3: override APP_ENV=development for build only, keep production guard.
+Successful full CI: https://github.com/samscript18/GrantPath/actions/runs/40098799050
+Actual main protection: strict correctness check from github-actions App 15368; administrators included.
+PR mergeable_state was observed blocked while this required check was pending, then clean after it passed.
+This is GitHub Actions evidence, not TestSprite red/green or a deliberately introduced regression.

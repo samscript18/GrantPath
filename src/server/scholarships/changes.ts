@@ -13,6 +13,7 @@ export function materialChanges(before: ScholarshipData | null, after: Scholarsh
     "applicationUrl",
     "levels",
     "sourceFacts",
+    "studyLocations",
   ] as const;
   return fields
     .filter((field) => semanticHash(before?.[field] ?? null) !== semanticHash(after[field] ?? null))

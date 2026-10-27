@@ -1,5 +1,54 @@
 import { z } from "zod";
 import { ruleSchema, type Rule } from "@/server/eligibility/rules";
+import { countryCodes } from "@/lib/countries";
+export const countryCodeSchema = z
+  .string()
+  .refine((v) => countryCodes.includes(v), "Use an ISO country code");
+export const studyLocationsSchema = z
+  .object({
+    scope: z.enum([
+      "single",
+      "multiple",
+      "participating",
+      "global",
+      "institution_dependent",
+      "unconfirmed",
+    ]),
+    countries: z.array(countryCodeSchema).max(100),
+    institutions: z
+      .array(
+        z
+          .object({
+            name: z.string().min(2).max(160),
+            countryCode: countryCodeSchema.optional(),
+            url: z.url().optional(),
+          })
+          .strict(),
+      )
+      .max(30),
+  })
+  .strict()
+  .superRefine((v, ctx) => {
+    if (
+      (v.scope === "single" && v.countries.length !== 1) ||
+      (v.scope === "multiple" && v.countries.length < 2) ||
+      new Set(v.countries).size !== v.countries.length
+    )
+      ctx.addIssue({
+        code: "custom",
+        message: "Supply distinct actual countries consistent with the location scope.",
+      });
+    if (["global", "unconfirmed"].includes(v.scope) && v.countries.length)
+      ctx.addIssue({
+        code: "custom",
+        message: "Global and unconfirmed are scopes, not asserted study countries.",
+      });
+    if (v.institutions.some((i) => i.countryCode && !v.countries.includes(i.countryCode)))
+      ctx.addIssue({
+        code: "custom",
+        message: "Institution countries must appear among the supported destinations.",
+      });
+  });
 const officialUrl = z
   .url()
   .refine((v) => new URL(v).protocol === "https:", "Official evidence must use HTTPS");
@@ -21,6 +70,9 @@ export const scholarshipDataSchema = z
     title: z.string().min(3).max(180),
     summary: z.string().min(20).max(1200),
     destination: z.string().min(2).max(100),
+    studyLocations: studyLocationsSchema.optional(),
+    recordKind: z.enum(["cycle", "overview"]).optional(),
+    cycleStatus: z.enum(["confirmed", "unconfirmed"]).optional(),
     institution: z.string().min(2).max(160),
     levels: z
       .array(z.enum(["bachelor", "master", "doctorate"]))
@@ -105,6 +157,15 @@ export const scholarshipDataSchema = z
 export type ScholarshipData = z.infer<typeof scholarshipDataSchema>;
 // Extraction candidates may be uncertain. Accepted operational labels require reviewed evidence.
 export const publicationSchema = scholarshipDataSchema.superRefine((data, ctx) => {
+  if (
+    data.recordKind === "overview" &&
+    (data.availability !== "unknown" || data.deadline || data.deadlineState !== "unknown")
+  )
+    ctx.addIssue({
+      code: "custom",
+      path: ["recordKind"],
+      message: "A scheme overview cannot assert a current application window or deadline.",
+    });
   const checked = (field: string) =>
     data.evidence.some((e) => e.field === field && e.state === "verified");
   for (const field of [

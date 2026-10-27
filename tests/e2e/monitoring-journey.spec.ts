@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "./fixtures";
+import { dismissStudyPrompt, test, expect, type Page } from "./fixtures";
 import { db } from "../../src/lib/db";
 import { createOpportunity } from "../../src/server/operator";
 import { saveProfile } from "../../src/server/profiles";
@@ -19,6 +19,7 @@ async function login(page: Page, email: string) {
   await page.getByLabel("Password", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Welcome back" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  await dismissStudyPrompt(page);
 }
 async function processKey(key: string) {
   const event = await db().outbox.update({
@@ -173,15 +174,20 @@ test("operator-reviewed change recalculates one alert, preserves history and sup
   await expect(alert).toContainText("Not eligible based on known requirements");
   await alert.getByRole("link", { name: "Inspect the evidence" }).click();
   await expect(page).toHaveURL(new RegExp(`version=${version}`));
+  await page
+    .locator("#requirements details")
+    .filter({ hasText: "Reason: VALUE_NOT_ACCEPTED" })
+    .getByText("Assessment details", { exact: true })
+    .click();
   await expect(page.getByText("VALUE_NOT_ACCEPTED", { exact: false })).toBeVisible();
   await expect(page.locator("#evidence-levels")).toContainText("All Undergraduate degrees");
-  await page.goto("/notifications");
-  await page.getByRole("checkbox", { name: /^Accepted scholarship changes/ }).uncheck();
+  await page.goto("/settings/notifications");
+  await page.getByRole("switch", { name: /^Accepted scholarship changes/ }).click();
   await page.getByRole("button", { name: "Save my preferences" }).click();
   await expect(page.getByText("Preferences saved.", { exact: false })).toBeVisible();
   await page.reload();
   await expect(
-    page.getByRole("checkbox", { name: /^Accepted scholarship changes/ }),
+    page.getByRole("switch", { name: /^Accepted scholarship changes/ }),
   ).not.toBeChecked();
   // A real accepted reversal is a new event; current disabled preferences suppress its queued messages.
   const reversal = await processSourceHtml(source.id, uclSnapshot(), { controlled: true });

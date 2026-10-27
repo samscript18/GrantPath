@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-27T04:04:27.695Z",
+  "publishedHead": "253e8df2fc0ca31c28112ad29449831bb21ab837",
+  "publishedRequiredCount": 19,
+  "appResult": {
+    "state": "failure",
+    "description": "18/19 passed · 1 blocked",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9be2c6bb-6ba5-484c-966d-204a7c1ac2ba"
+  },
+  "statuses": [
+    {
+      "context": "Vercel",
+      "state": "success",
+      "description": "Deployment has completed",
+      "targetUrl": "https://vercel.com/lammysam8-7688/grantpath/8BoxDeot9pg3ph1tGfrpvJwYWGYi"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "failure",
+      "description": "18/19 passed · 1 blocked",
+      "targetUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9be2c6bb-6ba5-484c-966d-204a7c1ac2ba"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Vercel Preview Comments",
+      "status": "completed",
+      "conclusion": "success",
+      "detailsUrl": "https://vercel.com/github"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "status": "completed",
+      "conclusion": "success",
+      "detailsUrl": "https://dashboard.gitguardian.com"
+    },
+    {
+      "name": "TestSprite API ownership",
+      "status": "completed",
+      "conclusion": "failure",
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40446668034/job/121999490080"
+    },
+    {
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "status": "completed",
+      "conclusion": "failure",
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40446668034/job/121999489747"
+    }
+  ],
+  "softwareVerification": {
+    "unit": 102,
+    "postgresql": 37,
+    "productionBrowser": 14,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed"
+  },
+  "api": {
+    "state": "stopped_before_execution",
+    "reason": "Hard-coded 50-credit reserve preflight",
+    "newHeadResultExists": false
+  },
+  "currentRemoteProjectCount": 18,
+  "currentLocalRequiredCount": 18,
+  "ownerRetiredCases": [
+    "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+    "90536332-1d3a-44de-96b7-fba37fa62836"
+  ],
+  "eighteenCaseUpdatePublished": false,
+  "balance": {
+    "beforePublication": 58.6,
+    "latestObserved": 48.1,
+    "appDebit": 9.5,
+    "apiDebit": 0,
+    "additionalUnattributedDebit": 1
+  },
+  "noFurtherPaidRun": true,
+  "noStatusFabricated": true
+}

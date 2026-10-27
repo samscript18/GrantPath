@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-26T23:45:46.972Z",
+  "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+  "id": "dpl_4UYkWP4k8VybR6QvhV5C6nGZPsLe",
+  "state": "READY",
+  "url": "https://grantpath-6k7mdx6bb-lammysam8-7688.vercel.app",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "health": {
+    "application": "GrantPath",
+    "revision": "4245853398a25c59a64273c1f119bdf9508be6d5"
+  }
+}

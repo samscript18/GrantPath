@@ -20,23 +20,18 @@ const evaluationJob = z.object({
   profileVersion: z.number().int(),
   scholarshipVersion: z.number().int(),
 });
-async function queueEvaluation(
-  tx: Prisma.TransactionClient,
+function evaluationEvent(
   userId: string,
   profileVersion: number,
   scholarshipId: string,
   scholarshipVersion: number,
-) {
+): Prisma.OutboxCreateManyInput {
   const key = `evaluate:${userId}:p${profileVersion}:${scholarshipId}:v${scholarshipVersion}:e${ENGINE_VERSION}`;
-  await tx.outbox.upsert({
-    where: { key },
-    create: {
-      key,
-      topic: "evaluation.requested",
-      payload: { userId, profileVersion, scholarshipId, scholarshipVersion },
-    },
-    update: {},
-  });
+  return {
+    key,
+    topic: "evaluation.requested",
+    payload: { userId, profileVersion, scholarshipId, scholarshipVersion },
+  };
 }
 async function markDone(tx: Prisma.TransactionClient, event: Outbox) {
   const done = await tx.outbox.updateMany({
@@ -70,7 +65,11 @@ export async function handleDomainEvent(event: Outbox) {
           orderBy: { id: "asc" },
           take: 50,
         });
-        for (const s of rows) await queueEvaluation(tx, p.userId, p.version, s.id, s.version);
+        if (rows.length)
+          await tx.outbox.createMany({
+            data: rows.map((s) => evaluationEvent(p.userId, p.version, s.id, s.version)),
+            skipDuplicates: true,
+          });
         if (rows.length === 50) {
           const cursor = rows.at(-1)!.id;
           const key = `profile:${p.userId}:${p.version}:after:${cursor}`;
@@ -93,7 +92,10 @@ export async function handleDomainEvent(event: Outbox) {
       });
       if (s) {
         const users = await tx.user.findMany({
-          where: p.cursor ? { id: { gt: p.cursor } } : {},
+          where: {
+            ...(p.cursor ? { id: { gt: p.cursor } } : {}),
+            ...(s.title.startsWith("[TEST ONLY]") ? { email: { endsWith: ".test" } } : {}),
+          },
           orderBy: { id: "asc" },
           take: 50,
           include: {
@@ -101,30 +103,28 @@ export async function handleDomainEvent(event: Outbox) {
             applications: { where: { scholarshipId: p.scholarshipId, saved: true } },
           },
         });
+        const pending: Prisma.OutboxCreateManyInput[] = [];
         for (const user of users) {
           if (user.profile && s.version === p.version)
-            await queueEvaluation(tx, user.id, user.profile.version, s.id, p.version);
+            pending.push(evaluationEvent(user.id, user.profile.version, s.id, p.version));
           if (
             p.previousVersion > 0 &&
             user.applications.some((a) => a.createdAt <= s.versions[0].createdAt)
           ) {
             const key = `change:${s.id}:v${p.version}:${user.id}`;
-            await tx.outbox.upsert({
-              where: { key },
-              create: {
-                key,
-                topic: "change.ready",
-                payload: {
-                  userId: user.id,
-                  scholarshipId: s.id,
-                  version: p.version,
-                  previousVersion: p.previousVersion,
-                },
+            pending.push({
+              key,
+              topic: "change.ready",
+              payload: {
+                userId: user.id,
+                scholarshipId: s.id,
+                version: p.version,
+                previousVersion: p.previousVersion,
               },
-              update: {},
             });
           }
         }
+        if (pending.length) await tx.outbox.createMany({ data: pending, skipDuplicates: true });
         if (users.length === 50) {
           const cursor = users.at(-1)!.id;
           const key = `scholarship:${s.id}:${p.version}:after:${cursor}`;

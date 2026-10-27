@@ -1,0 +1,122 @@
+{
+  "checkedAt": "2026-10-26T16:19:15.348Z",
+  "scope": "Historical native-run inputs and labelled isolated .test notification event identities only",
+  "nativeHead": "963149ea1e7d4f75e387630554b1f0316417c570",
+  "profileVersion": 5,
+  "targetLevel": "master",
+  "scholarshipVersion": 12,
+  "requirements": {
+    "id": "fixture-all",
+    "kind": "all",
+    "label": "Isolated fixture conditions",
+    "rules": [
+      {
+        "id": "fixture-level",
+        "op": "in",
+        "kind": "requirement",
+        "field": "targetLevel",
+        "label": "Fixture requires the stated intended level",
+        "values": ["bachelor"],
+        "verified": true,
+        "evidenceKey": "levels"
+      }
+    ]
+  },
+  "evaluation": {
+    "outcome": "not_eligible",
+    "result": {
+      "tree": {
+        "id": "fixture-all",
+        "code": "ALL_FAIL",
+        "label": "Isolated fixture conditions",
+        "state": "fail",
+        "children": [
+          {
+            "id": "fixture-level",
+            "code": "VALUE_NOT_ACCEPTED",
+            "label": "Fixture requires the stated intended level",
+            "state": "fail",
+            "evidenceKey": "levels",
+            "explanation": "Your recorded value does not satisfy this mandatory condition or alternative.",
+            "studentValue": "master"
+          }
+        ],
+        "explanation": "All mandatory conditions are required; a verified failure determines failure."
+      },
+      "state": "fail",
+      "leaves": [
+        {
+          "id": "fixture-level",
+          "code": "VALUE_NOT_ACCEPTED",
+          "label": "Fixture requires the stated intended level",
+          "state": "fail",
+          "evidenceKey": "levels",
+          "explanation": "Your recorded value does not satisfy this mandatory condition or alternative.",
+          "studentValue": "master"
+        }
+      ],
+      "outcome": "not_eligible",
+      "ranking": {
+        "score": 0,
+        "factors": ["Known mandatory failure: excluded from recommendations."],
+        "excluded": true
+      },
+      "evaluatedAt": "2026-10-26T16:13:06.362Z",
+      "engineVersion": "1.3.0"
+    }
+  },
+  "notificationEvents": [
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v10:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v12:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v13:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v14:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v2:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v3:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v4:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v5:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v6:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v8:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    },
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v9:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    }
+  ],
+  "duplicateEventGroups": 0,
+  "note": "Master profile fails the changed bachelor requirement as intended. Historical accepted versions have separate event identities; repeated scholarship titles are not duplicate delivery for one event.",
+  "nativeVersion12NotificationEvents": [
+    {
+      "eventId": "change:cmvnkok34001o08l2tsu0hfzz:v12:4453585d-2d4f-4907-8400-9a0db78d2770",
+      "count": 1
+    }
+  ]
+}

@@ -5,6 +5,7 @@ on:
     branches: [main]
 permissions:
   contents: read
+  statuses: read
 jobs:
   correctness:
     name: Typecheck, lint, domain and PostgreSQL checks
@@ -40,14 +41,27 @@ jobs:
       - run: npm run check
       - run: npm run test:integration
       - run: npm run build
+        env:
+          APP_ENV: development
       - run: npx playwright install --with-deps chromium
       - run: psql -h localhost -U grantpath -d grantpath_test -c 'CREATE DATABASE grantpath_e2e_test'
         env:
           PGPASSWORD: isolated-ci-only
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python Playwright for exact reusable TestSprite source checks
+        run: python3 -m pip install playwright==1.60.0
       - run: npm run test:e2e
         env:
           PLAYWRIGHT_PRODUCTION: "1"
           E2E_DATABASE_URL: postgresql://grantpath:isolated-ci-only@localhost:5432/grantpath_e2e_test
+      - name: Require every native TestSprite case to pass (read-only; no execution)
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RELEASE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: npm run release:testsprite-gate
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -55,3 +69,28 @@ jobs:
           path: |
             playwright-report/
             test-results/
+  api-ownership:
+    name: TestSprite API ownership
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: grantpath-api-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact deployed commit and native protected API assertions
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+          RELEASE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          RELEASE_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: node scripts/verify-api-ownership.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: testsprite-api-evidence
+          path: testsprite-api-summary.json

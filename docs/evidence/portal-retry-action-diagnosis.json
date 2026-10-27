@@ -1,0 +1,124 @@
+{
+  "scope": "Provider action descriptions sanitized: every input redacted; no cookies, credentials or artefact URLs. No manual processing/reset.",
+  "originalNotification": {
+    "runId": "4ffb850e-46dd-4133-9680-a6e6fe207ec9",
+    "processQueuedJobsClicksInRecordedSteps": 0,
+    "lastSteps": [
+      {
+        "stepIndex": 36,
+        "action": "click",
+        "description": "Click 'Search button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 37,
+        "action": "click",
+        "description": "Click '[TEST ONLY] Controlled change scholarship link'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 38,
+        "action": "click",
+        "description": "Click 'Update my matches button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 39,
+        "action": "click",
+        "description": "Click 'Sign out button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 40,
+        "action": "fill",
+        "description": "[input redacted]",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 41,
+        "action": "fill",
+        "description": "[input redacted]",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 42,
+        "action": "click",
+        "description": "Click 'Welcome back \u2192 button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 43,
+        "action": "click",
+        "description": "Click 'Operator studio link'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 44,
+        "action": "click",
+        "description": "Click 'Isolated source verification'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 45,
+        "action": "click",
+        "description": "Click 'Eligibility and notifications button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 46,
+        "action": "click",
+        "description": "Click 'Publish changed requirement button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 47,
+        "action": "visible",
+        "description": "The operator queue should drain before the test switches accounts.",
+        "status": "failed"
+      }
+    ]
+  },
+  "blockedCompanion": {
+    "runId": "704195da-ad64-4d29-8745-35dceb4ee051",
+    "passwordFillCount": 1,
+    "allEnteredPasswordsMatchSuccessfulOriginalSignIn": false,
+    "steps": [
+      {
+        "stepIndex": 1,
+        "action": "navigate",
+        "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 2,
+        "action": "click",
+        "description": "Click 'Sign in link'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 3,
+        "action": "fill",
+        "description": "[input redacted]",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 4,
+        "action": "fill",
+        "description": "[input redacted]",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 5,
+        "action": "click",
+        "description": "Click 'Welcome back \u2192 button'",
+        "status": "passed"
+      },
+      {
+        "stepIndex": 6,
+        "action": "visible",
+        "description": "All updates should open so a delivered notification can be inspected.",
+        "status": "failed"
+      }
+    ]
+  }
+}

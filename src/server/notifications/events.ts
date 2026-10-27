@@ -197,30 +197,30 @@ export async function scheduleReminders(now = new Date(), limit = 100) {
     orderBy: [{ deadline: "asc" }, { id: "asc" }],
     take: bounded,
   });
-  let queued = 0;
+  const pending: {
+    key: string;
+    topic: string;
+    payload: { scholarshipId: string; version: number; deadline: string; days: number };
+  }[] = [];
   for (const s of rows) {
     const data = scholarshipDataSchema.parse(s.versions[0].data);
     if (!s.deadline || data.deadlineState !== "confirmed") continue;
     for (const days of [7, 1] as const) {
       if (!inReminderWindow(s.deadline, days, now)) continue;
       const key = reminderEventKey(s.id, s.deadline.toISOString(), days);
-      const result = await db().outbox.createMany({
-        data: [
-          {
-            key,
-            topic: "deadline.ready",
-            payload: {
-              scholarshipId: s.id,
-              version: s.version,
-              deadline: s.deadline.toISOString(),
-              days,
-            },
-          },
-        ],
-        skipDuplicates: true,
+      pending.push({
+        key,
+        topic: "deadline.ready",
+        payload: {
+          scholarshipId: s.id,
+          version: s.version,
+          deadline: s.deadline.toISOString(),
+          days,
+        },
       });
-      queued += result.count;
     }
   }
-  return { queued };
+  if (!pending.length) return { queued: 0 };
+  const result = await db().outbox.createMany({ data: pending, skipDuplicates: true });
+  return { queued: result.count };
 }

@@ -1,0 +1,151 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "preparedAt": "2026-10-25T07:50:13.600Z",
+  "creditedExecution": false,
+  "cases": [
+    {
+      "file": "discovery_evidence",
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "codeVersion": "v-522503c24345",
+      "planSteps": 6
+    },
+    {
+      "file": "profile_application",
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "codeVersion": "v-6ebae73763fd",
+      "planSteps": 16
+    },
+    {
+      "file": "multi_destination",
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "codeVersion": "v-ba7daaecadb5",
+      "planSteps": 4
+    },
+    {
+      "file": "automatic_publication",
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "codeVersion": "v-dabe6cdebe80",
+      "planSteps": 4
+    },
+    {
+      "file": "publication_exception",
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "codeVersion": "v-3b3f1d7077ba",
+      "planSteps": 4
+    },
+    {
+      "file": "account_privacy",
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "codeVersion": "v-cd62d2bcd84b",
+      "planSteps": 4
+    },
+    {
+      "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+      "name": "Search and filter scholarships",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+      "name": "View scholarship details from the shortlist",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+      "name": "Open the saved opportunities shortlist",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+      "name": "Review academic references guidance",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+      "name": "Switch applications to list view",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+      "name": "Review applications board stages",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+      "name": "Open the study profile editor",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+      "name": "Open profile and access account settings",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+      "name": "Browse scholarships from the overview",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "43f1ad19-29d1-473c-bcc5-838c25987ab1",
+      "name": "Private application notes remain isolated between student accounts",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "name": "Review delivered notifications and official evidence",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null,
+      "codeVersion": "v2.0",
+      "planSteps": 3,
+      "targetedPassEvidence": "notification-targeted-results.json"
+    },
+    {
+      "id": "efd3c479-5f8c-441e-b96e-05b43aa41f0c",
+      "name": "GLOCAL uses one canonical scholarship URL across all seven destinations",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null
+    }
+  ],
+  "refreshedAt": "2026-10-27T01:01:17.984574+00:00",
+  "reason": "Owner-confirmed retirements630a42fb and90536332 remove those TestSprite requirements; active suite now18cases. Do not substitute failed earlier19/20-case statuses for a fresh18-case result.",
+  "planRefreshedAt": "2026-10-26T20:37:39.642Z",
+  "selection": {
+    "caseCount": 18,
+    "originalCliCases": 6,
+    "earlierManualPortalCases": 3,
+    "aiGeneratedPortalCases": 9,
+    "configurationEvidence": "Existing trigger runs all project cases. Owner retired the original controlled eligibility/notification case and the generated notifications/read-state case; all18remaining cases stay required."
+  },
+  "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad",
+  "retirementEvidence": "notification-owner-generated-retirement.json"
+}

@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-24T15:39:39.817Z",
+  "baseURL": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "commit": "50570e1075cf5a754cc1a9d18ad5513abcc187ae",
+  "checks": [
+    "hosted signup Google button, matching checklist and independent password visibility",
+    "existing preview account login; persistent dark mobile workspace and evidence",
+    "hosted light override persists after reload"
+  ],
+  "passed": 3,
+  "failures": 0,
+  "realGoogleConsent": false
+}

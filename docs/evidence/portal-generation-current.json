@@ -1,0 +1,168 @@
+{
+  "checkedAt": "2026-10-27T00:53:17.275Z",
+  "account": {
+    "name": "Salman",
+    "email": "lammysam8@gmail.com",
+    "balance": 81.5,
+    "plan": "Free",
+    "creditsPerRun": 0.5
+  },
+  "project": {
+    "id": "a3f56241-4390-4269-8e0e-e88d61104094",
+    "defaultEnvironment": "default",
+    "environmentCount": 1,
+    "name": "GrantPath",
+    "type": "frontend",
+    "createdFrom": "cli",
+    "createdAt": "2026-10-24T13:40:33.437Z",
+    "updatedAt": "2026-10-27T00:48:30.094Z",
+    "orgId": "76bdd244-19c4-5d53-804b-92e29f6cfd98",
+    "orgName": "Salman's workspace",
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "testIdAttributes": null
+  },
+  "cases": [
+    {
+      "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+      "name": "Search and filter scholarships",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+      "name": "View scholarship details from the shortlist",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+      "name": "Open the saved opportunities shortlist",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+      "name": "Review academic references guidance",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "name": "Review notifications and mark them read",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+      "name": "Switch applications to list view",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+      "name": "Review applications board stages",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+      "name": "Open the study profile editor",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+      "name": "Open profile and access account settings",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+      "name": "Browse scholarships from the overview",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "43f1ad19-29d1-473c-bcc5-838c25987ab1",
+      "name": "Private application notes remain isolated between student accounts",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:11:08.703Z"
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "name": "Requirement changes update eligibility and create one preference-aware notification",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-27T00:09:11.719Z"
+    },
+    {
+      "id": "efd3c479-5f8c-441e-b96e-05b43aa41f0c",
+      "name": "GLOCAL uses one canonical scholarship URL across all seven destinations",
+      "createdFrom": "portal",
+      "status": "passed",
+      "createdAt": "2026-10-26T23:44:42.942Z"
+    },
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "name": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T20:37:39.634Z"
+    },
+    {
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "name": "Private application notes stay with their owner across independent browser sessions",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T20:01:50.289Z"
+    },
+    {
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "name": "A valid approved controlled candidate publishes once with official evidence and history",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T19:58:23.348Z"
+    },
+    {
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "name": "Discovery shows traceable Twente funding without overstating coverage",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T19:58:10.438Z"
+    },
+    {
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "name": "One real joint programme appears under each actual destination without duplicates",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T19:38:14.625Z"
+    },
+    {
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "name": "A student retains separate citizenship and residence and a private application plan",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T19:38:06.047Z"
+    },
+    {
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "name": "Ambiguous mandatory source conditions remain unpublished in the operator exception queue",
+      "createdFrom": "cli",
+      "status": "passed",
+      "createdAt": "2026-10-26T18:41:38.686Z"
+    }
+  ],
+  "portalRun": "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3a17a157-b012-43db-bf5a-0bbe70028cad",
+  "ownerReport": "Owner confirms live-app exploration and Add Tests with AI produced ten cases; supplied screenshot shows 10 passed, zero failed/blocked, and a project total of 20 cases."
+}

@@ -1,14 +1,47 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { profileReadiness } from "@/server/profiles/readiness";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema, type StudentProfile } from "@/server/profiles/schema";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Check, ArrowRight, ShieldCheck } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  ArrowLeft,
+  ShieldCheck,
+  MapPin,
+  GraduationCap,
+  Compass,
+  FileCheck2,
+} from "lucide-react";
 import { countryNames } from "@/lib/countries";
+import { ChoiceField } from "./choice-field";
 const stages = ["Your world", "Your education", "Your next chapter", "Other requirements"];
+const stageGuides = [
+  [
+    "Where your story begins.",
+    "Your citizenship and where you live can lead to different opportunities. Keep both true to your circumstances.",
+    MapPin,
+  ],
+  [
+    "Your record. In its own words.",
+    "Use the values and wording on your transcript. Your current qualifications stay separate from your future study plans.",
+    GraduationCap,
+  ],
+  [
+    "Make room for what’s next.",
+    "Where would you like your studies to take you? These preferences help order relevant opportunities without changing eligibility.",
+    Compass,
+  ],
+  [
+    "The details that add clarity.",
+    "Language, experience and admission conditions differ by provider. Leave an answer blank when it still needs checking.",
+    FileCheck2,
+  ],
+] as const;
 const optional = (v: unknown) => (v === "" ? undefined : v);
 function validationMessages(value: unknown, path = ""): { path: string; message: string }[] {
   if (!value || typeof value !== "object") return [];
@@ -22,15 +55,34 @@ export function ProfileForm({
   initial,
   version: initialVersion,
   stage: initialStage,
+  institutions = [],
+  variant = "page",
+  onSaved,
+  onComplete,
 }: {
   initial: StudentProfile;
   version: number;
   stage: number;
+  institutions?: string[];
+  variant?: "page" | "modal";
+  onSaved?: (profile: { data: StudentProfile; version: number; stage: number }) => void;
+  onComplete?: () => void;
 }) {
   const router = useRouter();
+  const prefix = useId();
+  const fieldId = (name: string) => (variant === "modal" ? `${prefix}-${name}` : name);
   const [stage, setStage] = useState(initialStage);
   const [version, setVersion] = useState(initialVersion);
   const [message, setMessage] = useState("");
+  const stageHeading = useRef<HTMLHeadingElement>(null);
+  const previousStage = useRef(initialStage);
+  useEffect(() => {
+    if (previousStage.current === stage) return;
+    previousStage.current = stage;
+    stageHeading.current?.focus({ preventScroll: true });
+    stageHeading.current?.scrollIntoView({ block: "nearest", behavior: "instant" });
+  }, [stage]);
+  const [guideTitle, guideText, GuideIcon] = stageGuides[stage];
   const {
     register,
     control,
@@ -46,10 +98,14 @@ export function ProfileForm({
     options: [string, string][],
   ) => (
     <div>
-      <label className="field-label" htmlFor={name}>
+      <label className="field-label" htmlFor={fieldId(name)}>
         {label}
       </label>
-      <select id={name} className="form-select" {...register(name, { setValueAs: optional })}>
+      <select
+        id={fieldId(name)}
+        className="form-select"
+        {...register(name, { setValueAs: optional })}
+      >
         <option value="">Not yet confirmed</option>
         {options.map(([value, label]) => (
           <option value={value} key={value}>
@@ -74,13 +130,13 @@ export function ProfileForm({
     type = "text",
   ) => (
     <div>
-      <label className="field-label" htmlFor={name}>
+      <label className="field-label" htmlFor={fieldId(name)}>
         {label}
       </label>
       <Input
-        id={name}
+        id={fieldId(name)}
         type={type}
-        list={name === "residence" ? "country-names" : undefined}
+        list={name === "residence" ? fieldId("country-names") : undefined}
         aria-invalid={!!errors[name]}
         {...register(name, { setValueAs: optional })}
       />
@@ -91,38 +147,35 @@ export function ProfileForm({
       control={control}
       name={name}
       render={({ field }) => (
-        <div>
-          <label className="field-label" htmlFor={name}>
-            {label}
-          </label>
-          <Input
-            id={name}
-            list={name === "citizenships" ? "country-names" : undefined}
-            defaultValue={field.value?.join(", ")}
-            onBlur={(e) =>
-              field.onChange(
-                e.target.value
-                  .split(",")
-                  .map((v) => v.trim())
-                  .filter(Boolean),
-              )
-            }
-          />
-          <p className="mt-2 text-[11px] text-muted-foreground">
-            Separate multiple entries with commas. Use full country names.
-          </p>
-        </div>
+        <ChoiceField
+          label={label}
+          options={name === "preferredInstitutions" ? institutions : countryNames}
+          value={field.value || []}
+          onChange={field.onChange}
+          multiple
+          custom={name === "preferredInstitutions"}
+          max={name === "citizenships" ? 10 : 20}
+          hint={
+            name === "preferredInstitutions"
+              ? "Suggestions come from the current catalogue. You can add another institution by its full name."
+              : "Search by country name and choose one or more. Remove a selection to change it."
+          }
+        />
       )}
     />
   );
   const save = handleSubmit(
     async (data) => {
       setMessage("");
+      const readiness = profileReadiness(data);
+      const finishing = stage === 3 && readiness.ready;
+      const nextStage =
+        stage === 3 && !readiness.ready ? readiness.missing[0].stage : Math.min(stage + 1, 3);
       try {
         const response = await fetch("/api/profile", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data, version, stage: Math.min(stage + 1, 3) }),
+          body: JSON.stringify({ data, version, stage: nextStage, complete: finishing }),
         });
         const body = await response.json();
         if (!response.ok) {
@@ -130,9 +183,26 @@ export function ProfileForm({
           return;
         }
         setVersion(body.version);
-        setMessage("Progress saved. Your matches will update shortly.");
-        if (stage < 3) setStage(stage + 1);
-        else router.push("/dashboard");
+        onSaved?.({
+          data: profileSchema.parse(body.data),
+          version: body.version,
+          stage: body.stage,
+        });
+        if (finishing) {
+          if (onComplete) onComplete();
+          else {
+            router.push("/dashboard");
+            router.refresh();
+          }
+        } else if (stage === 3) {
+          setStage(nextStage);
+          setMessage(
+            `Progress saved. To finish your matching basics, add ${readiness.missing.map((field) => field.label.toLowerCase()).join(", ")}. Other requirements can stay unconfirmed.`,
+          );
+        } else {
+          setMessage("Progress saved. Your matches will update shortly.");
+          setStage(nextStage);
+        }
       } catch {
         setMessage("We couldn’t save this time. Your answers are still here. Please retry.");
       }
@@ -165,37 +235,66 @@ export function ProfileForm({
     },
   );
   return (
-    <div className="grid gap-9 xl:grid-cols-[1fr_260px]">
+    <div
+      className={`profile-workspace grid gap-8 ${variant === "page" ? "xl:grid-cols-[minmax(0,1fr)_250px]" : "min-w-0"}`}
+    >
       <div>
-        <div className="mb-8 flex gap-2">
+        <div className="mb-7 grid grid-cols-2 gap-2 sm:flex">
           {stages.map((label, i) => (
             <button
               key={label}
               type="button"
+              disabled={isSubmitting}
               onClick={() => setStage(i)}
               aria-current={stage === i ? "step" : undefined}
-              className={`flex-1 border-b-2 pb-4 text-left text-xs ${stage === i ? "border-primary font-semibold" : "border-border text-muted-foreground"}`}
+              className={`flex flex-1 items-center gap-2.5 rounded-lg border px-3 py-3 text-left text-xs transition-colors ${stage === i ? "border-primary/30 bg-secondary font-semibold text-primary" : "border-transparent text-muted-foreground hover:bg-muted"}`}
             >
-              <span className="mb-2 block text-[10px]">0{i + 1}</span>
+              <span
+                className={`flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] ${stage === i ? "bg-primary text-primary-foreground" : "border border-border"}`}
+              >
+                0{i + 1}
+              </span>
               {label}
             </button>
           ))}
         </div>
-        <form onSubmit={save} noValidate className="paper p-5 sm:p-8">
-          <datalist id="country-names">
+        <form
+          onSubmit={save}
+          noValidate
+          aria-label="Study profile"
+          className={variant === "modal" ? "pb-2" : "paper p-5 sm:p-8"}
+        >
+          <datalist id={fieldId("country-names")}>
             {countryNames.map((name) => (
               <option value={name} key={name} />
             ))}
           </datalist>
-          <h2 className="font-serif text-2xl">{stages[stage]}</h2>
+          <p className="eyebrow mb-3 text-muted-foreground">
+            STEP {stage + 1} OF {stages.length}
+          </p>
+          <h2 ref={stageHeading} tabIndex={-1} className="editorial text-3xl">
+            {stages[stage]}
+          </h2>
           <p className="mt-2 mb-7 text-xs leading-6 text-muted-foreground">
-            You can leave uncertain answers blank. We’ll show what needs confirmation.
+            Add your matching basics and leave uncertain extra requirements blank. We’ll show what
+            needs confirmation.
           </p>
           <div className="grid gap-6 sm:grid-cols-2">
             {stage === 0 && (
               <>
                 {csv("citizenships", "Citizenship(s)")}
-                {text("residence", "Country of residence")}
+                <Controller
+                  control={control}
+                  name="residence"
+                  render={({ field }) => (
+                    <ChoiceField
+                      label="Country of residence"
+                      options={countryNames}
+                      value={field.value ? [field.value] : []}
+                      onChange={(values) => field.onChange(values[0] ?? "")}
+                    />
+                  )}
+                />
                 {text("timeZone", "Time zone (IANA, e.g. Africa/Lagos)")}
                 <div className="rounded-md bg-muted p-4 text-xs leading-6 text-muted-foreground">
                   Citizenship and residence are different. We use each only where a provider
@@ -262,15 +361,45 @@ export function ProfileForm({
                   </label>
                 </div>
                 {text("currentField", "Current field of study")}
-                {text("degreeClassification", "Original degree classification (if available)")}
                 {text("institution", "Current institution")}
+                <div className="border-t border-border pt-6 sm:col-span-2">
+                  <h3 className="font-serif text-xl">Your original academic record</h3>
+                  <p className="mt-2 text-xs leading-6 text-muted-foreground">
+                    Use the result and classification on your transcript. No automatic conversion is
+                    applied.
+                  </p>
+                </div>
                 {text("graduationDate", "Actual or expected graduation", "date")}
+                <Controller
+                  control={control}
+                  name="degreeClassification"
+                  render={({ field }) => (
+                    <ChoiceField
+                      label="Original degree classification (if available)"
+                      options={[
+                        "First Class Honours",
+                        "Upper Second Class Honours (2:1)",
+                        "Lower Second Class Honours (2:2)",
+                        "Third Class Honours",
+                        "Distinction",
+                        "Merit",
+                        "Pass",
+                        "High Distinction",
+                        "Credit",
+                      ]}
+                      value={field.value ? [field.value] : []}
+                      onChange={(values) => field.onChange(values[0] ?? "")}
+                      custom
+                      hint="Use the wording on your transcript. These labels do not convert your result."
+                    />
+                  )}
+                />
                 <div>
-                  <label className="field-label" htmlFor="gpa">
+                  <label className="field-label" htmlFor={fieldId("gpa")}>
                     Academic result (original value)
                   </label>
                   <Input
-                    id="gpa"
+                    id={fieldId("gpa")}
                     type="number"
                     min="0"
                     step="any"
@@ -280,22 +409,52 @@ export function ProfileForm({
                   />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="scale">
+                  <label className="field-label" htmlFor={fieldId("scale")}>
                     Original result scale
                   </label>
                   <Input
-                    id="scale"
+                    id={fieldId("scale")}
                     type="number"
                     min="0.1"
                     step="any"
                     placeholder="e.g. 4, 5 or 100"
+                    list={fieldId("original-scales")}
                     {...register("gpa.scale", {
                       setValueAs: (v) => (v === "" ? undefined : Number(v)),
                     })}
                   />
+                  <datalist id={fieldId("original-scales")}>
+                    {[4, 4.3, 4.33, 5, 6, 7, 9, 10, 20, 100].map((scale) => (
+                      <option key={scale} value={scale} />
+                    ))}
+                  </datalist>
+                </div>
+                <div>
+                  <label className="field-label" htmlFor={fieldId("grading-direction")}>
+                    How your original scale works
+                  </label>
+                  <select
+                    id={fieldId("grading-direction")}
+                    className="form-select"
+                    {...register("gpa.direction", { setValueAs: optional })}
+                  >
+                    <option value="">Higher results are stronger (usual GPA)</option>
+                    <option value="higher">Higher results are stronger</option>
+                    <option value="lower">Lower results are stronger</option>
+                  </select>
                 </div>
                 <p className="text-xs leading-6 text-muted-foreground">
-                  Leave both result fields blank if unknown. We never invent GPA conversions.
+                  Leave both result fields blank if unknown. Enter the value and scale exactly as
+                  shown on your transcript.{" "}
+                  <a
+                    href="/academic-references"
+                    className="underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Official grading guidance ↗
+                  </a>
+                  . We never invent GPA conversions.
                 </p>
               </>
             )}
@@ -329,11 +488,11 @@ export function ProfileForm({
               <>
                 {text("birthDate", "Date of birth (optional)", "date")}
                 <div>
-                  <label className="field-label" htmlFor="experience">
+                  <label className="field-label" htmlFor={fieldId("experience")}>
                     Work experience (months)
                   </label>
                   <Input
-                    id="experience"
+                    id={fieldId("experience")}
                     type="number"
                     min="0"
                     {...register("experienceMonths", {
@@ -342,11 +501,11 @@ export function ProfileForm({
                   />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="experienceHours">
+                  <label className="field-label" htmlFor={fieldId("experienceHours")}>
                     Work experience (hours, if recorded)
                   </label>
                   <Input
-                    id="experienceHours"
+                    id={fieldId("experienceHours")}
                     type="number"
                     min="0"
                     {...register("experienceHours", {
@@ -368,11 +527,11 @@ export function ProfileForm({
                   name="englishMedium"
                   render={({ field }) => (
                     <div>
-                      <label className="field-label" htmlFor="medium">
+                      <label className="field-label" htmlFor={fieldId("medium")}>
                         Previous education in English
                       </label>
                       <select
-                        id="medium"
+                        id={fieldId("medium")}
                         className="form-select"
                         value={field.value === undefined ? "" : String(field.value)}
                         onChange={(e) =>
@@ -395,11 +554,11 @@ export function ProfileForm({
                   </p>
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="languageType">
+                  <label className="field-label" htmlFor={fieldId("languageType")}>
                     Language test
                   </label>
                   <select
-                    id="languageType"
+                    id={fieldId("languageType")}
                     className="form-select"
                     {...register("language.type", { setValueAs: optional })}
                   >
@@ -410,11 +569,11 @@ export function ProfileForm({
                   </select>
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="languageScore">
+                  <label className="field-label" htmlFor={fieldId("languageScore")}>
                     Language score
                   </label>
                   <Input
-                    id="languageScore"
+                    id={fieldId("languageScore")}
                     type="number"
                     min="0"
                     step="0.5"
@@ -424,11 +583,11 @@ export function ProfileForm({
                   />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="languageDate">
+                  <label className="field-label" htmlFor={fieldId("languageDate")}>
                     Test date
                   </label>
                   <Input
-                    id="languageDate"
+                    id={fieldId("languageDate")}
                     type="date"
                     {...register("language.takenAt", { setValueAs: optional })}
                   />
@@ -437,7 +596,10 @@ export function ProfileForm({
             )}
           </div>
           {Object.keys(errors).length > 0 && (
-            <div role="alert" className="mt-5 rounded-md bg-[#f9e8e3] p-4 text-xs text-red-900">
+            <div
+              role="alert"
+              className="mt-5 rounded-md bg-danger p-4 text-xs text-danger-foreground"
+            >
               {validationMessages(errors).map((error) => (
                 <p key={error.path}>
                   {error.path.replace(/([A-Z])/g, " $1").replaceAll(".", " ")}: {error.message}
@@ -455,29 +617,47 @@ export function ProfileForm({
               <Check size={14} />
               Profile version {version}
             </span>
-            <Button disabled={isSubmitting}>
-              {isSubmitting ? "Saving…" : stage === 3 ? "Save & see my matches" : "Save & continue"}
-              <ArrowRight size={15} />
-            </Button>
+            <div className="flex items-center gap-2">
+              {stage > 0 && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setStage(stage - 1)}
+                  disabled={isSubmitting}
+                >
+                  <ArrowLeft size={14} />
+                  Back
+                </Button>
+              )}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting
+                  ? "Saving…"
+                  : stage === 3
+                    ? "Save & see my matches"
+                    : "Save & continue"}
+                <ArrowRight size={15} />
+              </Button>
+            </div>
           </div>
         </form>
       </div>
-      <aside>
-        <div className="border-t-2 border-primary pt-5">
-          <ShieldCheck size={23} strokeWidth={1.3} />
-          <h3 className="mt-4 font-serif text-2xl">A profile with purpose.</h3>
-          <p className="mt-3 text-xs leading-6 text-muted-foreground">
-            Your answers help us explain which requirements you meet, which you don’t, and what
-            still needs checking.
+      {variant === "page" && (
+        <aside>
+          <div className="rounded-xl border border-border bg-secondary/45 p-6">
+            <GuideIcon size={25} strokeWidth={1.2} className="text-leaf" aria-hidden="true" />
+            <p className="eyebrow mt-6 text-[9px] text-muted-foreground">A LITTLE CONTEXT</p>
+            <h3 className="editorial mt-3 text-[28px] leading-tight">{guideTitle}</h3>
+            <p className="mt-3 text-xs leading-6 text-muted-foreground">{guideText}</p>
+            <p className="mt-6 flex items-center gap-2 border-t border-primary/15 pt-4 text-[11px] text-muted-foreground">
+              <ShieldCheck size={13} aria-hidden="true" />
+              Your profile stays private.
+            </p>
+          </div>
+          <p className="mt-6 px-1 text-[11px] leading-6 text-muted-foreground">
+            Every step saves your progress. Return whenever you’re ready.
           </p>
-          <p className="mt-4 text-xs leading-6 text-muted-foreground">
-            Your profile is private. Your current education stays separate from your future plans.
-          </p>
-        </div>
-        <p className="mt-8 text-[11px] leading-6 text-muted-foreground">
-          Every step saves your progress. Return whenever you’re ready.
-        </p>
-      </aside>
+        </aside>
+      )}
     </div>
   );
 }

@@ -1,0 +1,52 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "preparedAt": "2026-10-25T07:50:13.600Z",
+  "creditedExecution": false,
+  "cases": [
+    {
+      "file": "discovery_evidence",
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "codeVersion": "v-522503c24345",
+      "planSteps": 6
+    },
+    {
+      "file": "profile_application",
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "codeVersion": "v-6ebae73763fd",
+      "planSteps": 16
+    },
+    {
+      "file": "multi_destination",
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "codeVersion": "v-ba7daaecadb5",
+      "planSteps": 4
+    },
+    {
+      "file": "automatic_publication",
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "codeVersion": "v-dabe6cdebe80",
+      "planSteps": 4
+    },
+    {
+      "file": "publication_exception",
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "codeVersion": "v-3b3f1d7077ba",
+      "planSteps": 4
+    },
+    {
+      "file": "eligibility_notification",
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "codeVersion": "v-b5d24f23e45d",
+      "planSteps": 8
+    },
+    {
+      "file": "account_privacy",
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "codeVersion": "v-cd62d2bcd84b",
+      "planSteps": 4
+    }
+  ],
+  "refreshedAt": "2026-10-26T20:01:50.567Z",
+  "reason": "Same exact reusable sources; notification plan now requires persisted zero-pending queue counts after bounded drain. No weakened eligibility, deduplication or suppression assertions.",
+  "planRefreshedAt": "2026-10-26T20:37:39.642Z"
+}

@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-26T20:54:52.069Z",
+  "head": "a20139111e9e69243223525558c3b95c0152f924",
+  "scope": "Read-only actual DOM href and API identity; not TestSprite",
+  "sameHref": true,
+  "sameId": true,
+  "officialHrefs": [
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+    "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/"
+  ],
+  "officialMetadata": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+  "rows": [
+    {
+      "code": "GB",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "DE",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "ES",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "SE",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "CO",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "JP",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    },
+    {
+      "code": "NL",
+      "href": "/scholarships/erasmus-glocal-8adbfb712d",
+      "officialUrl": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "cardOfficial": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "total": 1,
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d"
+    }
+  ],
+  "publicProgressStateVerified": true,
+  "exactRevisionVerified": true
+}

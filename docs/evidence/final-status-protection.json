@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-26T21:09:59.668422+00:00",
+  "target": "main",
+  "strict": true,
+  "enforceAdmins": true,
+  "required": [
+    {
+      "context": "Typecheck, lint, domain and PostgreSQL checks",
+      "app_id": 15368
+    },
+    {
+      "context": "TestSprite V3",
+      "app_id": 2756476
+    },
+    {
+      "context": "TestSprite API ownership",
+      "app_id": 15368
+    }
+  ],
+  "scope": "Authenticated read-only GitHub branch-protection response; no mutation"
+}

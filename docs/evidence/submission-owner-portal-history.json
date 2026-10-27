@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-27",
+  "ownerStatement": "manual creation in the portal",
+  "activityLogUrl": "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/activity",
+  "ownerSuppliedExecutionUrls": [
+    "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/49fd8e7f-a30a-43aa-bcb5-c1a5b1ef82d2",
+    "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/a9f7f347-3c02-4c6a-bc45-9b5ca1027d70",
+    "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/8cfa35e5-88b0-487a-bc64-14aa6d32ad64"
+  ],
+  "caseOrigins": "Three additional cases marked createdFrom: portal; original seven remain createdFrom: cli.",
+  "generationCompliance": "Not established. Manual portal creation and execution are not AI exploration/generation.",
+  "creditObservations": {
+    "beforeRelease": 97.2,
+    "afterAutomaticCycle": 93.5,
+    "final": 92,
+    "automaticApp": 3.5,
+    "nativeAPI": 0.2,
+    "additionalManualExecutionsAggregate": 1.5,
+    "totalAccountReduction": 5.2,
+    "reserve": 50
+  },
+  "perManualRunCosts": "The 1.5 aggregate reduction is consistent with three frontend executions at the account-reported 0.5 rate; no per-run invoice or generation quote is exposed.",
+  "agentGenerationStarted": false
+}

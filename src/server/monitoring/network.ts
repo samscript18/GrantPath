@@ -64,6 +64,10 @@ export function isPublicAddress(address: string) {
 }
 export async function boundedFetch(raw: string, adapter: string, robots = false) {
   const url = validateSourceUrl(raw, adapter, robots);
+  return boundedFetchUrl(url, robots);
+}
+// Call only after an explicit source/directory URL policy has validated this URL.
+export async function boundedFetchUrl(url: URL, robots = false) {
   const addresses = await lookup(url.hostname, { all: true });
   if (!addresses.length || addresses.some((a) => !isPublicAddress(a.address)))
     throw new Error("Source DNS did not resolve exclusively to public addresses.");

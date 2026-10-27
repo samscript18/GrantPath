@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-10-26T23:22:13.258Z",
+  "workflowsStatus": 200,
+  "workflows": [
+    {
+      "id": 395123908,
+      "name": "Durable matching and notifications",
+      "path": ".github/workflows/application-jobs.yml",
+      "state": "disabled_manually"
+    },
+    {
+      "id": 395123911,
+      "name": "Local release checks",
+      "path": ".github/workflows/ci.yml",
+      "state": "active"
+    },
+    {
+      "id": 395123912,
+      "name": "Bounded official-source ingestion",
+      "path": ".github/workflows/ingestion.yml",
+      "state": "disabled_manually"
+    }
+  ],
+  "applicationRuns": [
+    {
+      "id": 40180139452,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "result": "success",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40180139452"
+    },
+    {
+      "id": 40177015523,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "queued",
+      "result": null,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177015523"
+    }
+  ],
+  "sourceRuns": [
+    {
+      "id": 40180145842,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "result": "success",
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40180145842"
+    },
+    {
+      "id": 40177024494,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "queued",
+      "result": null,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177024494"
+    }
+  ],
+  "deployment": {
+    "httpStatus": 200,
+    "id": "dpl_CuhnKfKwEMyZYP6YhxgfDMe5nW9Y",
+    "state": "READY",
+    "url": "grantpath-mdgg56q1p-lammysam8-7688.vercel.app",
+    "source": {
+      "ref": "release/hosted-verification",
+      "repoId": 1432130901,
+      "sha": "448831d7edc080b34599c291de19d6f52540fb76",
+      "type": "github",
+      "prId": null
+    },
+    "aliases": [
+      "grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app"
+    ]
+  },
+  "intendedSource": "448831d7edc080b34599c291de19d6f52540fb76"
+}

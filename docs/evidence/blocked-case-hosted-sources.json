@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-26T18:50:52.907Z",
+  "head": "3591af74281e3e0e5467ce954331c7106d61cf1e",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "scope": "Locally controlled Playwright against actual deployed app/isolated Neon; NOT TestSprite",
+  "results": [
+    {
+      "name": "discovery_evidence",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 24591,
+      "diagnostic": ""
+    },
+    {
+      "name": "profile_application",
+      "passed": false,
+      "exitCode": 1,
+      "durationMs": 30246,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/Users/mac/Desktop/projects/GrantPath/docs/testsprite/code/profile_application.py\", line 113, in <module>\n    asyncio.run(run_test())\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/runners.py\", line 44, in run\n    return loop.run_until_complete(main)\n  File \"/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py\", line 642, in run_until_complete\n    return future.result()\n  File \"/Users/mac/Desktop/projects/GrantPath/docs/testsprite/code/profile_application.py\", line 34, in run_test\n    await sign_in()\n  File \"/Users/mac/Desktop/projects/GrantPath/docs/testsprite/code/profile_application.py\", line 25, in sign_in\n    await expect(page).to_have_url(re.compile(r\"/dashboard$\"))\n  File \"/Users/mac/Desktop/projects/GrantPath/.local/playwright-python/lib/python3.9/site-packages/playwright/async_api/_generated.py\", line 21180, in to_have_url\n    await self._impl_obj.to_have_url(\n  File \"/Users/mac/Desktop/projects/GrantPath/.local/playwright-python/lib/python3.9/site-packages/playwright/_impl/_assertions.py\", line 193, in to_have_url\n    await self._expect_impl(\n  File \"/Users/mac/Desktop/projects/GrantPath/.local/playwright-python/lib/python3.9/site-packages/playwright/_impl/_assertions.py\", line 123, in _expect_impl\n    _record_soft_or_raise(\n  File \"/Users/mac/Desktop/projects/GrantPath/.local/playwright-python/lib/python3.9/site-packages/playwright/_impl/_assertions.py\", line 60, in _record_soft_or_raise\n    raise error\nAssertionError: Page URL expected to be 're.compile('/dashboard$')'\nActual value: https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app/login \nCall log:\n  - Expect \"to_have_url\" with timeout 5000ms\n    14 × unexpected value \"https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app/login\"\n\n"
+    }
+  ]
+}

@@ -1,38 +1,45 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-export function RecoveryForm({
-  reset = false,
-  verify = false,
-}: {
-  reset?: boolean;
-  verify?: boolean;
-}) {
+import { PasswordInput } from "./password-input";
+import { PasswordRequirements } from "./password-requirements";
+import { passwordConfirmationSchema } from "@/lib/password";
+export function RecoveryForm({ reset = false }: { reset?: boolean }) {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmation, setConfirmation] = useState("");
+  const [validation, setValidation] = useState("");
   return (
     <form
       className="space-y-5"
       onSubmit={async (e) => {
         e.preventDefault();
+        setValidation("");
+        if (reset) {
+          const checked = passwordConfirmationSchema.safeParse({
+            password,
+            confirmPassword: confirmation,
+          });
+          if (!checked.success) {
+            setValidation(checked.error.issues[0].message);
+            return;
+          }
+        }
         setBusy(true);
         setMessage("");
         const form = new FormData(e.currentTarget);
         try {
           const token = new URLSearchParams(window.location.search).get("token") || "";
           const result = reset
-            ? await authClient.resetPassword({ newPassword: String(form.get("password")), token })
-            : verify
-              ? await authClient.sendVerificationEmail({
-                  email: String(form.get("email")),
-                  callbackURL: "/profile",
-                })
-              : await authClient.requestPasswordReset({
-                  email: String(form.get("email")),
-                  redirectTo: "/reset-password",
-                });
+            ? await authClient.resetPassword({ newPassword: password, token })
+            : await authClient.requestPasswordReset({
+                email: String(form.get("email")),
+                redirectTo: "/reset-password",
+              });
           setMessage(
             result.error
               ? result.error.message || "Please try again."
@@ -47,34 +54,70 @@ export function RecoveryForm({
         }
       }}
     >
-      <label className="field-label" htmlFor={reset ? "password" : "email"}>
-        {reset ? "New password" : "Email address"}
-      </label>
-      <Input
-        id={reset ? "password" : "email"}
-        name={reset ? "password" : "email"}
-        type={reset ? "password" : "email"}
-        required
-        minLength={reset ? 10 : undefined}
-        autoComplete={reset ? "new-password" : "email"}
-      />
+      {reset ? (
+        <>
+          <div>
+            <label className="field-label" htmlFor="password">
+              New password
+            </label>
+            <PasswordInput
+              id="password"
+              name="password"
+              label="New password"
+              autoComplete="new-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              aria-describedby="reset-password-checklist reset-validation"
+              aria-invalid={!!validation}
+            />
+          </div>
+          <div>
+            <label className="field-label" htmlFor="confirm-password">
+              Confirm password
+            </label>
+            <PasswordInput
+              id="confirm-password"
+              name="confirmPassword"
+              label="Confirm password"
+              autoComplete="new-password"
+              required
+              value={confirmation}
+              onChange={(e) => setConfirmation(e.target.value)}
+              aria-describedby="reset-validation"
+              aria-invalid={!!validation}
+            />
+          </div>
+          <PasswordRequirements
+            id="reset-password-checklist"
+            password={password}
+            confirmation={confirmation}
+          />
+          {validation && (
+            <p id="reset-validation" role="alert" className="text-sm text-danger-foreground">
+              {validation}
+            </p>
+          )}
+        </>
+      ) : (
+        <div>
+          <label className="field-label" htmlFor="email">
+            Email address
+          </label>
+          <Input id="email" name="email" type="email" required autoComplete="email" />
+        </div>
+      )}
       <Button className="w-full" disabled={busy}>
-        {busy
-          ? "One moment…"
-          : reset
-            ? "Update password"
-            : verify
-              ? "Resend verification link"
-              : "Request recovery link"}
+        {busy ? "One moment…" : reset ? "Update password" : "Request recovery link"}
       </Button>
       {message && (
         <p role="status" className="text-sm leading-6">
           {message}
         </p>
       )}
-      <a className="block text-center text-sm underline" href="/login">
+      <Link className="block text-center text-sm underline underline-offset-4" href="/login">
         Back to sign in
-      </a>
+      </Link>
     </form>
   );
 }

@@ -1,12 +1,15 @@
 import "dotenv/config";
+import { execFileSync } from "node:child_process";
 import { defineConfig, devices } from "@playwright/test";
 const database = process.env.E2E_DATABASE_URL || process.env.TEST_DATABASE_URL;
 if (!database || !new URL(database).pathname.includes("test"))
   throw new Error(
     "Browser tests need an isolated E2E_DATABASE_URL or TEST_DATABASE_URL containing test.",
   );
+process.env.APP_REVISION = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 const baseURL = "http://127.0.0.1:3100";
 process.env.DATABASE_URL = database;
+process.env.DATABASE_TRANSPORT = "tcp";
 process.env.DIRECT_URL = database;
 process.env.BETTER_AUTH_URL = baseURL;
 process.env.APP_ENV = "test";
@@ -36,13 +39,22 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI && process.env.PLAYWRIGHT_PRODUCTION !== "1",
     timeout: 120000,
     env: {
+      APP_REVISION: process.env.APP_REVISION,
       DATABASE_URL: database,
+      DATABASE_TRANSPORT: "tcp",
       DIRECT_URL: database,
       APP_ENV: "development",
       EMAIL_MODE: "sink",
+      ENABLE_CONTROLLED_FIXTURES: "1",
       BETTER_AUTH_URL: baseURL,
       NEXT_PUBLIC_APP_URL: baseURL,
       TRUSTED_ORIGINS: baseURL,
+      // Labelled OAuth fixtures. Browser tests intercept Google navigation; no external login.
+      GOOGLE_CLIENT_ID: "isolated.browser.apps.googleusercontent.com",
+      GOOGLE_CLIENT_SECRET: "isolated-browser-client-secret",
+      // Browser journeys exercise the explicit text fallback without paid inference.
+      // Semantic provider decisions are isolated in unit/PostgreSQL tests.
+      VERTEX_PROJECT_ID: "",
     },
   },
 });

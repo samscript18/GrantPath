@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-27",
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "portalAction": "Add Tests with AI",
+  "performedBy": "Owner-provided confirmation; not agent browser interaction",
+  "ownerStatement": "I have resolved the missing portal AI-generation step. The live app was explored, Add Tests with AI was used, and the resulting ten-test run passed 10/10.",
+  "target": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "caseCreationTimestampUTC": "2026-10-27T00:46:33.812Z",
+  "runUrl": "https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3a17a157-b012-43db-bf5a-0bbe70028cad",
+  "runId": "3a17a157-b012-43db-bf5a-0bbe70028cad",
+  "screenshot": "portal-ai-generation-10-pass.png",
+  "screenshotSha256": "141ddb0307b060675820fd6139967c1db6c16b9ac469ab97b0fa317209b8724b",
+  "screenshotObservation": {
+    "passed": 10,
+    "failed": 0,
+    "blocked": 0,
+    "total": 10,
+    "projectCaseCount": 20,
+    "explorationMapRoutes": [
+      "/login",
+      "/dashboard",
+      "/scholarships",
+      "/saved",
+      "/applications",
+      "/profile",
+      "/notifications",
+      "/academic-references"
+    ]
+  },
+  "generatedCases": [
+    {
+      "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+      "name": "Search and filter scholarships",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+      "name": "View scholarship details from the shortlist",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+      "name": "Open the saved opportunities shortlist",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+      "name": "Review academic references guidance",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "name": "Review notifications and mark them read",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+      "name": "Switch applications to list view",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+      "name": "Review applications board stages",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+      "name": "Open the study profile editor",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+      "name": "Open profile and access account settings",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    },
+    {
+      "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+      "name": "Browse scholarships from the overview",
+      "createdFrom": "portal",
+      "createdAt": "2026-10-27T00:46:33.812Z"
+    }
+  ],
+  "independentReadback": "All ten portal-origin metadata entries share the timestamp above; all ten latest case results passed against the live alias. Full sanitized plans/exports/results are in portal-generated-case-review.json. The parent execution UI result and exploration map are owner-supplied screenshot evidence.",
+  "generationEventId": null,
+  "costs": {
+    "priorObservedBalance": 92,
+    "currentObservedBalance": 81.5,
+    "accountReduction": 10.5,
+    "tenCaseExecutionEstimateAtDisplayedRate": 5,
+    "separateGenerationDebit": "Not exposed; do not infer it from the aggregate reduction."
+  },
+  "reserve": 50,
+  "nextAutomaticTwentyCasePlusApiEstimate": 10.2,
+  "nextProjectedBalance": 71.3
+}

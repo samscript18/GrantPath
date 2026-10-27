@@ -12,3 +12,15 @@ export const test = base.extend<{ isolatedClient: void }>({
     { auto: true },
   ],
 });
+
+export async function dismissStudyPrompt(page: import("@playwright/test").Page) {
+  const later = page.getByRole("button", { name: "Continue study profile later", exact: true });
+  try {
+    await later.waitFor({ state: "visible", timeout: 1500 });
+    await later.click();
+  } catch {
+    // Completed profiles have no prompt. Do not suppress errors from a visible dialog.
+    if (await page.locator("dialog[open]").count())
+      throw new Error("Study profile prompt could not be dismissed.");
+  }
+}

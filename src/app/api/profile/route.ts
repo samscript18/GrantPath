@@ -16,10 +16,13 @@ export async function PUT(request: Request) {
         data: z.unknown(),
         version: z.number().int().nonnegative(),
         stage: z.number().int().min(0).max(3),
+        complete: z.boolean().default(false),
       })
       .strict()
       .parse(await readBody(request));
-    return Response.json(await saveProfile(actor, input.data, input.version, input.stage));
+    return Response.json(
+      await saveProfile(actor, input.data, input.version, input.stage, input.complete),
+    );
   } catch (e) {
     return apiError(e);
   }

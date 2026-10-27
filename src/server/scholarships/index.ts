@@ -1,13 +1,16 @@
+import { countryCode, countryName } from "@/lib/countries";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import type { Prisma } from "@/generated/prisma/client";
 import { scholarshipDataSchema, availabilityOf } from "./schema";
+import { normaliseScholarshipLinks } from "./links";
+import { matchStudyField, type FieldMatching } from "./field-matching";
 export const filtersSchema = z.object({
   q: z.string().trim().max(120).default(""),
   destination: z.string().max(100).default(""),
   provider: z.string().max(100).default(""),
   level: z.enum(["", "bachelor", "master", "doctorate"]).default(""),
-  field: z.string().max(100).default(""),
+  field: z.string().trim().max(100).default(""),
   funding: z.enum(["", "comprehensive", "tuition", "partial", "unknown"]).default(""),
   availability: z
     .enum(["active", "all", "open", "upcoming", "unknown", "closed"])
@@ -25,9 +28,11 @@ export async function catalogue(input: unknown) {
       { programme: { provider: { name: { contains: filters.q, mode: "insensitive" } } } },
       { field: { contains: filters.q, mode: "insensitive" } },
     ];
-  if (filters.destination) where.destination = { equals: filters.destination, mode: "insensitive" };
+  if (filters.destination) {
+    const code = countryCode(filters.destination);
+    where.destinationCodes = { has: code ?? "INVALID" };
+  }
   if (filters.level) where.level = { contains: filters.level };
-  if (filters.field) where.field = { contains: filters.field, mode: "insensitive" };
   if (filters.provider) where.programme = { provider: { slug: filters.provider } };
   if (filters.funding) where.fundingType = filters.funding;
   const now = new Date();
@@ -47,6 +52,40 @@ export async function catalogue(input: unknown) {
       ...(typeof where.deadline === "object" ? where.deadline : {}),
       lt: new Date(`${filters.deadlineBefore}T00:00:00Z`),
     };
+  let fieldMatching: FieldMatching | null = null;
+  if (filters.field) {
+    const candidates = await db().scholarship.findMany({
+      where,
+      orderBy: { id: "asc" },
+      take: 161,
+      select: {
+        id: true,
+        title: true,
+        field: true,
+        versions: { orderBy: { number: "desc" }, take: 1, select: { data: true } },
+      },
+    });
+    const result =
+      candidates.length > 160
+        ? null
+        : await matchStudyField(
+            filters.field,
+            candidates.map((candidate) => {
+              const data = candidate.versions[0]?.data;
+              const summary =
+                data &&
+                typeof data === "object" &&
+                !Array.isArray(data) &&
+                typeof data.summary === "string"
+                  ? data.summary
+                  : "";
+              return { id: candidate.id, title: candidate.title, fields: candidate.field, summary };
+            }),
+          );
+    if (result) where.id = { in: result.ids };
+    else where.field = { contains: filters.field, mode: "insensitive" };
+    fieldMatching = result?.mode ?? "text_only";
+  }
   const [rows, total, destinations, providers] = await Promise.all([
     db().scholarship.findMany({
       where,
@@ -62,21 +101,26 @@ export async function catalogue(input: unknown) {
     db().scholarship.count({ where }),
     db().scholarship.findMany({
       where: { published: true },
-      select: { destination: true },
-      distinct: ["destination"],
-      orderBy: { destination: "asc" },
+      select: { destinationCodes: true },
     }),
     db().provider.findMany({ orderBy: { name: "asc" } }),
   ]);
   return {
     rows: rows.map((s) => ({
       ...s,
-      data: scholarshipDataSchema.parse(s.versions[0].data),
+      data: normaliseScholarshipLinks(
+        s.programme.slug,
+        scholarshipDataSchema.parse(s.versions[0].data),
+      ),
       currentAvailability: availabilityOf(s),
     })),
     total,
     filters,
-    destinations,
+    fieldMatching,
+    destinations: [...new Set(destinations.flatMap((row) => row.destinationCodes))]
+      .map((code) => ({ code, destination: countryName(code)! }))
+      .filter((item) => item.destination)
+      .sort((a, b) => a.destination.localeCompare(b.destination)),
     providers,
   };
 }
@@ -90,9 +134,33 @@ export async function scholarshipBySlug(slug: string) {
     },
   });
   if (!s) return null;
+  const monitored = await db().discoveredCandidate.findMany({
+    where: { scholarshipId: s.id },
+    select: {
+      id: true,
+      state: true,
+      directory: {
+        select: { enabled: true, cadenceHours: true, lastAttemptAt: true, lastSuccessAt: true },
+      },
+      observations: {
+        where: {
+          decisions: {
+            some: { decision: { in: ["auto_publish", "unchanged", "manual_publish"] } },
+          },
+        },
+        orderBy: { retrievedAt: "desc" },
+        take: 1,
+        select: { retrievedAt: true },
+      },
+    },
+  });
   return {
     ...s,
-    data: scholarshipDataSchema.parse(s.versions[0].data),
+    monitored,
+    data: normaliseScholarshipLinks(
+      s.programme.slug,
+      scholarshipDataSchema.parse(s.versions[0].data),
+    ),
     currentAvailability: availabilityOf(s),
   };
 }
@@ -122,7 +190,10 @@ export async function featuredScholarships() {
     .slice(0, 3)
     .map((row) => ({
       ...row,
-      data: scholarshipDataSchema.parse(row.versions[0].data),
+      data: normaliseScholarshipLinks(
+        row.programme.slug,
+        scholarshipDataSchema.parse(row.versions[0].data),
+      ),
       currentAvailability: availabilityOf(row),
     }));
 }

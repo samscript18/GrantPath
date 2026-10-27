@@ -1,0 +1,112 @@
+{
+  "head": "6b6399f9215f8195db0d43f108509147fea4961b",
+  "executionId": "daa54b31-5049-41d8-b1c5-e50d30b00675",
+  "source": "Automatic authentic GitHub App",
+  "reported": {
+    "passed": 2,
+    "failed": 0
+  },
+  "observedDebit": 1,
+  "observedBalance": 147,
+  "tests": [
+    {
+      "testId": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "runId": "38d97955-8ed0-47d5-8f4d-3913520cda14",
+      "status": "passed",
+      "startedAt": "2026-10-24T14:42:50.741Z",
+      "finishedAt": "2026-10-24T14:44:09.396Z"
+    },
+    {
+      "testId": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "runId": "3447391d-8164-4b51-9a69-3a671105de42",
+      "status": "passed",
+      "startedAt": "2026-10-24T14:42:50.741Z",
+      "finishedAt": "2026-10-24T14:46:36.239Z"
+    }
+  ],
+  "savedSources": [
+    {
+      "file": "discovery_evidence.py",
+      "sha256": "be32b6e14fa204342b0e4049ad3eb275e58567949643e15bf7c40f03606ba32d",
+      "savedCodeIdentical": true
+    },
+    {
+      "file": "profile_application.py",
+      "sha256": "32bdbfacd6a95eed2d315484b6990e54d0b0fd3f2d5c8aebf1b7eb1cdb08b865",
+      "savedCodeIdentical": true
+    }
+  ],
+  "actualDiscoverySteps": [
+    {
+      "index": 1,
+      "type": "action",
+      "action": "navigate",
+      "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 2,
+      "type": "action",
+      "action": "click",
+      "description": "Click 'Find a scholarship link'",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 3,
+      "type": "action",
+      "action": "fill",
+      "description": "Fill 'Twente' into Search scholarships text field",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 4,
+      "type": "action",
+      "action": "select",
+      "description": "Select option in 'All destinations Australia Netherlands... dropdown'",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 5,
+      "type": "action",
+      "action": "click",
+      "description": "Click 'Search button'",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 6,
+      "type": "action",
+      "action": "click",
+      "description": "Click 'University of Twente Scholarship link'",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 7,
+      "type": "assertion",
+      "action": "visible",
+      "description": "The funding evidence links to the official University of Twente source.",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    },
+    {
+      "index": 8,
+      "type": "assertion",
+      "action": "visible",
+      "description": "Provider application timing is shown separately from personal application tracking.",
+      "status": "passed",
+      "outcomeContributesToFailure": null
+    }
+  ],
+  "limitation": "App replayed older recorded steps. Byte-identical saved source does not establish that every explicit assertion executed remotely. Exact Python scripts passed locally.",
+  "supplementalStrictReplay": {
+    "status": "not executed",
+    "initialAttempt": "Local CLI validation rejected multi-ID remote syntax before dispatch",
+    "correctedAttempt": "Execution permission declined before process start",
+    "additionalDebit": 0
+  }
+}

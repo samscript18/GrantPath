@@ -1,0 +1,267 @@
+{
+  "checkedAt": "2026-10-26T20:02:19.632Z",
+  "head": "b5bbce70bb2df46b07353b3fc27edd587c231917",
+  "run": "https://github.com/samscript18/GrantPath/actions/runs/40389328255",
+  "jobs": [
+    {
+      "id": 121805878389,
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "status": "completed",
+      "result": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-26T19:43:53Z",
+          "completed_at": "2026-10-26T19:43:55Z"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-26T19:43:55Z",
+          "completed_at": "2026-10-26T19:44:10Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-26T19:44:10Z",
+          "completed_at": "2026-10-26T19:44:11Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-26T19:44:11Z",
+          "completed_at": "2026-10-26T19:44:12Z"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-26T19:44:12Z",
+          "completed_at": "2026-10-26T19:44:30Z"
+        },
+        {
+          "name": "Run npm run db:generate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-26T19:44:30Z",
+          "completed_at": "2026-10-26T19:44:31Z"
+        },
+        {
+          "name": "Run npm run db:test-migrate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-26T19:44:31Z",
+          "completed_at": "2026-10-26T19:44:32Z"
+        },
+        {
+          "name": "Run npm run check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-26T19:44:32Z",
+          "completed_at": "2026-10-26T19:44:48Z"
+        },
+        {
+          "name": "Run npm run test:integration",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-26T19:44:48Z",
+          "completed_at": "2026-10-26T19:45:01Z"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-26T19:45:01Z",
+          "completed_at": "2026-10-26T19:45:21Z"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-26T19:45:21Z",
+          "completed_at": "2026-10-26T19:54:56Z"
+        },
+        {
+          "name": "Run psql -h localhost -U grantpath -d grantpath_test -c 'CREATE DATABASE grantpath_e2e_test'",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-26T19:54:56Z",
+          "completed_at": "2026-10-26T19:54:56Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-26T19:54:56Z",
+          "completed_at": "2026-10-26T19:54:57Z"
+        },
+        {
+          "name": "Install Python Playwright for exact reusable TestSprite source checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-26T19:54:57Z",
+          "completed_at": "2026-10-26T19:54:59Z"
+        },
+        {
+          "name": "Run npm run test:e2e",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 15,
+          "started_at": "2026-10-26T19:54:59Z",
+          "completed_at": "2026-10-26T19:57:19Z"
+        },
+        {
+          "name": "Require every native TestSprite case to pass (read-only; no execution)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 16,
+          "started_at": "2026-10-26T19:57:19Z",
+          "completed_at": "2026-10-26T19:57:19Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-26T19:57:19Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 31,
+          "started_at": "2026-10-26T19:57:22Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 32,
+          "started_at": "2026-10-26T19:57:22Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33,
+          "started_at": "2026-10-26T19:57:22Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34,
+          "started_at": "2026-10-26T19:57:22Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 35,
+          "started_at": "2026-10-26T19:57:22Z",
+          "completed_at": "2026-10-26T19:57:22Z"
+        }
+      ]
+    },
+    {
+      "id": 121805878985,
+      "name": "TestSprite API ownership",
+      "status": "completed",
+      "result": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-26T19:43:53Z",
+          "completed_at": "2026-10-26T19:43:54Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-26T19:43:54Z",
+          "completed_at": "2026-10-26T19:43:55Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-26T19:43:55Z",
+          "completed_at": "2026-10-26T19:43:55Z"
+        },
+        {
+          "name": "Verify exact deployed commit and native protected API assertions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 4,
+          "started_at": "2026-10-26T19:43:55Z",
+          "completed_at": "2026-10-26T19:45:17Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-26T19:45:17Z",
+          "completed_at": "2026-10-26T19:45:17Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9,
+          "started_at": "2026-10-26T19:45:17Z",
+          "completed_at": "2026-10-26T19:45:17Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-26T19:45:17Z",
+          "completed_at": "2026-10-26T19:45:17Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-26T19:45:17Z",
+          "completed_at": "2026-10-26T19:45:17Z"
+        }
+      ]
+    }
+  ],
+  "diagnoses": [
+    "Browser account_privacy inspected Save button count before streamed controls rendered; explicit Save-or-Unsave readiness now precedes conditional save.",
+    "Native API source comparison rejected provider-added public-auth export prelude; no credited API run occurred."
+  ]
+}

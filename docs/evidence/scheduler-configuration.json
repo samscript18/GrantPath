@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-25T06:37:34.088Z",
+  "applicationScheduler": "GitHub application-jobs only; Inngest absent",
+  "environments": [
+    {
+      "environment": "application-jobs",
+      "scope": "existing isolated PR1 preview database; not production student data",
+      "secrets": [
+        {
+          "name": "BETTER_AUTH_SECRET",
+          "updatedAt": "2026-10-25T06:37:28Z"
+        },
+        {
+          "name": "BREVO_API_KEY",
+          "updatedAt": "2026-10-25T06:37:28Z"
+        },
+        {
+          "name": "CLOUDINARY_API_KEY",
+          "updatedAt": "2026-10-25T06:37:29Z"
+        },
+        {
+          "name": "CLOUDINARY_API_SECRET",
+          "updatedAt": "2026-10-25T06:37:29Z"
+        },
+        {
+          "name": "CLOUDINARY_CLOUD_NAME",
+          "updatedAt": "2026-10-25T06:37:29Z"
+        },
+        {
+          "name": "DATABASE_URL",
+          "updatedAt": "2026-10-25T06:37:27Z"
+        }
+      ],
+      "allowedBranches": ["release/hosted-verification", "main"]
+    },
+    {
+      "environment": "ingestion",
+      "scope": "existing isolated PR1 preview database; not production student data",
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "updatedAt": "2026-10-25T06:37:34Z"
+        }
+      ],
+      "allowedBranches": ["release/hosted-verification", "main"]
+    }
+  ],
+  "runs": "Pending authorised manual dispatch after release push; default-branch schedules require merge separately."
+}

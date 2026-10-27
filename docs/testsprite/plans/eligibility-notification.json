@@ -1,0 +1,45 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in isolated operator VAR_{operator_email} with VAR_{password}; click the Eligibility and notifications button (assert it is pressed) in Isolated source verification, publish valid snapshot to establish target-level master."
+    },
+    {
+      "type": "action",
+      "description": "Click Sign out, open /login, enter VAR_{other_email} and VAR_{password}, and click Welcome back. Use one browser session sequentially; switching tabs does not switch authentication cookies. Dismiss an unfinished-profile prompt if needed; open /settings/profile. Save Nigeria citizenship, Ghana residence, bachelor current qualification and completed status. In Your plans set the exact Intended future qualification field to master, not bachelor; set Computer Science. Save & continue, then Save & see my matches. Save [TEST ONLY] Controlled change scholarship. Enable in-app change notifications and disable email."
+    },
+    {
+      "type": "assertion",
+      "description": "Mandatory setup checkpoint: reload /settings/profile, open Your plans, and verify Intended future qualification is still master. Fail setup if it is bachelor or was not saved. Return to matches and update until complete. Do not diagnose the evaluator using a profile that differs from this master requirement."
+    },
+    {
+      "type": "assertion",
+      "description": "Baseline checkpoint BEFORE publishing any changed requirement: as the configured other student, verify [TEST ONLY] Controlled change scholarship is eligible for the persisted master profile and the current master requirement. Record the baseline accepted version. Do not evaluate this baseline checkpoint after changing the requirement."
+    },
+    {
+      "type": "action",
+      "description": "Explicitly click Sign out from the student workspace. Open /login, fill Email address with VAR_{operator_email} and Password with VAR_{password}, click Welcome back, then navigate fresh to /operator and verify Operator studio is accessible. Never reuse an old operator tab after student login because its session cookie is now a student. Reopen Isolated source verification, explicitly click the Eligibility and notifications button (assert it is pressed) again, and publish the changed requirement (bachelor). Record the NEW accepted version C displayed in the result."
+    },
+    {
+      "type": "action",
+      "description": "Required worker action while authenticated as the operator: find and CLICK the visible Process queued jobs button in Operator studio. Do not merely wait or inspect pending counters: schedules are deliberately disabled. Wait for that request to finish. If Batch limit reached reports runnable work, click Process queued jobs again, up to ten bounded invocations. Record the displayed processing result. Do not call a worker/reset endpoint directly or pretend a wait processes jobs; fail if the button is missing, fails, or cannot finish. Remain signed in as operator until the following drain assertion passes."
+    },
+    {
+      "type": "assertion",
+      "description": "While still authenticated as the operator, click Process queued jobs (not the single 10-job batch button). Wait until the Queue status shows Pending events 0 and Pending deliveries 0, with Queue drained confirmation. Each click is bounded to 10 batches; if Batch limit reached appears and Runnable jobs remain, repeat Process queued jobs until those pending counts are zero. A completed single batch does NOT mean its downstream change alert has been delivered. Do not leave the operator account until this queue-drain checkpoint passes. Then click Sign out, open /login, fill VAR_{other_email} and VAR_{password}, and click Welcome back. As this student with target master, verify the current version C is now not_eligible with VALUE_NOT_ACCEPTED. This rejection is the EXPECTED post-change result. Verify exactly one change alert for version C, using its accepted-version/event context. Older alerts for other accepted versions must remain in history and do not count as duplicates. Total unread count or repeated scholarship titles cannot establish duplicate delivery."
+    },
+    {
+      "type": "assertion",
+      "description": "Sign out of the student account. Log in through /login as VAR_{operator_email} with VAR_{password}, navigate fresh to /operator, choose Eligibility and notifications, and replay Publish changed requirement; assert unchanged version C. Click Process queued jobs as operator; repeat if its bounded limit is reached, and verify Pending events 0 and Pending deliveries 0 before switching accounts. Sign out, log in as VAR_{other_email} with VAR_{password}, and assert exactly one same event alert remains."
+    },
+    {
+      "type": "assertion",
+      "description": "Sign out and log in as VAR_{operator_email} with VAR_{password}. Open /operator fresh, choose Eligibility and notifications and publish valid reverse change, recording reverse version R. Do not process jobs yet. Sign out and log in as VAR_{other_email} with VAR_{password}; disable the Changes topic and save preferences before queued jobs process. Sign out and log in as VAR_{operator_email} with VAR_{password}, then click Process queued jobs until Pending events and Pending deliveries both equal 0. Repeat only if the bounded limit reports remaining runnable work. Sign out and log in as VAR_{other_email} with VAR_{password}; assert no reverse-version R notification. Restore Changes preference. Every account switch must use Sign out plus a new /login; old tabs share cookies."
+    }
+  ]
+}

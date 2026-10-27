@@ -1,0 +1,14 @@
+{
+  "name": "Review academic references guidance",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Open VAR_{url}/academic-references. Fill Search grading references with Australia and click Search. Select Australia in Reference regions."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the Australia section includes University of Queensland or University of Melbourne, a Read official guidance link, and substantive grading guidance. Verify the page says Keep the original and explains provider confirmation. Do not treat navigation to an anchor alone as proof of equivalence, or invent a universal GPA conversion."
+    }
+  ]
+}

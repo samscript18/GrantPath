@@ -1,3 +1,4 @@
+import { accountTopics, handleAccountEvent, maintainAccounts } from "@/server/accounts/jobs";
 import { Inngest } from "inngest";
 import { drainOutbox } from "./outbox";
 import {
@@ -15,13 +16,20 @@ export const processApplicationJobs = inngest.createFunction(
     concurrency: 1,
   },
   async ({ step }) => {
+    const accounts = await step.run("account-retention-maintenance", () => maintainAccounts(25));
     const reminders = await step.run("schedule-confirmed-reminders", () =>
       scheduleReminders(new Date(), 25),
     );
     const events = await step.run("drain-persisted-outbox", () =>
-      drainOutbox(5, { topics: notificationTopics, handler: handleNotificationEvent }),
+      drainOutbox(1, {
+        topics: [...notificationTopics, ...accountTopics],
+        handler: (event) =>
+          accountTopics.includes(event.topic)
+            ? handleAccountEvent(event)
+            : handleNotificationEvent(event),
+      }),
     );
-    const deliveries = await step.run("deliver-with-current-preferences", () => deliverBatch(5));
-    return { reminders, events, deliveries };
+    const deliveries = await step.run("deliver-with-current-preferences", () => deliverBatch(1));
+    return { accounts, reminders, events, deliveries };
   },
 );

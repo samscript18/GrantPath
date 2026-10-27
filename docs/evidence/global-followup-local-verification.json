@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-26T14:59:19.890003+00:00",
+  "scope": "Healthy local worktree before disclosed regression verification push; not a TestSprite result",
+  "typecheck": "passed",
+  "lint": "passed",
+  "unit": {
+    "passed": 85
+  },
+  "postgresql": {
+    "passed": 31,
+    "testFiles": 12
+  },
+  "productionBuild": "passed",
+  "productionBrowser": {
+    "passed": 13,
+    "failed": 0,
+    "includesExactSavedPythonSources": 7
+  },
+  "secretScan": {
+    "textFiles": 336,
+    "matches": 0
+  },
+  "format": "passed",
+  "scripts": [
+    {
+      "file": "access_denial",
+      "sha256": "f61abdce8ae7e8de502c5536ffecbefbd6c8e32924d68dff8d969290ec297bdd"
+    },
+    {
+      "file": "automatic_publication",
+      "sha256": "72d2389de5884709b0c4fb4afe64dce8eaa009b9ccc2c40d0f884e5d6a28be74"
+    },
+    {
+      "file": "discovery_evidence",
+      "sha256": "da6ab77db3bf097308e43d51cae04b67a3426b73251c01ab1b39ec367e72fde0"
+    },
+    {
+      "file": "eligibility_notification",
+      "sha256": "4d2914e4525a7b741038ac547d1f612b3b6fff07c93c4c033bab734787d56ab8"
+    },
+    {
+      "file": "multi_destination",
+      "sha256": "b55ab62969d8660cb9bc93c9976ffa9f50589223fef7ef4c128bac280323d679"
+    },
+    {
+      "file": "profile_application",
+      "sha256": "5c151d891bc108cc5708fb0676778124b9240b68ff65cae02af0130036eb4da8"
+    },
+    {
+      "file": "publication_exception",
+      "sha256": "34eb1d22c33d8fb8a4af86a77dfcfdbbc314d6f976878c860a042635aa3a717b"
+    }
+  ]
+}

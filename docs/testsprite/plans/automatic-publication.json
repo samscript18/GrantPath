@@ -1,0 +1,25 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "A valid approved controlled candidate publishes once with official evidence and history",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "In this isolated preview sign in as VAR_{operator_email} with the configured secret VAR_{password}. Open /operator and expand Isolated source verification. Select Publication and replay."
+    },
+    {
+      "type": "assertion",
+      "description": "Click Publish valid snapshot. Assert auto_publish (first time) or unchanged (replay), and capture accepted version. These labelled snapshots use the actual protected publication service."
+    },
+    {
+      "type": "assertion",
+      "description": "Click Publish valid snapshot again; assert unchanged and the same accepted version."
+    },
+    {
+      "type": "assertion",
+      "description": "In /scholarships enter EXACTLY Controlled joint scholarship in Search scholarships (do not append words such as with all windows). Set the separate Application window dropdown to All cycles, including closed, then click Apply filters. Assert exactly one [TEST ONLY] Controlled joint scholarship. Open it and inspect Evidence you can inspect and Change history containing publication-1.0.0. Assert durable publication event IDs are retained in operator decision provenance. Return to /operator, expand Isolated source verification, select Publication and replay and click Publish valid snapshot. Click View publication history to inspect retained accepted decisions for this opportunity, including older decisions outside the recent list. Inspect the entry named [TEST ONLY] Controlled joint scholarship. Verify its Durable publication event IDs section contains actual IDs."
+    }
+  ]
+}
