@@ -10,10 +10,10 @@
 
 **TestSprite account email:** lammysam8@gmail.com
 
-**Coverage:** The owner used portal exploration/Add Tests with AI; ten generated cases passed10/10. The current required suite has19cases covering discovery/evidence, profiles/applications, joint identity, publication/replay, exceptions, privacy, notifications and navigation. The owner retired the controlled eligibility/change-notification case and removed that TestSprite requirement. Native API ownership remains separately required. The notification companion’s targeted rerun passed11recorded steps. A real residence-clearing bug was caught by TestSprite, blocked merge, was fixed and subsequently passed.
+**Coverage:** Owner-completed portal exploration/Add Tests with AI produced ten passing generated cases; nine remain required after an owner retirement. The current18-case manifest covers discovery/evidence, profiles/applications, joint identity, publication/replay, exceptions, privacy, notification evidence and navigation. The owner removed the two retired TestSprite requirements. All 18 retained cases have passing histories at published source `253e8df`. A real residence-clearing bug was caught by TestSprite, blocked merge, was fixed and subsequently passed.
 
-**Verification disclosure:** A fresh complete19-case automatic PR check is pending for this publication. Older10/10orfailed20-case runs do not establish that final result. Routine monitoring schedules remain disabled. No video is supplied.
+**Current-check disclosure:** The [whole App execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9be2c6bb-6ba5-484c-966d-204a7c1ac2ba) still reports18/19 passed,1 blocked because it included a subsequently deleted case. The native API job stopped before execution at its 50-credit reserve guard. CI software checks, GitGuardian and Vercel passed; the PR is not all-green. The second retirement/count update is local. Routine monitoring schedules remain disabled. No video is supplied.
 
 ---
 
-Prepared only; not posted. Update this disclosure using actual final-head results. Do not claim organiser approval or byte-identical browser replay.
+Prepared only; not posted. Update the current-check disclosure only from actual future results. Do not claim organiser approval or byte-identical browser replay.

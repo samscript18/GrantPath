@@ -72,14 +72,6 @@
       "originalCodeVersion": "v1.0"
     },
     {
-      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
-      "name": "Review notifications and mark them read",
-      "origin": "portal-ai-generated",
-      "generationEvidence": "portal-ai-generation-10-pass.png",
-      "generatedAt": "2026-10-27T00:46:33.812Z",
-      "originalCodeVersion": "v1.0"
-    },
-    {
       "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
       "name": "Switch applications to list view",
       "origin": "portal-ai-generated",
@@ -145,15 +137,15 @@
     }
   ],
   "refreshedAt": "2026-10-27T01:01:17.984574+00:00",
-  "reason": "Owner explicitly retired eligibility/notification case630a42fb and removed its TestSprite requirement. Required suite now contains all19remaining cases; do not claim earlier20-case status as a fresh19/19result.",
+  "reason": "Owner-confirmed retirements630a42fb and90536332 remove those TestSprite requirements; active suite now18cases. Do not substitute failed earlier19/20-case statuses for a fresh18-case result.",
   "planRefreshedAt": "2026-10-26T20:37:39.642Z",
   "selection": {
-    "caseCount": 19,
+    "caseCount": 18,
     "originalCliCases": 6,
     "earlierManualPortalCases": 3,
-    "aiGeneratedPortalCases": 10,
-    "configurationEvidence": "Existing trigger runs all project cases. Owner deleted original eligibility/notification case and explicitly instructed removal of its requirement. No other case/check is removed."
+    "aiGeneratedPortalCases": 9,
+    "configurationEvidence": "Existing trigger runs all project cases. Owner retired the original controlled eligibility/notification case and the generated notifications/read-state case; all18remaining cases stay required."
   },
   "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad",
-  "retirementEvidence": "notification-owner-retirement.json"
+  "retirementEvidence": "notification-owner-generated-retirement.json"
 }
