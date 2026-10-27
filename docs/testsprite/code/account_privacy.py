@@ -15,11 +15,25 @@ async def run_test():
     note = "[TEST ONLY] Owner-only application note"
     async with async_playwright() as p:
         executable = os.environ.get("GRANTPATH_CHROMIUM_PATH")
-        browser = await p.chromium.launch(headless=True, **({"executable_path": executable} if executable else {}))
+        # Match the launch settings of the passing TestSprite browser companion.
+        # Its container needs one Chromium process and avoids shared-memory use.
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--window-size=1280,720", "--disable-dev-shm-usage", "--ipc=host", "--single-process"],
+            **({"executable_path": executable} if executable else {}),
+        )
         try:
+            # Use distinct authenticated sessions sequentially. The hosted replay
+            # runner does not reliably support simultaneous incognito contexts.
+            context = await browser.new_context(reduced_motion="reduce")
+            page = await context.new_page()
+
             async def login(email):
-                context = await browser.new_context(reduced_motion="reduce")
-                page = await context.new_page()
+                sign_out = page.get_by_role("button", name="Sign out", exact=True)
+                if await sign_out.count():
+                    async with page.expect_response(lambda r: r.url.endswith("/api/auth/sign-out") and r.request.method == "POST") as signed_out:
+                        await sign_out.click()
+                    assert (await signed_out.value).status == 200, "Previous session must sign out successfully"
                 await page.goto(base + "/login")
                 await page.get_by_label("Email address").fill(email)
                 await page.get_by_label("Password", exact=True).fill(password)
@@ -56,6 +70,9 @@ async def run_test():
             await owner.get_by_label("Private notes", exact=True).fill(note)
             await owner.get_by_role("button", name="Save my plan", exact=True).click()
             await expect(owner.get_by_text("Your plan is saved.", exact=True)).to_be_visible()
+            await owner.reload()
+            await owner.get_by_text(re.compile(r"My application plan ·")).click()
+            await expect(owner.get_by_label("Private notes", exact=True)).to_have_value(note)
             student = await login(value("VAR_{username}", "test_username"))
             await expect(student.get_by_text(note, exact=True)).to_have_count(0)
             plan = student.get_by_text(re.compile(r"My application plan ·"))
@@ -63,7 +80,9 @@ async def run_test():
                 await plan.click()
                 await expect(student.get_by_label("Private notes", exact=True)).not_to_have_value(note)
             await expect(student.get_by_role("link", name=re.compile(r"Operator"))).to_have_count(0)
-            await owner.reload()
+            # Re-authenticate the owner and navigate directly, rather than
+            # looping through discovery links from the post-login dashboard.
+            owner = await login(value("VAR_{other_email}", "other_email"))
             await owner.get_by_text(re.compile(r"My application plan ·")).click()
             await expect(owner.get_by_label("Private notes", exact=True)).to_have_value(note)
         finally:

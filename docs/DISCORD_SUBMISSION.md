@@ -12,6 +12,8 @@
 
 **Verification:** [Complete TestSprite GitHub App run](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/de9e499a-6b33-4e91-b083-6082e087b55f) **17/18 passed, one blocked** at `5c822c3`, including portal AI-generated coverage alongside authored cases. Covers discovery/evidence, profiles/applications, joint identity, publication/replay, exceptions, privacy, notifications and navigation. Separate native API ownership verification and GitGuardian passed. Correctness CI software checks passed; its required App gate remains failed because the privacy case’s final persistence check was blocked by a provider loop warning. An actual [residence-clearing bug](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc) was caught by TestSprite, blocked merge, was fixed and subsequently passed.
 
+The privacy case was subsequently fixed and [passed a targeted TestSprite rerun](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/56186d80-94a6-4bf2-9eaa-b497203f6f2b/test/7ddcf48b-d0a4-44d6-be47-c6cf3d8ccfd4); the historical complete App status remains unchanged.
+
 Routine monitoring schedules remain disabled. No demo video is supplied.
 
 ---

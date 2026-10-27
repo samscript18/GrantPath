@@ -7,19 +7,27 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Sign in VAR_{other_email} with VAR_{password}; open the real Twente scholarship. Save if needed. Expand My application plan, set Private notes to [TEST ONLY] Owner-only application note, and Save my plan. Verify saved confirmation."
+      "description": "Sign in as isolated owner VAR_{other_email} using configured VAR_{password}. Navigate directly to VAR_{url}/scholarships/twente-uts-2027, not via discovery/search or a dashboard link. Wait for the scholarship heading and Save/Unsave control. Save if necessary. Expand My application plan, set Private notes to [TEST ONLY] Owner-only application note, click Save my plan, and require Your plan is saved confirmation."
+    },
+    {
+      "type": "assertion",
+      "description": "Still as owner, reload that exact scholarship detail URL, expand My application plan and require Private notes to equal [TEST ONLY] Owner-only application note. A saved toast alone does not establish persistence."
     },
     {
       "type": "action",
-      "description": "Sign out, then sign in VAR_{username} with VAR_{password}. Open the same Twente scholarship. Dismiss the unfinished-profile prompt if present."
+      "description": "Click Sign out. Sign in using the configured second student VAR_{username} and VAR_{password}; wait for the dashboard to finish loading and dismiss Continue study profile later if present. Then explicitly navigate directly to VAR_{url}/scholarships/twente-uts-2027. Do not repeatedly click dashboard/discovery links or reuse an old authenticated tab."
     },
     {
       "type": "assertion",
-      "description": "Verify the owner-only note does not appear for this other account. If its own My application plan exists, expand it and verify Private notes is not [TEST ONLY] Owner-only application note. Verify there is no Operator navigation item."
+      "description": "As the second student, verify the owner-only note is absent. If this student has its own My application plan, expand it and verify Private notes is not [TEST ONLY] Owner-only application note. A different note belonging to this second account is valid. Verify there is no Operator navigation item. Do not modify this second account\u2019s note."
+    },
+    {
+      "type": "action",
+      "description": "Click Sign out and sign back in as original owner VAR_{other_email} using configured VAR_{password}. Wait for the dashboard route; this is an intermediate sign-in result, not the final checkpoint. Explicitly navigate directly to VAR_{url}/scholarships/twente-uts-2027 once, wait for its scholarship heading, and expand My application plan. Do not loop through discovery/search/dashboard links. Fail if this direct navigation cannot open the detail page; do not silently skip it."
     },
     {
       "type": "assertion",
-      "description": "Sign out and return as VAR_{other_email}. Open Twente, expand My application plan, and verify Private notes still equals [TEST ONLY] Owner-only application note. Required HTTP ownership enforcement is checked separately by the native API test, not inferred from hidden UI."
+      "description": "Require the current URL to be /scholarships/twente-uts-2027 and Private notes to equal [TEST ONLY] Owner-only application note after returning as owner. All previous owner persistence, second-account absence and no-Operator assertions remain mandatory. HTTP ownership enforcement remains separately required in native API case88b47334-232c-4665-a6a2-413b09c34eb5; hidden UI alone is not server enforcement."
     }
   ]
 }

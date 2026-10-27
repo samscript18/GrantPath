@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-27T04:26:56.205Z",
+  "head": "5c822c3def5c79ef43b9bbec3abc27f739b302c8",
+  "result": {
+    "runId": "743c7b82-73da-4073-a8c9-d59658d63276",
+    "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "testTitle": "Private application notes stay with their owner across independent browser sessions",
+    "status": "failed",
+    "source": "cli",
+    "createdAt": "2026-10-27T04:25:56.394Z",
+    "startedAt": "2026-10-27T04:25:56.394Z",
+    "finishedAt": "2026-10-27T04:26:04.679Z",
+    "codeVersion": null,
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "failedStepIndex": null,
+    "failureKind": "unknown",
+    "error": "TargetClosedError: BrowserContext.new_page: Target page, context or browser has been closed",
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/d4fc4c9e-b366-4192-8f4a-0c683bc0055a/test/743c7b82-73da-4073-a8c9-d59658d63276"
+  },
+  "expectedCodeVersion": "v-483dbd7e0520",
+  "sourceVersionMatches": false,
+  "onlyThisCase": true,
+  "source": "targeted CLI rerun, not a new complete GitHub App check",
+  "balanceBefore": 38.9,
+  "balanceAfter": 38.4,
+  "observedDebit": 0.5,
+  "reserve": 30
+}

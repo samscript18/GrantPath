@@ -36,8 +36,9 @@
     {
       "file": "account_privacy",
       "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
-      "codeVersion": "v-cd62d2bcd84b",
-      "planSteps": 4
+      "codeVersion": "v-7fe483322776",
+      "planSteps": 6,
+      "targetedPassEvidence": "privacy-loop-targeted-result.json"
     },
     {
       "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
@@ -147,5 +148,7 @@
     "configurationEvidence": "Existing trigger runs all project cases. Owner retired the original controlled eligibility/notification case and the generated notifications/read-state case; all18remaining cases stay required."
   },
   "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad",
-  "retirementEvidence": "notification-owner-generated-retirement.json"
+  "retirementEvidence": "notification-owner-generated-retirement.json",
+  "privacyPlanRefreshedAt": "2026-10-27T04:29:11.383Z",
+  "privacyCorrection": "Same required case retained; explicit direct return route, sequential real sign-ins and provider-compatible Chromium flags. Targeted rerun passed; whole App status unchanged."
 }

@@ -1,0 +1,133 @@
+{
+  "checkedAt": "2026-10-27T04:22:40.661Z",
+  "caseId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "name": "Private application notes stay with their owner across independent browser sessions",
+  "planStepCount": 4,
+  "codeVersion": "v-cd62d2bcd84b",
+  "storedCodeHash": "a9ca60a80ee43cc3f905889b2b48d232f717a4d4b7a9f79637431cd77b4e90f9",
+  "localCodeHash": "a9ca60a80ee43cc3f905889b2b48d232f717a4d4b7a9f79637431cd77b4e90f9",
+  "sourceMatches": true,
+  "balance": 38.9,
+  "creditsPerRun": 0.5,
+  "estimatedSingleRetry": 0.5,
+  "reserve": 30,
+  "projectedRemaining": 38.4,
+  "failedRun": "118962b8-5eac-4dd6-898e-1c439313517b",
+  "failedRunSteps": [
+    {
+      "stepIndex": 1,
+      "action": "navigate",
+      "description": "Navigate to https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 2,
+      "action": "click",
+      "description": "Click 'Sign in link'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 3,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 4,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 5,
+      "action": "click",
+      "description": "Click 'Welcome back → button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 6,
+      "action": "click",
+      "description": "Click 'University of Twente Scholarship link'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 7,
+      "action": "click",
+      "description": "Click 'My application plan · Interested'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 8,
+      "action": "click",
+      "description": "Click 'Save my plan button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 9,
+      "action": "click",
+      "description": "Click 'Sign out button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 10,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 11,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 12,
+      "action": "click",
+      "description": "Click 'Welcome back → button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 13,
+      "action": "click",
+      "description": "Click 'University of Twente Scholarship link'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 14,
+      "action": "click",
+      "description": "Click 'My application plan · Preparing documents'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 15,
+      "action": "click",
+      "description": "Click 'Sign out button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 16,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 17,
+      "action": "fill",
+      "description": "[input redacted]",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 18,
+      "action": "click",
+      "description": "Click 'Welcome back → button'",
+      "status": "passed"
+    },
+    {
+      "stepIndex": 19,
+      "action": "visible",
+      "description": "The owner should be back on the Twente scholarship to verify that the saved private note persisted.",
+      "status": "failed"
+    }
+  ],
+  "noRunDispatched": true
+}

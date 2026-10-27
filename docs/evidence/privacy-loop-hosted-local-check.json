@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-27T04:28:37.908Z",
+  "head": "5c822c3def5c79ef43b9bbec3abc27f739b302c8",
+  "scope": "Exact reviewed Python source run in local Chromium against hosted app and isolated .test accounts. This is not TestSprite. Only labelled owner note fixture changed; no foreign-note write, account reset or role mutation.",
+  "sourceHash": "12b3439ffd686382e90bebd715fdad73ce06a643b633481edac360e831710a0c",
+  "durationMs": 18814,
+  "passed": true,
+  "assertions": [
+    "Owner save confirmation",
+    "Owner note persists after reload",
+    "Second account note differs from owner-only note",
+    "No Operator navigation for student",
+    "Original owner signs back in and note is unchanged"
+  ]
+}
