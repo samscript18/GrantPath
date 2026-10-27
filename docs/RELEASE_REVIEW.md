@@ -1,54 +1,14 @@
-# Release Review — 27 October 2026
+# Release Review — portal integration, 27 October 2026
 
-Published source: `4245853398a25c59a64273c1f119bdf9508be6d5`. [Live app](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app) · [immutable Ready deployment](https://grantpath-6k7mdx6bb-lammysam8-7688.vercel.app) · [PR #1](https://github.com/samscript18/GrantPath/pull/1) · [CI](https://github.com/samscript18/GrantPath/actions/runs/40420797802).
+Portal AI generation is now established by the owner's explicit confirmation of live-app exploration and **Add Tests with AI**, the supplied exploration-map screenshot showing **10/10 passed**, and independent metadata/results for ten portal-origin cases created together at **2026-10-27 00:46:33.812 UTC (01:46 Lagos)**. [Passing portal run](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3a17a157-b012-43db-bf5a-0bbe70028cad), [screenshot](evidence/portal-ai-generation-10-pass.png), [case IDs/provenance](evidence/portal-ai-generation-provenance.json), [sanitized original generated plans/exports/results](evidence/portal-generated-case-review.json). A separate portal Activity Log generation-event ID was not exposed; it is not invented. The portal operation was owner-completed, not agent browser interaction.
 
-Fresh final-head reads confirm **TestSprite App 7/7 passed**, the **separate native API check passed**, **CI passed**, **GitGuardian passed**, and **Vercel Ready**. [App execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3e453883-20eb-4466-bce3-f77723bb73c5); [API execution](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/ade112f3-c9a0-4a27-a22c-30c699fdc2e7/test/9b5228ef-c566-452e-aa84-1eb1d70d9380); [status receipt](evidence/submission-semantic-status.json). Native API source version is `v-5e0325a9c69d`, with exact 404/403/foreign-read exclusion/unchanged-owner output and an expected-commit check. App verdicts do not establish verbatim execution of every saved Python assertion.
+The existing trigger supports all **20 cases**, per owner confirmation. The reviewed manifest now preserves the original seven CLI-authored cases, three earlier manual portal companions and ten AI-generated portal cases. No case/history is deleted. The original seven plans/sources remain unchanged. The manual privacy companion now uses Ertegun rather than the Twente/API fixtures; the duplicate notification companion inspects retained history without racing the original mandatory mutation/recalculation/deduplication test. Generated plans were reviewed in place for real routes, deterministic filter values, conditional saved/unread state, substantive evidence and account isolation. [Saved plan receipts](evidence/portal-reviewed-plans-saved.json).
 
-**Portal generation remains unresolved.** The original seven cases are CLI-authored. Three additional manually portal-authored cases appeared later, as reconciled below. No generation event, displayed generation estimate or organiser exception was supplied. The Browser tool required for portal interaction is unavailable here, and no TestSprite connector was found. No CLI generation is substituted. [Exact owner procedure](PORTAL_GENERATION.md).
+CI dynamically requires **20/20**, rejecting earlier 7/7 or generation-only 10/10 results; App creator, project and exact-head requirements remain. **The new complete twenty-case PR result is pending at this preparation checkpoint.** Earlier green source `4245853398a25c59a64273c1f119bdf9508be6d5` and the owner's ten-case portal execution do not verify a later source or a complete twenty-case App run.
 
-Semantic subject search is **included**, explicitly approved on 27 October. Its original work remains on `feature/semantic-field-search` at `14b492e`; the published source includes shared cache/budget protections. The preview-only server credentials and additive migration008 are configured. Hosted Humanities returns four relevant records including GLOCAL through History; Chemistry returns zero from the current catalogue. Repeated IDs/counts are stable. The earlier standalone provider test separately demonstrated Chemistry → organic synthesis. [Hosted receipt](evidence/submission-semantic-hosted.json), [setup/limits](FIELD_OF_STUDY.md).
+Current balance is **81.5 credits**, Free, with **50 reserved**. The owner's generation/exploration and ten-case run produced an aggregate **10.5** reduction from the last observed 92.0; its separate generation debit is not exposed and is not derived from the execution rate. One complete automatic twenty-case App run plus native API check estimates **10.2** at observed/displayed rates, leaving about **71.3**. No duplicate manual run or new generation is requested by this agent.
 
-Local checks passed: **101 unit tests, 37 PostgreSQL tests, typecheck, lint, production build and all 14 production-browser journeys**, including the exact reusable Python sources. Routine provider responses are mocked. Hosted DOM/API/provider checks are distinct from local Playwright and native TestSprite checks.
-
-The catalogue has **32 real records, 23 providers, 17 actual countries and six regions**; 23 cycles/nine overviews; **7 open, 2 upcoming, 5 closed and 18 unknown**. Labelled fixtures are excluded. These are not 32 open awards. GLOCAL is one joint record across seven destinations; tracks vary. [Final anonymous readback](evidence/submission-live-readback-final.json).
-
-Account identity is **Salman / lammysam8@gmail.com**, Free plan. Observed balance **97.2 → 93.7 → 93.5 → 92.0**, an actual **5.2-credit** account reduction (automatic App 3.5, native API 0.2, later owner manual runs 1.5); generation cost/spend is zero because none was run. Approximately 50 remain reserved. One automatic browser execution is observed for this head; the agent started no manual duplicate, scheduled TestSprite run, purchase or paid plan. The three later owner manual runs are listed below. [API debit receipt](evidence/submission-semantic-api-ci.json), [final account readback](evidence/submission-final-account-catalogue.json).
-
-PR #1 is public, open and unmerged, created **24 October 2026 at 13:26:20 UTC**, within the user's supplied October 16–26 window. Fresh branch-protection administration read was denied with **403** and was not retried through another identity. No protections were changed; the historical strict/admin-enforced configuration remains in `evidence/github-release-gate.json`. The authentic [residence regression failure](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/10178282-1655-45f4-a09c-a39db97410dc), actual blocked merge, fix and later passes are preserved.
-
-Both routine GitHub schedulers remain disabled, with no TestSprite schedules. Historical successful manual application/source dispatches remain available. Two older queued manual jobs need review before any future activation. [Operational handoff](OPERATIONS_HANDOFF.md) separates post-merge binding/enablement from this submission. Optional automatic Neon lifecycle is unconfigured; Brevo acceptance is not recipient receipt.
-
-The connected PR title/body update returned **403 Resource not accessible by integration** on 27 October. No alternate identity was tried. **The title now matches, but owner body paste is required** using the exact body in [SUBMISSION_PR.md](SUBMISSION_PR.md); exact account entry is in [DISCORD_SUBMISSION.md](DISCORD_SUBMISSION.md). No merge, production rebinding, scheduler activation, purchase or Discord submission was performed. Post-run documentation/receipts remain local to avoid a credited receipt-only push; they do not claim verification of a later source.
-
-### Late portal/manual-run reconciliation — 27 October
-
-The owner explicitly confirmed **“manual creation in the portal”** for three new
-cases and supplied [Activity Log](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/activity)
-and three execution links. The project now contains **ten cases: the original
-seven CLI-authored cases plus three manually portal-authored cases**. The new
-cases cover GLOCAL, notifications and private notes, overlapping original coverage.
-**This still does not establish AI exploration/generation through the web portal.**
-[Owner statement/run links](evidence/submission-owner-portal-history.json),
-[new case metadata/export review](PORTAL_CASE_REVIEW.md).
-
-The final automatic App result at `4245853` covers the original seven cases;
-it does not verify the later three as part of an App-connected ten-case suite.
-Preserve all histories. Before another automatic run, reconcile App selection and
-the exact-count manifest; do not delete cases or weaken the guard. No ten-case App
-pass is claimed. New manual cases are not silently substituted for the original
-reviewed cases. The agent started no extra manual run or generation.
-
-**Final observed balance is 92.0 credits**: 97.2 → 93.7 (App 3.5) → 93.5
-(API 0.2) → 92.0 (additional owner-confirmed manual executions, aggregate 1.5).
-Total account reduction **5.2**, with **50 reserved**. Generation has no displayed
-estimate and was not started by this agent. The 1.5 aggregate is consistent with
-three executions at the observed 0.5 rate, rather than a claimed per-run invoice.
-[Final account/catalogue readback](evidence/submission-final-account-catalogue.json).
-
-The PR title matches the prepared title on independent readback, but its body
-remains the old version after the connector returned **403**. **Owner action is
-paste the replacement body only** from SUBMISSION_PR.md. No alternate write
-identity or second metadata write was attempted.
+The semantic-search product remains included. Actual catalogue: **32 real records / 23 providers / 17 countries / six regions; 7 open, 2 upcoming, 5 closed, 18 unknown; 23 cycle records and nine overviews**. No production binding, routine scheduler, optional Neon lifecycle, merge or Discord submission is activated. Fresh PR metadata writes previously returned403; the title matches but the owner must paste the replacement body if write access remains unavailable.
 
 ---
 

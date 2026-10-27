@@ -1,0 +1,16 @@
+{
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in to VAR_{url} using the isolated VAR_{other_email} and VAR_{password}. Open /notifications with All updates selected. Do not change profile answers, notification preferences, source facts or publication scenarios."
+    },
+    {
+      "type": "assertion",
+      "description": "Inspect an existing accepted-change notification. Verify its readable accepted-version/change explanation and internal Inspect the evidence link. Open its scholarship detail and inspect Evidence you can inspect or retained accepted history. Do not require the current assessment outcome to equal a historical version: another test legitimately publishes a later version."
+    },
+    {
+      "type": "assertion",
+      "description": "Return to All updates and verify retained change history remains accessible. Do not mark alerts read, publish snapshots, process jobs or count version-specific notifications; those mandatory mutation, deduplication and suppression assertions remain in the untouched original case 630a42fb-fd1f-4aa7-ae23-ef6ba7c57806."
+    }
+  ]
+}

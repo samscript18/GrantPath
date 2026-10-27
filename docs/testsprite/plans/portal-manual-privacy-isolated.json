@@ -1,0 +1,20 @@
+{
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in using VAR_{other_email} and VAR_{password}. Open /scholarships/ertegun-2027. Wait until its Save or Unsave control appears. Save the opportunity if necessary."
+    },
+    {
+      "type": "action",
+      "description": "Expand My application plan. Set Private notes to:[TEST ONLY] Portal privacy verification note\nClick Save my plan, verify Your plan is saved, reload, and confirm the note persists."
+    },
+    {
+      "type": "assertion",
+      "description": "Sign out. Sign in using VAR_{username} and VAR_{password}. Open the same scholarship. Assert the owner’s note is absent. If this account has its own application plan, expand it and assert its Private notes field does not contain the owner’s note. Assert no Operator navigation item appears."
+    },
+    {
+      "type": "action",
+      "description": "Sign out and return to the original account. Reload the scholarship and expand its application plan. Assert the original private note is unchanged."
+    }
+  ]
+}

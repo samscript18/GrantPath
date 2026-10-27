@@ -1,0 +1,686 @@
+{
+  "checkedAt": "2026-10-27T00:55:35.264Z",
+  "cases": [
+    {
+      "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+      "metadata": {
+        "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Search and filter scholarships",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can search for scholarships and apply filters to narrow the results list.",
+        "planStepCount": 8,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the scholarship discovery page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Fill in the scholarship search field with a relevant search term",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Apply the search",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Select a destination filter",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Select a study level filter",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Select a funding filter",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Apply the filters",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify only scholarships matching the chosen search and filters are shown",
+            "structured": false
+          }
+        ],
+        "priority": "High",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:58.219Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the scholarship discovery page using the visible “Find a scholarship” navigation link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/nav/a[2]\",\"desc\":\"Click 'Find a scholarship link'\",\"input\":null,\"field\":\"13\"}\n        # Find a scholarship link\n        elem = page.get_by_role(\"link\", name=\"Find a scholarship\")\n        await elem.click(timeout=10000)\n        \n        # -> Search the scholarship catalogue for “Australia Awards” using the visible search field and Search button.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div/input\",\"desc\":\"Fill 'Australia Awards' into Search scholarships text field\",\"input\":\"Australia Awards\",\"field\":\"1147\"}\n        # Search scholarships text field\n        elem = page.get_by_role(\"textbox\", name=\"Search scholarships\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"Australia Awards\")\n        \n        # -> Search the scholarship catalogue for “Australia Awards” using the visible search field and Search button.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div/button\",\"desc\":\"Click 'Search button'\",\"input\":null,\"field\":\"1148\"}\n        # Search button\n        elem = page.get_by_role(\"button\", name=\"Search\")\n        await elem.click(timeout=10000)\n        \n        # -> Choose Australia in the Destination filter.\n        # [internal] get_dropdown_options: index=\n        \n        # -> Select Australia, Master’s, and Tuition + living support in the scholarship filters, then apply the filters.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1152\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Select Australia, Master’s, and Tuition + living support in the scholarship filters, then apply the filters.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[2]\",\"desc\":\"Select option in 'All study levels Undergraduate Master\\u2019s Doctorate dropdown'\",\"input\":null,\"field\":\"1173\"}\n        # All study levels Undergraduate Master’s Doctorate dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[2]\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Select Australia, Master’s, and Tuition + living support in the scholarship filters, then apply the filters.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[3]\",\"desc\":\"Select option in 'All funding Tuition + living support Tuition... dropdown'\",\"input\":null,\"field\":\"1180\"}\n        # All funding Tuition + living support Tuition... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[3]\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Select Australia, Master’s, and Tuition + living support in the scholarship filters, then apply the filters.\n        # @@ts-step {\"i\":8,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1275\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The filtered catalogue shows Australia Awards Scholarships for the search and selected criteria.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The search and selected filter criteria are applied.\n        await expect(page).to_have_url(re.compile(\"q=Australia\\\\+Awards\\\\&destination=AU\\\\&level=master\\\\&funding=comprehensive\"), timeout=15000), \"The search and selected filter criteria are applied.\"\n        await page.get_by_role(\"link\", name=\"Australia Awards Scholarships\", exact=True).nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The matching Australia Awards Scholarships result is visible.\n        await expect(page.get_by_role(\"link\", name=\"Australia Awards Scholarships\", exact=True).nth(0)).to_be_visible(timeout=15000), \"The matching Australia Awards Scholarships result is visible.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "04db67c9-2add-4239-bffd-35c75b21a636",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:58.230Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+      "metadata": {
+        "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "View scholarship details from the shortlist",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open a saved scholarship from the shortlist and review its details.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the saved opportunities page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Open a saved scholarship from the shortlist",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the scholarship detail view is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the scholarship summary and key eligibility information are shown",
+            "structured": false
+          }
+        ],
+        "priority": "High",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:57.135Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the Sign in page to access the saved scholarship shortlist.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"16\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"963\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"968\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"980\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open “Saved opportunities” to view the scholarship shortlist.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[3]\",\"desc\":\"Click 'Saved opportunities link'\",\"input\":null,\"field\":\"1605\"}\n        # Saved opportunities link\n        elem = page.get_by_role(\"link\", name=\"Saved opportunities\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the saved “University of Twente Scholarship” and review its detail view.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/section[2]/article/div[2]/div/a\",\"desc\":\"Click 'University of Twente Scholarship link'\",\"input\":null,\"field\":\"2364\"}\n        # University of Twente Scholarship link\n        elem = page.get_by_role(\"link\", name=\"University of Twente Scholarship\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The University of Twente Scholarship detail view is displayed.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The University of Twente Scholarship detail page is open.\n        await expect(page).to_have_url(re.compile(\"/scholarships/twente\\\\-uts\\\\-2027\"), timeout=15000), \"The University of Twente Scholarship detail page is open.\"\n        \n        # --> The scholarship summary and key eligibility assessment are shown.\n        await page.get_by_text(\"Met\", exact=True).nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The eligibility assessment shows a met requirement.\n        await expect(page.get_by_text(\"Met\", exact=True).nth(0)).to_be_visible(timeout=15000), \"The eligibility assessment shows a met requirement.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "9c6665cd-b5ca-4256-ab05-3205ab77e3fb",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:57.147Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+      "metadata": {
+        "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Open the saved opportunities shortlist",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can navigate to the saved opportunities page and view their shortlisted scholarships.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the overview page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Click the link to saved opportunities",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the scholarship shortlist page is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify saved opportunities are listed",
+            "structured": false
+          }
+        ],
+        "priority": "High",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:40.758Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the “Sign in” page and inspect its visible fields before entering the student credentials.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"16\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the supplied student credentials and submit the “Welcome back” form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"963\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the supplied student credentials and submit the “Welcome back” form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"968\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the supplied student credentials and submit the “Welcome back” form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"980\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open “Saved opportunities” and verify the shortlist page and its listed scholarships.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[3]\",\"desc\":\"Click 'Saved opportunities link'\",\"input\":null,\"field\":\"1829\"}\n        # Saved opportunities link\n        elem = page.get_by_role(\"link\", name=\"Saved opportunities\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The saved-opportunities shortlist page is displayed.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The page URL shows the saved-opportunities shortlist.\n        await expect(page).to_have_url(re.compile(\"/saved\"), timeout=15000), \"The page URL shows the saved-opportunities shortlist.\"\n        \n        # --> Saved scholarships are listed on the shortlist.\n        await page.get_by_role(\"link\", name=\"[TEST ONLY] Controlled change scholarship\", exact=True).nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The first saved scholarship is listed.\n        await expect(page.get_by_role(\"link\", name=\"[TEST ONLY] Controlled change scholarship\", exact=True).nth(0)).to_be_visible(timeout=15000), \"The first saved scholarship is listed.\"\n        await page.get_by_role(\"link\", name=\"University of Twente Scholarship\", exact=True).nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The second saved scholarship is listed.\n        await expect(page.get_by_role(\"link\", name=\"University of Twente Scholarship\", exact=True).nth(0)).to_be_visible(timeout=15000), \"The second saved scholarship is listed.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "6e150ca4-cfaf-4dda-8d83-ef73eb172260",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:40.769Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+      "metadata": {
+        "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Review academic references guidance",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open academic references and search for a grading provider or scale.",
+        "planStepCount": 5,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the academic references page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Search for a provider, region, or grading scale",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Select a relevant guidance entry",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify matching academic reference guidance is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the guidance includes the expected equivalence or grading information",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:48:10.702Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the student sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"26\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"966\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"971\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"983\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the “Academic references” page from the workspace navigation.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[6]\",\"desc\":\"Click 'Academic references link'\",\"input\":null,\"field\":\"1611\"}\n        # Academic references link\n        elem = page.get_by_role(\"link\", name=\"Academic references\")\n        await elem.click(timeout=10000)\n        \n        # -> Search academic references for University of Queensland and verify the matching grading guidance.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/main/div/form/div/input\",\"desc\":\"Fill 'University of Queensland' into Search provider, region or scale\\u2026 text field\",\"input\":\"University of Queensland\",\"field\":\"2273\"}\n        # Search provider, region or scale… text field\n        elem = page.get_by_role(\"textbox\", name=\"Search grading references\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"University of Queensland\")\n        \n        # -> Search academic references for University of Queensland and verify the matching grading guidance.\n        # @@ts-step {\"i\":8,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/form/button\",\"desc\":\"Click 'Search button'\",\"input\":null,\"field\":\"2276\"}\n        # Search button\n        elem = page.get_by_role(\"button\", name=\"Search\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the University of Queensland reference entry and verify its grading guidance.\n        # @@ts-step {\"i\":9,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/div[3]/nav/a\",\"desc\":\"Click 'Australia link'\",\"input\":null,\"field\":\"2285\"}\n        # Australia link\n        elem = page.get_by_role(\"link\", name=\"Australia\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The University of Queensland reference is displayed in the selected Australia entry.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The Australia academic reference entry is selected.\n        await expect(page).to_have_url(re.compile(\"\\\\#reference\\\\-australia\"), timeout=15000), \"The Australia academic reference entry is selected.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "fc7fbb7e-a49e-4385-8518-88e9d6580757",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:48:10.712Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "metadata": {
+        "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Review notifications and mark them read",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open notifications and mark a notification as read.",
+        "planStepCount": 5,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the notifications page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Open a notification detail or inspect its evidence",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Mark the notification as read",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the notification list reflects the read state",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the notification remains accessible in the updates list",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:48:26.491Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"16\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"963\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"968\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"980\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the “Notifications” section to view the student’s updates.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[5]\",\"desc\":\"Click 'Notifications 4 link'\",\"input\":null,\"field\":\"1607\"}\n        # Notifications 4 link\n        elem = page.get_by_role(\"link\", name=\"Notifications\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the evidence for the UCT Mastercard Foundation notification.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/section/div[2]/article/div/div/div[2]/a\",\"desc\":\"Click 'Inspect the evidence link'\",\"input\":null,\"field\":\"2292\"}\n        # Inspect the evidence link\n        elem = page.get_by_role(\"article\").filter(has_text=\"New possibilityUnreadA possibility to explore: UCT Mastercard Foundation —\").get_by_role(\"link\")\n        await elem.click(timeout=10000)\n        \n        # -> Return to the Notifications inbox and locate the UCT Mastercard Foundation update and its read control.\n        # @@ts-step {\"i\":8,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[5]\",\"desc\":\"Click 'Notifications 4 link'\",\"input\":null,\"field\":\"1607\"}\n        # Notifications 4 link\n        elem = page.get_by_role(\"link\", name=\"Notifications\")\n        await elem.click(timeout=10000)\n        \n        # -> Mark the UCT Mastercard Foundation update as read and verify that it remains listed in the updates inbox.\n        # @@ts-step {\"i\":9,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/section/div[2]/article/div/div/div[2]/div/button\",\"desc\":\"Click 'Mark as read button'\",\"input\":null,\"field\":\"3297\"}\n        # Mark as read button\n        elem = page.get_by_role(\"article\").filter(has_text=\"New possibilityUnreadA possibility to explore: UCT Mastercard Foundation —\").get_by_role(\"button\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The UCT Mastercard Foundation notification remains accessible in the updates list.\n        await page.get_by_role(\"article\").filter(has_text=\"New possibilityA possibility\").get_by_role(\"link\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The UCT notification’s evidence link is available in the updates list.\n        await expect(page.get_by_role(\"article\").filter(has_text=\"New possibilityA possibility\").get_by_role(\"link\").nth(0)).to_be_visible(timeout=15000), \"The UCT notification\\u2019s evidence link is available in the updates list.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "b4f7ba1f-899b-48a5-86c5-82831eb28bfe",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:48:26.504Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+      "metadata": {
+        "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Switch applications to list view",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can switch the applications page from board view to list view and see their applications in a list.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the applications page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Switch to the list view",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the applications list view is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify applications are shown in list form",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:54.843Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"18\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"962\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"967\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"979\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open “My applications” from the workspace sidebar.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[4]\",\"desc\":\"Click 'My applications link'\",\"input\":null,\"field\":\"1605\"}\n        # My applications link\n        elem = page.get_by_role(\"link\", name=\"My applications\")\n        await elem.click(timeout=10000)\n        \n        # -> Select the “List” view and confirm that the applications are displayed in list form.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/div[2]/a[2]\",\"desc\":\"Click 'List view link'\",\"input\":null,\"field\":\"2285\"}\n        # List view link\n        elem = page.get_by_role(\"link\", name=\"List view\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The applications page is in List view.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The applications page is in List view.\n        await expect(page).to_have_url(re.compile(\"\\\\?view=list\"), timeout=15000), \"The applications page is in List view.\"\n        \n        # --> The applications are displayed in status-grouped list form.\n        await page.get_by_role(\"link\", name=\"[TEST ONLY] Controlled change\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: An application is displayed in the Interested list.\n        await expect(page.get_by_role(\"link\", name=\"[TEST ONLY] Controlled change\").nth(0)).to_be_visible(timeout=15000), \"An application is displayed in the Interested list.\"\n        await page.get_by_role(\"link\", name=\"University of Twente\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: An application is displayed in the Preparing documents list.\n        await expect(page.get_by_role(\"link\", name=\"University of Twente\").nth(0)).to_be_visible(timeout=15000), \"An application is displayed in the Preparing documents list.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "ccfc22a1-f47f-48fc-8fc7-c1bf7309f108",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:54.854Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+      "metadata": {
+        "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Review applications board stages",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open the applications area and see their application stages in the board view.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the applications page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Keep the board view selected",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the applications board is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the application stages are shown",
+            "structured": false
+          }
+        ],
+        "priority": "High",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:41.329Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"17\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the provided student email and password, then submit the “Welcome back” form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"970\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the provided student email and password, then submit the “Welcome back” form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"975\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the provided student email and password, then submit the “Welcome back” form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"987\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open “My applications” and inspect the application board and its visible stages.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[4]\",\"desc\":\"Click 'My applications link'\",\"input\":null,\"field\":\"1389\"}\n        # My applications link\n        elem = page.get_by_role(\"link\", name=\"My applications\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The applications board is open in Board view.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The applications board URL is open.\n        await expect(page).to_have_url(re.compile(\"/applications\"), timeout=15000), \"The applications board URL is open.\"\n        \n        # --> Application stages are shown on the board, including Applied.\n        await page.get_by_role(\"heading\", name=\"Applied\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The Applied stage is visible on the board.\n        await expect(page.get_by_role(\"heading\", name=\"Applied\").nth(0)).to_be_visible(timeout=15000), \"The Applied stage is visible on the board.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "d11b13e1-a071-4bc9-999e-01a711a12d1a",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:41.345Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+      "metadata": {
+        "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Open the study profile editor",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open the study profile editor from the profile page.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the profile page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Open the study profile editor",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the study profile editor is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the study profile can be reviewed or updated",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:45.165Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"99\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"990\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"995\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Sign in with the supplied student account using the visible email and password fields.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"1007\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the “Profile” page from the personal navigation.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[7]\",\"desc\":\"Click 'Profile link'\",\"input\":null,\"field\":\"1414\"}\n        # Profile link\n        elem = page.get_by_role(\"link\", name=\"Profile\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # -> Open “Edit study profile” and verify the study profile editor is displayed with controls for reviewing or updating details.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/section[2]/div/a\",\"desc\":\"Click 'Edit study profile link'\",\"input\":null,\"field\":\"2148\"}\n        # Edit study profile link\n        elem = page.get_by_role(\"link\", name=\"Edit study profile\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The study profile editor is open with details to review and a save option for updates.\n        await page.get_by_role(\"textbox\", name=\"Date of birth (optional)\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The study profile editor shows a field to review or update.\n        await expect(page.get_by_role(\"textbox\", name=\"Date of birth (optional)\").nth(0)).to_be_visible(timeout=15000), \"The study profile editor shows a field to review or update.\"\n        await page.get_by_role(\"button\", name=\"Save & see my matches\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The study profile editor provides a save option for updates.\n        await expect(page.get_by_role(\"button\", name=\"Save & see my matches\").nth(0)).to_be_visible(timeout=15000), \"The study profile editor provides a save option for updates.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "c8aa2431-628b-4e91-891c-48c68be91a10",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:45.183Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+      "metadata": {
+        "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Open profile and access account settings",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can open their profile and access account and security settings from the profile page.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the profile page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Open the account and security section",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify account details are displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the student account status is shown",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:57.236Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"26\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"966\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"971\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Enter the supplied student email and password, then submit the “Welcome back” sign-in form.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"983\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the “Profile” page from the workspace navigation.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/nav/a[7]\",\"desc\":\"Click 'Profile link'\",\"input\":null,\"field\":\"1838\"}\n        # Profile link\n        elem = page.get_by_role(\"link\", name=\"Profile\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # -> Open the “Account & security” section from the profile and check the account details and student status shown there.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/section/div/div/div/a[2]\",\"desc\":\"Click 'Account & security link'\",\"input\":null,\"field\":\"2514\"}\n        # Account & security link\n        elem = page.get_by_role(\"link\", name=\"Account & security\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        current_url = await page.evaluate(\"() => window.location.href\")\n        # Assert-outcome: passed\n        # Assert: page loaded with a URL (final outcome verified by the AI judge during the run)\n        assert current_url, 'Page should have loaded with a URL'\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "eed72da4-08ce-4650-9380-852ab56a3f4b",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:57.252Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+      "metadata": {
+        "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Browse scholarships from the overview",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify the user can start from the overview and open the scholarship discovery page to browse opportunities.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Navigate to the overview page",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Click the link to explore opportunities",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify the scholarship discovery page is displayed",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Verify scholarship search and filtering controls are available",
+            "structured": false
+          }
+        ],
+        "priority": "High",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:46:33.812Z",
+        "updatedAt": "2026-10-27T00:47:20.199Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open “Explore scholarships” from the overview and check the scholarship discovery page for search and filtering controls.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/section/div/div/a[2]\",\"desc\":\"Click 'Explore scholarships link'\",\"input\":null,\"field\":\"29\"}\n        # Explore scholarships link\n        elem = page.get_by_role(\"link\", name=\"Explore scholarships\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The scholarship discovery page is displayed.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The URL shows the scholarship discovery page.\n        await expect(page).to_have_url(re.compile(\"/scholarships\"), timeout=15000), \"The URL shows the scholarship discovery page.\"\n        \n        # --> Scholarship search and filtering controls are available.\n        await page.locator(\"xpath=/html/body/div[3]/main/div[2]/div/form/div[1]/input\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The scholarship search field is visible.\n        await expect(page.locator(\"xpath=/html/body/div[3]/main/div[2]/div/form/div[1]/input\").nth(0)).to_be_visible(timeout=15000), \"The scholarship search field is visible.\"\n        await page.locator(\"xpath=/html/body/div[3]/main/div[2]/div/form/div[2]/select[1]\").nth(0).scroll_into_view_if_needed()\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The destination filter is visible.\n        await expect(page.locator(\"xpath=/html/body/div[3]/main/div[2]/div/form/div[2]/select[1]\").nth(0)).to_be_visible(timeout=15000), \"The destination filter is visible.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "e540c781-9b27-4380-b2c0-6faba01ed7ab",
+        "startedAt": "2026-10-27T00:46:34.830Z",
+        "finishedAt": "2026-10-27T00:47:20.210Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    }
+  ],
+  "scope": "Owner confirms Add Tests with AI; supplied exploration-map screenshot shows run 3a17a157-b012-43db-bf5a-0bbe70028cad with ten passes. Metadata and latest results independently inspected; exact export fidelity is not assumed."
+}

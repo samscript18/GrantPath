@@ -1,60 +1,28 @@
-# Portal generation — unresolved, 27 October 2026
+# Portal AI generation recorded — 27 October 2026
 
-The organiser requires generation in the TestSprite 3.0 web portal against the live
-app. The original seven cases were authored/saved using the official CLI. Fresh
-project metadata says `createdFrom: cli`, every frontend case is marked `cli`,
-and the preflight `--created-from portal` read returned no cases. The owner later manually created three portal cases; see PORTAL_CASE_REVIEW.md. These observations
-do not prove that no exploration ever occurred; the portal Activity Log still
-needs inspection. No generation event, generated-case provenance or organiser
-exception has been supplied. App execution is separate evidence.
+Portal AI generation is now established by the owner's explicit confirmation of live-app exploration and **Add Tests with AI**, the supplied exploration-map screenshot showing **10/10 passed**, and independent metadata/results for ten portal-origin cases created together at **2026-10-27 00:46:33.812 UTC (01:46 Lagos)**. [Passing portal run](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3a17a157-b012-43db-bf5a-0bbe70028cad), [screenshot](evidence/portal-ai-generation-10-pass.png), [case IDs/provenance](evidence/portal-ai-generation-provenance.json), [sanitized original generated plans/exports/results](evidence/portal-generated-case-review.json). A separate portal Activity Log generation-event ID was not exposed; it is not invented. The portal operation was owner-completed, not agent browser interaction.
 
-Portal controls cannot be operated in this agent session: the Browser integration's
-required browser-control tool is not exposed. No CLI generation is substituted.
-The generation/exploration estimate is unknown, so no credited generation is run by this agent. The owner expressly confirmed manual portal creation, not AI generation.
+The existing trigger supports all **20 cases**, per owner confirmation. The reviewed manifest now preserves the original seven CLI-authored cases, three earlier manual portal companions and ten AI-generated portal cases. No case/history is deleted. The original seven plans/sources remain unchanged. The manual privacy companion now uses Ertegun rather than the Twente/API fixtures; the duplicate notification companion inspects retained history without racing the original mandatory mutation/recalculation/deduplication test. Generated plans were reviewed in place for real routes, deterministic filter values, conditional saved/unread state, substantive evidence and account isolation. [Saved plan receipts](evidence/portal-reviewed-plans-saved.json).
 
-## Exact owner procedure
+CI dynamically requires **20/20**, rejecting earlier 7/7 or generation-only 10/10 results; App creator, project and exact-head requirements remain. **The new complete twenty-case PR result is pending at this preparation checkpoint.** Earlier green source `4245853398a25c59a64273c1f119bdf9508be6d5` and the owner's ten-case portal execution do not verify a later source or a complete twenty-case App run.
 
-1. Sign in as **Salman / lammysam8@gmail.com** and open the existing
-   [GrantPath project](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094).
-   Inspect **Activity Log**, filtering for exploration/generation around project
-   creation on 24 October and afterwards. If a genuine event exists, retain its
-   date, project, live target, event/job identifier and resulting case IDs.
-2. If none exists, use the existing project's portal generation flow. The
-   documented portal **AI Chat** can propose a scoped action for review. Request:
+Current balance is **81.5 credits**, Free, with **50 reserved**. The owner's generation/exploration and ten-case run produced an aggregate **10.5** reduction from the last observed 92.0; its separate generation debit is not exposed and is not derived from the execution rate. One complete automatic twenty-case App run plus native API check estimates **10.2** at observed/displayed rates, leaving about **71.3**. No duplicate manual run or new generation is requested by this agent.
 
-   > Generate one frontend test for scholarship discovery's empty-result recovery
-   > against https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app.
-   > Open /scholarships, search GrantPathNoSuchAward2026, verify no matching
-   > scholarships and the visible recovery action, then clear filters and verify
-   > the normal catalogue returns. Use public pages only. Preserve the seven
-   > existing cases, environments, history and GitHub App trigger. Do not run tests,
-   > regenerate the whole app, create schedules, or modify accounts.
+The semantic-search product remains included. Actual catalogue: **32 real records / 23 providers / 17 countries / six regions; 7 open, 2 upcoming, 5 closed, 18 unknown; 23 cycle records and nine overviews**. No production binding, routine scheduler, optional Neon lifecycle, merge or Discord submission is activated. Fresh PR metadata writes previously returned403; the title matches but the owner must paste the replacement body if write access remains unavailable.
 
-   Inspect the proposed action and **displayed total estimate**, including any
-   prerequisite exploration/strategy. After the semantic release, observed balance is 92.0; preserve
-   50 plus enough for final App/API execution (seven-case estimate 3.7; an eight-case suite plus API would be 4.2 at observed rates).
-   If a focused scope or cost estimate is unavailable, stop before starting it.
-   Do not guess a button name or accept broad exploration as equivalent scope.
+## Generated case inventory
 
-3. Review the resulting proposed case in the portal. Require real `/scholarships`
-   controls, an unmistakable empty state, functional recovery, no fixed catalogue
-   count, no invented subject list, and no sign-in/real-account assumptions. Retain
-   only the small useful coverage. Do not delete historical cases to avoid a duplicate.
-   Preserve the portal generation event plus resulting case ID and reviewed assertions.
-4. Include the reviewed case in the App-connected suite using supported project/test
-   list selection. Confirm it is selected in the existing GitHub App configuration;
-   do not replace its environment or disable Blocking PRs. If the suite count changes,
-   update the reviewed manifest and exact-count CI expectation coherently. The guard
-   must continue to require every case; do not loosen it to accept an old seven-case run.
-5. After the deployment is healthy and changes are batched, obtain one actual
-   automatic App result covering the resulting suite at the intended commit. Avoid
-   an overlapping manual run. Record the generation cost separately from execution,
-   actual balance, cases, event and run links. Until then, this requirement stays unresolved.
+| Case                                        | Native ID                              |
+| ------------------------------------------- | -------------------------------------- |
+| Search and filter scholarships              | `e2f66f05-497f-45ab-adff-aef3c24a6099` |
+| View scholarship details from the shortlist | `b1465d25-05d4-48a1-a5a6-63f320255a87` |
+| Open the saved opportunities shortlist      | `ab5240d1-7cf8-406d-8f7c-70f4fab60548` |
+| Review academic references guidance         | `9ae9a4c5-5a19-4211-8ba1-549faa3f4606` |
+| Review notifications and mark them read     | `90536332-1d3a-44de-96b7-fba37fa62836` |
+| Switch applications to list view            | `8a0bcb96-5c30-403b-b091-f62330ebf4e3` |
+| Review applications board stages            | `62473a74-4ce1-4b5d-af28-eb6eb1504110` |
+| Open the study profile editor               | `600c5c59-760a-44ae-a9fb-caab12138065` |
+| Open profile and access account settings    | `595a7970-91fa-40d3-aab0-a50f120ce49e` |
+| Browse scholarships from the overview       | `18cb1b3f-d765-4d1d-9140-350d69fbd5db` |
 
-The interface has not been inspected here; AI Chat and Activity Log are documented
-capabilities, not a claim that a particular generation button was observed.
-References: [official portal introduction](https://www.testsprite.com/blog/how-do-i-get-started-with-testsprite),
-[official changelog](https://www.testsprite.com/changelog),
-[organiser's portal-suite requirement](https://www.testsprite.com/hackathon-s4).
-The user's supplied October 16–26 window is retained; no deadline extension is
-inferred from the public page and no further deadline confirmation is requested.
+Original CLI authorship and the three earlier **manual** portal cases remain distinct. The subsequent AI generation resolves the previously missing creation step; it does not retroactively change their origin. Generation credit estimates were unavailable before the owner operation; this receipt reports only actual balance observations. The screenshot is a passing execution and exploration map, combined with the owner’s explicit statement about Add Tests with AI; no independent event/job ID is fabricated.

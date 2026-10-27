@@ -1,40 +1,14 @@
-# Coverage Matrix — 27 October 2026
+# Coverage Matrix — portal integration, 27 October 2026
 
-Current source `4245853398a25c59a64273c1f119bdf9508be6d5` has seven passing App cases: discovery/evidence; separate citizenship/residence and private application persistence; seven-destination identity; accepted publication and replay; unpublished ambiguous-source exception; exact changed eligibility and notifications; private-note isolation. [Actual App result](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3e453883-20eb-4466-bce3-f77723bb73c5). A separate [native API pass](https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/ade112f3-c9a0-4a27-a22c-30c699fdc2e7/test/9b5228ef-c566-452e-aa84-1eb1d70d9380) verifies 404 foreign update, excluded foreign reads, unchanged owner data and 403 operator denial, at reviewed version `v-5e0325a9c69d`.
+Portal AI generation is now established by the owner's explicit confirmation of live-app exploration and **Add Tests with AI**, the supplied exploration-map screenshot showing **10/10 passed**, and independent metadata/results for ten portal-origin cases created together at **2026-10-27 00:46:33.812 UTC (01:46 Lagos)**. [Passing portal run](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3a17a157-b012-43db-bf5a-0bbe70028cad), [screenshot](evidence/portal-ai-generation-10-pass.png), [case IDs/provenance](evidence/portal-ai-generation-provenance.json), [sanitized original generated plans/exports/results](evidence/portal-generated-case-review.json). A separate portal Activity Log generation-event ID was not exposed; it is not invented. The portal operation was owner-completed, not agent browser interaction.
 
-Local coverage is 101 unit / 37 PostgreSQL / 14 production-browser journeys. Semantic tests cover input/batch limits, structured ID validation, cache stability, committed hourly/daily budgets, failure retention, before-pagination selection and explicit text fallback. Hosted provider/DOM/API checks verify Humanities relevance and repeated results. These are not additional TestSprite browser cases. Portal-generated coverage is **not established**; [owner procedure](PORTAL_GENERATION.md). [Final status](evidence/submission-semantic-status.json).
+The existing trigger supports all **20 cases**, per owner confirmation. The reviewed manifest now preserves the original seven CLI-authored cases, three earlier manual portal companions and ten AI-generated portal cases. No case/history is deleted. The original seven plans/sources remain unchanged. The manual privacy companion now uses Ertegun rather than the Twente/API fixtures; the duplicate notification companion inspects retained history without racing the original mandatory mutation/recalculation/deduplication test. Generated plans were reviewed in place for real routes, deterministic filter values, conditional saved/unread state, substantive evidence and account isolation. [Saved plan receipts](evidence/portal-reviewed-plans-saved.json).
 
-Current catalogue: 32 real records, 23 providers, 17 countries; 7 open / 2 upcoming / 5 closed / 18 unknown. Routine scheduling, optional Neon lifecycle and recipient receipt remain outside verified coverage. App steps are not assumed byte-identical to saved sources.
+CI dynamically requires **20/20**, rejecting earlier 7/7 or generation-only 10/10 results; App creator, project and exact-head requirements remain. **The new complete twenty-case PR result is pending at this preparation checkpoint.** Earlier green source `4245853398a25c59a64273c1f119bdf9508be6d5` and the owner's ten-case portal execution do not verify a later source or a complete twenty-case App run.
 
-### Late portal/manual-run reconciliation — 27 October
+Current balance is **81.5 credits**, Free, with **50 reserved**. The owner's generation/exploration and ten-case run produced an aggregate **10.5** reduction from the last observed 92.0; its separate generation debit is not exposed and is not derived from the execution rate. One complete automatic twenty-case App run plus native API check estimates **10.2** at observed/displayed rates, leaving about **71.3**. No duplicate manual run or new generation is requested by this agent.
 
-The owner explicitly confirmed **“manual creation in the portal”** for three new
-cases and supplied [Activity Log](https://www.testsprite.com/dashboard-v3/o/salmans-workspace-76bdd244/projects/a3f56241-4390-4269-8e0e-e88d61104094/activity)
-and three execution links. The project now contains **ten cases: the original
-seven CLI-authored cases plus three manually portal-authored cases**. The new
-cases cover GLOCAL, notifications and private notes, overlapping original coverage.
-**This still does not establish AI exploration/generation through the web portal.**
-[Owner statement/run links](evidence/submission-owner-portal-history.json),
-[new case metadata/export review](PORTAL_CASE_REVIEW.md).
-
-The final automatic App result at `4245853` covers the original seven cases;
-it does not verify the later three as part of an App-connected ten-case suite.
-Preserve all histories. Before another automatic run, reconcile App selection and
-the exact-count manifest; do not delete cases or weaken the guard. No ten-case App
-pass is claimed. New manual cases are not silently substituted for the original
-reviewed cases. The agent started no extra manual run or generation.
-
-**Final observed balance is 92.0 credits**: 97.2 → 93.7 (App 3.5) → 93.5
-(API 0.2) → 92.0 (additional owner-confirmed manual executions, aggregate 1.5).
-Total account reduction **5.2**, with **50 reserved**. Generation has no displayed
-estimate and was not started by this agent. The 1.5 aggregate is consistent with
-three executions at the observed 0.5 rate, rather than a claimed per-run invoice.
-[Final account/catalogue readback](evidence/submission-final-account-catalogue.json).
-
-The PR title matches the prepared title on independent readback, but its body
-remains the old version after the connector returned **403**. **Owner action is
-paste the replacement body only** from SUBMISSION_PR.md. No alternate write
-identity or second metadata write was attempted.
+The semantic-search product remains included. Actual catalogue: **32 real records / 23 providers / 17 countries / six regions; 7 open, 2 upcoming, 5 closed, 18 unknown; 23 cycle records and nine overviews**. No production binding, routine scheduler, optional Neon lifecycle, merge or Discord submission is activated. Fresh PR metadata writes previously returned403; the title matches but the owner must paste the replacement body if write access remains unavailable.
 
 ---
 

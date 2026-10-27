@@ -1,0 +1,22 @@
+{
+  "name": "Review notifications and mark them read",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}. Sign in if needed; dismiss Continue study profile later if shown. Never change account security, send email, edit the study profile or operate source-publication controls."
+    },
+    {
+      "type": "action",
+      "description": "Open /notifications and verify Keep your possibilities in view and the All updates/Unread filters. Use the default student account, not VAR_{other_email}; the latter belongs to the independent change-notification scenario."
+    },
+    {
+      "type": "action",
+      "description": "If unread notifications exist, inspect one visible update and its Inspect the evidence link, then mark that notification read using its own control. Verify its unread indicator is removed and the update remains in All updates. If all notifications are already read, verify All updates still retains readable entries and Unread honestly shows its empty state. Do not create a new source change merely to obtain an unread fixture."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify a displayed evidence link has an internal scholarship target. Do not require one named historical alert or a fixed inbox count, change preferences, or mark another test account’s inbox read."
+    }
+  ]
+}

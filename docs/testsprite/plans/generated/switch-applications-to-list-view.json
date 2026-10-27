@@ -1,0 +1,22 @@
+{
+  "name": "Switch applications to list view",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}. Sign in if needed; dismiss Continue study profile later if shown. Never change account security, send email, edit the study profile or operate source-publication controls."
+    },
+    {
+      "type": "action",
+      "description": "Open /scholarships/twente-uts-2027. If Save University of Twente Scholarship is visible, click it once; otherwise retain the existing saved state. Do not unsave it or edit notes, progress or checklist. Open /saved."
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /applications and select List view."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify /applications?view=list, the List view link is current, and the saved University of Twente application appears. Reload and verify list view persists. Do not assert a fixed personal stage because an independent application journey may legitimately update it."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "View scholarship details from the shortlist",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}. Sign in if needed; dismiss Continue study profile later if shown. Never change account security, send email, edit the study profile or operate source-publication controls."
+    },
+    {
+      "type": "action",
+      "description": "Open /scholarships/twente-uts-2027. If Save University of Twente Scholarship is visible, click it once; otherwise retain the existing saved state. Do not unsave it or edit notes, progress or checklist. Open /saved."
+    },
+    {
+      "type": "action",
+      "description": "Click the saved University of Twente Scholarship link from the shortlist."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify its scholarship detail page, title, Netherlands destination, partial-funding explanation and Evidence you can inspect section are visible. Verify funding evidence includes € 3,000 - € 22,000 and official utwente.nl guidance. Do not require a definitive eligible or Met outcome: mandatory conditions may need confirmation."
+    }
+  ]
+}

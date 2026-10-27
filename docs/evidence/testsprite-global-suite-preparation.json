@@ -44,9 +44,118 @@
       "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
       "codeVersion": "v-cd62d2bcd84b",
       "planSteps": 4
+    },
+    {
+      "id": "e2f66f05-497f-45ab-adff-aef3c24a6099",
+      "name": "Search and filter scholarships",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "b1465d25-05d4-48a1-a5a6-63f320255a87",
+      "name": "View scholarship details from the shortlist",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "ab5240d1-7cf8-406d-8f7c-70f4fab60548",
+      "name": "Open the saved opportunities shortlist",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "9ae9a4c5-5a19-4211-8ba1-549faa3f4606",
+      "name": "Review academic references guidance",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "name": "Review notifications and mark them read",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "8a0bcb96-5c30-403b-b091-f62330ebf4e3",
+      "name": "Switch applications to list view",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "62473a74-4ce1-4b5d-af28-eb6eb1504110",
+      "name": "Review applications board stages",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "600c5c59-760a-44ae-a9fb-caab12138065",
+      "name": "Open the study profile editor",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "595a7970-91fa-40d3-aab0-a50f120ce49e",
+      "name": "Open profile and access account settings",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "18cb1b3f-d765-4d1d-9140-350d69fbd5db",
+      "name": "Browse scholarships from the overview",
+      "origin": "portal-ai-generated",
+      "generationEvidence": "portal-ai-generation-10-pass.png",
+      "generatedAt": "2026-10-27T00:46:33.812Z",
+      "originalCodeVersion": "v1.0"
+    },
+    {
+      "id": "43f1ad19-29d1-473c-bcc5-838c25987ab1",
+      "name": "Private application notes remain isolated between student accounts",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "name": "Requirement changes update eligibility and create one preference-aware notification",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null
+    },
+    {
+      "id": "efd3c479-5f8c-441e-b96e-05b43aa41f0c",
+      "name": "GLOCAL uses one canonical scholarship URL across all seven destinations",
+      "origin": "portal-manual",
+      "generationEvidence": "submission-owner-portal-history.json",
+      "generatedAt": null
     }
   ],
-  "refreshedAt": "2026-10-26T20:01:50.567Z",
-  "reason": "Same exact reusable sources; notification plan now requires persisted zero-pending queue counts after bounded drain. No weakened eligibility, deduplication or suppression assertions.",
-  "planRefreshedAt": "2026-10-26T20:37:39.642Z"
+  "refreshedAt": "2026-10-27T01:01:17.984574+00:00",
+  "reason": "Owner completed portal Add Tests with AI and supplied a ten-case passing exploration-map screenshot. Existing App trigger supports all20; preserve every case, original seven unchanged. Include ten generated cases and three earlier manual companions; reviewed plans remove brittle preconditions and isolate duplicate writes. Next source requires a fresh complete 20-case App result.",
+  "planRefreshedAt": "2026-10-26T20:37:39.642Z",
+  "selection": {
+    "caseCount": 20,
+    "originalCliCases": 7,
+    "earlierManualPortalCases": 3,
+    "aiGeneratedPortalCases": 10,
+    "configurationEvidence": "Owner confirmed existing trigger only supports all20; no trigger or blocking setting changed by agent."
+  },
+  "portalGenerationExecution": "3a17a157-b012-43db-bf5a-0bbe70028cad"
 }
