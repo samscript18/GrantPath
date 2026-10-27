@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-27T04:19:56.411Z",
+  "head": "5c822c3def5c79ef43b9bbec3abc27f739b302c8",
+  "allRequiredChecksPassed": false,
+  "appPassed": 17,
+  "appBlocked": 1,
+  "appFailed": 0,
+  "requiredCaseCount": 18,
+  "appUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/de9e499a-6b33-4e91-b083-6082e087b55f",
+  "workflowUrl": "https://github.com/samscript18/GrantPath/actions/runs/40448320534",
+  "checks": [
+    {
+      "name": "Vercel Preview Comments",
+      "status": "completed",
+      "conclusion": "success",
+      "detailsUrl": "https://vercel.com/github"
+    },
+    {
+      "name": "TestSprite API ownership",
+      "status": "completed",
+      "conclusion": "success",
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40448320534/job/122004802010"
+    },
+    {
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "status": "completed",
+      "conclusion": "failure",
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40448320534/job/122004801513"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "status": "completed",
+      "conclusion": "success",
+      "detailsUrl": "https://dashboard.gitguardian.com"
+    }
+  ],
+  "statuses": [
+    {
+      "context": "Vercel",
+      "state": "success",
+      "description": "Deployment has completed",
+      "targetUrl": "https://vercel.com/lammysam8-7688/grantpath/Hnop8Zw3dJjVL2vnzNPJ68Q4CMx3"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "failure",
+      "description": "17/18 passed · 1 blocked",
+      "targetUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/de9e499a-6b33-4e91-b083-6082e087b55f"
+    }
+  ],
+  "nativeApiPassed": true,
+  "startingApiMinimum": 30.5,
+  "reserve": 30,
+  "balance": 38.9,
+  "balanceBefore": 48.1,
+  "observedPublicationDebit": 9.2,
+  "blockedCase": {
+    "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "name": "account_privacy",
+    "reason": "Provider loop warning prevented final owner-note persistence reopen; no whole-case pass inferred."
+  },
+  "noAdditionalPaidRun": true
+}

@@ -1,3 +1,11 @@
+# Current manual portal companions —27October2026
+
+All three manual portal companions remain required and passed in the final18-case App execution. Privacy uses isolated Ertegun notes, the notification companion uses the configured student sign-in and validates delivered-alert persistence/evidence, and GLOCAL retains canonical-link comparisons. The owner retired original controlled change case630a42fb and generated read-state case90536332; those TestSprite requirements are removed. Earlier review claims below apply to their dated stage, not the final requirement set.
+
+---
+
+## Historical review
+
 # Earlier manual companions — retained and isolated, 27 October 2026
 
 The three earlier manual cases remain in the project alongside the seven original CLI-authored cases and ten subsequent AI-generated cases. All20 are selected because the existing trigger supports all20, per owner confirmation. No test or history was deleted.

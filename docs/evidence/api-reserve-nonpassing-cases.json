@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-27T04:17:34.808Z",
+  "head": "5c822c3def5c79ef43b9bbec3abc27f739b302c8",
+  "cases": [
+    {
+      "runId": "118962b8-5eac-4dd6-898e-1c439313517b",
+      "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "testTitle": "Private application notes stay with their owner across independent browser sessions",
+      "status": "blocked",
+      "source": "github_action",
+      "startedAt": "2026-10-27T04:11:54.165Z",
+      "finishedAt": "2026-10-27T04:15:21.589Z",
+      "error": "TEST BLOCKED\n\nThe final persistence check could not be completed because reopening the scholarship triggered a loop warning. Earlier in the workflow, the owner account saved “[TEST ONLY] Owner-only application note” and the page confirmed “Your plan is saved.” The second account’s Private notes field showed a different note, and its visible navigation had no Operator item.\n\nObservations:\n- The owner previously saw “Your plan is saved” after saving the note.\n- The second account’s Private notes value was “TestSprite verification: confirm provider language requirements.”\n- The owner is back on the dashboard, but the note was not reopened for the final persistence check.",
+      "stepSummary": {
+        "total": 19,
+        "completed": 19,
+        "passedCount": 18,
+        "failedCount": 1
+      },
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/de9e499a-6b33-4e91-b083-6082e087b55f/test/118962b8-5eac-4dd6-898e-1c439313517b"
+    }
+  ]
+}

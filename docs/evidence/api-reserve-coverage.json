@@ -1,0 +1,396 @@
+{
+  "checkedAt": "2026-10-27T04:14:10.245Z",
+  "head": "5c822c3def5c79ef43b9bbec3abc27f739b302c8",
+  "scope": "Actual public catalogue metadata, excluding labelled fixtures; no field inference/model call",
+  "opportunities": 32,
+  "providerCount": 23,
+  "destinationCountries": [
+    "AU",
+    "CA",
+    "CH",
+    "CO",
+    "DE",
+    "ES",
+    "GB",
+    "GH",
+    "JP",
+    "KR",
+    "NL",
+    "NZ",
+    "SE",
+    "TR",
+    "UG",
+    "US",
+    "ZA"
+  ],
+  "recordKinds": {
+    "cycle": 23,
+    "overview": 9
+  },
+  "availability": {
+    "open": 7,
+    "unknown": 18,
+    "closed": 5,
+    "upcoming": 2
+  },
+  "records": [
+    {
+      "slug": "warwick-ahrc-doctoral-2027",
+      "title": "AHRC Doctoral Scholarships",
+      "provider": "University of Warwick",
+      "providerId": "cmvmfrhyh003biruzgkpb1o5t",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "academic-futures-2027",
+      "title": "Academic Futures Scholarships",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "ashesi-mastercard-3d33bac4e0",
+      "title": "Ashesi Mastercard Foundation Scholars Program",
+      "provider": "Ashesi University",
+      "providerId": "cmvni3hoo003i7fuzuukmna94",
+      "destinations": [
+        "GH"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "australia-awards-cycle-unconfirmed",
+      "title": "Australia Awards Scholarships",
+      "provider": "Australian Government · DFAT",
+      "providerId": "cmvmftr9b0058iruz9255yiff",
+      "destinations": [
+        "AU"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "chevening-2027",
+      "title": "Chevening Scholarships",
+      "provider": "UK Government · Chevening",
+      "providerId": "cmvmfq7bp001viruz6zmv117v",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "clarendon-2027",
+      "title": "Clarendon Scholarships",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "commonwealth-masters-2027",
+      "title": "Commonwealth Master’s Scholarships",
+      "provider": "Commonwealth Scholarship Commission",
+      "providerId": "cmvmfq0nt001kiruzovv1c4up",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "closed"
+    },
+    {
+      "slug": "daad-epos-overview-3d33bac4e0",
+      "title": "DAAD EPOS — development-related postgraduate courses",
+      "provider": "German Academic Exchange Service (DAAD)",
+      "providerId": "cmvni3gt4003g7fuzxbe3gs3h",
+      "destinations": [
+        "DE"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "eth-esop-2027",
+      "title": "ETH Excellence Scholarship & Opportunity Programme",
+      "provider": "ETH Zurich",
+      "providerId": "cmvmfr6hl0030iruzd067ybzx",
+      "destinations": [
+        "CH"
+      ],
+      "recordKind": "cycle",
+      "availability": "upcoming"
+    },
+    {
+      "slug": "ertegun-2027",
+      "title": "Ertegun Graduate Scholarships",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "warwick-faculty-chancellors-2027",
+      "title": "Faculty Chancellors Scholarships",
+      "provider": "University of Warwick",
+      "providerId": "cmvmfrhyh003biruzgkpb1o5t",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "fulbright-foreign-student-3d33bac4e0",
+      "title": "Fulbright Foreign Student Program — country-administered routes",
+      "provider": "U.S. Department of State / Fulbright",
+      "providerId": "cmvni5vbe005i7fuzyk47l90g",
+      "destinations": [
+        "US"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "erasmus-glocal-8adbfb712d",
+      "title": "GLOCAL — Erasmus Mundus Joint Master scholarship",
+      "provider": "GLOCAL Consortium",
+      "providerId": "cmvni0185000o7fuz021am5tf",
+      "destinations": [
+        "GB",
+        "DE",
+        "ES",
+        "SE",
+        "CO",
+        "JP",
+        "NL"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "gks-degree-3d33bac4e0",
+      "title": "Global Korea Scholarship — degree programmes",
+      "provider": "National Institute for International Education",
+      "providerId": "cmvni2n98002g7fuzh83ojrvd",
+      "destinations": [
+        "KR"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "warwick-interdisciplinary-chancellors-2027",
+      "title": "Interdisciplinary Chancellors Scholarships",
+      "provider": "University of Warwick",
+      "providerId": "cmvmfrhyh003biruzgkpb1o5t",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "jardine-oxford-2027",
+      "title": "Jardine-Oxford Graduate Scholarships",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "stanford-knight-hennessy-3d33bac4e0",
+      "title": "Knight-Hennessy Scholars — graduate funding",
+      "provider": "Stanford University",
+      "providerId": "cmvni0xx0001d7fuzti43t0gk",
+      "destinations": [
+        "US"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "leiden-lexs-december-2026",
+      "title": "Leiden University Excellence Scholarship",
+      "provider": "Leiden University",
+      "providerId": "cmvmfsz95004oiruzl9dclj82",
+      "destinations": [
+        "NL"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "mext-research-3d33bac4e0",
+      "title": "MEXT — research student scholarship route",
+      "provider": "Japan Student Services Organization",
+      "providerId": "cmvni2ngx002h7fuzhahdsirt",
+      "destinations": [
+        "JP"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "makerere-mastercard-masters-c95359c2d2",
+      "title": "Makerere Mastercard Foundation — master's scholarships",
+      "provider": "Makerere University",
+      "providerId": "cmvnhyd2v00077fuz4r528681",
+      "destinations": [
+        "UG"
+      ],
+      "recordKind": "cycle",
+      "availability": "closed"
+    },
+    {
+      "slug": "manaaki-tertiary-3d33bac4e0",
+      "title": "Manaaki New Zealand — tertiary scholarship routes",
+      "provider": "Education New Zealand / New Zealand Government",
+      "providerId": "cmvni5vq8005j7fuzjl5tp6vb",
+      "destinations": [
+        "NZ"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "mcgill-mastercard-31c752c934",
+      "title": "McGill Mastercard Foundation Scholars Program",
+      "provider": "McGill University",
+      "providerId": "cmvni1t8p001t7fuzkrd6gpfd",
+      "destinations": [
+        "CA"
+      ],
+      "recordKind": "cycle",
+      "availability": "closed"
+    },
+    {
+      "slug": "nl-scholarship-2026",
+      "title": "NL Scholarship",
+      "provider": "Nuffic · Study in NL",
+      "providerId": "cmvmftd5k004yiruzhuj0j8n8",
+      "destinations": [
+        "NL"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "reach-oxford-2027",
+      "title": "Reach Oxford Scholarship",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "upcoming"
+    },
+    {
+      "slug": "bristol-think-big-2026",
+      "title": "Think Big Scholarships",
+      "provider": "University of Bristol",
+      "providerId": "cmvmfqwyz002qiruzm64asrs8",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    },
+    {
+      "slug": "turkiye-graduate-3d33bac4e0",
+      "title": "Türkiye Scholarships — graduate programme",
+      "provider": "Presidency for Turks Abroad and Related Communities",
+      "providerId": "cmvni4aev004f7fuzdhvcoaud",
+      "destinations": [
+        "TR"
+      ],
+      "recordKind": "overview",
+      "availability": "unknown"
+    },
+    {
+      "slug": "ucl-global-masters-2026",
+      "title": "UCL Global Master’s Scholarship",
+      "provider": "University College London",
+      "providerId": "cmvmfqdc30025iruzulh0tdmd",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "closed"
+    },
+    {
+      "slug": "ucl-global-undergraduate-2026",
+      "title": "UCL Global Undergraduate Scholarship",
+      "provider": "University College London",
+      "providerId": "cmvmfqdc30025iruzulh0tdmd",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "closed"
+    },
+    {
+      "slug": "uct-mastercard-postgraduate-fa76a36874",
+      "title": "UCT Mastercard Foundation — postgraduate scholarships",
+      "provider": "University of Cape Town",
+      "providerId": "cmvni53q6004u7fuziyof3v39",
+      "destinations": [
+        "ZA"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "twente-uts-2027",
+      "title": "University of Twente Scholarship",
+      "provider": "University of Twente",
+      "providerId": "cmvmfsmp2004diruz9amv0h3j",
+      "destinations": [
+        "NL"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "warwick-china-scholarship-council-2027",
+      "title": "Warwick China Scholarship Council",
+      "provider": "University of Warwick",
+      "providerId": "cmvmfrhyh003biruzgkpb1o5t",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "open"
+    },
+    {
+      "slug": "weidenfeld-hoffmann-2027",
+      "title": "Weidenfeld-Hoffmann Scholarships",
+      "provider": "University of Oxford",
+      "providerId": "cmvmforct0000iruzi8o77rku",
+      "destinations": [
+        "GB"
+      ],
+      "recordKind": "cycle",
+      "availability": "unknown"
+    }
+  ]
+}
