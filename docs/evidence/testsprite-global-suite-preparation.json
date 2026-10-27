@@ -134,7 +134,7 @@
     },
     {
       "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
-      "name": "Requirement changes update eligibility and create one preference-aware notification",
+      "name": "Review delivered notifications and official evidence",
       "origin": "portal-manual",
       "generationEvidence": "submission-owner-portal-history.json",
       "generatedAt": null

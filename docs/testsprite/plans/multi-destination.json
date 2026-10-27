@@ -19,7 +19,7 @@
     },
     {
       "type": "assertion",
-      "description": "Open that link; assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence. Each of the seven study-location Scholarship information links must have the identical literal href https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ without query parameters or fragments. Funding evidence and the separate application guidance may use their specific official pages."
+      "description": "Open the captured INTERNAL GrantPath scholarship detail href from the GLOCAL title/View scholarship link, staying on VAR_{url}. Do not click the external Official scholarship button: its literal href was inspected in the preceding assertion, and the provider website does not contain GrantPath's study-location UI. Verify the GrantPath detail route /scholarships/erasmus-glocal-8adbfb712d before continuing. Assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence. Each of the seven study-location Scholarship information links must have the identical literal href https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ without query parameters or fragments. Funding evidence and the separate application guidance may use their specific official pages. All seven per-destination card href comparisons and all seven detail-link assertions remain mandatory."
     }
   ]
 }

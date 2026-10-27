@@ -6,11 +6,11 @@
     },
     {
       "type": "assertion",
-      "description": "Inspect an existing accepted-change notification. Verify its readable accepted-version/change explanation and internal Inspect the evidence link. Open its scholarship detail and inspect Evidence you can inspect or retained accepted history. Do not require the current assessment outcome to equal a historical version: another test legitimately publishes a later version."
+      "description": "Inspect an existing delivered notification in All updates. Require a readable title, substantive explanation, displayed timestamp/time zone and internal Inspect the evidence link. Record its actual topic (New possibility, Accepted change or Confirmed deadline); do not relabel a new-match alert as an accepted change or require a change alert another concurrent test has not created yet. Follow the link and verify it opens the named scholarship, with Evidence you can inspect and an official supporting source. Fail if there is no delivered notification or if its evidence link is broken; do not pass on an empty inbox."
     },
     {
       "type": "assertion",
-      "description": "Return to All updates and verify retained change history remains accessible. Do not mark alerts read, publish snapshots, process jobs or count version-specific notifications; those mandatory mutation, deduplication and suppression assertions remain in the untouched original case 630a42fb-fd1f-4aa7-ae23-ef6ba7c57806."
+      "description": "Return to All updates, reload and verify the same inspected notification remains with its title and working evidence link. Do not require its read status or current assessment to remain unchanged during concurrent tests. Do not mark alerts read, publish snapshots, process jobs or count version-specific notifications; mandatory accepted-change delivery, exact recalculation, deduplication and suppression assertions remain in the untouched original case 630a42fb-fd1f-4aa7-ae23-ef6ba7c57806."
     }
   ]
 }
