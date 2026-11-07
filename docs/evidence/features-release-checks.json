@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-24T15:42:08Z",
+  "commit": "50570e1075cf5a754cc1a9d18ad5513abcc187ae",
+  "deployment": {
+    "id": "dpl_6X3iQXQB9VQWY6xCsL4naQJsVsU2",
+    "state": "READY",
+    "url": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app"
+  },
+  "ci": {
+    "id": 40107749839,
+    "result": "success",
+    "url": "https://github.com/samscript18/GrantPath/actions/runs/40107749839"
+  },
+  "testsprite": {
+    "execution": "e0d65db9-7c39-42f3-b1ff-4ce8f31f2234",
+    "reportedPassed": 2,
+    "total": 2,
+    "commentUrl": "https://github.com/samscript18/GrantPath/pull/1#issuecomment-6386106390",
+    "updatedAt": "2026-10-24T15:40:25Z",
+    "runIds": ["9b6063c2-8e7c-4c9d-8df0-88d58a011097", "35cf5987-72af-4714-b863-3d7a68b690a1"],
+    "creditsBefore": 147,
+    "creditsAfter": 146,
+    "debit": 1,
+    "coverage": "Existing discovery/evidence and profile/application journeys. New Google/theme/password feature assertions verified locally and in hosted smoke; not claimed as TestSprite coverage."
+  },
+  "statuses": [
+    {
+      "context": "Vercel",
+      "state": "success",
+      "target_url": "https://vercel.com/lammysam8-7688/grantpath/6X3iQXQB9VQWY6xCsL4naQJsVsU2"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "success",
+      "target_url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/e0d65db9-7c39-42f3-b1ff-4ce8f31f2234"
+    }
+  ],
+  "gitguardian": {
+    "flaggedOccurrences": 6,
+    "path": "tests/e2e/password.spec.ts",
+    "lines": [14, 24, 28, 30, 49, 56],
+    "classification": "Illustrative password input strings used only for checklist/visibility UI assertions; no accounts provisioned with these strings.",
+    "reviewState": "External incidents remain open; no check disabled, assertion weakened, or history rewritten."
+  }
+}

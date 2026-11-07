@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-24T14:06:35.104Z",
+  "sender": "onboarding@resend.dev",
+  "recipient": "delivered+grantpath-release@resend.dev",
+  "provider": "Resend",
+  "first": {
+    "id": "01a16e3c-196e-79de-82f0-4ee9cb59c1c7",
+    "state": "accepted"
+  },
+  "replay": {
+    "id": "01a16e3c-196e-79de-82f0-4ee9cb59c1c7",
+    "state": "accepted"
+  },
+  "sameProviderId": true,
+  "scope": "Official Resend simulated-delivery inbox. Provider acceptance and idempotent replay only; no human recipient receipt or public student delivery claim."
+}

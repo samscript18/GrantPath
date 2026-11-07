@@ -1,0 +1,552 @@
+{
+  "checkedAt": "2026-10-26T14:50:48.558Z",
+  "scope": "Isolated PR1 preview; public catalogue metadata only",
+  "opportunities": 32,
+  "destinationCountries": [
+    "AU",
+    "CA",
+    "CH",
+    "CO",
+    "DE",
+    "ES",
+    "GB",
+    "GH",
+    "JP",
+    "KR",
+    "NL",
+    "NZ",
+    "SE",
+    "TR",
+    "UG",
+    "US",
+    "ZA"
+  ],
+  "automaticPublications": [
+    {
+      "scholarshipId": "cmvnhyef200097fuzhc9rfvzv",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvnhygpx000k7fuzn21hnyz3"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:19:06.733Z"
+    },
+    {
+      "scholarshipId": "cmvni02ey000q7fuz3kfdye3l",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni04rh00137fuz2mro8feo"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:20:26.943Z"
+    },
+    {
+      "scholarshipId": "cmvni0z9t001f7fuztmioo3p1",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni11hl001p7fuzz90d79g4"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:21:06.722Z"
+    },
+    {
+      "scholarshipId": "cmvni1ux4001v7fuzkxdufjbp",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni1x2u00257fuz9ge37ake"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:21:48.148Z"
+    },
+    {
+      "scholarshipId": "cmvni2onn002k7fuzq8qhfnmf",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni2qy200327fuzn9ruoyls"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:22:26.390Z"
+    },
+    {
+      "scholarshipId": "cmvni2ow4002l7fuzbna8rlft",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni2r4t00337fuz1fexhed3"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:22:26.722Z"
+    },
+    {
+      "scholarshipId": "cmvni3hwj003j7fuzcv1w5kq4",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni3k97003u7fuzb6em1lj3"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:23:04.372Z"
+    },
+    {
+      "scholarshipId": "cmvni3j8d003l7fuzl648uqvw",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni3l7v00457fuznesuz13c"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:23:05.626Z"
+    },
+    {
+      "scholarshipId": "cmvni4csc004h7fuzskxtreu2",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni4ht1004q7fuzx3inr76w"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:23:47.926Z"
+    },
+    {
+      "scholarshipId": "cmvni54y6004w7fuzey97pevb",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni577x00577fuzp9xbx250"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:24:20.785Z"
+    },
+    {
+      "scholarshipId": "cmvni5wpa005m7fuzux24e32k",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni5yum00647fuzcha16gur"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:24:56.601Z"
+    },
+    {
+      "scholarshipId": "cmvni5x4e005n7fuz5rabjexd",
+      "decision": "auto_publish",
+      "reasonCodes": ["VALIDATED_OFFICIAL_RECORD"],
+      "resultingVersion": 1,
+      "eventIds": ["cmvni5z8a00677fuzvmq3ahvt"],
+      "policyVersion": "publication-1.0.0/directory-1",
+      "createdAt": "2026-10-25T07:24:57.082Z"
+    }
+  ],
+  "records": [
+    {
+      "id": "cmvmfote00002iruzpqwpxer5",
+      "slug": "clarendon-2027",
+      "title": "Clarendon Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfozyc000ciruzlicu38qj",
+      "slug": "weidenfeld-hoffmann-2027",
+      "title": "Weidenfeld-Hoffmann Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfqfu50027iruz1fz817ij",
+      "slug": "ucl-global-masters-2026",
+      "title": "UCL Global Master’s Scholarship",
+      "cycle": "2026/27",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfp64n000liruz75mh2mw9",
+      "slug": "reach-oxford-2027",
+      "title": "Reach Oxford Scholarship",
+      "cycle": "2027",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfpg28000uiruztsxdnb1j",
+      "slug": "ertegun-2027",
+      "title": "Ertegun Graduate Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfpq0h0013iruz01iwt8hl",
+      "slug": "academic-futures-2027",
+      "title": "Academic Futures Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfpxfo001ciruz519czqxu",
+      "slug": "jardine-oxford-2027",
+      "title": "Jardine-Oxford Graduate Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfq2u1001miruz7z2p4img",
+      "slug": "commonwealth-masters-2027",
+      "title": "Commonwealth Master’s Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfq92d001xiruz1ggek8me",
+      "slug": "chevening-2027",
+      "title": "Chevening Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfqocg002hiruz943zx4yv",
+      "slug": "ucl-global-undergraduate-2026",
+      "title": "UCL Global Undergraduate Scholarship",
+      "cycle": "2026/27",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfr0n6002siruzg7ff5ycv",
+      "slug": "bristol-think-big-2026",
+      "title": "Think Big Scholarships",
+      "cycle": "2026 entry",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfra5i0032iruzjlgaun7m",
+      "slug": "eth-esop-2027",
+      "title": "ETH Excellence Scholarship & Opportunity Programme",
+      "cycle": "2027/28",
+      "destinationCodes": ["CH"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfrn9q003diruzyspunjvu",
+      "slug": "warwick-faculty-chancellors-2027",
+      "title": "Faculty Chancellors Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfrz06003miruzibw6y6qc",
+      "slug": "warwick-interdisciplinary-chancellors-2027",
+      "title": "Interdisciplinary Chancellors Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfs81c003viruzyzrvcw8x",
+      "slug": "warwick-ahrc-doctoral-2027",
+      "title": "AHRC Doctoral Scholarships",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfsh4z0044iruzau7o0qy9",
+      "slug": "warwick-china-scholarship-council-2027",
+      "title": "Warwick China Scholarship Council",
+      "cycle": "2027/28",
+      "destinationCodes": ["GB"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmfsprj004firuz6rv059yc",
+      "slug": "twente-uts-2027",
+      "title": "University of Twente Scholarship",
+      "cycle": "2027/28",
+      "destinationCodes": ["NL"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmft4ln004qiruz4flgupfc",
+      "slug": "leiden-lexs-december-2026",
+      "title": "Leiden University Excellence Scholarship",
+      "cycle": "December 2026 selection",
+      "destinationCodes": ["NL"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmftjb20050iruzdntjhqg9",
+      "slug": "nl-scholarship-2026",
+      "title": "NL Scholarship",
+      "cycle": "2026/27",
+      "destinationCodes": ["NL"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvmftv7p005airuzkt8oujn2",
+      "slug": "australia-awards-cycle-unconfirmed",
+      "title": "Australia Awards Scholarships",
+      "cycle": "Programme overview · cycle unconfirmed",
+      "destinationCodes": ["AU"],
+      "versions": [
+        {
+          "actorId": "official-source-research:2026-10-24",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni0z9t001f7fuztmioo3p1",
+      "slug": "stanford-knight-hennessy-3d33bac4e0",
+      "title": "Knight-Hennessy Scholars — graduate funding",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["US"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvnhyef200097fuzhc9rfvzv",
+      "slug": "makerere-mastercard-masters-c95359c2d2",
+      "title": "Makerere Mastercard Foundation — master's scholarships",
+      "cycle": "2026/2027",
+      "destinationCodes": ["UG"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni02ey000q7fuz3kfdye3l",
+      "slug": "erasmus-glocal-8adbfb712d",
+      "title": "GLOCAL — Erasmus Mundus Joint Master scholarship",
+      "cycle": "September 2027 entry",
+      "destinationCodes": ["GB", "DE", "ES", "SE", "CO", "JP", "NL"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni1ux4001v7fuzkxdufjbp",
+      "slug": "mcgill-mastercard-31c752c934",
+      "title": "McGill Mastercard Foundation Scholars Program",
+      "cycle": "Fall 2027",
+      "destinationCodes": ["CA"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni2onn002k7fuzq8qhfnmf",
+      "slug": "gks-degree-3d33bac4e0",
+      "title": "Global Korea Scholarship — degree programmes",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["KR"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni3hwj003j7fuzcv1w5kq4",
+      "slug": "daad-epos-overview-3d33bac4e0",
+      "title": "DAAD EPOS — development-related postgraduate courses",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["DE"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni2ow4002l7fuzbna8rlft",
+      "slug": "mext-research-3d33bac4e0",
+      "title": "MEXT — research student scholarship route",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["JP"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni3j8d003l7fuzl648uqvw",
+      "slug": "ashesi-mastercard-3d33bac4e0",
+      "title": "Ashesi Mastercard Foundation Scholars Program",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["GH"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni4csc004h7fuzskxtreu2",
+      "slug": "turkiye-graduate-3d33bac4e0",
+      "title": "Türkiye Scholarships — graduate programme",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["TR"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni54y6004w7fuzey97pevb",
+      "slug": "uct-mastercard-postgraduate-fa76a36874",
+      "title": "UCT Mastercard Foundation — postgraduate scholarships",
+      "cycle": "2027 intake",
+      "destinationCodes": ["ZA"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni5x4e005n7fuz5rabjexd",
+      "slug": "manaaki-tertiary-3d33bac4e0",
+      "title": "Manaaki New Zealand — tertiary scholarship routes",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["NZ"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    },
+    {
+      "id": "cmvni5wpa005m7fuzux24e32k",
+      "slug": "fulbright-foreign-student-3d33bac4e0",
+      "title": "Fulbright Foreign Student Program — country-administered routes",
+      "cycle": "Scheme overview — cycle unconfirmed",
+      "destinationCodes": ["US"],
+      "versions": [
+        {
+          "actorId": "service:official-discovery",
+          "number": 1
+        }
+      ]
+    }
+  ]
+}

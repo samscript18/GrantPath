@@ -1,0 +1,279 @@
+{
+  "recordedAt": "2026-10-25T06:27:16.572Z",
+  "method": "Standalone bounded public-host fetch with robots checks, manual redirects and durable per-host pacing",
+  "observations": [
+    {
+      "id": "mastercard",
+      "url": "https://mastercardfdn.org/en/what-we-do/our-programs/mastercard-foundation-scholars-program/where-to-apply/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:00:04.859Z",
+      "headings": [
+        "It's more than just a scholarship.",
+        "The Mastercard Foundation is aware of Facebook posts advertising recruitment for the Mastercard Foundation Scholars Program and requesting an application fee. These groups are not associated with the Mastercard Foundation.",
+        "Mastercard Foundation Scholars Program Institutions",
+        ""
+      ]
+    },
+    {
+      "id": "glocal",
+      "url": "https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:00:05.394Z",
+      "headings": [
+        "Programme Overview",
+        "Study Tracks",
+        "Track A",
+        "Track B",
+        "Track C",
+        "Track D",
+        "Track E",
+        "Track F",
+        "Track G",
+        "Track H"
+      ]
+    },
+    {
+      "id": "pretoria",
+      "url": "https://www.up.ac.za/mastercard-foundation-scholars-program/what-program-covers",
+      "error": "SOURCE_HTTP:403",
+      "attemptedAt": "2026-10-25T06:00:25.771Z"
+    },
+    {
+      "id": "makerere",
+      "url": "https://apply.mastercardfoundation.mak.ac.ug/scholarships",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:00:26.543Z",
+      "headings": [
+        "Scholarships",
+        "Undergraduate Scholarships for Academic year 2026/2027",
+        "Graduate/Masters Scholarships for Academic Year 2026/2027"
+      ]
+    },
+    {
+      "id": "stanford",
+      "url": "https://knight-hennessy.stanford.edu/program-overview/funding",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:00:47.817Z",
+      "headings": [
+        "Funding",
+        "Main navigation",
+        "Financial Support for Cost of Attendance",
+        "What is Not Covered",
+        "Resources"
+      ]
+    },
+    {
+      "id": "mcgill",
+      "url": "https://www.mcgill.ca/mastercardfdn-scholars/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:00:47.874Z",
+      "headings": [
+        "Main navigation",
+        "Mastercard Foundation Scholars Program",
+        "The Mastercard Foundation Scholars Program stands as the largest scholarship and leadership initiative of its kind in Africa.",
+        "Fostering Entrepreneurship and Social Impact",
+        "McGill's Mastercard Foundation Scholars",
+        "Upcoming Events",
+        "Department and University Information",
+        "Mastercard Foundation Scholars Program at McGill University"
+      ]
+    },
+    {
+      "id": "japan",
+      "url": "https://www.studyinjapan.go.jp/en/planning/scholarships/mext-scholarships/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:01:09.708Z",
+      "headings": [
+        "Scholarships",
+        "Japanese Government (MEXT) Scholarship",
+        "Types",
+        "Application Process",
+        "Japanese Government (MEXT) Scholarship Applicant Qualifying Examinations - Subject Test Questions"
+      ]
+    },
+    {
+      "id": "korea",
+      "url": "https://www.niied.go.kr/web/niied/contents/niiedEng/eng_gksDegree",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:01:09.937Z",
+      "headings": ["Core Business"]
+    },
+    {
+      "id": "turkiye",
+      "url": "https://www.turkiyeburslari.gov.tr/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:01:31.318Z",
+      "headings": [
+        "#TürkiyeScholarships",
+        "#BeyondBorders",
+        "#EverythingAtOnce",
+        "#WorldClassEducation",
+        "#FutureIsNow",
+        "#NewPagetoEducation",
+        "#GlobalNetwork",
+        "YTB–IsDB Joint Scholarship Program Meeting",
+        "YTB – Islamic Development Bank (ISDB) Joint Scholarship Program 2026 Applicaiton Period",
+        "Türkiye Scholarships 2026 Applications"
+      ]
+    },
+    {
+      "id": "daad",
+      "url": "https://www.daad.de/en/information-services-for-higher-education-institutions/further-information-on-daad-programmes/epos/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:01:31.355Z",
+      "headings": ["Background", "Programme objectives", "Funded projects/measures", "Results"]
+    },
+    {
+      "id": "ghana",
+      "url": "https://mcf.knust.edu.gh/",
+      "error": "fetch failed",
+      "attemptedAt": "2026-10-25T06:01:33.569Z"
+    },
+    {
+      "id": "newzealand",
+      "url": "https://www.nzscholarships.govt.nz/check-eligible-countries/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:01:52.557Z",
+      "headings": ["Check eligible countries", "Application process"]
+    },
+    {
+      "id": "glocal-funding",
+      "url": "https://globallocal-erasmusmundus.eu/erasmus-mundus-scholarship/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:03:36.379Z",
+      "headings": ["GLOCAL Consortium"]
+    },
+    {
+      "id": "glocal-list",
+      "url": "https://globallocal-erasmusmundus.eu/how-to-apply/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:03:58.141Z",
+      "headings": ["How To Apply", "GLOCAL Consortium"]
+    },
+    {
+      "id": "makerere-master",
+      "url": "https://apply.mastercardfoundation.mak.ac.ug/announcements/30",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:04:19.283Z",
+      "headings": [
+        "Scholarships for Masters Programmes 2026/2027",
+        "About the Scholarship",
+        "Application Procedure",
+        "Deadline for Submission of Application",
+        "Eligibility",
+        "Ready to Apply? Click here to get Started.",
+        "Apply Now (Masters Scholarships)"
+      ]
+    },
+    {
+      "id": "mcgill-apply",
+      "url": "https://www.mcgill.ca/mastercardfdn-scholars/apply",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:04:19.475Z",
+      "headings": [
+        "Main navigation",
+        "Apply",
+        "How to Apply",
+        "Questions about the application process?",
+        "Department and University Information",
+        "Mastercard Foundation Scholars Program at McGill University"
+      ]
+    },
+    {
+      "id": "rwanda",
+      "url": "https://www.africa.engineering.cmu.edu/financial-aid/mastercard-foundation-scholars-program.html",
+      "error": "SOURCE_HTTP:404",
+      "attemptedAt": "2026-10-25T06:04:40.866Z"
+    },
+    {
+      "id": "cape-town",
+      "url": "https://uct.ac.za/mastercardfdn",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:04:40.917Z",
+      "headings": [
+        "",
+        "Mastercard Foundation Scholars Program 2027 Applications are now open!",
+        "Celebrating a Decade of Leadership Excellence",
+        "Mastercard Foundation Scholars Program gives impetus to the spirit of ubuntu",
+        "Combining service and policy to make a real difference",
+        "Tributes to ‘life-changing’ Mastercard Foundation Scholars Program",
+        "NextGen Engineers’ winning toolkit takes innovation beyond the lab",
+        "Mastercard Foundation Scholar focuses on ways to alleviate climate change while giving back to society"
+      ]
+    },
+    {
+      "id": "korea-list",
+      "url": "https://www.niied.go.kr/web/niied/contents/niiedEng/eng_gksDegree",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:05:03.037Z",
+      "headings": ["Core Business"]
+    },
+    {
+      "id": "ashesi",
+      "url": "https://ashesi.edu.gh/financial-aid/",
+      "error": "SOURCE_HTTP:404",
+      "attemptedAt": "2026-10-25T06:05:09.621Z"
+    },
+    {
+      "id": "ashesi-scholarships",
+      "url": "https://ashesi.edu.gh/scholarships/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:08:37.488Z",
+      "headings": [
+        "Scholarships Make an Ashesi Education Affordable",
+        "~50%",
+        "25%",
+        "Ranked 1st",
+        "Stories",
+        "Spotlight: Mastercard Foundation Scholars Program",
+        "Spotlight: Kofi A. Tawiah Scholarship Program",
+        "Supporting Students"
+      ]
+    },
+    {
+      "id": "ashesi-mastercard",
+      "url": "https://ashesi.edu.gh/the-mastercard-foundation-scholars-programme/",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:08:58.899Z",
+      "headings": [
+        "The Mastercard Foundation Scholars Program at Ashesi",
+        "Tips for a Strong Scholarship Application",
+        "Featured Stories",
+        "Accelerated master's program with Arizona State University",
+        "A pan-African alumni network",
+        "Activity Calendar",
+        "Featured Event: December 3, 2025"
+      ]
+    },
+    {
+      "id": "turkiye-fulltime",
+      "url": "https://www.turkiyeburslari.gov.tr/fulltimeprograms",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:09:20.044Z",
+      "headings": ["Full-Time Scholarships"]
+    },
+    {
+      "id": "cape-apply",
+      "url": "https://uct.ac.za/mastercardfdn/how-apply",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:09:20.291Z",
+      "headings": ["Apply"]
+    },
+    {
+      "id": "fulbright",
+      "url": "https://foreign.fulbrightonline.org/about/foreign-student-program",
+      "status": 200,
+      "retrievedAt": "2026-10-25T06:09:41.709Z",
+      "headings": [
+        "Foreign Fulbright Program - Foreign Student Program",
+        "Fulbright Foreign Student Program"
+      ]
+    },
+    {
+      "id": "daad-course",
+      "url": "https://www.th-koeln.de/en/academics/integrated-water-resources-management-master_7084.php",
+      "error": "SOURCE_HTTP:404",
+      "attemptedAt": "2026-10-25T06:09:41.885Z"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-26T16:06:10.083044+00:00",
+  "scope": "Local production app and isolated PostgreSQL; not TestSprite",
+  "typecheck": "passed",
+  "lint": "passed",
+  "unitPassed": 85,
+  "postgresqlPassed": 31,
+  "productionBuild": "passed",
+  "focusedProductionBrowserPassed": 3,
+  "includesExactSavedSources": 7,
+  "completedEventInvariant": "Real handled scholarship.changed remains in recentEvents with done state and is absent from unfinished events",
+  "screenshotsInspected": [
+    "global-completed-events-desktop.png",
+    "global-completed-events-mobile.png"
+  ]
+}

@@ -53,7 +53,7 @@ export function ApplicationEditor({
     }
   }
   return (
-    <div className="space-y-5">
+    <div className="application-editor space-y-5">
       <div>
         <label className="field-label" htmlFor={`status-${application.id}`}>
           My application progress
@@ -83,7 +83,7 @@ export function ApplicationEditor({
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
           placeholder="Questions to ask, ideas to explore, a plan for your next step…"
-          className="w-full rounded-md border border-border bg-background p-3 text-xs leading-6"
+          className="w-full rounded-lg border border-border bg-background/60 p-3 text-[13px] leading-7 focus:border-primary/60 focus:outline-none focus:ring-3 focus:ring-primary/10"
         />
       </div>
       <div>
@@ -91,9 +91,9 @@ export function ApplicationEditor({
         <p className="mb-3 text-[10px] leading-5 text-muted-foreground">
           A personal planning aid. Check official guidance for required documents.
         </p>
-        <ul className="space-y-3">
+        <ul className="divide-y divide-border/60">
           {checklist.map((c) => (
-            <li key={c.id} className="flex items-start gap-3">
+            <li key={c.id} className="flex items-start gap-3 py-3">
               <label className="flex min-w-0 flex-1 items-start gap-2 text-xs leading-5">
                 <input
                   className="mt-1 accent-primary"
@@ -180,7 +180,7 @@ export function ApplicationEditor({
           The scholarship is kept in the catalogue.
         </p>
         <button
-          className="text-red-800 underline"
+          className="text-danger-foreground underline"
           onClick={async () => {
             if (
               !window.confirm(

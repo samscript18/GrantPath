@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-27",
+  "pr": "https://github.com/samscript18/GrantPath/pull/1",
+  "operation": "Update title and body using the authorised GitHub connector",
+  "status": 403,
+  "message": "Resource not accessible by integration",
+  "applied": false,
+  "alternateIdentityAttempted": false,
+  "replacement": "docs/SUBMISSION_PR.md",
+  "title": "Ship evidence-backed global scholarships and semantic subject discovery",
+  "titleMatchesPreparedOnReadback": true,
+  "bodyMatchesPreparedOnReadback": false,
+  "remainingOwnerAction": "Paste replacement body; title already matches the prepared title.",
+  "note": "The connector returned 403; independent readback found the new title but the old body. No second write or alternate identity was attempted."
+}

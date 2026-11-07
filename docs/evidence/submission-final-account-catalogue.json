@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-27T00:18:24.930Z",
+  "health": {
+    "application": "GrantPath",
+    "revision": "4245853398a25c59a64273c1f119bdf9508be6d5"
+  },
+  "account": {
+    "name": "Salman",
+    "email": "lammysam8@gmail.com",
+    "plan": "Free",
+    "balance": 92
+  },
+  "creditsBefore": 97.2,
+  "spent": 5.2,
+  "realRecords": 32,
+  "providers": 23,
+  "countries": [
+    "AU",
+    "CA",
+    "CH",
+    "CO",
+    "DE",
+    "ES",
+    "GB",
+    "GH",
+    "JP",
+    "KR",
+    "NL",
+    "NZ",
+    "SE",
+    "TR",
+    "UG",
+    "US",
+    "ZA"
+  ],
+  "availability": {
+    "open": 7,
+    "unknown": 18,
+    "closed": 5,
+    "upcoming": 2
+  },
+  "recordKinds": {
+    "cycle": 23,
+    "overview": 9
+  },
+  "generationStartedByAgent": false,
+  "creditAttribution": {
+    "automaticApp": 3.5,
+    "nativeAPI": 0.2,
+    "laterOwnerManualExecutionsAggregate": 1.5
+  }
+}

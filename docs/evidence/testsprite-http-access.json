@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-26T18:41:28.186Z",
+  "finishedAt": "2026-10-26T18:42:10.090Z",
+  "head": "9461493cb65e9eb4ee1e22948127309f178194e9",
+  "reason": "New concrete runtime remedy: standard-library HTTP cookie jars replace instrumented Playwright contexts while preserving and strengthening actual ownership/status assertions. Hosted source passed before this focused strict execution.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 116.5,
+  "case": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "exitCode": 1,
+  "body": {
+    "runId": "9e65f3be-2f18-4e1d-b6d1-75bfa961631b",
+    "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "testTitle": "Cross-account application modification is denied by the server and owner data stays unchanged",
+    "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+    "userId": "a4b85448-0081-7067-e263-693e586fe698",
+    "status": "failed",
+    "source": "cli",
+    "createdAt": "2026-10-26T18:41:37.010Z",
+    "startedAt": "2026-10-26T18:41:37.010Z",
+    "finishedAt": "2026-10-26T18:42:06.212Z",
+    "codeVersion": null,
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "environment": {
+      "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+      "name": "default"
+    },
+    "createdFrom": null,
+    "failedStepIndex": null,
+    "failureKind": "unknown",
+    "error": "replay child failed: TypeError: An asyncio.Future, a coroutine or an awaitable is required",
+    "videoUrl": "",
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "replay": {
+      "path": "replay",
+      "reason": null,
+      "caveat": null
+    },
+    "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/0727bf8c-7943-4e99-b944-0ed0cd457ca5/test/9e65f3be-2f18-4e1d-b6d1-75bfa961631b",
+    "apiOutput": null,
+    "trace": null
+  },
+  "diagnostic": "idempotency-key: cli-run-ab74b184-3ac1-4d1b-8b01-b46a3e219310\nRun 9e65f3be-2f18-4e1d-b6d1-75bfa961631b\nDashboard: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279\nrequestId: cli_ad8be12e-1ca4-447e-ae26-cc7eba779505\nRun finished with status: failed. Use 'testsprite test artifact get 9e65f3be-2f18-4e1d-b6d1-75bfa961631b' to download the failure bundle.\n{\n  \"error\": {\n    \"code\": \"CLI_ERROR\",\n    \"message\": \"Run 9e65f3be-2f18-4e1d-b6d1-75bfa961631b finished with status: failed\",\n    \"nextAction\": \"\",\n    \"requestId\": \"local\",\n    \"details\": {}\n  }\n}\n"
+}

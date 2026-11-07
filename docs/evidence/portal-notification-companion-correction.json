@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-27T01:12:41.419Z",
+  "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+  "before": {
+    "name": "Review retained change notifications and official evidence",
+    "planStepCount": 3
+  },
+  "after": {
+    "name": "Review delivered notifications and official evidence",
+    "planStepCount": 3,
+    "createdFrom": "portal"
+  },
+  "executionDispatched": false,
+  "reason": "First all20 run failed on an unsupported accepted-change-history precondition. Preserve failure; require substantive delivered-alert content, actual topic, evidence destination and persistence, without empty-inbox pass. Original mandatory accepted-change case unchanged."
+}

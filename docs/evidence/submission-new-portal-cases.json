@@ -1,0 +1,214 @@
+{
+  "checkedAt": "2026-10-27T00:22:59.941Z",
+  "cases": [
+    {
+      "id": "43f1ad19-29d1-473c-bcc5-838c25987ab1",
+      "metadata": {
+        "id": "43f1ad19-29d1-473c-bcc5-838c25987ab1",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Private application notes remain isolated between student accounts",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify through visible application screens that one student's private application note is unavailable to another student and remains unchanged after the second student's visit. This browser case complements the existing required backend 403/404 enforcement test.",
+        "planStepCount": 4,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Sign in using VAR_{other_email} and VAR_{password}. Open /scholarships/twente-uts-2027. Wait until its Save or Unsave control appears. Save the opportunity if necessary.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Expand My application plan. Set Private notes to:[TEST ONLY] Portal privacy verification note\nClick Save my plan, verify Your plan is saved, reload, and confirm the note persists.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Sign out. Sign in using VAR_{username} and VAR_{password}. Open the same scholarship. Assert the owner’s note is absent. If this account has its own application plan, expand it and assert its Private notes field does not contain the owner’s note. Assert no Operator navigation item appears.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Sign out and return to the original account. Reload the scholarship and expand its application plan. Assert the original private note is unchanged.",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:11:08.703Z",
+        "updatedAt": "2026-10-27T00:16:40.706Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the sign-in page using the visible “Sign in” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/div/a\",\"desc\":\"Click 'Sign in link'\",\"input\":null,\"field\":\"26\"}\n        # Sign in link\n        elem = page.get_by_role(\"link\", name=\"Sign in\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign in to GrantPath as VAR_{other_email} and check that the account opens successfully.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{other_email}' into email email field\",\"input\":\"VAR_{other_email}\",\"field\":\"966\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{other_email}\")\n        \n        # -> Sign in to GrantPath as VAR_{other_email} and check that the account opens successfully.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"971\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Sign in to GrantPath as VAR_{other_email} and check that the account opens successfully.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"983\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Search for the Twente UTS 2027 scholarship using the dashboard’s scholarship search.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/header/div/div[3]/form/input\",\"desc\":\"Fill 'Twente UTS 2027' into Find a scholarship\\u2026 search field\",\"input\":\"Twente UTS 2027\",\"field\":\"1436\"}\n        # Find a scholarship… search field\n        elem = page.get_by_role(\"searchbox\", name=\"Quick scholarship search\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"Twente UTS 2027\")\n        \n        # -> Submit the “Twente UTS 2027” scholarship search using the visible Search button.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div/button\",\"desc\":\"Click 'Search button'\",\"input\":null,\"field\":\"2159\"}\n        # Search button\n        elem = page.get_by_role(\"button\", name=\"Search\")\n        await elem.click(timeout=10000)\n        \n        # -> Change the availability filter to include closed cycles so the Twente UTS 2027 opportunity can be located.\n        # @@ts-step {\"i\":8,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[4]\",\"desc\":\"Select option in 'Exclude closed cycles All cycles, including... dropdown'\",\"input\":null,\"field\":\"2199\"}\n        # Exclude closed cycles All cycles, including... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[4]\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the selected availability filter and check whether the Twente UTS 2027 scholarship appears.\n        # @@ts-step {\"i\":9,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"2286\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the Twente UTS 2027 scholarship page while signed in as Other test student.\n        # @@ts-step {\"i\":10,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}/scholarships/twente-uts-2027\",\"input\":\"VAR_{url}/scholarships/twente-uts-2027\",\"field\":null}\n        await page.goto(\"VAR_{url}/scholarships/twente-uts-2027\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Expand “My application plan” to edit the private note.\n        # @@ts-step {\"i\":11,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/aside/div/details/summary\",\"desc\":\"Click 'My application plan \\u00b7 Interested'\",\"input\":null,\"field\":\"4004\"}\n        # My application plan · Interested\n        elem = page.get_by_text(\"My application plan ·\")\n        await elem.click(timeout=10000)\n        \n        # -> Replace the owner’s Private notes with the specified verification note and save the application plan.\n        # @@ts-step {\"i\":12,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/main/div/aside/div/details/div/div/div[2]/textarea\",\"desc\":\"Fill '[TEST ONLY] Portal privacy verification note' into [TEST ONLY] Owner-only application note text area\",\"input\":\"[TEST ONLY] Portal privacy verification note\",\"field\":\"3365\"}\n        # [TEST ONLY] Owner-only application note text area\n        elem = page.get_by_role(\"textbox\", name=\"Private notes\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"[TEST ONLY] Portal privacy verification note\")\n        \n        # -> Replace the owner’s Private notes with the specified verification note and save the application plan.\n        # @@ts-step {\"i\":13,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/aside/div/details/div/div/button\",\"desc\":\"Click 'Save my plan button'\",\"input\":null,\"field\":\"3433\"}\n        # Save my plan button\n        elem = page.get_by_role(\"button\", name=\"Save my plan\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign out of the scholarship page as Other test student so the second student account can be checked.\n        # @@ts-step {\"i\":14,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/div[2]/div[2]/span/button\",\"desc\":\"Click 'Sign out button'\",\"input\":null,\"field\":\"3410\"}\n        # Sign out button\n        elem = page.get_by_role(\"button\", name=\"Sign out\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign in to GrantPath as VAR_{username} and verify that the student account opens successfully.\n        # @@ts-step {\"i\":15,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{username}' into email email field\",\"input\":\"VAR_{username}\",\"field\":\"5220\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{username}\")\n        \n        # -> Sign in to GrantPath as VAR_{username} and verify that the student account opens successfully.\n        # @@ts-step {\"i\":16,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"5225\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Sign in to GrantPath as VAR_{username} and verify that the student account opens successfully.\n        # @@ts-step {\"i\":17,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"5237\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the visible University of Twente Scholarship opportunity from the student dashboard to check its private application plan.\n        # @@ts-step {\"i\":18,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[4]/div/div[2]/article[3]/a\",\"desc\":\"Click 'University of Twente Scholarship link'\",\"input\":null,\"field\":\"5886\"}\n        # University of Twente Scholarship link\n        elem = page.get_by_role(\"link\", name=\"University of Twente Scholarship\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # -> Expand “My application plan” and verify the second student’s Private notes do not contain the owner’s verification note.\n        # @@ts-step {\"i\":19,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/aside/div/details/summary\",\"desc\":\"Click 'My application plan \\u00b7 Preparing documents'\",\"input\":null,\"field\":\"6590\"}\n        # My application plan · Preparing documents\n        elem = page.get_by_text(\"My application plan ·\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign out of the student account so the original account can be used for the final note check.\n        # @@ts-step {\"i\":20,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/aside/div[2]/div[2]/span/button\",\"desc\":\"Click 'Sign out button'\",\"input\":null,\"field\":\"5656\"}\n        # Sign out button\n        elem = page.get_by_role(\"button\", name=\"Sign out\")\n        await elem.click(timeout=10000)\n        \n        # -> Sign in as VAR_{other_email} and return to the University of Twente Scholarship to confirm the private note is unchanged.\n        # @@ts-step {\"i\":21,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[2]/input\",\"desc\":\"Fill 'VAR_{other_email}' into email email field\",\"input\":\"VAR_{other_email}\",\"field\":\"7159\"}\n        # email email field\n        elem = page.get_by_role(\"textbox\", name=\"Email address\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{other_email}\")\n        \n        # -> Sign in as VAR_{other_email} and return to the University of Twente Scholarship to confirm the private note is unchanged.\n        # @@ts-step {\"i\":22,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/div[3]/div/input\",\"desc\":\"Fill 'VAR_{password}' into password password field\",\"input\":\"VAR_{password}\",\"field\":\"7164\"}\n        # password password field\n        elem = page.get_by_role(\"textbox\", name=\"Password\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"VAR_{password}\")\n        \n        # -> Sign in as VAR_{other_email} and return to the University of Twente Scholarship to confirm the private note is unchanged.\n        # @@ts-step {\"i\":23,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/div/main/div[2]/form/button[2]\",\"desc\":\"Click 'Welcome back \\u2192 button'\",\"input\":null,\"field\":\"7177\"}\n        # Welcome back → button\n        elem = page.get_by_role(\"button\", name=\"Welcome back →\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the University of Twente Scholarship from the owner dashboard and verify the saved private note remains unchanged.\n        # @@ts-step {\"i\":24,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[4]/div/div[2]/article[3]/a\",\"desc\":\"Click 'University of Twente Scholarship link'\",\"input\":null,\"field\":\"8053\"}\n        # University of Twente Scholarship link\n        elem = page.get_by_role(\"link\", name=\"University of Twente Scholarship\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # -> Expand “My application plan” on the owner account and confirm the Private notes field still contains the exact verification note.\n        # @@ts-step {\"i\":25,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div/aside/div/details/summary\",\"desc\":\"Click 'My application plan \\u00b7 Interested'\",\"input\":null,\"field\":\"8748\"}\n        # My application plan · Interested\n        elem = page.get_by_text(\"My application plan ·\")\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The original student's private note remains unchanged after the other student's visit.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The original student's private note is still unchanged.\n        await expect(page.get_by_role(\"textbox\", name=\"Private notes\").nth(0)).to_have_value(\"[TEST ONLY] Portal privacy verification note\", timeout=15000), \"The original student's private note is still unchanged.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "0034eb12-007c-4be5-abf2-738cac4ef6ec",
+        "startedAt": "2026-10-27T00:11:59.347Z",
+        "finishedAt": "2026-10-27T00:16:40.713Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "metadata": {
+        "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "Requirement changes update eligibility and create one preference-aware notification",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "running",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "running"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Using only the labelled controlled scholarship, verify reliable operator scenario switching, eligible-to-ineligible recalculation, one notification per accepted version, replay deduplication, and suppression when Changes notifications are disabled.",
+        "planStepCount": 6,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Sign in using configured VAR_{operator_email} and VAR_{password}. Open /operator → Isolated source verification. Switch between Publication and replay and Eligibility and notifications, ending on the latter. Assert the selected button is pressed and its controls appear. Click Publish valid snapshot to establish the master-level baseline.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Sign out and sign in using VAR_{other_email} and VAR_{password}. Dismiss the study-profile prompt if necessary. In /settings/profile, save Nigeria citizenship, Ghana residence, completed bachelor qualification, intended future qualification master, and Computer Science. Finish saving, reload, and verify the intended qualification remains master.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Save [TEST ONLY] Controlled change scholarship. Enable in-app Changes notifications and disable email notifications. Recalculate matches if needed. Assert the baseline assessment is eligible before publishing the changed requirement.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Click Process queued jobs. Wait for Pending events = 0, Pending deliveries = 0, and Queue drained. If the bounded batch limit leaves runnable jobs, repeat processing. Then sign out and sign in as the student. Assert version C evaluates as not_eligible with reason VALUE_NOT_ACCEPTED, and exactly one change notification belongs to version C.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Sign out and sign in as the operator. Replay Publish changed requirement. Assert the accepted version remains C. Drain queued jobs, return to the student account, and assert there is still exactly one notification for C. Historical notifications for other versions are not duplicates.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "As the operator, publish a valid reverse change and record version R, but do not process jobs. Switch to the student, disable the Changes topic, and save preferences. Switch back to the operator and drain queued jobs. Return to the student and assert no notification exists for reverse version R. Restore the Changes preference.",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-27T00:09:11.719Z",
+        "updatedAt": "2026-10-27T00:12:19.857Z"
+      },
+      "codeUnavailable": true,
+      "result": {
+        "status": "running",
+        "runId": "da6c16e1-8b76-49b9-9c23-c89ad33a5f3d",
+        "startedAt": "2026-10-27T00:12:19.838Z",
+        "finishedAt": null,
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Run in progress — no verdict yet. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    },
+    {
+      "id": "efd3c479-5f8c-441e-b96e-05b43aa41f0c",
+      "metadata": {
+        "id": "efd3c479-5f8c-441e-b96e-05b43aa41f0c",
+        "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+        "projectName": "GrantPath",
+        "name": "GLOCAL uses one canonical scholarship URL across all seven destinations",
+        "type": "frontend",
+        "createdFrom": "portal",
+        "isIntegration": false,
+        "status": "passed",
+        "statusByEnvironment": [
+          {
+            "environmentId": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+            "environmentName": "default",
+            "status": "passed"
+          }
+        ],
+        "headlineEnvironment": {
+          "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+          "name": "default"
+        },
+        "description": "Verify that GLOCAL appears once under each participating destination and that every catalogue and study-location scholarship link uses the exact same canonical official URL.",
+        "planStepCount": 5,
+        "planSteps": [
+          {
+            "type": "action",
+            "description": "Open /scholarships. Search for GLOCAL, select Germany, choose All application windows, and apply filters. Assert exactly one GLOCAL result.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "Reload. Assert the search and Germany selection persist. Record the result’s internal scholarship href.",
+            "structured": false
+          },
+          {
+            "type": "action",
+            "description": "Repeat for United Kingdom, Spain, Sweden, Colombia, Japan, and Netherlands. For every country, assert exactly one GLOCAL result and the same internal scholarship href.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "For every country’s result, inspect the Official scholarship link’s actual href. Assert literal equality with:https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/\nCompare the href itself, before following redirects. Query parameters, fragments, encoded variants, or missing comparisons must fail.",
+            "structured": false
+          },
+          {
+            "type": "assertion",
+            "description": "1. Open the GLOCAL detail page. Assert participating institutions include University of Glasgow, Kyoto University, and Universidad de Los Andes. Assert all seven study-location scholarship-information links use that exact canonical href. Separate evidence citations and application guidance may use other official pages.",
+            "structured": false
+          }
+        ],
+        "priority": "Medium",
+        "category": "GrantPath",
+        "produces": null,
+        "consumes": null,
+        "createdAt": "2026-10-26T23:44:42.942Z",
+        "updatedAt": "2026-10-27T00:18:07.042Z"
+      },
+      "code": "import asyncio\nimport re\nfrom playwright import async_api\nfrom playwright.async_api import expect\n\nasync def run_test():\n    pw = None\n    browser = None\n    context = None\n\n    try:\n        # Start a Playwright session in asynchronous mode\n        pw = await async_api.async_playwright().start()\n\n        # Launch a Chromium browser in headless mode with custom arguments\n        browser = await pw.chromium.launch(\n            headless=True,\n            args=[\n                \"--window-size=1280,720\",\n                \"--disable-dev-shm-usage\",\n                \"--ipc=host\",\n                \"--single-process\"\n            ],\n        )\n\n        # Create a new browser context (like an incognito window)\n        context = await browser.new_context()\n        # Wider default timeout to match the agent's DOM-stability budget;\n        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.\n        context.set_default_timeout(15000)\n\n        # Open a new page in the browser context\n        page = await context.new_page()\n\n        # Interact with the page elements to simulate user flow\n        # -> navigate\n        # @@ts-step {\"i\":1,\"type\":\"action\",\"action\":\"navigate\",\"selector\":null,\"desc\":\"Navigate to VAR_{url}\",\"input\":\"VAR_{url}\",\"field\":null}\n        await page.goto(\"VAR_{url}\")\n        try:\n            await page.wait_for_load_state(\"domcontentloaded\", timeout=5000)\n        except Exception:\n            pass\n        \n        # -> Open the scholarship catalogue using the visible “Find a scholarship” link.\n        # @@ts-step {\"i\":2,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/header/nav/a[2]\",\"desc\":\"Click 'Find a scholarship link'\",\"input\":null,\"field\":\"23\"}\n        # Find a scholarship link\n        elem = page.get_by_role(\"link\", name=\"Find a scholarship\")\n        await elem.click(timeout=10000)\n        \n        # -> Search the scholarship catalogue for GLOCAL using the visible search field.\n        # @@ts-step {\"i\":3,\"type\":\"action\",\"action\":\"fill\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div/input\",\"desc\":\"Fill 'GLOCAL' into Search scholarships text field\",\"input\":\"GLOCAL\",\"field\":\"1148\"}\n        # Search scholarships text field\n        elem = page.get_by_role(\"textbox\", name=\"Search scholarships\")\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.fill(\"GLOCAL\")\n        \n        # -> Search the scholarship catalogue for GLOCAL using the visible search field.\n        # @@ts-step {\"i\":4,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div/button\",\"desc\":\"Click 'Search button'\",\"input\":null,\"field\":\"1149\"}\n        # Search button\n        elem = page.get_by_role(\"button\", name=\"Search\")\n        await elem.click(timeout=10000)\n        \n        # -> Inspect the available destination and application-window options before applying the Germany filter.\n        # [internal] get_dropdown_options: index=\n        \n        # -> Inspect the available destination and application-window options before applying the Germany filter.\n        # [internal] get_dropdown_options: index=\n        \n        # -> Set the destination filter to Germany and inspect the form after the selection.\n        # @@ts-step {\"i\":5,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Choose “All cycles, including closed” in the application-window filter, then apply the filters.\n        # @@ts-step {\"i\":6,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[4]\",\"desc\":\"Select option in 'Exclude closed cycles All cycles, including... dropdown'\",\"input\":null,\"field\":\"1189\"}\n        # Exclude closed cycles All cycles, including... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select[4]\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the selected Germany and all-application-windows filters and confirm the resulting GLOCAL catalogue state.\n        # @@ts-step {\"i\":7,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Select United Kingdom as the catalogue destination, then apply the filters and verify the resulting GLOCAL card.\n        # @@ts-step {\"i\":8,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the United Kingdom destination filter and verify the GLOCAL result count and its two scholarship links.\n        # @@ts-step {\"i\":9,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Select Spain as the destination and apply the GLOCAL catalogue filters.\n        # @@ts-step {\"i\":10,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the Spain destination filter and verify the GLOCAL result count and its catalogue link URLs.\n        # @@ts-step {\"i\":11,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Select Sweden as the destination in the scholarship catalogue.\n        # @@ts-step {\"i\":12,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the selected Sweden destination filter and verify the resulting GLOCAL catalogue state.\n        # @@ts-step {\"i\":13,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Filter the GLOCAL catalogue to Colombia and confirm the single result and its scholarship links.\n        # @@ts-step {\"i\":14,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Filter the GLOCAL catalogue to Colombia and confirm the single result and its scholarship links.\n        # @@ts-step {\"i\":15,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Select Japan as the destination in the scholarship catalogue.\n        # @@ts-step {\"i\":16,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the Japan destination filter and verify the single GLOCAL result.\n        # @@ts-step {\"i\":17,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Inspect the destination choices so the remaining Netherlands catalogue check can be completed.\n        # [internal] get_dropdown_options: index=\n        \n        # -> Select Netherlands as the scholarship destination and apply the GLOCAL catalogue filters.\n        # @@ts-step {\"i\":18,\"type\":\"action\",\"action\":\"select\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\",\"desc\":\"Select option in 'All destinations Australia Canada Colombia... dropdown'\",\"input\":null,\"field\":\"1153\"}\n        # All destinations Australia Canada Colombia... dropdown\n        elem = page.locator(\"xpath=/html/body/div[2]/main/div[2]/div/form/div[2]/select\").nth(0)\n        await elem.wait_for(state=\"visible\", timeout=10000)\n        await elem.select_option(\"\")\n        \n        # -> Apply the Netherlands destination filter and verify the single GLOCAL result and its scholarship links.\n        # @@ts-step {\"i\":19,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/form/div[3]/div/button\",\"desc\":\"Click 'Apply filters button'\",\"input\":null,\"field\":\"1276\"}\n        # Apply filters button\n        elem = page.get_by_role(\"button\", name=\"Apply filters\")\n        await elem.click(timeout=10000)\n        \n        # -> Open the GLOCAL scholarship detail page to verify its participating institutions and study-location scholarship links.\n        # @@ts-step {\"i\":20,\"type\":\"action\",\"action\":\"click\",\"selector\":\"xpath=/html/body/div[2]/main/div[2]/div/div/article/div[2]/div/a\",\"desc\":\"Click 'GLOCAL \\u2014 Erasmus Mundus Joint Master scholarship link'\",\"input\":null,\"field\":\"2547\"}\n        # GLOCAL — Erasmus Mundus Joint Master scholarship link\n        elem = page.get_by_role(\"link\", name=\"GLOCAL — Erasmus Mundus Joint Master scholarship\", exact=True)\n        await elem.click(timeout=10000)\n        \n        # --> Assertions to verify final state\n        \n        # --> The GLOCAL study locations include University of Glasgow, Kyoto University, and Universidad de Los Andes.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The study locations include University of Glasgow.\n        await expect(page.get_by_role(\"link\", name=\"Official scholarship information for University of Glasgow\").nth(0)).to_have_attribute(\"aria-label\", \"Official scholarship information for University of Glasgow\", timeout=15000), \"The study locations include University of Glasgow.\"\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The study locations include Universidad de Los Andes.\n        await expect(page.get_by_role(\"link\", name=\"Official scholarship information for Universidad de Los Andes\").nth(0)).to_have_attribute(\"aria-label\", \"Official scholarship information for Universidad de Los Andes\", timeout=15000), \"The study locations include Universidad de Los Andes.\"\n        \n        # --> All seven study-location scholarship-information links use the canonical official URL.\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The University of Glasgow scholarship link uses the canonical official URL.\n        await expect(page.get_by_role(\"link\", name=\"Official scholarship information for University of Glasgow\").nth(0)).to_have_attribute(\"href\", \"https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/\", timeout=15000), \"The University of Glasgow scholarship link uses the canonical official URL.\"\n        # Assert-outcome: not verified — the export-time check could not be evaluated\n        # Assert: The Georg-August-Universität Göttingen scholarship link uses the canonical official URL.\n        await expect(page.get_by_role(\"link\", name=\"Official scholarship information for Georg-August-Universität Göttingen\").nth(0)).to_have_attribute(\"href\", \"https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/\", timeout=15000), \"The Georg-August-Universit\\u00e4t G\\u00f6ttingen scholarship link uses the canonical official URL.\"\n        await asyncio.sleep(5)\n\n    finally:\n        if context:\n            await context.close()\n        if browser:\n            await browser.close()\n        if pw:\n            await pw.stop()\n\nasyncio.run(run_test())\n    ",
+      "codeVersion": "v1.0",
+      "codeUnavailable": false,
+      "result": {
+        "status": "passed",
+        "runId": "f94c61d4-4998-4272-a95a-e4c00ebc3a86",
+        "startedAt": "2026-10-27T00:11:44.776Z",
+        "finishedAt": "2026-10-27T00:18:07.050Z",
+        "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+        "summary": "Test passed. Target: environment default (https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app)."
+      }
+    }
+  ],
+  "scope": "Read-only discovery; creation actor and generation event not inferred from createdFrom alone."
+}

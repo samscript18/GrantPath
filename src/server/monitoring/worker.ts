@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { boundedFetch, robotsPolicy, validateSourceUrl } from "./network";
 import { processSourceHtml, recordSourceFailure } from "./index";
-async function reserveHost(host: string, delaySeconds: number) {
+export async function reserveHost(host: string, delaySeconds: number) {
   const now = Date.now();
   const delay = Math.max(20, delaySeconds) * 1000;
   const key = `source-host:${host}`;

@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-25T08:32:16.231Z",
+  "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "scope": "Existing isolated PR1 Neon database; no production student data",
+  "scheduleActivation": "Manual release-branch verification only. Workflows returned to disabled to prevent the older default-branch Resend job executing; after owner separately merges this release, enable both workflows. GitHub application-jobs is the sole selected application scheduler.",
+  "runs": [
+    {
+      "workflowId": 395123908,
+      "runId": 40177015523,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177015523",
+      "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "limit": "20",
+      "status": "queued",
+      "conclusion": null,
+      "workflowStateAfterDispatch": "disabled_manually"
+    },
+    {
+      "workflowId": 395123912,
+      "runId": 40177024494,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177024494",
+      "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "limit": "1",
+      "status": "queued",
+      "conclusion": null,
+      "workflowStateAfterDispatch": "disabled_manually"
+    }
+  ]
+}

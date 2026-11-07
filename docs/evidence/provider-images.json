@@ -1,0 +1,127 @@
+{
+  "observedAt": "2026-10-24T21:26:45.657Z",
+  "environment": "development",
+  "providers": [
+    {
+      "provider": "University of Oxford",
+      "slug": "oxford",
+      "sourcePage": "https://www.ox.ac.uk/",
+      "sourceImage": null,
+      "checkedAt": null,
+      "visuallyReviewed": false,
+      "persistedImageUrl": null,
+      "persistedAt": null,
+      "limitation": "Official source returned HTTP 403."
+    },
+    {
+      "provider": "Commonwealth Scholarship Commission",
+      "slug": "commonwealth",
+      "sourcePage": "https://cscuk.fcdo.gov.uk/",
+      "sourceImage": "https://cscuk.fcdo.gov.uk/wp-content/uploads/2020/02/cropped-Cscuk-Logo-01-1-180x180.png",
+      "checkedAt": "2026-10-24T21:19:43.129Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876915/grantpath/providers/2a854bea-24ee-47bd-8fe6-f8b4f96e9fea.jpg",
+      "persistedAt": "2026-10-24T21:21:56.673Z",
+      "limitation": null
+    },
+    {
+      "provider": "UK Government · Chevening",
+      "slug": "chevening",
+      "sourcePage": "https://www.chevening.org/",
+      "sourceImage": "https://www.chevening.org/wp-content/themes/chevening/assets/images/apple-touch-icon.png",
+      "checkedAt": "2026-10-24T21:19:53.841Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876926/grantpath/providers/cb6d6f93-719f-4eb7-b113-f552f83c8806.jpg",
+      "persistedAt": "2026-10-24T21:22:08.510Z",
+      "limitation": null
+    },
+    {
+      "provider": "University College London",
+      "slug": "ucl",
+      "sourcePage": "https://www.ucl.ac.uk/",
+      "sourceImage": null,
+      "checkedAt": null,
+      "visuallyReviewed": false,
+      "persistedImageUrl": null,
+      "persistedAt": null,
+      "limitation": "Official source returned HTTP 403."
+    },
+    {
+      "provider": "University of Bristol",
+      "slug": "bristol",
+      "sourcePage": "https://www.bristol.ac.uk/",
+      "sourceImage": "https://www.bristol.ac.uk/assets/responsive-web-project/2.7.5/favicons/apple-touch-icon.png",
+      "checkedAt": "2026-10-24T21:20:02.184Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876937/grantpath/providers/8dc684d6-dfc8-494a-b27c-9e6d5eb3639a.jpg",
+      "persistedAt": "2026-10-24T21:22:18.746Z",
+      "limitation": null
+    },
+    {
+      "provider": "ETH Zurich",
+      "slug": "eth",
+      "sourcePage": "https://ethz.ch/en.html",
+      "sourceImage": "https://ethz.ch/etc/designs/ethz/img/icons/ETH-APP-Icons-Theme-white/192-xxxhpdi.png",
+      "checkedAt": "2026-10-24T21:20:05.046Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876946/grantpath/providers/a99ed82c-f8f9-4ebf-8f18-4f4951e4a134.jpg",
+      "persistedAt": "2026-10-24T21:22:28.969Z",
+      "limitation": null
+    },
+    {
+      "provider": "University of Warwick",
+      "slug": "warwick",
+      "sourcePage": "https://warwick.ac.uk/",
+      "sourceImage": "https://warwick.ac.uk/linkedin.png",
+      "checkedAt": "2026-10-24T21:20:08.430Z",
+      "visuallyReviewed": false,
+      "persistedImageUrl": null,
+      "persistedAt": null,
+      "limitation": "Rejected during visual review: candidate is a LinkedIn icon, not the university identity."
+    },
+    {
+      "provider": "University of Twente",
+      "slug": "twente",
+      "sourcePage": "https://www.utwente.nl/en/",
+      "sourceImage": "https://www.utwente.nl/.utdesign/img/favicons/apple-touch-icon.png",
+      "checkedAt": "2026-10-24T21:20:11.592Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876956/grantpath/providers/663af052-ae34-4c9b-8eed-931f239b738b.jpg",
+      "persistedAt": "2026-10-24T21:22:37.811Z",
+      "limitation": null
+    },
+    {
+      "provider": "Leiden University",
+      "slug": "leiden",
+      "sourcePage": "https://www.universiteitleiden.nl/en",
+      "sourceImage": null,
+      "checkedAt": null,
+      "visuallyReviewed": false,
+      "persistedImageUrl": null,
+      "persistedAt": null,
+      "limitation": "fetch failed"
+    },
+    {
+      "provider": "Nuffic · Study in NL",
+      "slug": "nuffic",
+      "sourcePage": "https://www.studyinnl.org/",
+      "sourceImage": "https://www.studyinnl.org/themes/custom/nuffic_sih_theme/src/svg/footer-logo.svg",
+      "checkedAt": "2026-10-24T21:20:19.214Z",
+      "visuallyReviewed": true,
+      "persistedImageUrl": "https://res.cloudinary.com/dynopc0cn/image/upload/v1792876965/grantpath/providers/a7102474-662b-489c-8283-998f03b5ea41.jpg",
+      "persistedAt": "2026-10-24T21:22:47.333Z",
+      "limitation": null
+    },
+    {
+      "provider": "Australian Government · DFAT",
+      "slug": "dfat",
+      "sourcePage": "https://www.dfat.gov.au/",
+      "sourceImage": null,
+      "checkedAt": null,
+      "visuallyReviewed": false,
+      "persistedImageUrl": null,
+      "persistedAt": null,
+      "limitation": "fetch failed"
+    }
+  ]
+}

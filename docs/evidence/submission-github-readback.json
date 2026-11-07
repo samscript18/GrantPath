@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-10-26T23:23:15.483Z",
+  "head": "448831d7edc080b34599c291de19d6f52540fb76",
+  "repositoryVisibility": "public",
+  "pr": {
+    "url": "https://github.com/samscript18/GrantPath/pull/1",
+    "createdAt": "2026-10-24T13:26:20Z",
+    "state": "open",
+    "merged": false,
+    "withinUserSuppliedOctober16To26Window": true
+  },
+  "checks": [
+    {
+      "name": "GitGuardian Security Checks",
+      "id": 121861017132,
+      "sha": "448831d7edc080b34599c291de19d6f52540fb76",
+      "status": "completed",
+      "result": "success",
+      "appId": 46505,
+      "url": "https://github.com/samscript18/GrantPath/runs/121861017132"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "id": 121847521734,
+      "sha": "448831d7edc080b34599c291de19d6f52540fb76",
+      "status": "completed",
+      "result": "success",
+      "appId": 8329,
+      "url": "https://github.com/samscript18/GrantPath/runs/121847521734"
+    },
+    {
+      "name": "TestSprite API ownership",
+      "id": 121847164756,
+      "sha": "448831d7edc080b34599c291de19d6f52540fb76",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40401191845/job/121847164756"
+    },
+    {
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "id": 121847164356,
+      "sha": "448831d7edc080b34599c291de19d6f52540fb76",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40401191845/job/121847164356"
+    }
+  ],
+  "statuses": [
+    {
+      "context": "Vercel",
+      "state": "success",
+      "target_url": "https://vercel.com/lammysam8-7688/grantpath/CuhnKfKwEMyZYP6YhxgfDMe5nW9Y"
+    },
+    {
+      "context": "TestSprite V3",
+      "state": "success",
+      "target_url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/12480f84-dcfe-4db0-8bff-d476687bbcd9"
+    }
+  ],
+  "appComment": "https://github.com/samscript18/GrantPath/pull/1#issuecomment-6427296986",
+  "protectionRefresh": {
+    "status": 403,
+    "message": "Resource not accessible by integration. No alternative identity attempted.",
+    "lastVerifiedReceipt": "github-release-gate.json"
+  }
+}

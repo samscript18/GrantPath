@@ -93,6 +93,17 @@ export async function queueAlert(
   const client = transaction || db();
   if (!(await client.user.findUnique({ where: { id: input.userId }, select: { id: true } })))
     return { count: 0 };
+  const fixture = await client.scholarship.findUnique({
+    where: { id: input.scholarshipId },
+    select: { title: true },
+  });
+  if (fixture?.title.startsWith("[TEST ONLY]")) {
+    const recipient = await client.user.findUnique({
+      where: { id: input.userId },
+      select: { email: true },
+    });
+    if (!recipient?.email.endsWith(".test")) return { count: 0 };
+  }
   const base = process.env.BETTER_AUTH_URL;
   if (!base) throw new Error("BETTER_AUTH_URL is required to freeze an alert’s destination.");
   const href = new URL(input.href, base);

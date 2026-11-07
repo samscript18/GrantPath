@@ -1,0 +1,14 @@
+{
+  "ownerInstruction": "leave deleted and remove the requirement completely instead of marking it unresolved",
+  "caseId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+  "caseName": "eligibility_notification",
+  "remoteCaseDeletedBy": "owner",
+  "requiredCaseRemoved": true,
+  "replacementCreated": false,
+  "newRequiredCount": 19,
+  "otherCasesPreserved": true,
+  "historicalSourceAndReceiptsRetained": true,
+  "githubAppAndNativeApiRequiredChecksPreserved": true,
+  "noGreenStatusFabricated": true,
+  "noFurtherPaidRun": true
+}

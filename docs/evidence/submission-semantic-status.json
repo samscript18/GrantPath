@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-10-27T00:14:59.267Z",
+  "head": "4245853398a25c59a64273c1f119bdf9508be6d5",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "deployment": {
+    "id": "dpl_4UYkWP4k8VybR6QvhV5C6nGZPsLe",
+    "state": "READY",
+    "url": "https://grantpath-6k7mdx6bb-lammysam8-7688.vercel.app"
+  },
+  "checks": [
+    {
+      "id": 121914998069,
+      "name": "Vercel Preview Comments",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 8329,
+      "url": "https://github.com/samscript18/GrantPath/runs/121914998069"
+    },
+    {
+      "id": 121914426375,
+      "name": "TestSprite API ownership",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40420797802/job/121914426375"
+    },
+    {
+      "id": 121914426174,
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 15368,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40420797802/job/121914426174"
+    },
+    {
+      "id": 121914412201,
+      "name": "GitGuardian Security Checks",
+      "sha": "4245853398a25c59a64273c1f119bdf9508be6d5",
+      "status": "completed",
+      "result": "success",
+      "appId": 46505,
+      "url": "https://github.com/samscript18/GrantPath/runs/121914412201"
+    }
+  ],
+  "statuses": [
+    {
+      "context": "TestSprite V3",
+      "state": "success",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3e453883-20eb-4466-bce3-f77723bb73c5",
+      "readSource": "Authenticated GitHub combined-status response and actual CI native-guard log reporting all 7 native cases passed."
+    },
+    {
+      "context": "Vercel",
+      "state": "success",
+      "url": "https://vercel.com/lammysam8-7688/grantpath/4UYkWP4k8VybR6QvhV5C6nGZPsLe",
+      "readSource": "Vercel Ready and successful GitHub status"
+    }
+  ],
+  "appExecutionUrls": [
+    "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/3e453883-20eb-4466-bce3-f77723bb73c5"
+  ],
+  "nativeCaseCount": 7,
+  "finalReadSource": "submission-semantic-final-checks.json"
+}

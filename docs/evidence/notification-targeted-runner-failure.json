@@ -1,0 +1,25 @@
+{
+  "runId": "b51398d2-6ae7-440d-bda1-a83c32e3d477",
+  "testId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+  "testTitle": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+  "status": "failed",
+  "source": "cli",
+  "createdAt": "2026-10-27T03:41:02.716Z",
+  "startedAt": "2026-10-27T03:41:02.716Z",
+  "finishedAt": "2026-10-27T03:41:10.304Z",
+  "codeVersion": null,
+  "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "failedStepIndex": null,
+  "failureKind": "unknown",
+  "error": "TargetClosedError: BrowserContext.new_page: Target page, context or browser has been closed",
+  "stepSummary": {
+    "total": 0,
+    "completed": 0,
+    "passedCount": 0,
+    "failedCount": 0
+  },
+  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/a129c3d5-3226-496f-986b-a07316663073/test/b51398d2-6ae7-440d-bda1-a83c32e3d477",
+  "sourceHashVerified": "4d2914e4525a7b741038ac547d1f612b3b6fff07c93c4c033bab734787d56ab8",
+  "unchangedReviewedSource": true,
+  "providerHypothesis": "Browser/container terminated before a page could be opened; no trace or recorded actions were supplied. This is a hypothesis about TestSprite runner infrastructure, not evidence that the hosted GrantPath server crashed."
+}

@@ -1,16 +1,30 @@
 # GrantPath
 
-A connected scholarship discovery, evidence, eligibility and application workspace. Next.js App Router, strict TypeScript, Tailwind and shadcn-style accessible primitives, PostgreSQL/Prisma, Better Auth, Resend and optional Inngest.
+A scholarship discovery, evidence, eligibility and application workspace built with Next.js App Router, strict TypeScript, PostgreSQL/Prisma, Better Auth, Brevo and Cloudinary.
 
-**Live URL: not deployed.** Hosted services, GitHub PR protection and TestSprite are pending account configuration. Local tests are not TestSprite results.
+**[GrantPath](https://grantpath-lake.vercel.app)** · [Original release PR](https://github.com/samscript18/GrantPath/pull/1)
+
+## Project status — 7 November 2026
+
+The hackathon has ended. GrantPath continues as an independent project, with `main` as its production branch. It explains scholarship eligibility with official evidence, keeps unknown requirements explicit, supports global and joint-programme destinations, and saves private application progress.
+
+GitHub Actions runs bounded scholarship discovery and detail fetching at **06:23 and 18:23 Africa/Lagos** (05:23 and 17:23 UTC), with up to six due directories/details/sources per stage. Approved source policies, robots checks, host pacing and evidence validation still apply. Unsupported or conflicting changes go to operator review. The separate application worker runs hourly at **:41** to process matching, notifications and account work. GitHub schedules are best effort; inspect actual runs in [Actions](https://github.com/samscript18/GrantPath/actions). See [operations](docs/OPERATIONS_HANDOFF.md) for bindings and verification.
+
+Paid TestSprite PR jobs and merge requirements are retired with the owner's approval. Typecheck, lint, unit tests, PostgreSQL integration tests and production-browser journeys remain in CI, including local execution of the reusable Python assertions. Security scanning remains enabled. Historical TestSprite evidence is retained in [the hackathon handoff](docs/FINAL_HANDOFF.md); it is not a claim about current CI.
+
+The **27 October catalogue snapshot** contained 32 real records from 23 providers across 17 destination countries and six regions: seven open, two upcoming, five closed and eighteen with availability unknown. It contained 23 cycle records and nine scheme overviews, not 32 open calls. These counts change as sources are checked. [Coverage and limits](docs/SOURCE_COVERAGE.md).
+
+Semantic **Field of study** search uses Vertex Gemini 3.8 Flash on public accepted scholarship content. Shared caching, validated results, global call limits and a text-only fallback bound its use. Mandatory eligibility and ranking remain separate. [Setup](docs/FIELD_OF_STUDY.md).
+
+[Demo guide](docs/DEMO.md)
 
 ## Run locally
 
-Use Node 24 LTS (24.11+), npm, and PostgreSQL 18. Versions are pinned in `package-lock.json`; run `npm ci`.
+Use Node 24 LTS, npm and PostgreSQL 18. Dependencies and lockfile are pinned.
 
-1. Copy `.env.example` to `.env`. Set `DATABASE_URL` and `DIRECT_URL` to your development PostgreSQL database. Neon uses pooled runtime and unpooled migration endpoints. Create separate databases containing `test` for `TEST_DATABASE_URL` and `E2E_DATABASE_URL`.
-2. Generate a private secret with `openssl rand -base64 32`. Set `BETTER_AUTH_SECRET`. Set `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL` and `TRUSTED_ORIGINS` to the same exact local origin, for example `http://127.0.0.1:3000`. Keep `APP_ENV=development` and `EMAIL_MODE=sink` locally.
-3. Run:
+1. Copy `.env.example` to ignored `.env`. Set `DATABASE_URL` and migration `DIRECT_URL`. Use separate databases containing `test` for `TEST_DATABASE_URL` and `E2E_DATABASE_URL`. Never use a student account database for browser setup.
+2. Generate `BETTER_AUTH_SECRET` using `openssl rand -base64 32`. Align `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL` and `TRUSTED_ORIGINS` with the exact origin you open. `localhost` and `127.0.0.1` are different origins. Keep `APP_ENV=development`, `EMAIL_MODE=sink` locally.
+3. Install and initialise:
 
 ```sh
 npm ci
@@ -21,56 +35,55 @@ npm run db:seed
 npm run dev
 ```
 
-Open the local origin you configured. Register, then inspect the newest matching recipient in the development `EmailSink` table using `npx prisma studio`. Open its verification URL privately. Sink mail is captured, never sent. Authentication recovery uses the same sink. Do not publish captured tokens.
+The seed persists 32 reviewed records idempotently and never overwrites an accepted later version. Migration 007 preserves legacy IDs/versions and backfills the former single-country locations. Register locally, inspect the recipient's captured verification mail in `EmailSink` through Prisma Studio and open its private link. Never publish captured tokens.
 
-The seed persists 20 real source-backed records. It never overwrites accepted operator changes. Existing installations created before the final funding corrections can inspect `npm run catalogue:corrections`, then apply with `-- --apply`; this helper is restricted to local/test environments and preserves history.
+Neon runtime connections support `DATABASE_TRANSPORT=tcp` (default) or `neon-ws` (TLS WebSocket 443 for official Neon hosts). The latter was added after TCP 5432 became unreachable from this machine. Migration tooling still uses `DIRECT_URL` over TCP. Hosted TCP settings use `sslmode=verify-full`; the runtime makes pg's existing verified alias behaviour explicit. It does not disable certificate verification.
 
-Grant a verified administrator access with `npm run operator:grant -- administrator@example.org`. Roles cannot be supplied by registration or profile requests. Operator bootstrap is an explicit database administrator command with an audit entry.
+Grant a verified administrator with `npm run operator:grant -- administrator@example.org`. Registration/profile requests cannot supply roles. See [Google OAuth](docs/GOOGLE_OAUTH.md), [Brevo](docs/BREVO.md) and [account controls](docs/ACCOUNT_CONTROLS.md) for provider setup. Google and email identities remain distinct. In-app password changes require the current password and an emailed six-digit code before revoking sessions. Private exports are encrypted/one-time; account deletion has a cancellable seven-day grace period.
 
-## Workflows
+## Sources and automatic publication
 
-Profile saves and accepted scholarship changes atomically queue durable events. Run `npm run jobs:run -- --limit 25` repeatedly to process bounded matching, notification and delivery work. The dashboard also offers bounded on-demand recalculation. Outbox/delivery leases, attempts, deduplication and failures are persisted in PostgreSQL. Inspect diagnostics and retry failed application events in the operator studio.
+Source roles are distinct: approved directory URLs discover candidates, programme/detail URLs supply facts, and application URLs direct students to providers. Source fetching runs outside Vercel:
 
-Fetching is a separate process: `npm run sources:ingest -- --limit 3`, or `--source REGISTERED_SOURCE_ID` for an explicit manual check. A manual check still enforces URL, robots, pacing and size/time policies. Failed checks exit unsuccessfully, retain accepted information and keep the prior successful timestamp. HTML extraction creates a review candidate; an operator must confirm evidence and accept it. Never enable a source until its policies and adapter coverage have been reviewed.
+```sh
+npm run sources:discover -- --limit 1
+npm run sources:discover -- --details --limit 1
+npm run sources:ingest -- --limit 1
+```
 
-`.github/workflows/ingestion.yml` supports daily best-effort scheduling and manual dispatch, bounded to six sources. `.github/workflows/application-jobs.yml` separately handles matching/delivery hourly. Configure their named GitHub environments and secrets before enabling use. Schedules are not punctual guarantees; the UI reports actual attempts and successes. Failed/interrupted jobs can be rerun safely.
+Only reviewed registry hosts/paths are accepted. Fetches enforce public-network DNS, HTTPS, manual redirect rejection, robots, response/time limits, persisted host pacing, leases, retry limits, pagination and run quotas. A 403 or inaccessible robots endpoint defers the source; it never closes an award or advances successful verification.
 
-Alternatively, register the signed `/api/inngest` endpoint with `INNGEST_SIGNING_KEY` and `INNGEST_EVENT_KEY`. It performs bounded application work on the hosting runtime; **it does not move computation off Vercel**. Choose one routine application scheduler after checking free usage allowances. No source fetches execute in the Inngest/Vercel handler.
+Directory definitions and semantic contracts live in `src/data/global-sources.ts` and `src/server/discovery`. New unmapped links enter review. Operators can pause fetching and automatic publication separately, retry exhausted work, inspect evidence/reason codes and accept/reject exceptions. CLI policy registration requires an explanatory reason; `--register-details DIRECTORY_ID` is a transparent manual fallback, not a claim of automatic discovery. Existing legacy source adapters retain their review flow.
 
-For real mail set `EMAIL_MODE=resend`, `RESEND_API_KEY` and a verified `EMAIL_FROM`; production also requires `APP_ENV=production` and HTTPS. Test recipients are isolated from live delivery. A provider-accepted response is not recipient receipt. Ambiguous acceptance beyond the safe retry window is held for investigation.
+Each observation stores adapter/schema versions, content/mapping fingerprints, evidence and validation. Decisions retain policy version, actor, before/after values, accepted version and downstream event IDs. Advisory locks and unique programme/cycle identities prevent duplicate publication. A new cycle creates a new record; a reversal appends a new version. Missing extracted material does not erase accepted requirements or funding.
 
-## Verification
+## Durable application work and mail
+
+```sh
+npm run jobs:run -- --limit 20
+npm run email:check
+```
+
+Profile saves and accepted publications atomically enqueue durable matching/notification events. Evaluations retain profile, scholarship and engine versions; stale jobs cannot replace current results. Preference ranking is separate from eligibility and uses actual country identities/participating institutions. Engine 1.3.0 retains deterministic pass/fail/unknown, AND/OR/exemptions, original academic scales and provider-specific equivalences. Unknown alternatives cannot silently fail or pass.
+
+GitHub `application-jobs.yml` is the chosen routine application scheduler, separate from `ingestion.yml` source work. Both workers use the existing app database, also bound to the main deployment. Its historical name is `grantpath_pr_1_test`; existing accounts and accepted history are preserved. Controlled fixture operations are disabled in production. GitHub schedules execute default-branch workflows and are best effort.
+
+Optional Inngest uses the hosting runtime and is not simultaneously activated. No source fetch occurs inside the Vercel/Inngest application handler. Set `EMAIL_MODE=brevo`, `BREVO_API_KEY` and active verified `EMAIL_FROM` for live mail. Current preferences/relevance and provider idempotency are checked at delivery. Provider acceptance is not recipient receipt. Test mail remains isolated; `.test` recipients never receive external messages.
+
+Cloudinary stores signed, bounded account/provider images. Existing identities without reviewed assets retain initials. The actual disposable upload/read/remove/cleanup smoke is [recorded separately](docs/evidence/cloudinary-account-smoke.json).
+
+## Verification and release evidence
 
 ```sh
 npm run db:test-migrate
 npm run check
 npm run test:integration
-npx playwright install chromium
-npm run test:e2e
 npm run build
+npx playwright install chromium
+PLAYWRIGHT_PRODUCTION=1 npm run test:e2e
 npm run format:check
 ```
 
-After building, use `PLAYWRIGHT_PRODUCTION=1 npm run test:e2e` to exercise the production server with the same isolated browser database and sink mail. CI uses this production-server variant.
+The production browser suite uses a separate database and sink mail on port 3100. It also executes the exact nine reusable TestSprite Python scripts locally; install Python Playwright 1.60.0 first. This is **local Playwright evidence, never a TestSprite pass**. Clearly labelled controlled source fixtures require explicit enablement, a test-named database and an authenticated operator. No unauthenticated reset or role-escalation route exists. They exercise the production publication/eligibility/notification services.
 
-Integration tests require the isolated `TEST_DATABASE_URL`. Browser tests migrate/seed a separate `E2E_DATABASE_URL`, use sink mail and repeatable `student@example.test`, `other@example.test` and `operator@example.test` accounts. Their default password exists only in guarded test tooling; optionally set `TEST_ACCOUNT_PASSWORD` before first creation. Synthetic records are labelled `[TEST ONLY]` and never seeded into development/production. Previous browser fixtures are archived, preserving test history. Browser setup changes its configured test database; never point it at a shared account database.
-
-Playwright starts its own server on port 3100. Stop an existing Next development process in this checkout first. The suite captures screenshots after page content renders, tests the connected journeys and checks mobile overflow and keyboard skip navigation. See [actual run evidence](docs/TEST_EVIDENCE.md), [coverage](docs/COVERAGE_MATRIX.md) and [release review](docs/RELEASE_REVIEW.md). Local CI YAML is prepared; its hosted execution is unverified.
-
-## Architecture and domain scope
-
-`src/server` contains independent accounts, profiles, scholarships, evidence, eligibility, applications, monitoring, notifications, operator and job modules. Routes/components call those services. Immutable profile and scholarship versions, evaluations, source observations, review decisions, application history and delivery attempts support explanation and recovery. PostgreSQL transactions, advisory locks, unique keys and leased outbox rows protect concurrent work.
-
-Eligibility engine 1.1.0 evaluates deterministic requirements with pass/fail/unknown and AND/OR groups. Exemptions are alternatives. Missing information cannot pass; unknown OR alternatives cannot become a premature failure. Current study, held qualifications, intended study, citizenship and residence remain separate. Original GPA scales and explicit provider equivalences are retained. Preference ranking cannot override a mandatory failure. Evaluations retain exact input/engine versions and evidence; obsolete jobs cannot overwrite current results.
-
-Official availability is independent of personal application progress. Only confirmed closing instants create reminders. Tuition-only awards are labelled accordingly. Programmes and application cycles have separate identities and history.
-
-The initial catalogue contains historical cycles and explicitly uncertain scheme overviews, not 20 currently open applications. Unmapped provider conditions remain explicit confirmation requirements. Four HTML adapters have fixture coverage; one has observed live extraction success and two smoke checks were access-blocked. Source schedules remain paused. See [source coverage and official links](docs/SOURCE_COVERAGE.md).
-
-## Hosting, PRs and submission
-
-Use [isolated Neon/Vercel preview setup](docs/PREVIEW_SETUP.md). Provision a separate database branch and auth secret for each trusted PR; never use production data in previews. No account, paid plan, deployment or remote repository has been created by this implementation.
-
-The configured origin is `samscript18/GrantPath`; authenticated read inspection confirms an empty repository with admin/push access and no rulesets/workflows. Before publishing a PR, establish TestSprite trigger/cost configuration, deploy a healthy isolated preview, install/configure the TestSprite GitHub App and use its 3.0 portal. Inspect the actual credit balance and displayed estimate before a small [focused suite](docs/TESTSPRITE_SUITE.md). Configure the authentic App check as required without bypassing it. Preserve real failed-check/blocked-merge/fix/rerun evidence. The user-reported allowance is 150 credits; actual balance remains unobserved and no credited operation was initiated. [Credit ledger](docs/TESTSPRITE_CREDITS.md).
-
-Follow [the demonstration outline](docs/DEMO.md) and [submission PR draft](docs/SUBMISSION_PR.md). Missing external credentials, remote verification, access-limited sources, time-zone/DST provider ambiguity and incomplete provider-rule mapping remain explicit release limitations.
+[Coverage matrix](docs/COVERAGE_MATRIX.md), [eligibility matrix](docs/ELIGIBILITY_MATRIX.md), [test evidence](docs/TEST_EVIDENCE.md), [focused TestSprite suite](docs/TESTSPRITE_SUITE.md), [credit ledger](docs/TESTSPRITE_CREDITS.md). Main requires the software correctness check from GitHub Actions, including administrators. The TestSprite results in these documents describe historical executions; paid external TestSprite runs are no longer required for merges.

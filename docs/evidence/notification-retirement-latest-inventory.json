@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-27T04:02:44.019Z",
+  "reason": "Read-only refresh after another generated case returned NOT_FOUND; no deletion or restoration performed by agent.",
+  "projectCaseCount": 18,
+  "manifestCaseCount": 19,
+  "missingManifestCases": [
+    {
+      "id": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "name": "Review notifications and mark them read",
+      "origin": "portal-ai-generated"
+    }
+  ],
+  "targetedCases": [
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "present": false
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "present": true
+    }
+  ],
+  "balance": 48.1,
+  "noCaseRestored": true,
+  "noFurtherRunDispatched": true
+}

@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-27T03:24:19.113Z",
+  "cases": [
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "file": "docs/testsprite/plans/eligibility-notification.json",
+      "previousStepCount": 8,
+      "stepCount": 9,
+      "createdFrom": "cli"
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "file": "docs/testsprite/plans/portal-manual-notification-history.json",
+      "previousStepCount": 3,
+      "stepCount": 3,
+      "createdFrom": "portal"
+    }
+  ],
+  "executionDispatched": false,
+  "productChange": false,
+  "reusablePythonSourcesUnchanged": true,
+  "mandatoryAssertionsPreserved": true,
+  "reason": "Recorded automatic actions skipped the queue button and the companion typed a password differing from successful sign-in. Explicit action and configured sign-in bundle; no manual drain/reset or weakened pass criteria."
+}

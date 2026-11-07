@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-27T03:28:03.258Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "status": "passed",
+  "runId": "95d39fdd-90ef-4979-9cd8-06b8b43e92b2",
+  "codeVersion": "v-5e0325a9c69d",
+  "startedAt": "2026-10-27T01:36:22.719Z",
+  "finishedAt": "2026-10-27T01:36:28.209Z",
+  "assertionOutput": "Verified: cross-account update 404; foreign read excluded; all owner fields unchanged; operator mutation 403.\n",
+  "expectedCommit": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "balance": 60.1,
+  "account": {
+    "name": "Salman",
+    "email": "lammysam8@gmail.com"
+  },
+  "priorBalance": 71.3,
+  "generationAttempted": false
+}

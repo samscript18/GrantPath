@@ -1,0 +1,41 @@
+{
+  "startedAt": "2026-10-26T19:09:23.377Z",
+  "finishedAt": "2026-10-26T19:09:46.584Z",
+  "head": "3591af74281e3e0e5467ce954331c7106d61cf1e",
+  "reason": "Verify native backend ownership replacement using encrypted environment credentials and actual HTTP assertions. Frontend strict source already passed; no browser-only substitute or paid auto-auth.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 112,
+  "case": "88b47334-232c-4665-a6a2-413b09c34eb5",
+  "exitCode": 0,
+  "body": {
+    "runId": "4253d3f6-c7e2-427e-b948-561e190e94a0",
+    "testId": "88b47334-232c-4665-a6a2-413b09c34eb5",
+    "testTitle": "API ownership: independent accounts enforce 404, 403 and unchanged owner data",
+    "projectId": "d36cedef-a40e-4fb7-ae61-f3b2484ede06",
+    "userId": "a4b85448-0081-7067-e263-693e586fe698",
+    "status": "passed",
+    "source": "cli",
+    "createdAt": "2026-10-26T19:09:37.945Z",
+    "startedAt": "2026-10-26T19:09:37.945Z",
+    "finishedAt": "2026-10-26T19:09:42.347Z",
+    "codeVersion": "v-daf95e66fcb1",
+    "targetUrl": null,
+    "environment": null,
+    "createdFrom": null,
+    "failedStepIndex": null,
+    "failureKind": null,
+    "error": "",
+    "videoUrl": null,
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/test-cases/88b47334-232c-4665-a6a2-413b09c34eb5",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/execution/5b1a5f05-2a10-4dea-9ce0-4bedcf061200/test/4253d3f6-c7e2-427e-b948-561e190e94a0",
+    "apiOutput": "Verified: cross-account update 404; foreign read excluded; all owner fields unchanged; operator mutation 403.\n",
+    "trace": ""
+  },
+  "diagnostic": "idempotency-key: cli-run-a7f80ea4-0c0e-41e3-80c2-ed56a1fc2428\nRun 4253d3f6-c7e2-427e-b948-561e190e94a0\nDashboard: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/d36cedef-a40e-4fb7-ae61-f3b2484ede06/test-cases/88b47334-232c-4665-a6a2-413b09c34eb5\nrequestId: cli_599c1332-9749-42c8-8425-29d579c19762\n"
+}

@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-26T16:19:23.603Z",
+  "head": "963149ea1e7d4f75e387630554b1f0316417c570",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "scope": "Locally controlled Playwright against actual deployed app/isolated Neon; NOT TestSprite",
+  "results": [
+    {
+      "name": "discovery_evidence",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 10122,
+      "diagnostic": ""
+    },
+    {
+      "name": "profile_application",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 24626,
+      "diagnostic": ""
+    },
+    {
+      "name": "multi_destination",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 19167,
+      "diagnostic": ""
+    },
+    {
+      "name": "automatic_publication",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 8012,
+      "diagnostic": ""
+    },
+    {
+      "name": "publication_exception",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 8736,
+      "diagnostic": ""
+    },
+    {
+      "name": "eligibility_notification",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 32592,
+      "diagnostic": ""
+    },
+    {
+      "name": "access_denial",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 12793,
+      "diagnostic": ""
+    }
+  ]
+}

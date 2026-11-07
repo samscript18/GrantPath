@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-27T03:25:06.606Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "caseCount": 20,
+  "completeSuitePassed": false,
+  "counts": {
+    "passed": 18,
+    "failed": 1,
+    "blocked": 1
+  },
+  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/060daa19-5134-4241-9443-39a5c0bcec3e",
+  "workflowUrl": "https://github.com/samscript18/GrantPath/actions/runs/40433440921",
+  "checks": [
+    {
+      "name": "Vercel Preview Comments",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 121956724844,
+      "detailsUrl": "https://vercel.com/github"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 121956469951,
+      "detailsUrl": "https://dashboard.gitguardian.com"
+    },
+    {
+      "name": "TestSprite API ownership",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 121956377710,
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40433440921/job/121956377710"
+    },
+    {
+      "name": "Typecheck, lint, domain and PostgreSQL checks",
+      "status": "completed",
+      "conclusion": "failure",
+      "id": 121956377441,
+      "detailsUrl": "https://github.com/samscript18/GrantPath/actions/runs/40433440921/job/121956377441"
+    }
+  ],
+  "softwareChecks": {
+    "unit": 102,
+    "integration": 37,
+    "browser": 14,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed"
+  },
+  "gate": {
+    "state": "failed",
+    "reason": "Native App status failed or errored.",
+    "source": "Actual correctness job log; required gate remains enforced."
+  },
+  "ownerSeparateManualRun": {
+    "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/cfface78-79a3-4c32-93c4-6b050c5402f3",
+    "reportedBy": "owner",
+    "aggregateAdditionalDebit": 1,
+    "doesNotReplaceAutomaticExecution": true
+  }
+}

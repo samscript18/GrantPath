@@ -1,0 +1,18 @@
+{
+  "name": "Open the study profile editor",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}. Sign in if needed; dismiss Continue study profile later if shown. Never change account security, send email, edit the study profile or operate source-publication controls."
+    },
+    {
+      "type": "action",
+      "description": "Open /profile and use Edit study profile or Start study profile to open /settings/profile."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the Study profile form, stage navigation and visible stage fields/save controls are present. Navigate stages only to inspect controls if necessary. Do not submit, change field values or assert specific profile answers; the independent profile journey owns those writes."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-27T03:47:31.138Z",
+  "ownerStatement": "I have deleted the test case.",
+  "projectCaseCount": 19,
+  "manifestCaseCount": 20,
+  "missingManifestCases": [
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "name": "eligibility_notification",
+      "origin": "original-cli"
+    }
+  ],
+  "targetedCases": [
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "present": false
+    },
+    {
+      "id": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "present": true
+    }
+  ],
+  "balance": 58.6,
+  "noCaseRestored": true,
+  "noFurtherRunDispatched": true
+}

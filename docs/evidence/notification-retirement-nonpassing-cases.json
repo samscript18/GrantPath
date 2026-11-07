@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-27T03:58:33.859Z",
+  "head": "253e8df2fc0ca31c28112ad29449831bb21ab837",
+  "cases": [
+    {
+      "runId": "5566d1c3-5d98-4c85-80ea-596816f83225",
+      "testId": "90536332-1d3a-44de-96b7-fba37fa62836",
+      "testTitle": "Review notifications and mark them read",
+      "status": "blocked",
+      "source": "github_action",
+      "startedAt": "2026-10-27T03:54:22.210Z",
+      "finishedAt": "2026-10-27T03:55:17.936Z",
+      "error": "TEST BLOCKED\n\nThe notifications feature could not be reached because the configured student account was rejected at sign-in.\n\nObservations:\n- The sign-in page displayed “Invalid email or password” after submission.\n- The page remained on the login form; notifications were not available to inspect.",
+      "stepSummary": {
+        "total": 6,
+        "completed": 6,
+        "passedCount": 5,
+        "failedCount": 1
+      },
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9be2c6bb-6ba5-484c-966d-204a7c1ac2ba/test/5566d1c3-5d98-4c85-80ea-596816f83225"
+    }
+  ]
+}

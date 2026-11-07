@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-25T08:28:46.964395+00:00",
+  "scope": "Local production build and isolated PostgreSQL; not TestSprite",
+  "typecheck": "passed",
+  "lint": "passed",
+  "unit": {
+    "passed": 82
+  },
+  "postgresql": {
+    "passed": 31,
+    "testFiles": 12
+  },
+  "productionBuild": "passed",
+  "productionBrowser": {
+    "passed": 13,
+    "failed": 0,
+    "includesExactSavedPythonSources": 7
+  },
+  "format": "passed",
+  "secretScan": {
+    "textFiles": 319,
+    "matches": 0
+  },
+  "scripts": [
+    {
+      "file": "discovery_evidence",
+      "sha256": "10a80f49b6964044f6d076b64ae694196055148c3fb924684918590778dfecb7"
+    },
+    {
+      "file": "profile_application",
+      "sha256": "aac6ed99ea486cf03216d93051a69baab46ad91063cde8513e69f2bc9efb28c8"
+    },
+    {
+      "file": "multi_destination",
+      "sha256": "461317e7a9def1cd4ad75dffe0d069c3cfc22a62498417491e98775a2f84458d"
+    },
+    {
+      "file": "automatic_publication",
+      "sha256": "495ca7b9d595b7039b32ed1ec807120b1f85b6a0688f2dc0d3429515486c95d0"
+    },
+    {
+      "file": "publication_exception",
+      "sha256": "99ae0077d1e487b514587e4286bda968aa806b2ebfd207de6972915f45b2470f"
+    },
+    {
+      "file": "eligibility_notification",
+      "sha256": "f366c7bbf48625bbc75ccafd614aa7101c9011692363c4cc05b01724d9e53eb9"
+    },
+    {
+      "file": "access_denial",
+      "sha256": "495518c2644552718c3974a150240f6ace9b05a58a48db8141f82d64b09d4e5c"
+    }
+  ]
+}

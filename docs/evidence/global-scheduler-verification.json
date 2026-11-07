@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-25T08:41:12.804Z",
+  "reason": "Keep workflows enabled until dispatched jobs actually start; do not dispatch duplicate runs. Temporarily restrict job-environment access to the release branch so the older main Resend workflow cannot use the configured credentials.",
+  "runs": [
+    {
+      "runId": 40177015523,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "queued",
+      "result": null,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177015523",
+      "jobs": []
+    },
+    {
+      "runId": 40177024494,
+      "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+      "event": "workflow_dispatch",
+      "status": "queued",
+      "result": null,
+      "url": "https://github.com/samscript18/GrantPath/actions/runs/40177024494",
+      "jobs": []
+    }
+  ],
+  "workflowState": "disabled_manually until owner separately merges updated default-branch code",
+  "environmentPoliciesRestored": true
+}

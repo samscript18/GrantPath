@@ -1,6 +1,6 @@
 # Requirement × profile × expected outcome
 
-Engine version: 1.1.0. Deterministic conditions are independent of Next.js, matching persistence and preference ranking. `tests/unit/eligibility.test.ts` asserts these cases and exact reason codes are exposed in per-rule explanations. Phase 7 adds the independently authored reference comparison.
+Engine version: 1.3.0 (country/institution preference ranking refresh; rule grammar unchanged). Deterministic conditions are independent of Next.js, matching persistence and preference ranking. `tests/unit/eligibility.test.ts` asserts these cases and exact reason codes are exposed in per-rule explanations. Phase 7 adds the independently authored reference comparison.
 
 | Requirement                                    | Profile state                                       | Rule result / reason                                      |
 | ---------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------- |
@@ -31,3 +31,17 @@ Engine version: 1.1.0. Deterministic conditions are independent of Next.js, matc
 | Unmapped provider condition                    | Any profile                                         | unknown / SOURCE_UNVERIFIED or PROVIDER_CONFIRMATION      |
 
 An overall pass means eligible based on available information, not an award prediction. An overall unknown is a potential match. A verified mandatory failure establishes ineligibility. Official application availability remains separate. Past or pending evaluations are explicitly historical; current reads require exact profile, scholarship and engine versions. No asynchronous job overwrites an evaluation: the records are immutable and uniquely keyed by all input versions.
+
+## Global/discovery additions
+
+| Requirement or context                 | Profile / publication state                                     | Expected result                                                          |
+| -------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Multi-destination preference           | Preferred Germany, joint GB+DE programme                        | Preference points using DE identity; one opportunity                     |
+| Provider country                       | Sponsor in US, actual study in Ghana                            | Ghana destination match only; no US destination inferred                 |
+| Unconfirmed/global location            | Preferred country supplied but provider gives no actual country | No fabricated location preference points; eligibility unchanged          |
+| Unmapped mandatory provider conditions | Other supported requirements pass                               | Potential, provider confirmation remains unknown                         |
+| Accepted controlled level change       | Target master; accepted source now bachelor                     | Not eligible, exact VALUE_NOT_ACCEPTED, newer scholarship/engine context |
+| Unknown alternative                    | One OR branch fails and another is unknown                      | Potential; existing independent reference agreement retained             |
+| Historical/open availability           | Same complete profile and conditions                            | Eligibility assessed separately; availability remains source-defined     |
+
+No automatic GPA conversion was introduced. Original scales and explicit provider equivalences remain the only supported comparisons. Bounded generated/reference checks do not prove all real-world scholarship interpretations.

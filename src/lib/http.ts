@@ -2,14 +2,17 @@ import { getAuth, type Actor } from "@/server/accounts/auth";
 import { mutationQuota } from "@/server/rate-limit";
 import { z } from "zod";
 import { DomainInputError } from "./errors";
+import { db } from "./db";
+import { SetupError } from "./env";
 export async function apiActor(request: Request): Promise<Actor> {
   if (request.method !== "GET" && request.method !== "HEAD") {
-    const origin = request.headers.get("origin");
-    const expected = process.env.BETTER_AUTH_URL;
-    if (!origin || origin !== expected) throw new HttpError(403, "Request origin is not allowed.");
+    assertSameOrigin(request);
   }
   const session = await getAuth().api.getSession({ headers: request.headers });
   if (!session) throw new HttpError(401, "Please sign in to continue.");
+  const deletion = await db().accountDeletion.findUnique({ where: { userId: session.user.id } });
+  if (deletion && deletion.scheduledAt <= new Date())
+    throw new HttpError(403, "Your account deletion cancellation period has ended.");
   if (
     !["GET", "HEAD"].includes(request.method) &&
     !(await mutationQuota(session.user.id, new URL(request.url).pathname))
@@ -17,6 +20,11 @@ export async function apiActor(request: Request): Promise<Actor> {
     throw new HttpError(429, "Too many updates. Please wait a minute and retry.");
   const user = session.user as typeof session.user & { role?: string };
   return { id: user.id, name: user.name, email: user.email, role: user.role || "student" };
+}
+export function assertSameOrigin(request: Request) {
+  const origin = request.headers.get("origin");
+  if (!origin || origin !== process.env.BETTER_AUTH_URL)
+    throw new HttpError(403, "Request origin is not allowed.");
 }
 export class HttpError extends Error {
   constructor(
@@ -27,6 +35,8 @@ export class HttpError extends Error {
   }
 }
 export function apiError(error: unknown) {
+  if (error instanceof SetupError)
+    return Response.json({ message: error.message }, { status: 503 });
   if (error instanceof DomainInputError)
     return Response.json({ message: error.message }, { status: 400 });
   if (error instanceof z.ZodError)

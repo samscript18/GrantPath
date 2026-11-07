@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-26T18:58:18.771Z",
+  "head": "3591af74281e3e0e5467ce954331c7106d61cf1e",
+  "pr": "https://github.com/samscript18/GrantPath/pull/1",
+  "prHead": "3591af74281e3e0e5467ce954331c7106d61cf1e",
+  "mergeableState": "blocked",
+  "enforceAdmins": true,
+  "required": [
+    {
+      "context": "Typecheck, lint, domain and PostgreSQL checks",
+      "app_id": 15368
+    },
+    {
+      "context": "TestSprite V3",
+      "app_id": 2756476
+    }
+  ],
+  "observedDistinctExecutionLinks": [
+    "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/1e3b1a12-6d83-4311-bdeb-bce0b7edb29c"
+  ],
+  "statuses": [
+    {
+      "id": 57296544938,
+      "context": "TestSprite V3",
+      "state": "failure",
+      "description": "4/7 passed · 1 failed · 2 blocked",
+      "creator": "testsprite[bot]",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/1e3b1a12-6d83-4311-bdeb-bce0b7edb29c",
+      "createdAt": "2026-10-26T18:58:00Z"
+    },
+    {
+      "id": 57295707613,
+      "context": "TestSprite V3",
+      "state": "pending",
+      "description": "7 tests queued",
+      "creator": "testsprite[bot]",
+      "url": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/1e3b1a12-6d83-4311-bdeb-bce0b7edb29c",
+      "createdAt": "2026-10-26T18:49:08Z"
+    }
+  ],
+  "note": "Authentic native App status; no run dispatched by this observer."
+}

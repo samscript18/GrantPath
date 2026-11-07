@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-26T16:35:35.778134+00:00",
+  "scope": "Read-only download of existing native blocked access failure bundle; no new run",
+  "runId": "5de7f195-944b-49cf-a851-33709162a06b",
+  "bundleCodeVersion": "v-d28835780596",
+  "runResultCodeVersion": null,
+  "bundleSourceByteIdenticalToSaved": true,
+  "savedAssertCount": 6,
+  "sourceHash": "f61abdce8ae7e8de502c5536ffecbefbd6c8e32924d68dff8d969290ec297bdd",
+  "nativeVerdict": "blocked",
+  "conclusion": "Bundle exports the saved source containing HTTP ownership assertions, while result codeVersion is null and recorded failure describes UI metadata inspection. Stored source fidelity does not establish those assertions executed. No exact-script native pass is claimed."
+}

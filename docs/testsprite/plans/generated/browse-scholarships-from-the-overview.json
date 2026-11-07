@@ -1,0 +1,14 @@
+{
+  "name": "Browse scholarships from the overview",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Open VAR_{url}. Use the visible discovery/explore opportunities link to open /scholarships."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the discovery page, Search scholarships input, destination, study-level, funding and availability filters. Do not rely on brittle absolute XPaths or sign in merely to browse public discovery."
+    }
+  ]
+}

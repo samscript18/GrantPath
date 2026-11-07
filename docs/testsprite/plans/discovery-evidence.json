@@ -1,0 +1,33 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "Discovery shows traceable Twente funding without overstating coverage",
+  "description": "A student can search and filter a real scholarship, inspect its funding and official evidence, and distinguish partial funding from a full award.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /scholarships. In Search scholarships enter Twente. Set Destination to Netherlands (NL) and click Apply filters."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify University of Twente Scholarship is in the results, then reload and verify the search input still contains Twente and Destination remains Netherlands."
+    },
+    {
+      "type": "action",
+      "description": "Open the University of Twente Scholarship result."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the scholarship title and Netherlands destination are displayed, with a partial funding label rather than a claim that this award covers every cost."
+    },
+    {
+      "type": "assertion",
+      "description": "Find Evidence you can inspect. In the funding evidence, verify the official passage contains the award range € 3,000 - € 22,000 and an official utwente.nl source link."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the source evidence includes its verification context and the page distinguishes the provider application window from personal application progress."
+    }
+  ]
+}

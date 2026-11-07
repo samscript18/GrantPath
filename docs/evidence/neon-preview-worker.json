@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-10-24T14:43:41.292Z",
+  "finishedAt": "2026-10-24T14:44:06.316Z",
+  "database": "isolated PR 1",
+  "limit": 5,
+  "exitCode": 0,
+  "result": {
+    "reminders": {
+      "queued": 0
+    },
+    "events": {
+      "completed": 5,
+      "failed": 0
+    },
+    "deliveries": {}
+  },
+  "scope": "One standalone bounded application batch; no source fetching and no scheduler execution claimed."
+}

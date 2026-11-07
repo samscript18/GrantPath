@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-24T14:46:48.723Z",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "results": [
+    "Live-mail registration UI has no unavailable-mail notice",
+    "Reserved test-domain signup rejected before delivery",
+    "Existing isolated student login works with Brevo configured",
+    "Evidence, application and inbox pages render at 360px"
+  ]
+}

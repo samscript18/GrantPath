@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-27T01:31:29.916Z",
+  "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+  "before": {
+    "name": "One real joint programme appears under each actual destination without duplicates",
+    "planStepCount": 4
+  },
+  "after": {
+    "name": "One real joint programme appears under each actual destination without duplicates",
+    "planStepCount": 4,
+    "createdFrom": "cli"
+  },
+  "executionDispatched": false,
+  "reason": "Recorded failed journey clicked external Official scholarship instead of captured internal detail href. Explicitly navigate to the actual internal GrantPath detail. Preserve all seven destination card href comparisons, all seven detail official-link comparisons, institution/evidence assertions and reusable source."
+}

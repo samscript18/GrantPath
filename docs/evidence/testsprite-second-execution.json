@@ -1,0 +1,32 @@
+{
+  "executionId": "bec3b808-1c62-4735-897a-114ccf1c39fb",
+  "source": "Automatic GitHub App deployment-ready trigger",
+  "head": "15e6d7c5e379ecd5b0b4b29634273c6b5996e6d9",
+  "observedDebit": 1,
+  "observedBalance": 148,
+  "tests": [
+    {
+      "testId": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "status": "passed",
+      "runId": "d5b66ed0-7732-42cb-ab83-6faa48853833",
+      "codeVersion": "v2.0",
+      "startedAt": "2026-10-24T14:03:04.012Z",
+      "finishedAt": "2026-10-24T14:04:37.421Z",
+      "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "environment": "github-pr-1",
+      "verdict": "passed"
+    },
+    {
+      "testId": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "status": "passed",
+      "runId": "510b2232-27b4-4670-a364-3898a4ac6250",
+      "codeVersion": "v2.0",
+      "startedAt": "2026-10-24T14:03:04.012Z",
+      "finishedAt": "2026-10-24T14:06:51.270Z",
+      "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "environment": "github-pr-1",
+      "verdict": "passed"
+    }
+  ],
+  "limitation": "Generated replay code omitted some intended assertions. Explicit replacements were authored and locally verified before the next release."
+}

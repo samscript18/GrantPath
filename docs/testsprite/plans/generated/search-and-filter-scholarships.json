@@ -1,0 +1,14 @@
+{
+  "name": "Search and filter scholarships",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Open VAR_{url}/scholarships. Search for Twente. Select destination Netherlands (value NL), study level Master’s (master), funding Partial funding (partial), and availability All cycles, including closed (all). Click Apply filters."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify University of Twente Scholarship appears and the URL/input controls retain q=Twente, destination=NL, level=master, funding=partial and availability=all. Reload and verify those same selected values and the matching Twente result persist. Do not substitute an empty option value for a requested filter."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-24T14:31:43.928Z",
+  "provider": "Brevo",
+  "recipient": "Configured active sender address",
+  "first": {
+    "id": "<202610241431.64784269818@smtp-relay.mailin.fr>",
+    "state": "accepted"
+  },
+  "idempotencyKey": "ac2a4e35-f8e5-58a9-9218-370c1204d9cb",
+  "duplicateSuppressed": true,
+  "scope": "Actual provider acceptance and duplicate-parameter response; recipient receipt has not been observed. One email requested, second request suppressed."
+}

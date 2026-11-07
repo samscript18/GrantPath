@@ -1,0 +1,38 @@
+{
+  "automaticExecution": "060daa19-5134-4241-9443-39a5c0bcec3e",
+  "cases": [
+    {
+      "runId": "704195da-ad64-4d29-8745-35dceb4ee051",
+      "testId": "1f6c402e-f926-4805-876a-7f69637e0e65",
+      "status": "blocked",
+      "source": "github_action",
+      "startedAt": "2026-10-27T01:36:15.984Z",
+      "finishedAt": "2026-10-27T01:37:17.714Z",
+      "error": "TEST BLOCKED\n\nThe notification test could not be run because the supplied student account was not accepted, so the notification inbox was not reached.\n\nObservations:\n- The sign-in page displayed \u201cInvalid email or password.\u201d",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/060daa19-5134-4241-9443-39a5c0bcec3e/test/704195da-ad64-4d29-8745-35dceb4ee051",
+      "stepSummary": {
+        "total": 6,
+        "completed": 6,
+        "passedCount": 5,
+        "failedCount": 1
+      }
+    },
+    {
+      "runId": "4ffb850e-46dd-4133-9680-a6e6fe207ec9",
+      "testId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "status": "failed",
+      "source": "github_action",
+      "startedAt": "2026-10-27T01:36:15.984Z",
+      "finishedAt": "2026-10-27T01:45:53.528Z",
+      "error": "TEST FAILURE\n\nThe queued jobs did not finish processing, so the required queue-drain checkpoint was not reached. The post-change eligibility and notification checks could not be completed.\n\nObservations:\n- The Operator studio continued to show 2 pending events and 2 runnable jobs after repeated processing attempts and waits.\n- Pending deliveries remained at 0.\n- No queue-drained confirmation appeared.",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/060daa19-5134-4241-9443-39a5c0bcec3e/test/4ffb850e-46dd-4133-9680-a6e6fe207ec9",
+      "stepSummary": {
+        "total": 47,
+        "completed": 47,
+        "passedCount": 46,
+        "failedCount": 1
+      }
+    }
+  ],
+  "diagnosis": "See portal-retry-action-diagnosis.json; no manual drain/reset or hidden rerun."
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Open profile and access account settings",
+  "description": "Reviewed portal AI-generated coverage. Preserve the original generation provenance; use real routes and deterministic, isolated assertions.",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Use only the configured isolated student account VAR_{username} and VAR_{password} at VAR_{url}. Sign in if needed; dismiss Continue study profile later if shown. Never change account security, send email, edit the study profile or operate source-publication controls."
+    },
+    {
+      "type": "action",
+      "description": "Open /profile and use Account & security to open /settings/account."
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the account/security settings route and the signed-in student’s account information or account/security controls are displayed. Verify student identity rather than an operator role. Do not change password, start account deletion/export, revoke sessions or send email. Returning to /profile must show the same account."
+    }
+  ]
+}

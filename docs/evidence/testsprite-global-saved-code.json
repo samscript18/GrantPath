@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-26T14:58:48.795Z",
+  "executed": false,
+  "cases": [
+    {
+      "id": "32f78efb-a7b0-4a30-a838-bc5b020f84e5",
+      "file": "discovery_evidence",
+      "codeVersion": "v-50823b9f627b",
+      "byteIdentical": true
+    },
+    {
+      "id": "52c1618f-923c-48e7-b2bb-e48a8dfddbb6",
+      "file": "profile_application",
+      "codeVersion": "v-bb625127f409",
+      "byteIdentical": true
+    },
+    {
+      "id": "a9233d93-6dd0-4c15-bcfd-da65091b8a64",
+      "file": "multi_destination",
+      "codeVersion": "v-f9391163b06a",
+      "byteIdentical": true
+    },
+    {
+      "id": "023cb43e-bf1e-4d64-a675-83561fb18b84",
+      "file": "automatic_publication",
+      "codeVersion": "v-f28e68163054",
+      "byteIdentical": true
+    },
+    {
+      "id": "762677d6-c058-41bd-996d-a599b01981be",
+      "file": "publication_exception",
+      "codeVersion": "v-38faa8392ef6",
+      "byteIdentical": true
+    },
+    {
+      "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "file": "eligibility_notification",
+      "codeVersion": "v-b5d24f23e45d",
+      "byteIdentical": true
+    },
+    {
+      "id": "ca8b9978-5bbc-423f-8612-bfb879698279",
+      "file": "access_denial",
+      "codeVersion": "v-d28835780596",
+      "byteIdentical": true
+    }
+  ]
+}

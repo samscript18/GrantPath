@@ -1,139 +1,244 @@
-import Link from "next/link";
+"use client";
+
+import Form from "next/form";
+import Link, { useLinkStatus } from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment, useEffect, useRef } from "react";
 import {
   LayoutDashboard,
   Compass,
   Bookmark,
   Columns3,
   Bell,
-  UserRound,
+  Settings2,
   ShieldCheck,
   ArrowUpRight,
+  ChevronRight,
+  Sprout,
+  UserRound,
+  BookOpen,
+  Search,
 } from "lucide-react";
 import { Logo } from "./logo";
 import type { Actor } from "@/server/accounts/auth";
 import { SignOut } from "./sign-out";
-import { unreadCount } from "@/server/notifications";
+import { ThemeControl } from "./theme-control";
+import { Button } from "./ui/button";
+import { Avatar } from "./avatar";
+
 const nav = [
   ["/dashboard", "Overview", LayoutDashboard],
   ["/scholarships", "Discover scholarships", Compass],
   ["/saved", "Saved opportunities", Bookmark],
   ["/applications", "My applications", Columns3],
   ["/notifications", "Notifications", Bell],
-  ["/profile", "My profile", UserRound],
+  ["/academic-references", "Academic references", BookOpen],
+  ["/profile", "Profile", UserRound],
+  ["/settings", "Settings", Settings2],
 ] as const;
-export async function Shell({
+
+function NavigationHint() {
+  const { pending } = useLinkStatus();
+  return <span aria-hidden="true" className={`nav-pending ${pending ? "is-pending" : ""}`} />;
+}
+
+export function Shell({
   children,
   actor,
-  active,
+  unread = 0,
 }: {
   children: React.ReactNode;
   actor: Actor | null;
-  active?: string;
+  unread?: number;
 }) {
-  const unread = actor ? await unreadCount(actor) : 0;
+  const workspaceRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const header = headerRef.current;
+    const workspace = workspaceRef.current;
+    if (!header || !workspace) return;
+    const updateHeight = () => {
+      workspace.style.setProperty(
+        "--workspace-header-height",
+        `${header.getBoundingClientRect().height}px`,
+      );
+    };
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+  const pathname = usePathname();
+  const active = nav.find(([href]) => pathname === href || pathname.startsWith(`${href}/`))?.[0];
+  const section = nav.find(([href]) => href === active)?.[1] || "Operator studio";
   return (
-    <div className="min-h-screen lg:pl-[238px]">
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[238px] flex-col bg-primary px-6 py-8 text-white/75 lg:flex">
-        <Logo light />
-        <div className="eyebrow mt-13 mb-4 text-white/70">YOUR NEXT CHAPTER</div>
-        <nav aria-label="Main navigation" className="space-y-1.5">
-          {nav.map(([href, label, Icon]) => (
-            <Link
-              key={href}
-              href={href}
-              aria-current={active === href ? "page" : undefined}
-              className={`flex items-center gap-3 rounded-md px-3 py-3 text-[12px] transition-colors ${active === href ? "bg-[#eceddd] text-primary" : "hover:bg-white/10"}`}
-            >
-              <Icon size={17} strokeWidth={1.5} />
-              {label}
-            </Link>
+    <div ref={workspaceRef} className="workspace min-h-screen lg:pl-[252px]">
+      <aside className="workspace-sidebar fixed inset-y-0 left-0 z-30 hidden w-[252px] flex-col overflow-y-auto px-5 py-8 text-white/75 lg:flex">
+        <div className="px-3">
+          <Logo light />
+        </div>
+        <p className="eyebrow mt-9 mb-4 px-3 text-[9px] text-white/65">YOUR WORKSPACE</p>
+        <nav aria-label="Main navigation" className="space-y-1">
+          {nav.map(([href, label, Icon], index) => (
+            <Fragment key={href}>
+              {(index === 2 || index === 5 || index === 6) && (
+                <p className="sidebar-group-label">
+                  {index === 2 ? "YOUR PLANS" : index === 5 ? "RESOURCES" : "PERSONAL"}
+                </p>
+              )}
+              <Link
+                href={href}
+                aria-current={active === href ? "page" : undefined}
+                className={`workspace-nav-link group relative flex items-center gap-3 rounded-lg px-3.5 py-3 text-[12px] ${active === href ? "is-active" : "hover:bg-white/6 hover:text-white"}`}
+              >
+                <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
+                <span className="flex-1">{label}</span>
+                {href === "/notifications" && unread > 0 && (
+                  <span className="nav-count">{unread > 99 ? "99+" : unread}</span>
+                )}
+                <NavigationHint />
+              </Link>
+            </Fragment>
           ))}
           {actor?.role === "operator" && (
-            <Link href="/operator" className="flex items-center gap-3 px-3 py-3 text-xs">
-              <ShieldCheck size={17} />
+            <Link
+              href="/operator"
+              aria-current={pathname === "/operator" ? "page" : undefined}
+              className={`workspace-nav-link mt-5 flex items-center gap-3 rounded-lg px-3.5 py-3.5 text-xs ${pathname === "/operator" ? "is-active" : "hover:bg-white/6"}`}
+            >
+              <ShieldCheck size={18} aria-hidden="true" />
               Operator studio
             </Link>
           )}
         </nav>
-        <div className="mt-auto">
-          <div className="mb-7 border-l border-accent/60 pl-4">
-            <p className="font-serif text-xl leading-relaxed text-[#ecebd8]">
-              Big ambitions.
-              <br />A clearer path.
+        <div className="mt-auto pt-10">
+          <div className="sidebar-note mb-6 border-t border-white/15 px-1 pt-5">
+            <p className="font-serif text-xl leading-snug text-[#f0eedb]">
+              Room for big ambitions.
             </p>
             <Link
               href="/scholarships"
-              className="mt-3 inline-flex items-center gap-2 text-[11px] text-white/65"
+              className="mt-3 inline-flex items-center gap-2 text-[11px] text-white/70 hover:text-white"
             >
-              Find your opportunity <ArrowUpRight size={13} />
+              Explore your possibilities <ArrowUpRight size={13} aria-hidden="true" />
             </Link>
           </div>
-          <div className="flex items-center gap-3 border-t border-white/15 pt-5">
-            <span className="flex size-9 items-center justify-center rounded-full bg-[#53705b] text-xs text-white">
-              {actor?.name?.slice(0, 2).toUpperCase() || "GP"}
-            </span>
+          <div className="flex items-center gap-3 border-t border-white/12 px-1 pt-5">
+            <Link
+              href={actor ? "/profile" : "/login"}
+              aria-label={actor ? "Your profile" : "Sign in"}
+              className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/8 text-[11px] text-white"
+            >
+              <Avatar
+                name={actor?.name || "GrantPath"}
+                image={actor?.image}
+                className="size-9 rounded-full text-[11px]"
+              />
+            </Link>
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs text-white">{actor?.name || "Welcome, explorer"}</p>
-              <p className="mt-1 text-[10px] text-white/70">
-                {actor ? "Your scholarship workspace" : "Explore your possibilities"}
+              <p className="mt-1 text-[10px] text-white/65">
+                {actor ? "Your personal workspace" : "A world of possibility"}
               </p>
             </div>
             {actor && <SignOut />}
           </div>
         </div>
       </aside>
-      <header className="flex min-h-18 flex-wrap items-center justify-between gap-4 border-b border-border bg-[#faf9f5] px-5 py-4 sm:px-9">
-        <div className="lg:hidden">
-          <Logo />
-        </div>
-        <p className="hidden text-xs text-muted-foreground lg:block">
-          A little direction. A world of possibility.
-        </p>
-        <div className="flex items-center gap-5 text-xs">
-          <Link href="/scholarships" className="hidden items-center gap-1 sm:inline-flex">
-            Explore opportunities <ArrowUpRight size={13} />
-          </Link>
-          {actor ? (
-            <Link
-              href="/notifications"
-              aria-label={`Notification inbox${unread ? `, ${unread} unread updates` : ""}`}
-              className="flex items-center gap-2"
+      <header
+        ref={headerRef}
+        className="workspace-header sticky top-0 z-20 border-b border-border/70 px-5 py-4 sm:px-9 lg:px-11"
+      >
+        <div className="flex min-h-8 items-center justify-between gap-3">
+          <div className="lg:hidden">
+            <Logo />
+          </div>
+          <div className="hidden items-center gap-3 text-xs lg:flex">
+            <span className="text-muted-foreground">Your workspace</span>
+            <ChevronRight size={12} className="text-muted-foreground/60" aria-hidden="true" />
+            <span className="font-medium">{section}</span>
+          </div>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Form
+              action="/scholarships"
+              role="search"
+              className="header-search relative hidden xl:block"
             >
-              <Bell size={18} strokeWidth={1.5} />
-              {unread > 0 && (
-                <span className="rounded-full bg-accent/25 px-1.5 py-0.5 text-[10px] font-semibold">
-                  {unread > 99 ? "99+" : unread}
-                </span>
-              )}
-            </Link>
-          ) : (
-            <Link href="/login" className="font-semibold">
-              Sign in <span aria-hidden>↗</span>
-            </Link>
-          )}
-          {actor && (
-            <span className="lg:hidden">
-              <SignOut />
-            </span>
-          )}
+              <label htmlFor="workspace-search" className="sr-only">
+                Quick scholarship search
+              </label>
+              <Search
+                size={14}
+                className="pointer-events-none absolute left-3 top-3 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <input
+                id="workspace-search"
+                name="q"
+                type="search"
+                maxLength={120}
+                placeholder="Find a scholarship…"
+                className="h-9 w-52 rounded-lg border border-border/70 bg-background/80 pl-9 pr-3 text-xs placeholder:text-muted-foreground focus:border-primary/40 focus:outline-none focus:ring-3 focus:ring-primary/10"
+              />
+            </Form>
+            <ThemeControl compactOnMobile />
+            {actor ? (
+              <Link
+                href="/notifications"
+                aria-label={`Notification inbox${unread ? `, ${unread} unread updates` : ""}`}
+                className="relative flex size-9 items-center justify-center rounded-full border border-border/80 bg-paper text-foreground transition-colors hover:bg-secondary"
+              >
+                <Bell size={17} strokeWidth={1.5} aria-hidden="true" />
+                {unread > 0 && (
+                  <span className="absolute -top-1 -right-1 flex min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[9px] leading-4 font-semibold text-[#183e2e]">
+                    {unread > 99 ? "99+" : unread}
+                  </span>
+                )}
+              </Link>
+            ) : (
+              <Button asChild size="sm">
+                <Link href="/login">Sign in</Link>
+              </Button>
+            )}
+            {actor && <div className="hidden h-5 w-px bg-border sm:block" />}
+            {actor && (
+              <Link
+                href="/profile"
+                aria-label="Your profile"
+                className="hidden size-8 items-center justify-center rounded-full bg-secondary text-[10px] font-semibold sm:flex"
+              >
+                <Avatar
+                  name={actor.name}
+                  image={actor.image}
+                  className="size-8 rounded-full text-[10px]"
+                />
+              </Link>
+            )}
+            {actor && (
+              <span className="lg:hidden">
+                <SignOut />
+              </span>
+            )}
+          </div>
         </div>
         <nav
           aria-label="Mobile navigation"
-          className="flex w-full gap-5 overflow-x-auto pb-1 lg:hidden"
+          className="-mx-5 mt-4 flex gap-1 overflow-x-auto border-t border-border/60 px-4 pt-3 lg:hidden"
         >
           {nav.map(([href, label, Icon]) => (
             <Link
               key={href}
               href={href}
               aria-current={active === href ? "page" : undefined}
-              className={`flex shrink-0 items-center gap-1.5 text-[11px] ${active === href ? "font-bold" : "text-muted-foreground"}`}
+              className={`relative flex shrink-0 items-center gap-2 rounded-md px-3 py-2.5 text-[11px] ${active === href ? "bg-secondary font-semibold text-primary" : "text-muted-foreground"}`}
             >
-              <Icon size={13} />
+              <Icon size={14} aria-hidden="true" />
               {label.replace(" scholarships", "").replace(" opportunities", "")}
+              <NavigationHint />
             </Link>
           ))}
           {actor?.role === "operator" && (
-            <Link href="/operator" className="text-[11px]">
+            <Link href="/operator" className="shrink-0 px-3 py-2.5 text-[11px]">
               Operator
             </Link>
           )}
@@ -141,13 +246,16 @@ export async function Shell({
       </header>
       <main
         id="main"
-        className="mx-auto max-w-[1500px] px-5 py-8 sm:px-9 lg:px-10 lg:py-10 fade-in"
+        className="workspace-content design-workspace mx-auto min-h-[calc(100vh-156px)] max-w-[1480px] px-5 py-8 sm:px-9 lg:px-11 lg:py-11"
       >
         {children}
       </main>
-      <footer className="mx-5 flex flex-wrap justify-between gap-3 border-t border-border py-6 text-[10px] text-muted-foreground sm:mx-9">
-        <span>© {new Date().getFullYear()} GrantPath. Make room for what comes next.</span>
-        <span>Evidence first. Your ambition, always.</span>
+      <footer className="mx-5 flex flex-wrap items-center justify-between gap-3 border-t border-border/70 py-6 text-[10px] text-muted-foreground sm:mx-9 lg:mx-11">
+        <span>© {new Date().getFullYear()} GrantPath</span>
+        <span className="flex items-center gap-2">
+          <Sprout size={12} strokeWidth={1.5} aria-hidden="true" />
+          Evidence first. Your ambition, always.
+        </span>
       </footer>
     </div>
   );

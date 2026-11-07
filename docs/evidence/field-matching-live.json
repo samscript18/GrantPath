@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-26",
+  "environment": "local",
+  "provider": "Google Cloud Vertex AI",
+  "project": "verith-ai",
+  "model": "gemini-3.8-flash",
+  "query": "Chemistry",
+  "candidates": [
+    {
+      "id": "organic",
+      "title": "Organic synthesis research scholarship",
+      "fields": "Organic synthesis",
+      "summary": "Research in synthetic methods and the preparation of organic molecules."
+    },
+    {
+      "id": "history",
+      "title": "Medieval history scholarship",
+      "fields": "History",
+      "summary": "Research on medieval historical archives."
+    },
+    {
+      "id": "unknown",
+      "title": "Provider scholarship",
+      "fields": "Various fields",
+      "summary": "Approved subjects must be confirmed with the provider."
+    },
+    {
+      "id": "all",
+      "title": "All disciplines postgraduate scholarship",
+      "fields": "All academic disciplines",
+      "summary": "Every academic discipline is supported with no subject exclusions."
+    }
+  ],
+  "matchingIds": ["organic", "all"],
+  "passed": true,
+  "elapsedMs": 2927,
+  "limits": "One authenticated request over standalone fictional records. No database writes, public scholarship additions, hosted deployment or TestSprite result."
+}

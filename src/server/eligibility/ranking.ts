@@ -1,3 +1,5 @@
+import { countryCode } from "@/lib/countries";
+import { studyLocationsOf } from "@/server/scholarships/locations";
 import type { StudentProfile } from "@/server/profiles/schema";
 import type { ScholarshipData } from "@/server/scholarships/schema";
 import type { Outcome } from "./engine";
@@ -11,7 +13,13 @@ export function rank(profile: StudentProfile, scholarship: ScholarshipData, outc
   let score = 0;
   const factors: string[] = [];
   const equal = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase();
-  if (profile.destinations.some((d) => equal(d, scholarship.destination))) {
+  const locations = studyLocationsOf(scholarship);
+  if (
+    profile.destinations.some((d) => {
+      const code = countryCode(d);
+      return code && locations.countries.includes(code);
+    })
+  ) {
     score += 30;
     factors.push("Preferred destination +30");
   }
@@ -19,7 +27,11 @@ export function rank(profile: StudentProfile, scholarship: ScholarshipData, outc
     score += 25;
     factors.push("Preferred field +25");
   }
-  if (profile.preferredInstitutions.some((i) => equal(i, scholarship.institution))) {
+  if (
+    profile.preferredInstitutions.some((i) =>
+      locations.institutions.some((location) => equal(i, location.name)),
+    )
+  ) {
     score += 15;
     factors.push("Preferred institution +15");
   }

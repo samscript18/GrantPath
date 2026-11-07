@@ -1,0 +1,71 @@
+{
+  "checkedAt": "2026-10-27T03:37:07.954Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "origin": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "balanceBefore": 60.1,
+  "displayedCreditsPerRun": 0.5,
+  "twoCaseEstimate": 1,
+  "projectedRemaining": 59.1,
+  "reserve": 50,
+  "scope": "Explicitly authorised hosted worker/auth diagnostic before fresh two-case rerun. No reset, reseed, credential or binding change. Original failed automatic run remains failed.",
+  "authChecks": [
+    {
+      "role": "student",
+      "status": 200,
+      "sessionIssued": true,
+      "inboxStatus": 200
+    },
+    {
+      "role": "otherStudent",
+      "status": 200,
+      "sessionIssued": true,
+      "inboxStatus": 200
+    },
+    {
+      "role": "operator",
+      "status": 200,
+      "sessionIssued": true
+    }
+  ],
+  "workerBatches": [
+    {
+      "status": 200,
+      "events": {
+        "completed": 9,
+        "failed": 0
+      },
+      "deliveries": {
+        "published": 4,
+        "suppressed": 4
+      },
+      "queue": {
+        "checkedAt": "2026-10-27T03:37:23.567Z",
+        "events": 0,
+        "deliveries": 0,
+        "ready": 0,
+        "needsReview": 0
+      }
+    }
+  ],
+  "before": {
+    "events": 2,
+    "topics": [
+      {
+        "topic": "scholarship.changed",
+        "state": "pending",
+        "attempts": 0
+      },
+      {
+        "topic": "scholarship.changed",
+        "state": "pending",
+        "attempts": 0
+      }
+    ]
+  },
+  "operatorPageStatus": 200,
+  "unauthenticatedWorkerStatus": 401,
+  "queueDrained": true,
+  "remainingActiveEvents": 0,
+  "remainingActiveDeliveries": 0,
+  "conclusion": "Existing deployed protected processor consumes/acknowledges work and both supplied student identities authenticate. No backend/auth configuration change or reseeding needed. Diagnostic processing is disclosed separately from the failed historical run and the forthcoming two-case rerun."
+}

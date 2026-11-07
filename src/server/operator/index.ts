@@ -1,3 +1,5 @@
+import { applicationQueueHealth } from "@/server/jobs/run";
+import { discoveryOverview } from "@/server/discovery/service";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireOperator, type Actor } from "@/server/accounts/auth";
@@ -48,38 +50,54 @@ export async function createOpportunity(actor: Actor, input: unknown) {
   const result = await publishScholarship(actor, record.id, v.data, 0, v.reason);
   return { ...result, id: record.id, slug: record.slug };
 }
-export async function operatorOverview(actor: Actor) {
+export async function operatorOverview(actor: Actor, publication?: string) {
   requireOperator(actor);
-  const [scholarships, sources, reviews, failures, events, audits] = await Promise.all([
-    db().scholarship.findMany({
-      include: {
-        programme: { include: { provider: true } },
-        versions: { orderBy: { number: "desc" }, take: 1 },
-      },
-      orderBy: { title: "asc" },
-    }),
-    db().source.findMany({
-      include: { scholarship: true, observations: { orderBy: { attemptedAt: "desc" }, take: 5 } },
-      orderBy: { url: "asc" },
-    }),
-    db().review.findMany({
-      where: { state: "pending" },
-      include: { scholarship: true, observation: true },
-      orderBy: { createdAt: "asc" },
-      take: 100,
-    }),
-    db().delivery.findMany({
-      where: { state: { in: ["failed", "pending", "processing", "uncertain"] } },
-      include: { history: { orderBy: { createdAt: "desc" }, take: 3 } },
-      orderBy: { createdAt: "desc" },
-      take: 50,
-    }),
-    db().outbox.findMany({
-      where: { state: { not: "done" } },
-      orderBy: { createdAt: "asc" },
-      take: 50,
-    }),
-    db().audit.findMany({ orderBy: { createdAt: "desc" }, take: 20 }),
+  const [scholarships, sources, reviews, failures, events, audits, recentEvents] =
+    await Promise.all([
+      db().scholarship.findMany({
+        include: {
+          programme: { include: { provider: true } },
+          versions: { orderBy: { number: "desc" }, take: 1 },
+        },
+        orderBy: { title: "asc" },
+      }),
+      db().source.findMany({
+        include: { scholarship: true, observations: { orderBy: { attemptedAt: "desc" }, take: 5 } },
+        orderBy: { url: "asc" },
+      }),
+      db().review.findMany({
+        where: { state: "pending" },
+        include: { scholarship: true, observation: true },
+        orderBy: { createdAt: "asc" },
+        take: 100,
+      }),
+      db().delivery.findMany({
+        where: { state: { in: ["failed", "pending", "processing", "uncertain"] } },
+        include: { history: { orderBy: { createdAt: "desc" }, take: 3 } },
+        orderBy: { createdAt: "desc" },
+        take: 50,
+      }),
+      db().outbox.findMany({
+        where: { state: { not: "done" } },
+        orderBy: { createdAt: "asc" },
+        take: 50,
+      }),
+      db().audit.findMany({ orderBy: { createdAt: "desc" }, take: 20 }),
+      db().outbox.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
+    ]);
+  const [discovery, queue] = await Promise.all([
+    discoveryOverview(actor, publication),
+    applicationQueueHealth(),
   ]);
-  return { scholarships, sources, reviews, failures, events, audits };
+  return {
+    scholarships,
+    sources,
+    reviews,
+    failures,
+    events,
+    recentEvents,
+    audits,
+    discovery,
+    queue,
+  };
 }

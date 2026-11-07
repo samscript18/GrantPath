@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-27T03:39:27.480Z",
+  "head": "5d9960f0e1088283eb3a9213abac3cc40cb744f6",
+  "scope": "Only two user-authorised targeted CLI reruns, separate from the earlier complete automatic GitHub App execution; no new all20 run or GitHub status mutation.",
+  "cases": [
+    {
+      "runId": "27bdbc63-6ce4-4424-9c26-cf58d2d6e09d",
+      "testId": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+      "testTitle": "An accepted requirement change recalculates the exact outcome once and honours disabled queued alerts",
+      "status": "blocked",
+      "source": "cli",
+      "createdAt": "2026-10-27T03:38:04.647Z",
+      "startedAt": "2026-10-27T03:38:04.647Z",
+      "finishedAt": "2026-10-27T03:38:04.736Z",
+      "codeVersion": null,
+      "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+      "failedStepIndex": null,
+      "failureKind": null,
+      "error": "stale_code: the stored script was written for an earlier version of this test, so replaying it would run the previous definition. Update the stored test code to match the current test, e.g. testsprite test code put <test-id> --code-file <path>.",
+      "stepSummary": {
+        "total": 0,
+        "completed": 0,
+        "passedCount": 0,
+        "failedCount": 0
+      },
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/9fa8844b-dd97-4314-8137-f698b0415574/test/27bdbc63-6ce4-4424-9c26-cf58d2d6e09d"
+    },
+    {
+      "runId": "e1ba24d1-b515-4784-96a6-64968b24945e",
+      "status": "running"
+    }
+  ],
+  "balanceBefore": 60.1,
+  "balanceAfter": 59.6,
+  "observedDebit": 0.5,
+  "allPassed": false
+}

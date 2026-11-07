@@ -1,15 +1,21 @@
+import { Logo } from "@/components/logo";
 export default function Loading() {
   return (
     <main
       id="main"
       aria-busy="true"
       aria-label="Loading GrantPath"
-      className="mx-auto max-w-5xl space-y-6 p-10"
+      className="state-scene flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center"
     >
-      <p className="eyebrow">Finding your path…</p>
-      <div className="h-14 w-2/3 animate-pulse bg-muted" />
-      <div className="h-60 animate-pulse bg-muted" />
-      <p className="text-sm text-muted-foreground">Loading your opportunities.</p>
+      <Logo />
+      <div
+        className="loading-track my-8 h-0.5 w-36 overflow-hidden rounded-full bg-border"
+        aria-hidden="true"
+      />
+      <div role="status">
+        <p className="font-serif text-xl">A little direction is on its way.</p>
+        <p className="mt-3 text-xs text-muted-foreground">Opening your workspace…</p>
+      </div>
     </main>
   );
 }

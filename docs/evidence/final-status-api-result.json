@@ -1,0 +1,27 @@
+{
+  "testId": "88b47334-232c-4665-a6a2-413b09c34eb5",
+  "status": "passed",
+  "startedAt": "2026-10-26T21:05:15.964Z",
+  "finishedAt": "2026-10-26T21:05:20.611Z",
+  "videoUrl": null,
+  "failureAnalysisUrl": null,
+  "snapshotId": "snap_a834d6b6008de37e",
+  "runIdIfAvailable": "5eb82386-d083-4f5f-aadb-390dac395805",
+  "codeVersion": "v-5e0325a9c69d",
+  "targetUrl": null,
+  "targetUrlSource": null,
+  "environment": null,
+  "failedStepIndex": null,
+  "failureKind": null,
+  "verdict": "passed",
+  "executionStatus": "completed",
+  "summary": "Test passed.",
+  "apiOutput": "Verified: cross-account update 404; foreign read excluded; all owner fields unchanged; operator mutation 403.\n",
+  "trace": "",
+  "analysis": {
+    "rootCauseHypothesis": null,
+    "recommendedFixTarget": null,
+    "failureKind": null,
+    "snapshotId": "snap_a834d6b6008de37e"
+  }
+}

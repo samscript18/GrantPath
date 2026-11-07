@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-26T14:58:50.678Z",
+  "finishedAt": "2026-10-26T14:59:02.873Z",
+  "head": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "reason": "Native browser agent could not assert protected API ownership. One strict saved-code replay addresses that concrete gap; not a duplicate broad App suite.",
+  "estimatedCredits": 0.5,
+  "balanceBefore": 138,
+  "case": "ca8b9978-5bbc-423f-8612-bfb879698279",
+  "exitCode": 1,
+  "body": {
+    "runId": "ce999aed-46ee-4a33-9131-8a4a68aa16d9",
+    "testId": "ca8b9978-5bbc-423f-8612-bfb879698279",
+    "testTitle": "Cross-account application modification is denied by the server and owner data stays unchanged",
+    "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+    "userId": "a4b85448-0081-7067-e263-693e586fe698",
+    "status": "failed",
+    "source": "cli",
+    "createdAt": "2026-10-26T14:58:53.861Z",
+    "startedAt": "2026-10-26T14:58:53.861Z",
+    "finishedAt": "2026-10-26T14:59:02.608Z",
+    "codeVersion": null,
+    "targetUrl": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+    "environment": {
+      "id": "c3fd7e17-fdbb-4c19-871c-26664defc818",
+      "name": "default"
+    },
+    "createdFrom": null,
+    "failedStepIndex": null,
+    "failureKind": "unknown",
+    "error": "TargetClosedError: BrowserContext.new_page: Target page, context or browser has been closed",
+    "videoUrl": "",
+    "stepSummary": {
+      "total": 0,
+      "completed": 0,
+      "passedCount": 0,
+      "failedCount": 0
+    },
+    "replay": {
+      "path": "replay",
+      "reason": null,
+      "caveat": null
+    },
+    "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279",
+    "executionUrl": "https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/execution/ec23dc08-69f7-4891-beaa-dca00dcc1790/test/ce999aed-46ee-4a33-9131-8a4a68aa16d9",
+    "apiOutput": null,
+    "trace": null
+  },
+  "diagnostic": "idempotency-key: cli-run-aa4186fe-62e3-4674-9b0c-40c414c9eb16\nRun ce999aed-46ee-4a33-9131-8a4a68aa16d9\nDashboard: https://www.testsprite.com/dashboard-v3/o/76bdd244-19c4-5d53-804b-92e29f6cfd98/projects/a3f56241-4390-4269-8e0e-e88d61104094/test-cases/ca8b9978-5bbc-423f-8612-bfb879698279\nrequestId: cli_9e6964a8-040f-452a-a7a5-d6d4eb396abd\nRun finished with status: failed. Use 'testsprite test artifact get ce999aed-46ee-4a33-9131-8a4a68aa16d9' to download the failure bundle.\n{\n  \"error\": {\n    \"code\": \"CLI_ERROR\",\n    \"message\": \"Run ce999aed-46ee-4a33-9131-8a4a68aa16d9 finished with status: failed\",\n    \"nextAction\": \"\",\n    \"requestId\": \"local\",\n    \"details\": {}\n  }\n}\n"
+}

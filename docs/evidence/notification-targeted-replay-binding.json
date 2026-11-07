@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-27T03:40:29.139Z",
+  "id": "630a42fb-fd1f-4aa7-ae23-ef6ba7c57806",
+  "previousCodeVersion": "v-b5d24f23e45d",
+  "currentCodeVersion": "v-b5d24f23e45d",
+  "sourceHash": "4d2914e4525a7b741038ac547d1f612b3b6fff07c93c4c033bab734787d56ab8",
+  "unchangedSource": true,
+  "reason": "Refresh stale-code binding after explicit worker-action plan clarification. Reusable assertions and source bytes unchanged.",
+  "executionDispatched": false
+}

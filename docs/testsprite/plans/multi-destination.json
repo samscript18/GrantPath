@@ -1,0 +1,25 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "One real joint programme appears under each actual destination without duplicates",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /scholarships; search GLOCAL. Select destination Germany (DE), choose all application windows and click Apply filters."
+    },
+    {
+      "type": "assertion",
+      "description": "Assert exactly one GLOCAL joint programme result. Reload and assert the search and Germany filter persist. Capture its scholarship link."
+    },
+    {
+      "type": "assertion",
+      "description": "Repeat filters for United Kingdom GB, Spain ES, Sweden SE, Colombia CO, Japan JP and Netherlands NL. Each must show exactly one GLOCAL result with the same literal internal scholarship href. In EACH result article inspect the visible Official scholarship button: its literal href must equal https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/. This button uses that catalogue record\u2019s officialUrl directly; compare the actual href under every destination, not the filter URL or a redirect. Missing comparisons must fail."
+    },
+    {
+      "type": "assertion",
+      "description": "Open the captured INTERNAL GrantPath scholarship detail href from the GLOCAL title/View scholarship link, staying on VAR_{url}. Do not click the external Official scholarship button: its literal href was inspected in the preceding assertion, and the provider website does not contain GrantPath's study-location UI. Verify the GrantPath detail route /scholarships/erasmus-glocal-8adbfb712d before continuing. Assert participating institutions include University of Glasgow, Kyoto University and Universidad de Los Andes. Inspect official evidence. Each of the seven study-location Scholarship information links must have the identical literal href https://globallocal-erasmusmundus.eu/about-glocal/programme-overview/ without query parameters or fragments. Funding evidence and the separate application guidance may use their specific official pages. All seven per-destination card href comparisons and all seven detail-link assertions remain mandatory."
+    }
+  ]
+}

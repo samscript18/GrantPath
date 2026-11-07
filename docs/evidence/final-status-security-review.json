@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-26T21:56:29.278Z",
+  "head": "448831d7edc080b34599c291de19d6f52540fb76",
+  "incident": 39071152,
+  "initialCheck": 121847274314,
+  "initialResult": "failure",
+  "userReportedResolved": true,
+  "apiRerequestStatus": 404,
+  "userReportedRechecked": true,
+  "recheck": 121861017132,
+  "recheckResult": "success",
+  "appId": 46505,
+  "scope": "Actual GitHub check response; portal classification was user performed; no scan bypass"
+}

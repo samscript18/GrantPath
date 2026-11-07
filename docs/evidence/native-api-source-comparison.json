@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-10-26T20:02:19.617Z",
+  "headBeforeFix": "b5bbce70bb2df46b07353b3fc27edd587c231917",
+  "failedJob": "https://github.com/samscript18/GrantPath/actions/runs/40389328255/job/121805878985",
+  "dispatchOccurred": false,
+  "codeVersion": "v-df3cfaf48c96",
+  "reviewedHash": "00e3f9a9d95b82b6688e4378b8df79b7de4e3491ff114eb185e598c66e81e0f6",
+  "exportHash": "5cc2098af6ef0b080be2729b63944cdb38025f67fae6fe0951bcd767da1a5f7a",
+  "knownPublicPreludeAndEofOnly": true,
+  "reason": "Exact observed public-auth export prefix and one removed trailing newline; all assertion body bytes preserved."
+}

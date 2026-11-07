@@ -1,0 +1,25 @@
+{
+  "projectId": "a3f56241-4390-4269-8e0e-e88d61104094",
+  "type": "frontend",
+  "name": "Ambiguous mandatory source conditions remain unpublished in the operator exception queue",
+  "description": "Focused deterministic journey; explicit reusable Python assertions are stored alongside this authored plan. Isolated labelled fixtures only for source mutations.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Sign in as VAR_{operator_email} with VAR_{password}. Open /operator, expand Isolated source verification, and click Inspect ambiguous snapshot."
+    },
+    {
+      "type": "assertion",
+      "description": "Assert review_required and LEVEL_SEMANTICS_UNSUPPORTED. The labelled unresolved candidate must not produce an accepted version or downstream change event."
+    },
+    {
+      "type": "assertion",
+      "description": "Click Discovery exceptions in the operator section navigation. In the article headed [TEST ONLY] Unresolved source scholarship, assert LEVEL_SEMANTICS_UNSUPPORTED and inspect Publication outcome: Accepted version after decision is None and Publication events is 0. These persisted values establish that this candidate remains unpublished."
+    },
+    {
+      "type": "assertion",
+      "description": "Search catalogue for Unresolved source scholarship with all windows. Zero results is the required PASS outcome: assert the empty result state. Do not attempt to open a scholarship; no published detail page should exist. Keep the exception unapproved."
+    }
+  ]
+}

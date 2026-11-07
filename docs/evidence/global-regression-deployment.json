@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-25T08:34:09.689Z",
+  "sha": "e09b64d3d38596b7f0cf236f5ea7bac2475d2d2f",
+  "id": "dpl_AsJ5hRjci83naQQPGhCEuQhuPG3W",
+  "state": "READY",
+  "url": "https://grantpath-k70kfvwwg-lammysam8-7688.vercel.app",
+  "alias": "https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app",
+  "compatibleParserVerified": true,
+  "stagedCatalogueRestore": {
+    "scope": "isolated PR1 only",
+    "restored": true,
+    "records": 12,
+    "acceptedVersionsUnchanged": true
+  }
+}

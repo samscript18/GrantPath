@@ -9,6 +9,11 @@ describe("profile validation", () => {
     expect(p.qualification).toBeUndefined();
     expect(p.targetLevel).toBeUndefined();
   });
+  it("retains a cleared residence as unknown instead of restoring a prior country", () => {
+    expect(
+      profileSchema.parse({ citizenships: ["Nigeria"], residence: "" }).residence,
+    ).toBeUndefined();
+  });
   it("preserves zero and rejects results above original scale", () => {
     expect(profileSchema.parse({ experienceMonths: 0 }).experienceMonths).toBe(0);
     expect(profileSchema.safeParse({ gpa: { value: 4.5, scale: 4 } }).success).toBe(false);

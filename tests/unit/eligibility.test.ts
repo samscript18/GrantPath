@@ -160,6 +160,15 @@ describe("requirement × profile × outcome matrix", () => {
 });
 
 describe("exact explanations and original values", () => {
+  it("keeps an inverted original grading system uncertain instead of comparing as a standard GPA", () => {
+    const result = evaluate(
+      rule({ field: "gpa", op: "gpa", scale: 5, threshold: 3.5 }),
+      p({ gpa: { value: 1.3, scale: 5, direction: "lower" } }),
+      new Date("2026-10-24T12:00:00Z"),
+    );
+    expect(result.state).toBe("unknown");
+    expect(result.tree.code).toBe("GPA_DIRECTION_UNSUPPORTED");
+  });
   it.each([
     [rule(), {}, "unknown", "PROFILE_MISSING"],
     [rule(), { citizenships: ["Ghana"] }, "fail", "VALUE_NOT_ACCEPTED"],

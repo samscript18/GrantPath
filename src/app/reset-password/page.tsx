@@ -4,7 +4,7 @@ export default function Reset() {
   return (
     <AuthLayout
       title="Make it yours again."
-      subtitle="Choose a new password with at least 10 characters."
+      subtitle="Choose a new password, then confirm it. The checklist will guide you."
     >
       <RecoveryForm reset />
     </AuthLayout>
