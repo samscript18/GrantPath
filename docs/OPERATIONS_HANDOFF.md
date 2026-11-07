@@ -1,3 +1,33 @@
+# Production operations — 7 November 2026
+
+The owner authorised merging the release into `main` and activating scholarship automation after the hackathon ended. The owner also authorised retiring the paid TestSprite merge requirements and PR jobs, confirmed the external TestSprite trigger is off, and confirmed the production Google OAuth callback was added. The software correctness requirement remains strict and applies to administrators. Security scanning and local Python ownership assertions remain.
+
+## Deployment and data
+
+- Canonical app: https://grantpath-lake.vercel.app; production branch: `main`.
+- Production uses the existing app database, historically named `grantpath_pr_1_test`. Existing accounts and accepted history are preserved; no private data is copied to a new database.
+- Vercel production credentials mirror the working release configuration, with production origins and `ENABLE_CONTROLLED_FIXTURES=0`.
+- GitHub `ingestion` and `application-jobs` environments retain that same database and `DATABASE_TRANSPORT=neon-ws`. The application worker uses the production origin and existing Brevo/Cloudinary credentials.
+- All eight migrations through `202610270008_field_search` were observed applied before activation. No seed/reset is required.
+
+## Scholarship and application schedules
+
+`ingestion.yml` runs at 05:23 and 17:23 UTC (06:23 and 18:23 Africa/Lagos). Each scheduled stage processes at most six due directories, details or registered legacy sources; manual runs default to one. Cadence, leases, host pacing, robots checks and retry limits still apply. The detail and legacy stages run even if an earlier fetch stage fails, while the workflow still reports the failed stage.
+
+The twelve previously reviewed official discovery directories retain their explicit policies. Legacy sources awaiting policy review stay paused. Controlled test directories are never fetched by the workers. Validated facts can publish automatically; unsupported changes still require operator review.
+
+`application-jobs.yml` runs hourly at minute 41. It processes matching, notifications, reminders and account maintenance. Optional Inngest remains unconfigured; GitHub Actions is the selected scheduler.
+
+Enable the two workflows only after the reviewed code reaches `main`, then dispatch bounded verification runs. Inspect [Actions](https://github.com/samscript18/GrantPath/actions) for actual results and later events marked `schedule`. Manual success does not prove a scheduled execution occurred. GitHub cron is best effort.
+
+Two historical runs (`40177024494`, `40177015523`) appeared queued with no jobs. Both ordinary cancellation and force-cancellation returned HTTP 409 (“has not been queued yet”) before activation. Recheck their state when enabling workflows; do not mistake them for fresh verification.
+
+## Historical handoff
+
+The dated material below is the preserved pre-activation record. Its lack of merge/activation authorisation and hackathon TestSprite requirements are superseded by the owner's instructions on 7 November.
+
+---
+
 # Operational activation handoff — 27 October 2026
 
 This is separate from submission preparation. No merge, production rebinding or

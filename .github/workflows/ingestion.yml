@@ -1,7 +1,7 @@
 name: Bounded official-source ingestion
 on:
   schedule:
-    - cron: "23 5 * * *"
+    - cron: "23 5,17 * * *"
   workflow_dispatch:
     inputs:
       limit:
@@ -33,15 +33,17 @@ jobs:
       - run: npm run db:generate
       - name: Discover candidates from approved official directories
         env:
-          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
+          SOURCE_LIMIT: ${{ inputs.limit || '6' }}
         run: npm run sources:discover -- --limit "$SOURCE_LIMIT"
       - name: Retrieve bounded programme details and evaluate publication policy
+        if: ${{ !cancelled() }}
         env:
-          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
+          SOURCE_LIMIT: ${{ inputs.limit || '6' }}
         run: npm run sources:discover -- --details --limit "$SOURCE_LIMIT"
       - name: Fetch registered due sources, respecting robots and cadence
+        if: ${{ !cancelled() }}
         env:
-          SOURCE_LIMIT: ${{ inputs.limit || '1' }}
+          SOURCE_LIMIT: ${{ inputs.limit || '6' }}
         run: npm run sources:ingest -- --limit "$SOURCE_LIMIT"
 # This workflow fetches only. Matching and delivery run in a separate workflow.
 # GitHub schedules are best effort; the application displays actual successful checks.
