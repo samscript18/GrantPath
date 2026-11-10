@@ -67,3 +67,11 @@ npm run sources:discover -- --details --limit 6
 Inspect actual `newScholarships`, review reasons, source successful times and public catalogue records. Replay must produce unchanged, with no duplicate record/version/event. Do not repeatedly register mappings or re-seed production to force a larger total. Do not change the active filter to disguise closed calls.
 
 Existing scheduled stages remain bounded at six. GitHub scheduling is best effort. A directory becoming accessible does not remove its semantic validation requirements. More source families and novel layouts still require reviewed adapters; this change is not an unrestricted crawler.
+
+## Review handoff
+
+Implementation commit: `1d5c82394aacd2058daee82b595cf9b0f789bfa3`, pushed to [fix/discovery-catalogue-growth](https://github.com/samscript18/GrantPath/tree/fix/discovery-catalogue-growth). The connected GitHub integration denied PR creation with403Resource not accessible by integration; that permission boundary was respected. [Create the review PR](https://github.com/samscript18/GrantPath/compare/main...fix/discovery-catalogue-growth). The owner was asked for its link so the existing correctness/security checks can be verified. No remote CI pass or merge is claimed for this commit yet.
+
+After PR review and separately authorised merge, verify main's deployment and the actual ingestion workflow revision, then re-enable only the reviewed Twente source and observe its subsequent scheduled checks. Existing production data is already36total/31default-view records; the source pause does not remove those records. The17old unlinked navigation candidates are already ignored and no longer consume the existing worker's detail slots. The20old review exceptions were preserved.
+
+The former local test URLs denied their old roles; tests used separate port55433databases. Your `.env` was not overwritten. Test commands can use explicit task-specific database overrides while the task's isolated cluster is running. The cluster can be stopped after verification; no test database was a copy of private student records.
