@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-11-10T12:55:42.698Z",
+  "scope": "Production pending unsupported navigation only; no accepted scholarship linked; actual worker atomic ignore+audit; no HTTP fetches or deletions",
+  "publishedBefore": 36,
+  "publishedAfter": 36,
+  "inspected": 17,
+  "ignored": 17,
+  "results": [
+    {
+      "url": "https://uct.ac.za/mastercardfdn/scholar-development/community-outreach",
+      "id": "cmw6vzysg000ctw4eiktfj4uu",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/scholar-development/mentorship",
+      "id": "cmw6vzytc000dtw4e96amebrr",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/scholar-development-mentorship/mentorship-experiences",
+      "id": "cmw6vzyu9000etw4elng5ghpn",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/scholar-development/career-development",
+      "id": "cmw6vzyv5000ftw4eofmc2a6a",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/scholar-development/employing-our-mastercard-foundation-scholars",
+      "id": "cmw6vzyw3000gtw4ezfg65pda",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/news",
+      "id": "cmw6vzywz000htw4ex49cdyxt",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/news/news-archive",
+      "id": "cmw6vzyxv000itw4edopw4aca",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/frequently-asked-questions",
+      "id": "cmw6vzyyr000jtw4e1ad1jzh2",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/gallery",
+      "id": "cmw6vzyzn000ktw4et71838k9",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/contact-us",
+      "id": "cmw6vzz0i000ltw4egfk5tqfz",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2023-06-07-combining-service-and-policy-make-real-difference",
+      "id": "cmw6vzz1g000mtw4e0iwgozvl",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2022-08-02-tributes-life-changing-mastercard-foundation-scholars-program",
+      "id": "cmw6vzz2c000ntw4e9ccxlaen",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2022-07-18-nextgen-engineers-winning-toolkit-takes-innovation-beyond-lab",
+      "id": "cmw6vzz39000otw4eeyz0vc4x",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2022-07-18-mastercard-foundation-scholar-focuses-ways-alleviate-climate-change-while-giving-back-society",
+      "id": "cmw6vzz45000ptw4eluwrna8e",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2021-10-25-diplomacy-and-leadership-un-way",
+      "id": "cmw6vzz52000qtw4edgrnvq0x",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2021-04-15-journey-be-proud",
+      "id": "cmw6vzz5w000rtw4edcxv12hn",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    },
+    {
+      "url": "https://uct.ac.za/mastercardfdn/articles/2021-05-24-ending-education-inequity",
+      "id": "cmw6vzz6t000stw4edtb1t795",
+      "state": "ignored",
+      "reasons": ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"]
+    }
+  ]
+}

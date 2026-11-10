@@ -1,5 +1,5 @@
 import type { ScholarshipData } from "@/server/scholarships/schema";
-export const ADAPTER_VERSION = "official-directory-1.0.0";
+export const ADAPTER_VERSION = "official-directory-1.1.0";
 export const SCHEMA_VERSION = "scholarship-2.0.0";
 export const POLICY_VERSION = "publication-1.0.0";
 export type DetailMapping = {
@@ -29,7 +29,8 @@ export type DirectoryDefinition = {
   allowedDetails: { host: string; pathPrefix: string }[];
   pagination?: { selector: string; pathPrefix: string; queryKeys: string[] };
   mappings: DetailMapping[];
-  dynamicDetail?: "makerere-announcement-1";
+  restrictToSupportedDetails?: boolean;
+  dynamicDetail?: "makerere-announcement-1" | "twente-award-1";
 };
 export type Validation = {
   codes: string[];

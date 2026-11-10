@@ -8,6 +8,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import { directoryDefinitions } from "./registry";
 import { allowedDiscoveryUrl } from "./urls";
 import { extractDirectory, extractDetail } from "./adapters";
+import { twenteAward } from "./twente";
 import { makerereAnnouncement } from "./makerere";
 import { publicationPolicy } from "./policy";
 import { ADAPTER_VERSION, POLICY_VERSION, SCHEMA_VERSION } from "./types";
@@ -20,10 +21,17 @@ const automatic: Actor = {
 export async function configureDirectory(
   actor: Actor,
   id: string,
-  input: { enabled: boolean; autoPublish: boolean; reason: string },
+  input: { enabled: boolean; autoPublish: boolean; reason: string; startAfter?: Date },
 ) {
   requireOperator(actor);
   const definition = directoryDefinitions[id];
+  if (
+    input.startAfter &&
+    (!Number.isFinite(input.startAfter.getTime()) ||
+      input.startAfter.getTime() < Date.now() ||
+      input.startAfter.getTime() > Date.now() + 48 * 3600000)
+  )
+    throw new Error("Deferred activation must be within the next 48 hours.");
   if (!definition || input.reason.trim().length < 10)
     throw new Error("Choose a supported directory and explain its policy.");
   return db().$transaction(async (tx) => {
@@ -33,7 +41,8 @@ export async function configureDirectory(
       previous &&
       previous.enabled === input.enabled &&
       previous.autoPublish === input.autoPublish &&
-      previous.policyReason === input.reason
+      previous.policyReason === input.reason &&
+      !input.startAfter
     )
       return previous;
     const row = await tx.discoveryDirectory.upsert({
@@ -45,6 +54,7 @@ export async function configureDirectory(
         enabled: input.enabled,
         autoPublish: input.autoPublish,
         policyReason: input.reason,
+        ...(input.startAfter ? { nextCheckAt: input.startAfter } : {}),
       },
       update: {
         enabled: input.enabled,
@@ -52,6 +62,7 @@ export async function configureDirectory(
         policyReason: input.reason,
         policyVersion: { increment: 1 },
         health: input.enabled ? "ready" : "paused",
+        ...(input.startAfter ? { nextCheckAt: input.startAfter } : {}),
       },
     });
     await tx.audit.create({
@@ -62,7 +73,12 @@ export async function configureDirectory(
         before: previous
           ? { enabled: previous.enabled, autoPublish: previous.autoPublish }
           : undefined,
-        after: input,
+        after: {
+          enabled: input.enabled,
+          autoPublish: input.autoPublish,
+          reason: input.reason,
+          ...(input.startAfter ? { startAfter: input.startAfter.toISOString() } : {}),
+        },
         reason: input.reason,
       },
     });
@@ -82,11 +98,25 @@ export async function processDirectoryHtml(
   const url = allowedDiscoveryUrl(pageUrl || directory.url, definition, "directory").href;
   const extracted = extractDirectory(definition, html, url);
   const ids: string[] = [];
+  let created = 0;
   for (const canonicalUrl of extracted.links.slice(0, Math.max(0, Math.min(100, remaining)))) {
-    const candidate = await db().discoveredCandidate.upsert({
+    const inserted = await db().discoveredCandidate.createMany({
+      data: [
+        {
+          directoryId,
+          canonicalUrl,
+          discoveredFrom: url,
+          // A manually checked future activation must not hand its new links to
+          // an older scheduled worker before the reviewed adapter is deployed.
+          nextAttemptAt: directory.nextCheckAt > new Date() ? directory.nextCheckAt : new Date(),
+        },
+      ],
+      skipDuplicates: true,
+    });
+    created += inserted.count;
+    const candidate = await db().discoveredCandidate.update({
       where: { directoryId_canonicalUrl: { directoryId, canonicalUrl } },
-      create: { directoryId, canonicalUrl, discoveredFrom: url },
-      update: { lastDiscoveredAt: new Date() },
+      data: { lastDiscoveredAt: new Date() },
     });
     ids.push(candidate.id);
   }
@@ -101,7 +131,13 @@ export async function processDirectoryHtml(
       hash: semanticHash(extracted.links),
     },
   });
-  return { ids, next: extracted.next };
+  return {
+    ids,
+    next: extracted.next,
+    created,
+    existing: ids.length - created,
+    excluded: extracted.excluded,
+  };
 }
 export async function processDetailHtml(
   candidateId: string,
@@ -125,7 +161,8 @@ export async function processDetailHtml(
   allowedDiscoveryUrl(candidate.canonicalUrl, definition, "detail");
   const mapping =
     definition.mappings.find((m) => m.url === candidate.canonicalUrl) ||
-    makerereAnnouncement(definition, candidate.canonicalUrl, html);
+    makerereAnnouncement(definition, candidate.canonicalUrl, html) ||
+    twenteAward(definition, candidate.canonicalUrl, html);
   const now = options.now || new Date();
   const extraction = mapping
     ? extractDetail(mapping, html, now, options.supportPages)
@@ -156,6 +193,14 @@ export async function processDetailHtml(
         validation: {
           ...extraction.validation,
           mappingHash: mapping ? semanticHash(mapping) : null,
+          identity: mapping
+            ? {
+                key: mapping.key,
+                programme: mapping.programme,
+                provider: mapping.provider,
+                cycle: mapping.cycle,
+              }
+            : null,
           directoryUrl: definition.url,
           detailUrl: candidate.canonicalUrl,
           applicationUrl: extraction.data?.applicationUrl || null,
@@ -388,9 +433,38 @@ export async function decideDiscovery(
     const originalDecision = await tx.publicationDecision.findUniqueOrThrow({
       where: { observationId },
     });
-    const mapping = directoryDefinitions[candidate.directoryId]?.mappings.find(
-      (m) => m.url === candidate.canonicalUrl,
-    );
+    const definition = directoryDefinitions[candidate.directoryId];
+    const identity = z
+      .object({
+        key: z
+          .string()
+          .regex(/^[a-z0-9-]+$/)
+          .max(180),
+        programme: z.string().min(3).max(180),
+        provider: z.object({
+          key: z.string().regex(/^[a-z0-9-]+$/),
+          name: z.string().min(2).max(180),
+          url: z.url({ protocol: /^https$/ }),
+          countryCode: z.string().length(2).optional(),
+        }),
+        cycle: z.string().min(1).max(180),
+      })
+      .safeParse(
+        observation.validation &&
+          typeof observation.validation === "object" &&
+          !Array.isArray(observation.validation)
+          ? observation.validation.identity
+          : null,
+      );
+    // Only server-persisted identities from supported templates can resolve a
+    // dynamic exception. Client data cannot register a new provider/programme.
+    const mapping =
+      definition?.mappings.find((m) => m.url === candidate.canonicalUrl) ||
+      (definition?.dynamicDetail &&
+      identity.success &&
+      observation.adapterVersion === ADAPTER_VERSION
+        ? identity.data
+        : undefined);
     let scholarshipId = candidate.scholarshipId,
       version: number | undefined,
       eventIds: string[] = [];
