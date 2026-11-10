@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-11-10T09:24:00.905Z",
+  "scope": "Actual robots-aware official HTTP discovery, extraction, policy, atomic publication and catalogue query against isolated PostgreSQL; no production changes",
+  "before": 2,
+  "after": 5,
+  "listing": {
+    "id": "twente-scholarships",
+    "state": "success",
+    "pages": 1,
+    "discovered": 5,
+    "created": 5,
+    "existing": 0,
+    "excluded": 26
+  },
+  "results": [
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/kipaji-scholarship/",
+      "id": "cmwahdaat0004g4uzq0bwvct4",
+      "state": "auto_publish",
+      "reasons": ["VALIDATED_OFFICIAL_RECORD"],
+      "scholarshipId": "cmwahe5060009g4uzu9fa7c7z",
+      "publicationKind": "new"
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/professor-de-winter-scholarship/",
+      "id": "cmwahdaav0005g4uzjtcuwlsv",
+      "state": "auto_publish",
+      "reasons": ["VALIDATED_OFFICIAL_RECORD"],
+      "scholarshipId": "cmwaheztq000og4uzyiflhclq",
+      "publicationKind": "new"
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/itc-excellence-scholarship-programme/",
+      "id": "cmwahdaae0001g4uz5rz6cqvc",
+      "state": "auto_publish",
+      "reasons": ["VALIDATED_OFFICIAL_RECORD"],
+      "scholarshipId": "cmwahfumm0014g4uzv7hq7tzg",
+      "publicationKind": "new"
+    }
+  ],
+  "replay": {
+    "id": "cmwahdaat0004g4uzq0bwvct4",
+    "state": "unchanged",
+    "reasons": ["SEMANTICALLY_UNCHANGED"],
+    "scholarshipId": "cmwahe5060009g4uzu9fa7c7z",
+    "publicationKind": null
+  },
+  "outboxBeforeReplay": 187,
+  "outboxAfterReplay": 187,
+  "rows": [
+    {
+      "id": "cmwaha78n00085uuzciwsjjbs",
+      "title": "[TEST ONLY] ITC Example Scholarship",
+      "slug": "twente-itc-test-feb3ac85-41de-4d72-99de-b43ef4ab66c7-scholarship-programme-7e51d239c4",
+      "version": 2,
+      "cycle": "2030/2031",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2030"
+    },
+    {
+      "id": "cmwaha7dg00185uuzgkkdlap3",
+      "title": "[TEST ONLY] ITC Example Scholarship",
+      "slug": "twente-itc-test-feb3ac85-41de-4d72-99de-b43ef4ab66c7-scholarship-programme-9f234d5661",
+      "version": 1,
+      "cycle": "2031/2032",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2031"
+    },
+    {
+      "id": "cmwahe5060009g4uzu9fa7c7z",
+      "title": "Kipaji Scholarship",
+      "slug": "twente-kipaji-scholarship-3d33bac4e0",
+      "version": 1,
+      "cycle": "Scheme overview \u2014 cycle unconfirmed",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2027; application cycle and closing time need confirmation."
+    },
+    {
+      "id": "cmwaheztq000og4uzyiflhclq",
+      "title": "Professor De Winter Scholarship",
+      "slug": "twente-professor-de-winter-scholarship-e1322c4031",
+      "version": 1,
+      "cycle": "2028/2029",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2028"
+    },
+    {
+      "id": "cmwahfumm0014g4uzv7hq7tzg",
+      "title": "ITC Excellence Scholarship Programme",
+      "slug": "twente-itc-excellence-scholarship-programme-3d33bac4e0",
+      "version": 1,
+      "cycle": "Scheme overview \u2014 cycle unconfirmed",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 March 2027; application cycle and closing time need confirmation."
+    }
+  ],
+  "visibleCatalogueMatches": 1,
+  "newPublicationCount": 3,
+  "realPublishedRecords": [
+    {
+      "id": "cmwahe5060009g4uzu9fa7c7z",
+      "title": "Kipaji Scholarship",
+      "slug": "twente-kipaji-scholarship-3d33bac4e0",
+      "version": 1,
+      "cycle": "Scheme overview \u2014 cycle unconfirmed",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2027; application cycle and closing time need confirmation."
+    },
+    {
+      "id": "cmwaheztq000og4uzyiflhclq",
+      "title": "Professor De Winter Scholarship",
+      "slug": "twente-professor-de-winter-scholarship-e1322c4031",
+      "version": 1,
+      "cycle": "2028/2029",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 April 2028"
+    },
+    {
+      "id": "cmwahfumm0014g4uzv7hq7tzg",
+      "title": "ITC Excellence Scholarship Programme",
+      "slug": "twente-itc-excellence-scholarship-programme-3d33bac4e0",
+      "version": 1,
+      "cycle": "Scheme overview \u2014 cycle unconfirmed",
+      "published": true,
+      "deadline": null,
+      "deadlineLabel": "1 March 2027; application cycle and closing time need confirmation."
+    }
+  ],
+  "note": "before/after include two existing isolated test cycles; results contains the three live-source publications. No fixture was published to production."
+}

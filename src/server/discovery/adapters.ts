@@ -1,3 +1,4 @@
+import { supportsCandidate } from "./candidates";
 import { parseClosingInstant } from "@/server/monitoring/adapters";
 import * as cheerio from "cheerio";
 import { scholarshipDataSchema } from "@/server/scholarships/schema";
@@ -15,6 +16,7 @@ export function extractDirectory(
   if (!cleanText($("h1,h2,title").text()).toLowerCase().includes(definition.heading.toLowerCase()))
     throw new Error("DIRECTORY_LAYOUT_CHANGED");
   const links = new Set<string>();
+  let excluded = 0;
   const primary = new Set(definition.mappings.map((m) => m.url));
   const supportingOnly = new Set(
     definition.mappings.flatMap((m) => m.supportPages || []).filter((url) => !primary.has(url)),
@@ -27,7 +29,8 @@ export function extractDirectory(
         definition,
         "detail",
       ).href;
-      if (!supportingOnly.has(detail)) links.add(detail);
+      if (!supportingOnly.has(detail) && supportsCandidate(definition, detail)) links.add(detail);
+      else excluded++;
     } catch {
       /* An external or unexpected link is not a source. */
     }
@@ -49,7 +52,7 @@ export function extractDirectory(
       }
     });
   if (!links.size) throw new Error("DIRECTORY_NO_SUPPORTED_LINKS");
-  return { links: [...links], next: [...next] };
+  return { links: [...links], next: [...next], excluded };
 }
 export function extractDetail(
   mapping: DetailMapping,

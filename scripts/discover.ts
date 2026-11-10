@@ -1,4 +1,6 @@
 import "dotenv/config";
+import { writeFile } from "node:fs/promises";
+import { discoveryRunSummary } from "../src/server/discovery/report";
 import { db } from "../src/lib/db";
 import {
   discoverBatch,
@@ -50,8 +52,30 @@ async function main() {
       : args.includes("--details")
         ? await detailBatch(limit)
         : await discoverBatch(limit);
-  console.log(JSON.stringify(result, null, 2));
-  if ((Array.isArray(result) ? result : [result]).some((r) => r.state === "failed"))
+  const results = Array.isArray(result) ? result : [result];
+  const report = {
+    checkedAt: new Date().toISOString(),
+    phase: args.includes("--details") || args.includes("--candidate") ? "details" : "discovery",
+    summary: discoveryRunSummary(results),
+    results,
+  };
+  console.log(JSON.stringify(report, null, 2));
+  if (process.env.GITHUB_STEP_SUMMARY)
+    await writeFile(
+      process.env.GITHUB_STEP_SUMMARY,
+      `### Official-source ${report.phase}\n\n| Outcome | Count |\n| --- | --- |\n${Object.entries(
+        report.summary,
+      )
+        .filter(([, v]) => typeof v === "number")
+        .map(([k, v]) => `| ${k} | ${v} |`)
+        .join("\n")}\n\n${report.summary.message}\n`,
+      { flag: "a" },
+    );
+  if (
+    (Array.isArray(result) ? result : [result]).some(
+      (r) => r.state === "failed" || r.state === "unsupported_directory",
+    )
+  )
     process.exitCode = 1;
 }
 main()

@@ -559,6 +559,7 @@ function directory(
     url,
     heading,
     linkSelector: "a[href]",
+    restrictToSupportedDetails: true,
     allowedDetails: urls.map((raw) => {
       const u = new URL(raw);
       return { host: u.hostname, pathPrefix: u.pathname };
@@ -567,6 +568,16 @@ function directory(
   };
 }
 export const globalDirectories: DirectoryDefinition[] = [
+  {
+    id: "twente-scholarships",
+    url: "https://www.utwente.nl/en/education/scholarship-finder/",
+    heading: "Find your scholarship",
+    linkSelector: ".grantfinder__scholarship a.scholarship__title[href]",
+    allowedDetails: [{ host: "www.utwente.nl", pathPrefix: "/en/education/scholarship-finder/" }],
+    mappings: [],
+    restrictToSupportedDetails: true,
+    dynamicDetail: "twente-award-1",
+  },
   directory("glocal-programmes", glocalApply, "How To Apply", [glocal]),
   directory(
     "makerere-scholarships",

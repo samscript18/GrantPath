@@ -1,3 +1,4 @@
+import { supportsCandidate } from "./candidates";
 import { db } from "@/lib/db";
 import { boundedFetchUrl, robotsPolicy } from "@/server/monitoring/network";
 import { reserveHost } from "@/server/monitoring/worker";
@@ -35,6 +36,8 @@ export async function fetchDiscoveryPage(
 }
 export async function checkDirectory(id: string) {
   if (id === "controlled-release") return { id, state: "controlled_snapshots_only" };
+  const definition = directoryDefinitions[id];
+  if (!definition) return { id, state: "unsupported_directory" };
   const token = crypto.randomUUID(),
     now = new Date();
   const claimed = await db().discoveryDirectory.updateMany({
@@ -43,11 +46,12 @@ export async function checkDirectory(id: string) {
   });
   if (!claimed.count) return { id, state: "paused_or_busy" };
   const schedule = await db().discoveryDirectory.findUniqueOrThrow({ where: { id } });
-  const definition = directoryDefinitions[id];
-  if (!definition) throw new Error("UNSUPPORTED_DIRECTORY");
   const queue = [definition.url],
     visited = new Set<string>();
-  let discovered = 0;
+  let discovered = 0,
+    created = 0,
+    existing = 0,
+    excluded = 0;
   try {
     while (queue.length && visited.size < 3 && discovered < 100) {
       const url = queue.shift()!;
@@ -59,6 +63,9 @@ export async function checkDirectory(id: string) {
       const page = await fetchDiscoveryPage(url, definition, "directory");
       const result = await processDirectoryHtml(id, page.text, url, 100 - discovered);
       discovered += result.ids.length;
+      created += result.created;
+      existing += result.existing;
+      excluded += result.excluded;
       queue.push(...result.next.filter((next) => !visited.has(next)));
     }
     await db().discoveryDirectory.updateMany({
@@ -71,7 +78,7 @@ export async function checkDirectory(id: string) {
         leaseToken: null,
       },
     });
-    return { id, state: "success", pages: visited.size, discovered };
+    return { id, state: "success", pages: visited.size, discovered, created, existing, excluded };
   } catch (error) {
     const message = error instanceof Error ? error.message.slice(0, 600) : "DISCOVERY_FAILED";
     await db().$transaction(async (tx) => {
@@ -107,6 +114,32 @@ export async function checkCandidate(id: string) {
   if (candidate.directoryId === "controlled-release")
     return { id, state: "controlled_snapshots_only" };
   if (!candidate.directory.enabled) return { id, state: "paused" };
+  const definition = directoryDefinitions[candidate.directoryId];
+  if (!definition) return { id, state: "unsupported_directory" };
+  if (!supportsCandidate(definition, candidate.canonicalUrl) && candidate.state === "pending") {
+    const ignored = await db().$transaction(async (tx) => {
+      const ignored = await tx.discoveredCandidate.updateMany({
+        where: { id, state: "pending", OR: [{ lockedUntil: null }, { lockedUntil: { lt: now } }] },
+        data: { state: "ignored", error: "NOT_A_SUPPORTED_OPPORTUNITY_LINK" },
+      });
+      if (ignored.count)
+        await tx.audit.create({
+          data: {
+            actorId: "service:official-discovery",
+            action: "discovery.exclude-navigation",
+            recordId: id,
+            reason:
+              "Approved source policy excludes this navigation/supporting URL from opportunity discovery; prior observations retained.",
+          },
+        });
+      return ignored;
+    });
+    return {
+      id,
+      state: ignored.count ? "ignored" : "busy",
+      reasons: ["NOT_A_SUPPORTED_OPPORTUNITY_LINK"],
+    };
+  }
   const claimed = await db().discoveredCandidate.updateMany({
     where: { id, attempts: { lt: 5 }, OR: [{ lockedUntil: null }, { lockedUntil: { lt: now } }] },
     data: {
@@ -144,7 +177,18 @@ export async function checkCandidate(id: string) {
       where: { id, state: "published" },
       data: { attempts: 0 },
     });
-    return { id, state: decision.decision, reasons: decision.reasonCodes };
+    return {
+      id,
+      state: decision.decision,
+      reasons: decision.reasonCodes,
+      scholarshipId: "scholarshipId" in decision ? decision.scholarshipId : null,
+      publicationKind:
+        decision.decision === "auto_publish" && "baseVersion" in decision
+          ? decision.baseVersion === 0
+            ? "new"
+            : "updated"
+          : null,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message.slice(0, 600) : "DETAIL_FAILED";
     await db().discoveredCandidate.updateMany({
