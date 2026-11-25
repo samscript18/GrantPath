@@ -380,3 +380,52 @@ Post-merge CI 42822909925, source dispatch 42823733497 and application dispatch 
 Final local production build with TypeScript checks, app/component ESLint, scoped formatting and `git diff --check` passed. Browser receipts record public and private page rendering, 360px overflow checks and an isolated operator journey: six section switches with zero document reloads, keyboard navigation, search/filter recovery, deep-link reload, policy form values, dark mode and mobile sections. Earlier snapshot navigation failed with six document reloads; the supported native-history fix passed the original zero-reload assertion. No broad domain-suite or TestSprite pass is claimed for this UI increment. Detailed scope, early preview failures and receipts: [UI_DESIGN_REVIEW.md](UI_DESIGN_REVIEW.md).
 
 Motion follow-up local verification: production build/typecheck, scoped lint/formatting and whitespace checks passed. Browser receipt evidence/ui-motion.json records persistent pause/re-enable, device reduced-motion override/restoration, 360px overflow and zero runtime errors. Desktop/mobile hero and new landing sections inspected; decorative labels do not represent live scholarship data. No TestSprite result or deployment is claimed.
+
+
+## Responsive navigation — 25 November 2026
+
+Implemented a compact mobile header, a floating five-action phone navigation bar
+(Home, Discover, Saved, Plans and More), and a native modal drawer containing the
+full workspace navigation. Small tablets use the drawer without squeezing desktop
+navigation into the header. Current destinations are labelled; Escape, focus
+containment, route selection and desktop resize dismiss the drawer. Operator links
+remain role-dependent. Brand colours and typography are preserved.
+
+Responsive refinements cover the landing hero, settings navigation, profile
+steps/actions, Operator Studio, touch targets and bottom safe-area spacing. An
+observed 320px profile action-row overflow was corrected by stacking the actions.
+An observed drawer remaining open after a desktop resize was corrected and checked
+using the native dialog open property as well as visibility.
+
+Local production build (including TypeScript), scoped ESLint, formatting and
+whitespace checks passed. Two focused Playwright regressions passed in 7.1 seconds.
+A separate fixture-backed browser matrix passed 42 page/width combinations across
+320, 360, 390, 600, 640, 768, 820, 1024 and 1280px, with no document overflow or browser
+runtime errors. The final review checked the adjusted 1024px landing headline,
+Operator Studio at five widths, and reachable navigation in 820×480 landscape.
+Desktop, phone and tablet screenshots were inspected. These checks used the actual
+app with an existing isolated test database; eleven existing migrations were applied
+there without a reset or production writes. One final-review locator initially used
+the wrong capitalization of Operator Studio; correcting that locator passed without
+changing the application or weakening the assertion.
+
+Receipts: [responsive matrix](evidence/ui-responsive.json) and
+[final visual review](evidence/ui-responsive-final-review.json). The matrix preceded
+the final 1024px headline size adjustment; the final review and two regression tests
+used the final production build. No broad domain suite, TestSprite run, deployment,
+push or merge is claimed for this increment.
+
+
+## Configured development database repair — 25 November 2026
+
+The local homepage failed in featuredScholarships with Prisma's missing-column
+error. Read-only inspection found only migrations 001–007 applied in the database
+configured by .env; the checked-out Prisma model also requires migrations 008–011.
+Confirmed the direct and pooled endpoints target the same database, then applied
+those four existing additive migrations with Prisma migrate deploy. This created
+the field-search cache, discovery continuation state and application-window/date
+columns without a reset or seed. No accepted scholarship or account records were
+rewritten. A fresh HTTP request to the already-running local homepage returned 200,
+contained the landing heading, and contained no missing-column/Prisma error.
+README now explains applying migrations after schema updates. No deployment,
+push, TestSprite run or broad test-suite execution was performed for this repair.

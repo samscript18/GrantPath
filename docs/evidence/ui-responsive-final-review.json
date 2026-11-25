@@ -1,0 +1,43 @@
+{
+  "scope": "Final isolated production build visual review; no production writes",
+  "checks": [
+    {
+      "page": "landing",
+      "width": 1024,
+      "headlineFont": "61.44px",
+      "overflow": false
+    },
+    {
+      "page": "operator",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "page": "operator",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "page": "operator",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "page": "operator",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "page": "operator",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "page": "menu",
+      "width": 820,
+      "height": 480,
+      "operatorLinkReachable": true
+    }
+  ],
+  "checkedAt": "2026-11-25T13:28:40.101Z"
+}

@@ -1,0 +1,225 @@
+{
+  "scope": "Isolated fixture-backed responsive production preview; no production data writes",
+  "widths": [320, 360, 390, 600, 640, 768, 820, 1024, 1280],
+  "pages": [
+    {
+      "path": "/",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 640,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 640,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 1280,
+      "overflow": false
+    },
+    {
+      "path": "/scholarships",
+      "width": 1280,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 600,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 820,
+      "overflow": false
+    },
+    {
+      "path": "/dashboard",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "path": "/applications",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "path": "/settings/account",
+      "width": 1024,
+      "overflow": false
+    }
+  ],
+  "navigation": [
+    "Floating phone bar exposes four destinations and More opens the full menu",
+    "Escape closes menu and restores trigger focus",
+    "Opening drawer then crossing desktop breakpoint releases modal",
+    "Selecting a menu destination navigates and closes drawer",
+    "Keyboard focus stays in open modal"
+  ],
+  "runtimeErrors": [],
+  "checkedAt": "2026-11-25T13:21:52.488Z"
+}

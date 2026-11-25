@@ -617,7 +617,7 @@ export function ProfileForm({
               <Check size={14} />
               Profile version {version}
             </span>
-            <div className="flex items-center gap-2">
+            <div className="profile-form-actions flex items-center gap-2">
               {stage > 0 && (
                 <Button
                   type="button"
