@@ -146,3 +146,49 @@ it("rejects corrupt publication history before creating a provider", async () =>
   );
   expect(await db().provider.findUnique({ where: { slug: tag } })).toBeNull();
 });
+
+it("imports different programmes sharing a new provider concurrently without unique-key failures", async () => {
+  const tag = crypto.randomUUID();
+  const provider = {
+    slug: `shared-transfer-${tag}`,
+    name: "Isolated shared provider",
+    url: "https://example.test",
+    countryCode: null,
+  };
+  const records: TransferRecord[] = Array.from({ length: 3 }, (_, i) => {
+    const slug = `shared-transfer-${tag}-${i}`;
+    const data = publicationSchema.parse({
+      ...testScholarship(),
+      title: `Concurrent transfer fixture ${tag} ${i}`,
+    });
+    return {
+      sourceId: slug,
+      slug,
+      cycle: "2027",
+      provider,
+      programme: { slug, name: "Isolated concurrent transfer" },
+      versions: [
+        {
+          number: 1,
+          data,
+          semanticHash: semanticHash(data),
+          actorId: "fixture",
+          reason: "Reviewed isolated source",
+          createdAt: "2026-11-01T00:00:00.000Z",
+        },
+      ],
+    };
+  });
+  const first = await Promise.all(
+    records.map((record) => db().$transaction((tx) => importTransferRecord(tx, record))),
+  );
+  expect(first.map((r) => r.kind)).toEqual(["new", "new", "new"]);
+  expect(await db().provider.count({ where: { slug: provider.slug } })).toBe(1);
+  expect(
+    await db().scholarship.count({ where: { id: { in: first.map((r) => r.scholarshipId) } } }),
+  ).toBe(3);
+  const replay = await Promise.all(
+    records.map((record) => db().$transaction((tx) => importTransferRecord(tx, record))),
+  );
+  expect(replay.map((r) => r.kind)).toEqual(["unchanged", "unchanged", "unchanged"]);
+});

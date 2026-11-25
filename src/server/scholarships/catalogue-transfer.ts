@@ -80,11 +80,10 @@ export async function planTransferRecord(tx: Prisma.TransactionClient, record: T
 export async function importTransferRecord(tx: Prisma.TransactionClient, record: TransferRecord) {
   await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`catalogue-import:${record.programme.slug}`}))`;
   const plan = await planTransferRecord(tx, record);
-  const provider = await tx.provider.upsert({
-    where: { slug: record.provider.slug },
-    create: record.provider,
-    update: {},
-  });
+  // Different programmes can share a provider. An emulated empty-update
+  // upsert can race across programme locks; INSERT ON CONFLICT cannot.
+  await tx.provider.createMany({ data: [record.provider], skipDuplicates: true });
+  const provider = await tx.provider.findUniqueOrThrow({ where: { slug: record.provider.slug } });
   const programme = await tx.programme.upsert({
     where: { slug: record.programme.slug },
     create: { ...record.programme, providerId: provider.id },
@@ -146,8 +145,8 @@ export async function importTransferRecord(tx: Prisma.TransactionClient, record:
     eventIds = result.eventIds;
   } else {
     // Additive read model backfill only; do not change accepted content/history.
-    await tx.scholarship.update({
-      where: { id: scholarship.id },
+    const projection = await tx.scholarship.updateMany({
+      where: { id: scholarship.id, version: scholarship.version },
       data: {
         windowKind: plan.latest.applicationWindow?.kind || "unknown",
         windowOpensOn:
@@ -161,6 +160,7 @@ export async function importTransferRecord(tx: Prisma.TransactionClient, record:
         opensAt: plan.latest.opensAt,
       },
     });
+    if (projection.count !== 1) throw Error("TRANSFER_PRODUCTION_EDIT_CONFLICT");
   }
   // Audit IDs make retries idempotent. Snapshots retain source version numbers,
   // timestamps, actors and reasons even where production has its own history.
