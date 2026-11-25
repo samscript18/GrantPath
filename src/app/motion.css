@@ -6,8 +6,10 @@
   z-index: 45;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 34px;
+  gap: 0;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
   border: 1px solid var(--gp-border);
   border-radius: 30px;
   padding: 7px 11px;
@@ -16,9 +18,39 @@
   font-size: 10px;
   box-shadow: 0 2px 14px #183e2e0a;
 }
-.motion-control:hover {
+.motion-control:hover,
+.motion-control:focus-visible {
   color: var(--gp-foreground);
   border-color: var(--gp-leaf);
+}
+.motion-control > svg {
+  flex-shrink: 0;
+}
+.motion-control > span {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+}
+.motion-control:focus-visible > span {
+  max-width: 80px;
+  margin-left: 6px;
+  opacity: 1;
+}
+@media (hover: hover) {
+  .motion-control:hover > span {
+    max-width: 80px;
+    margin-left: 6px;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .motion-control > span {
+    transition:
+      max-width 180ms ease,
+      margin-left 180ms ease,
+      opacity 150ms ease;
+  }
 }
 .hero-line {
   display: block;

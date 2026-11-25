@@ -35,6 +35,12 @@ npm run db:seed
 npm run dev
 ```
 
+After pulling schema changes, run `npm run db:migrate` before starting the app.
+A Prisma “column does not exist” error usually means the configured database is
+behind the checked-out migrations. Confirm `DIRECT_URL` targets the same database
+as `DATABASE_URL`, then apply migrations; do not reset the database or reseed to
+repair missing columns.
+
 The seed persists 32 reviewed records idempotently and never overwrites an accepted later version. Migration 007 preserves legacy IDs/versions and backfills the former single-country locations. Register locally, inspect the recipient's captured verification mail in `EmailSink` through Prisma Studio and open its private link. Never publish captured tokens.
 
 Neon runtime connections support `DATABASE_TRANSPORT=tcp` (default) or `neon-ws` (TLS WebSocket 443 for official Neon hosts). The latter was added after TCP 5432 became unreachable from this machine. Migration tooling still uses `DIRECT_URL` over TCP. Hosted TCP settings use `sslmode=verify-full`; the runtime makes pg's existing verified alias behaviour explicit. It does not disable certificate verification.

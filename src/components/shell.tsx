@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "next/form";
+import { MobileWorkspaceNav, MobileBottomNav } from "./mobile-workspace-nav";
 import Link, { useLinkStatus } from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useRef } from "react";
@@ -150,7 +151,8 @@ export function Shell({
         className="workspace-header sticky top-0 z-20 border-b border-border/70 px-5 py-4 sm:px-9 lg:px-11"
       >
         <div className="flex min-h-8 items-center justify-between gap-3">
-          <div className="lg:hidden">
+          <div className="workspace-mobile-brand flex min-w-0 items-center gap-2 lg:hidden">
+            <MobileWorkspaceNav actor={actor} unread={unread} />
             <Logo />
           </div>
           <div className="hidden items-center gap-3 text-xs lg:flex">
@@ -214,36 +216,10 @@ export function Shell({
                 />
               </Link>
             )}
-            {actor && (
-              <span className="lg:hidden">
-                <SignOut />
-              </span>
-            )}
           </div>
         </div>
-        <nav
-          aria-label="Mobile navigation"
-          className="-mx-5 mt-4 flex gap-1 overflow-x-auto border-t border-border/60 px-4 pt-3 lg:hidden"
-        >
-          {nav.map(([href, label, Icon]) => (
-            <Link
-              key={href}
-              href={href}
-              aria-current={active === href ? "page" : undefined}
-              className={`relative flex shrink-0 items-center gap-2 rounded-md px-3 py-2.5 text-[11px] ${active === href ? "bg-secondary font-semibold text-primary" : "text-muted-foreground"}`}
-            >
-              <Icon size={14} aria-hidden="true" />
-              {label.replace(" scholarships", "").replace(" opportunities", "")}
-              <NavigationHint />
-            </Link>
-          ))}
-          {actor?.role === "operator" && (
-            <Link href="/operator" className="shrink-0 px-3 py-2.5 text-[11px]">
-              Operator
-            </Link>
-          )}
-        </nav>
       </header>
+      <MobileBottomNav />
       <main
         id="main"
         className="workspace-content design-workspace mx-auto min-h-[calc(100vh-156px)] max-w-[1480px] px-5 py-8 sm:px-9 lg:px-11 lg:py-11"
