@@ -429,3 +429,24 @@ rewritten. A fresh HTTP request to the already-running local homepage returned 2
 contained the landing heading, and contained no missing-column/Prisma error.
 README now explains applying migrations after schema updates. No deployment,
 push, TestSprite run or broad test-suite execution was performed for this repair.
+
+
+## PR #5 mobile sign-out regression coverage — 25 November 2026
+
+GitHub run 45625712013 failed only the release-review browser journey: it looked
+for a visible Sign out button after reviewing the mobile layout, although the new
+mobile navigation places that action inside the closed drawer. The other fifteen
+browser tests and the preceding typecheck, lint, unit, PostgreSQL and build steps
+passed in that remote run. Updated the journey to open More, assert the named
+workspace dialog, and sign out within it. The original login redirect assertion
+remains; a second assertion now verifies that revisiting the protected dashboard
+returns to login. No timeout increase, skipped coverage or authentication change.
+
+Fresh local production build (including TypeScript), targeted ESLint/formatting,
+whitespace checks and all sixteen production-browser tests passed; the complete
+browser run took 3.5 minutes and the formerly failing review took 27.4 seconds.
+These tests used the existing isolated PostgreSQL browser database with sink mail.
+The reusable TestSprite sources ran locally as part of that suite; this is not a
+credited TestSprite portal run. Remote checks at the forthcoming fix commit remain
+to be observed. No production data, deployment configuration or branch protection
+was changed.

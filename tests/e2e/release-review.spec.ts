@@ -62,7 +62,12 @@ test("rendered release review: every main screen, mobile, keyboard and recoverab
   ).toBeVisible();
   await page.goto("/dashboard");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await page.getByRole("button", { name: "Sign out" }).filter({ visible: true }).click();
+  await page.getByRole("button", { name: "More navigation" }).click();
+  const mobileMenu = page.getByRole("dialog", { name: "YOUR WORKSPACE" });
+  await expect(mobileMenu).toBeVisible();
+  await mobileMenu.getByRole("button", { name: "Sign out", exact: true }).click();
+  await expect(page).toHaveURL(/login/);
+  await page.goto("/dashboard");
   await expect(page).toHaveURL(/login/);
   await page.setViewportSize({ width: 1440, height: 1000 });
   for (const [name, path] of [
