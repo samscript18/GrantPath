@@ -1,0 +1,827 @@
+{
+  "ambition": 100,
+  "entryPointCount": 38,
+  "institutionTargetCount": 50,
+  "note": "The supplied first-four-tier tables contain 38 explicit entry points; the 50 institution targets overlap some providers. Counts are backlog entries, not unique approved sources. Resolve and review URLs before registration.",
+  "targets": [
+    {
+      "id": "erasmus",
+      "name": "Erasmus Mundus",
+      "region": "Europe",
+      "proposedUrl": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+      "directoryId": "erasmus-mundus-catalogue",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "daad",
+      "name": "DAAD Scholarship Database",
+      "region": "Europe",
+      "proposedUrl": "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "educanada",
+      "name": "EduCanada Scholarship Search",
+      "region": "North America",
+      "proposedUrl": "https://www.educanada.ca/scholarships-bourses/search-scholarships-rechercher-bourses.aspx?lang=eng",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.educanada.ca/scholarships-bourses/assets/forms/data.json",
+      "directoryId": "educanada-government-feed",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "japan",
+      "name": "Study in Japan Scholarship Search",
+      "region": "Asia",
+      "proposedUrl": "https://www.studyinjapan.go.jp/en/search-for-scholarships/tuition-reduction_search.php?lang=en",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.studyinjapan.go.jp/en/search-for-scholarships/tuition-reduction_search.php?lang=en",
+      "directoryId": "jasso-scholarship-search",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "korea",
+      "name": "Study in Korea",
+      "region": "Asia",
+      "proposedUrl": "https://www.studyinkorea.go.kr/ko/plan/scholarship.do",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "oead",
+      "name": "OeAD / grants.at",
+      "region": "Europe",
+      "proposedUrl": "https://oead.at/en/study-research-teaching/overview-grants-and-scholarships",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "campusfrance",
+      "name": "Campus France / Campus Bourses",
+      "region": "Europe",
+      "proposedUrl": "https://www.canada.campusfrance.org/en/scholarship-programs",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "nl",
+      "name": "Study in NL",
+      "region": "Europe",
+      "proposedUrl": "https://studyinnl.org/finances",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "euraxess",
+      "name": "EURAXESS",
+      "region": "Europe",
+      "proposedUrl": "https://euraxess.ec.europa.eu/jobs/search",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "mastercard",
+      "name": "Mastercard Foundation Institutions",
+      "region": "Global/Africa",
+      "proposedUrl": "https://mastercardfdn.org/en/what-we-do/our-programs/mastercard-foundation-scholars-program/where-to-apply",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "cambridge",
+      "name": "University of Cambridge Funding Search",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.student-funding.cam.ac.uk/",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.student-funding.cam.ac.uk/",
+      "directoryId": "cambridge-funding-search",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "oxford",
+      "name": "University of Oxford Graduate Funding",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.ox.ac.uk/students/fees-funding/search/graduate",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "ucl",
+      "name": "UCL Scholarship Finder",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.ucl.ac.uk/scholarships/scholarships-finder",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "imperial",
+      "name": "Imperial College London",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.imperial.ac.uk/study/fees-and-funding/scholarships-search/",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.imperial.ac.uk/study/fees-and-funding/scholarships-search/",
+      "directoryId": "imperial-scholarships",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "kings",
+      "name": "King’s College London",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.kcl.ac.uk/study/funding",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "edinburgh",
+      "name": "University of Edinburgh",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://registryservices.ed.ac.uk/student-funding/search-scholarships",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "warwick",
+      "name": "University of Warwick",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://warwick.ac.uk/study/scholarships-and-bursaries/scholarships/",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "leeds",
+      "name": "University of Leeds",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://eps.leeds.ac.uk/directories/dir/scholarships",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.leeds.ac.uk/scholarships",
+      "directoryId": "leeds-scholarships",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "birmingham",
+      "name": "University of Birmingham",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.birmingham.ac.uk/study/postgraduate/scholarships-and-funding/search-funding",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "bristol",
+      "name": "University of Bristol",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.bristol.ac.uk/international/fees-finance/scholarships/",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "manchester",
+      "name": "University of Manchester",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.manchester.ac.uk/study/international/finance-and-scholarships/funding/",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "monash",
+      "name": "Monash University",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://www.monash.edu/study/fees-scholarships/scholarships/find-a-scholarship",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "sydney",
+      "name": "University of Sydney",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://www.sydney.edu.au/scholarships/search.html",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "uq",
+      "name": "University of Queensland",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://scholarships.uq.edu.au/scholarships",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://scholarships.uq.edu.au/scholarships",
+      "directoryId": "uq-scholarships",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "anu",
+      "name": "Australian National University",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://study.anu.edu.au/scholarships/find-scholarship",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://study.anu.edu.au/scholarships/find-scholarship",
+      "directoryId": "anu-scholarships",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "unsw",
+      "name": "UNSW Sydney Research Scholarships",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://www.unsw.edu.au/research/hdr/scholarships",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "unsw-projects",
+      "name": "UNSW Funded Research Projects",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://www.unsw.edu.au/research/hdr/find-a-project",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "auckland",
+      "name": "University of Auckland",
+      "region": "Australia/New Zealand",
+      "proposedUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship.html",
+      "status": "reviewed-policy-implemented",
+      "authorization": "isolated-development-only",
+      "origin": "owner-named-entry-point",
+      "resolvedDirectoryUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship.html",
+      "directoryId": "auckland-scholarships",
+      "reviewedAt": "2026-11-24"
+    },
+    {
+      "id": "toronto",
+      "name": "University of Toronto Award Explorer",
+      "region": "North America",
+      "proposedUrl": "https://www.registrar.utoronto.ca/financial-aid-awards/awards-scholarships/",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "educanada-international",
+      "name": "EduCanada International Applicants",
+      "region": "North America",
+      "proposedUrl": "https://www.educanada.ca/scholarships-bourses/non_can/index.aspx?lang=eng",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "canada",
+      "name": "Government of Canada Scholarships",
+      "region": "North America",
+      "proposedUrl": "https://www.canada.ca/en/services/finance/educationfunding/scholarships.html",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "eea",
+      "name": "European Education Area",
+      "region": "Europe",
+      "proposedUrl": "https://education.ec.europa.eu/study-in-europe/planning-your-studies/scholarships-and-funding",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "eu-programmes",
+      "name": "European Programme Discovery",
+      "region": "Europe",
+      "proposedUrl": "https://education.ec.europa.eu/study-in-europe/programmes-and-fields/programmes-by-theme",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "nl-guide",
+      "name": "Study in NL Scholarship Guide",
+      "region": "Europe",
+      "proposedUrl": "https://studyinnl.org/finances/finding-a-scholarship-step-by-step",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "cambridge-mastercard",
+      "name": "Cambridge Mastercard Foundation",
+      "region": "UK & Ireland",
+      "proposedUrl": "https://www.mastercardfoundation.fund.cam.ac.uk/apply/how-apply",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "uct-network",
+      "name": "UCT Mastercard Foundation Partner Directory",
+      "region": "Africa",
+      "proposedUrl": "https://www.uct.ac.za/mastercardfdn/about-program/program-partners",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "berkeley-network",
+      "name": "Berkeley Mastercard Foundation Partners",
+      "region": "North America",
+      "proposedUrl": "https://mcfscholarsprogram.berkeley.edu/partner-universities",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "korea-notices",
+      "name": "Study in Korea Scholarship Announcements",
+      "region": "Asia",
+      "proposedUrl": "https://www.studyinkorea.go.kr/ko/notice/scholarshipsList.do?boardSort=3",
+      "status": "unreviewed",
+      "authorization": "not-approved",
+      "origin": "owner-named-entry-point"
+    },
+    {
+      "id": "institution-university-of-glasgow",
+      "name": "University of Glasgow",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-sheffield",
+      "name": "University of Sheffield",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-nottingham",
+      "name": "University of Nottingham",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-southampton",
+      "name": "University of Southampton",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-exeter",
+      "name": "University of Exeter",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-liverpool",
+      "name": "University of Liverpool",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-durham-university",
+      "name": "Durham University",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-newcastle-university",
+      "name": "Newcastle University",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-queen-s-university-belfast",
+      "name": "Queen’s University Belfast",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-trinity-college-dublin",
+      "name": "Trinity College Dublin",
+      "region": "UK & Ireland",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-eth-zurich",
+      "name": "ETH Zurich",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-epfl",
+      "name": "EPFL",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-geneva",
+      "name": "University of Geneva",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-lausanne",
+      "name": "University of Lausanne",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-ku-leuven",
+      "name": "KU Leuven",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-ghent-university",
+      "name": "Ghent University",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-twente",
+      "name": "University of Twente",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-wageningen-university",
+      "name": "Wageningen University",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-lund-university",
+      "name": "Lund University",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-uppsala-university",
+      "name": "Uppsala University",
+      "region": "Continental Europe",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-british-columbia",
+      "name": "University of British Columbia",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-mcgill-university",
+      "name": "McGill University",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-alberta",
+      "name": "University of Alberta",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-calgary",
+      "name": "University of Calgary",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-waterloo",
+      "name": "University of Waterloo",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-manitoba",
+      "name": "University of Manitoba",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-ottawa",
+      "name": "University of Ottawa",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-saskatchewan",
+      "name": "University of Saskatchewan",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-rochester",
+      "name": "University of Rochester",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-stanford-university",
+      "name": "Stanford University",
+      "region": "North America",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-kaust",
+      "name": "KAUST",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-king-fahd-university-of-petroleum-and-minerals",
+      "name": "King Fahd University of Petroleum and Minerals",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-qatar-university",
+      "name": "Qatar University",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-hamad-bin-khalifa-university",
+      "name": "Hamad Bin Khalifa University",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-khalifa-university",
+      "name": "Khalifa University",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-sharjah",
+      "name": "University of Sharjah",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-national-university-of-singapore",
+      "name": "National University of Singapore",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-nanyang-technological-university",
+      "name": "Nanyang Technological University",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-kaist",
+      "name": "KAIST",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-postech",
+      "name": "POSTECH",
+      "region": "Asia & Middle East",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-cape-town",
+      "name": "University of Cape Town",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-pretoria",
+      "name": "University of Pretoria",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-stellenbosch-university",
+      "name": "Stellenbosch University",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-johannesburg",
+      "name": "University of Johannesburg",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-makerere-university",
+      "name": "Makerere University",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-university-of-ghana",
+      "name": "University of Ghana",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-ashesi-university",
+      "name": "Ashesi University",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-knust",
+      "name": "KNUST",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-carnegie-mellon-university-africa",
+      "name": "Carnegie Mellon University Africa",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    },
+    {
+      "id": "institution-african-institute-for-mathematical-sciences",
+      "name": "African Institute for Mathematical Sciences",
+      "region": "Africa",
+      "proposedUrl": null,
+      "status": "directory-url-unresolved",
+      "authorization": "not-approved",
+      "origin": "owner-named-institution"
+    }
+  ]
+}

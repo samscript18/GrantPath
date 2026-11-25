@@ -25,8 +25,7 @@ export function AuthLayout({
               <em className="text-[#d8dfb9]">A world of possibility.</em>
             </h2>
             <p className="mt-5 max-w-xs text-[13px] leading-7 text-white/65">
-              Find real scholarships, understand the requirements, and make space for your next
-              chapter.
+              Find scholarships, check your eligibility and keep your applications organised.
             </p>
           </div>
           <OpportunityArt dark className="mx-auto -mt-2 w-full max-w-[330px] xl:max-w-[380px]" />
@@ -56,7 +55,7 @@ export function AuthLayout({
               <span className="h-px w-6 bg-accent" aria-hidden="true" />
               YOUR NEXT CHAPTER
             </p>
-            <h1 className="editorial text-[40px] leading-tight sm:text-[44px]">{title}</h1>
+            <h1 className="editorial text-[34px] leading-tight sm:text-[42px]">{title}</h1>
             <p className="mt-3 mb-8 text-[13px] leading-7 text-muted-foreground">{subtitle}</p>
             {children}
           </div>

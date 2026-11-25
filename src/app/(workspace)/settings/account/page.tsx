@@ -19,8 +19,8 @@ export default async function AccountSettings() {
     <SettingsFrame
       actor={actor}
       active="/settings/account"
-      title="Keep your account in good hands."
-      description="Change your password with email verification and manage the devices signed in to your account."
+      title="Password & sessions"
+      description="Change your password and manage signed-in devices."
     >
       <AccountSecurity
         method={account.authMethod}

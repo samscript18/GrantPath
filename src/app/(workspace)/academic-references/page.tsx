@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/empty-state";
 import { academicReferences } from "@/data/academic-references";
-export const metadata = { title: "Official academic grading references" };
+export const metadata = { title: "Official academic and qualification references" };
 export default async function References({
   searchParams,
 }: {
@@ -27,8 +27,8 @@ export default async function References({
     <div className="reference-library">
       <PageHeading
         eyebrow="THE ACADEMIC REFERENCE LIBRARY"
-        title="Your grades, in context."
-        description="Official grading scales and provider equivalence guidance. Keep your original result and check the provider’s conditions."
+        title="Academic references"
+        description="Find official grading scales, qualification recognition guidance and provider assessment requirements."
       />
       <Form
         action="/academic-references"
@@ -118,7 +118,15 @@ export default async function References({
                         >
                           Read official guidance <ArrowUpRight size={13} aria-hidden="true" />
                         </a>
-                        <p className="text-[10px] text-muted-foreground">Reviewed 24 Oct 2026</p>
+                        <p className="text-[10px] text-muted-foreground">
+                          Reviewed{" "}
+                          {new Intl.DateTimeFormat("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                            timeZone: "UTC",
+                          }).format(new Date(`${row.reviewedAt}T00:00:00Z`))}
+                        </p>
                       </div>
                     </div>
                   </article>

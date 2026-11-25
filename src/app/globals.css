@@ -844,3 +844,450 @@ summary:hover {
     width: min(240px, calc(100vw - 64px));
   }
 }
+
+/* Operator studio: a focused editorial workspace, with room for evidence. */
+.studio-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: 1px solid var(--gp-border);
+  margin-bottom: 2.5rem;
+}
+.studio-metric {
+  padding: 1.5rem;
+  border-right: 1px solid var(--gp-border);
+}
+.studio-metric:first-child {
+  padding-left: 0;
+}
+.studio-metric:last-child {
+  border-right: 0;
+}
+.studio-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+.studio-rail {
+  position: sticky;
+  top: 6rem;
+}
+.studio-rail-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--gp-muted-foreground);
+  padding: 0 0.8rem 1rem;
+}
+.studio-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.studio-menu > a {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  padding: 0.85rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--gp-muted-foreground);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.studio-menu > a:hover {
+  background: var(--gp-muted);
+  color: var(--gp-foreground);
+}
+.studio-menu > a[aria-current] {
+  background: var(--gp-primary);
+  color: var(--gp-primary-foreground);
+  border-color: var(--gp-primary);
+  box-shadow: 0 4px 12px #183e2e0c;
+}
+.studio-menu-description {
+  display: block;
+  font-size: 0.625rem;
+  margin-top: 0.3rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+.studio-menu-count {
+  min-width: 1.45rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: 0.35rem;
+  background: var(--gp-paper);
+  color: var(--gp-foreground);
+  text-align: center;
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+}
+.studio-rail-note {
+  margin: 1.75rem 0.75rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gp-border);
+}
+.studio-content,
+.studio-panel {
+  min-width: 0;
+}
+.studio-panel[hidden] {
+  display: none;
+}
+.studio-panel > section,
+.studio-panel > section.studio-section {
+  margin-top: 0;
+}
+.studio-section-heading {
+  margin-bottom: 1.5rem;
+}
+.studio-section-heading h2 {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  margin-top: 0.7rem;
+}
+.studio-section-heading > p:last-child:not(.eyebrow) {
+  max-width: 38rem;
+  color: var(--gp-muted-foreground);
+  font-size: 0.8rem;
+  line-height: 1.9;
+  margin-top: 0.75rem;
+}
+.operator-studio .paper {
+  border-radius: 1rem;
+}
+.operator-studio details.paper > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.7;
+}
+.operator-studio details.paper > summary::-webkit-details-marker {
+  display: none;
+}
+.operator-studio details.paper > summary::after {
+  content: "+";
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid var(--gp-border);
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--gp-muted-foreground);
+}
+.operator-studio details.paper[open] > summary::after {
+  content: "−";
+}
+.operator-studio details.paper[open] > summary {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gp-border);
+}
+.operator-studio .operator-table th {
+  padding-block: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--gp-muted-foreground);
+}
+.operator-studio .operator-table tbody tr:hover {
+  background: color-mix(in srgb, var(--gp-secondary) 25%, transparent);
+}
+.operator-studio .operator-table td {
+  padding-block: 1.25rem;
+}
+.operator-studio .operator-table td:first-child a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.operator-studio .operator-table td:first-child a:hover {
+  text-decoration: underline;
+}
+.studio-edit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--gp-border);
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--gp-paper);
+}
+.studio-edit-button:hover {
+  border-color: var(--gp-leaf);
+  background: var(--gp-secondary);
+}
+.studio-version {
+  display: inline-block;
+  border-radius: 0.35rem;
+  background: var(--gp-muted);
+  padding: 0.2rem 0.45rem;
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+}
+.studio-policy-controls {
+  border-top: 1px solid var(--gp-border);
+  padding-top: 1rem;
+}
+.studio-policy-switch {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 0.5rem;
+}
+.studio-policy-switch p {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.studio-policy-switch small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--gp-muted-foreground);
+}
+@media (max-width: 1100px) {
+  .studio-layout {
+    grid-template-columns: 185px minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .studio-menu-description {
+    display: none;
+  }
+  .studio-metric {
+    padding-inline: 1rem;
+  }
+}
+@media (max-width: 767px) {
+  .studio-layout {
+    display: block;
+  }
+  .studio-rail {
+    position: static;
+    margin-bottom: 1.75rem;
+  }
+  .studio-menu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+  .studio-menu > a {
+    border-color: var(--gp-border);
+    padding: 0.7rem;
+    background: var(--gp-paper);
+  }
+  .studio-rail-note,
+  .studio-rail-label {
+    display: none;
+  }
+  .studio-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 1.5rem;
+  }
+  .studio-metric {
+    padding: 1rem;
+  }
+  .studio-metric:first-child {
+    padding-left: 1rem;
+  }
+  .studio-metric:nth-child(2) {
+    border-right: 0;
+  }
+  .studio-metric:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--gp-border);
+  }
+  .operator-studio .paper {
+    padding: 1.1rem;
+  }
+  .operator-studio .operator-table {
+    padding: 0;
+  }
+}
+.studio-empty {
+  padding: 2.5rem 1.5rem;
+  border: 1px dashed var(--gp-border);
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+  background: var(--gp-paper);
+  text-align: center;
+}
+.studio-empty h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.studio-empty p {
+  max-width: 28rem;
+  margin: 0.75rem auto 0;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--gp-muted-foreground);
+}
+
+/* Consistent, readable controls across the student and operator workspace. */
+.action-link {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--gp-border);
+  border-radius: 0.6rem;
+  background: var(--gp-paper);
+  padding: 0.6rem 0.9rem;
+  color: var(--gp-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.action-link:hover {
+  border-color: var(--gp-leaf);
+  background: var(--gp-secondary);
+}
+.action-link svg {
+  flex-shrink: 0;
+}
+.settings-directory-link {
+  position: relative;
+  box-shadow: 0 2px 6px #183e2e03;
+}
+.settings-directory-link:hover {
+  background: color-mix(in srgb, var(--gp-secondary) 20%, var(--gp-paper));
+}
+.settings-directory-link h2 {
+  margin-top: 1.2rem;
+  font-size: 1.45rem;
+}
+.settings-directory-link > p:last-child {
+  margin-top: 0.6rem;
+  line-height: 1.75;
+}
+.guide-note {
+  border-top: 3px solid var(--gp-accent);
+}
+.opportunity-fact-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+}
+.opportunity-facts {
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--gp-muted) 45%, transparent);
+  padding: 1rem;
+}
+.application-card {
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+.application-card:hover {
+  border-color: color-mix(in srgb, var(--gp-primary) 28%, var(--gp-border));
+  box-shadow: 0 4px 14px #183e2e07;
+}
+.application-card .plan-editor > summary {
+  min-height: 2.5rem;
+  background: var(--gp-paper);
+}
+.evidence-section .evidence-entry,
+.evidence-section .evidence-section {
+  min-width: 0;
+}
+.evidence-section blockquote {
+  border-left-width: 3px;
+  color: var(--gp-foreground);
+}
+.notification-unread h2 {
+  font-weight: 500;
+}
+@media (max-width: 767px) {
+  .page-heading {
+    gap: 1rem;
+  }
+  .page-heading > div > p:last-child {
+    line-height: 1.75;
+  }
+  .settings-dock {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+    gap: 0.35rem;
+  }
+  .settings-dock > a {
+    min-width: 0;
+    padding: 0.7rem 0.65rem;
+    font-size: 0.7rem;
+  }
+  .opportunity-facts {
+    padding: 0.9rem;
+  }
+  .guide-note {
+    padding: 1.25rem;
+  }
+  .studio-metric {
+    padding-block: 1rem;
+  }
+  .studio-metric > p:nth-child(2) {
+    font-size: 2rem;
+    margin-block: 0.6rem;
+  }
+  .studio-metric > p:last-child {
+    line-height: 1.6;
+  }
+  .studio-menu > a {
+    min-height: 3rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .action-link,
+  .studio-menu > a,
+  .application-card {
+    transition: none;
+  }
+}
+.operator-studio .studio-catalogue {
+  padding: 0;
+}
+@media (max-width: 767px) {
+  .studio-rail {
+    position: sticky;
+    top: calc(var(--workspace-header-height, 120px) + 0.5rem);
+    z-index: 20;
+    margin-inline: -0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.85rem;
+    background: var(--gp-background);
+    box-shadow: 0 6px 12px #183e2e06;
+  }
+}
+@media (max-width: 767px) {
+  .auth-content .auth-form-content {
+    margin-block: 0;
+    padding-block: 2rem;
+  }
+  .auth-content > p:last-child {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+}

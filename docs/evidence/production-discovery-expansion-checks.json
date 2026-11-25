@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-11-24T18:30:55.724487+00:00",
+  "branch": "feat/production-discovery-expansion",
+  "scope": "local working tree; isolated databases only; no deployment/merge/production policy changes",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "unit": {
+      "passed": 118,
+      "files": 19
+    },
+    "integration": {
+      "passed": 44,
+      "files": 16,
+      "database": "grantpath_expansion_final_test"
+    },
+    "build": {
+      "passed": true,
+      "nextVersion": "16.4.6"
+    },
+    "browser": {
+      "passed": 14,
+      "duration": "2.9m",
+      "productionBuild": true,
+      "database": "grantpath_expansion_e2e_test",
+      "preservedPythonSources": 9,
+      "paidTestSpriteExecution": false
+    },
+    "formatting": "passed for changed implementation/test/report files",
+    "gitDiffCheck": "passed",
+    "nonEmptyLiveDatabaseGuard": "refused before mutations"
+  },
+  "liveReceipt": "production-discovery-expansion-live.json",
+  "limitations": [
+    "Three live details require review; two discovered candidates were not processed within the quota.",
+    "No live PDF source approved; parser and reviewed mapping publication verified with controlled fixtures.",
+    "npm installation still reported 16 pre-existing/transitive advisories; separate final advisory endpoint recheck failed with ECONNRESET."
+  ],
+  "resolvedFailures": [
+    "Initial browser publication-history regression corrected without modifying historical Python sources.",
+    "Repeated integration fixture accumulation exceeded an existing first-page assertion; full final suite passed against a newly created empty database.",
+    "Next.js 16.4.3 security build stop resolved with non-major 16.4.6 patch."
+  ]
+}

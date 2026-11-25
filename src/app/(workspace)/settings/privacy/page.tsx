@@ -11,8 +11,8 @@ export default async function PrivacySettings() {
     <SettingsFrame
       actor={actor}
       active="/settings/privacy"
-      title="Your information. Your choice."
-      description="Take a copy of your workspace or manage a request to close your account."
+      title="Privacy & data"
+      description="Download your account data or request deletion."
     >
       <AccountPrivacy email={actor.email} initial={initial} timeZone={profile.data.timeZone} />
     </SettingsFrame>

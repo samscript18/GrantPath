@@ -71,8 +71,8 @@ export default async function ProfilePage() {
     <div className="account-profile-page">
       <PageHeading
         eyebrow="YOUR GRANTPATH IDENTITY"
-        title="A profile for your next chapter."
-        description="Keep your account recognisable, your study plans current, and your workspace a little more you."
+        title="Your profile"
+        description="Manage your account details, photo and study profile."
       />
       <section
         aria-labelledby="profile-name"

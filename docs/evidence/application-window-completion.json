@@ -1,0 +1,118 @@
+{
+  "completedAt": "2026-11-25T04:38:37.456640+00:00",
+  "scope": "Isolated development catalogue on feat/production-discovery-expansion; production and schedules unchanged",
+  "totalBefore": 1066,
+  "totalAfter": 1067,
+  "before": {
+    "open": 7,
+    "upcoming": 2,
+    "closed": 7,
+    "unknown": 1050
+  },
+  "after": {
+    "open": 7,
+    "upcoming": 3,
+    "closed": 115,
+    "unknown": 942
+  },
+  "originalUnknownStatusesResolved": 109,
+  "newUnknownRecordsFromReviewFix": 1,
+  "reviewBefore": 420,
+  "reviewAfter": 419,
+  "explicitUnannouncedSchemes": 25,
+  "explicitRollingConsiderationSchemes": 1,
+  "retainedEvidenceWindowUpdates": 370,
+  "replayProposedUpdates": 0,
+  "unknownCauses": [
+    {
+      "cause": "no_retained_detail_date_evidence",
+      "count": 9
+    },
+    {
+      "cause": "scheme_overview_no_confirmed_cycle",
+      "count": 624
+    },
+    {
+      "cause": "course_specific_supporting_page_required",
+      "count": 8
+    },
+    {
+      "cause": "unannounced_cycle",
+      "count": 25
+    },
+    {
+      "cause": "scheme_overview_with_dates_but_no_confirmed_cycle",
+      "count": 192
+    },
+    {
+      "cause": "unsupported_date_format_or_unmapped_date_field",
+      "count": 143
+    },
+    {
+      "cause": "unsupported_or_ambiguous_date_wording",
+      "count": 44
+    },
+    {
+      "cause": "inaccessible_detail_page",
+      "count": 4
+    },
+    {
+      "cause": "missing_official_dates",
+      "count": 1
+    }
+  ],
+  "verification": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "unitTestsPassed": 152,
+    "integrationTestsPassed": 51,
+    "browserJourneysPassed": 14,
+    "productionBuild": "passed",
+    "gitDiffCheck": "passed",
+    "catalogueValidation": {
+      "checkedAt": "2026-11-25T04:30:31.791Z",
+      "scope": "Read-only isolated development catalogue",
+      "records": 1067,
+      "uniqueProgrammes": 1067,
+      "availability": [
+        {
+          "availability": "open",
+          "total": 7
+        },
+        {
+          "availability": "upcoming",
+          "total": 3
+        },
+        {
+          "availability": "closed",
+          "total": 115
+        },
+        {
+          "availability": "unknown",
+          "total": 942
+        }
+      ],
+      "profilesChecked": 12,
+      "unknownConditionAssessments": 12564,
+      "filtersChecked": {
+        "levels": 3,
+        "destinations": 6
+      },
+      "integrity": {
+        "missingEvents": 0,
+        "missingVersions": 0
+      },
+      "failures": []
+    }
+  },
+  "limitations": [
+    "No additional confirmed-open call was inferred.",
+    "Overviews with published dates retain unknown availability until a specific cycle is established.",
+    "Date-only windows do not create closing instants, timezone assumptions or instant-based reminders.",
+    "Course-dependent deadlines and ambiguous or yearless dates remain unresolved.",
+    "Supporting pages are limited to explicitly reviewed URLs; access restrictions remain respected.",
+    "Date-only upcoming windows require a later source check; opening instants are not invented.",
+    "Warm local filter and matching timings are not production benchmarks."
+  ],
+  "policiesPaused": true
+}

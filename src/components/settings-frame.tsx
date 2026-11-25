@@ -33,7 +33,7 @@ export function SettingsFrame({
 }) {
   return (
     <div className="settings-page">
-      <PageHeading eyebrow="YOUR WORKSPACE, YOUR WAY" title={title} description={description}>
+      <PageHeading eyebrow="SETTINGS" title={title} description={description}>
         <span
           className="hidden items-center gap-2 text-[11px] text-muted-foreground xl:inline-flex"
           title={`Private settings for ${actor.name}`}

@@ -1,6 +1,8 @@
+import { MotionExperience } from "@/components/motion-experience";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./refinements.css";
+import "./motion.css";
 import { isIsolatedHostedPreview } from "@/server/accounts/preview";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 export const metadata: Metadata = {
@@ -31,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </div>
         )}
         {children}
+        <MotionExperience />
       </body>
     </html>
   );

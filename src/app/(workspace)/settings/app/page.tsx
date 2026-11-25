@@ -15,7 +15,7 @@ export default async function AppSettings() {
     <SettingsFrame
       actor={actor}
       active="/settings/app"
-      title="A workspace that feels like you."
+      title="Appearance & time zone"
       description="Choose your appearance and set the time zone for your scholarship plans."
     >
       <section className="settings-panel">

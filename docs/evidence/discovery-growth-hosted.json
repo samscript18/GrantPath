@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-10T09:33:37.298Z",
+  "checkedAt": "2026-11-10T13:27:57.469Z",
   "origin": "https://grantpath-lake.vercel.app",
   "scope": "Actual anonymous production API/DOM; read-only and no paid subject query",
   "counts": {
-    "active": 31,
-    "all": 36
+    "active": 32,
+    "all": 37
   },
   "records": [
     {
@@ -42,6 +42,18 @@
       "availability": "unknown",
       "deadlineState": "unknown",
       "officialUrl": "https://www.utwente.nl/en/education/scholarship-finder/itc-excellence-scholarship-programme/"
+    },
+    {
+      "id": "cmwapyuf4000f00uzw4qdu0kd",
+      "slug": "twente-nl-scholarship-university-of-twente-181bf23256",
+      "title": "NL Scholarship",
+      "version": 1,
+      "cycle": "2027/2028",
+      "recordKind": "cycle",
+      "cycleStatus": "confirmed",
+      "availability": "unknown",
+      "deadlineState": "date_only",
+      "officialUrl": "https://www.utwente.nl/en/education/scholarship-finder/nl-scholarship-university-of-twente/"
     }
   ],
   "mobileNoOverflow": true

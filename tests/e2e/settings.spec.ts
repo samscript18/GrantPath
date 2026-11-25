@@ -12,7 +12,7 @@ test("settings, searchable profile choices, original results, keyboard switches 
   await expect(page).toHaveURL(/dashboard/);
   await dismissStudyPrompt(page);
   await page.goto("/settings");
-  await expect(page.getByRole("heading", { name: "Make this space your own." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Settings", exact: true })).toBeVisible();
   await page.getByRole("link", { name: "Your study profile", exact: false }).click();
   await page.getByRole("button", { name: /Your world/ }).click();
   const countries = page.getByRole("list", { name: "Selected citizenship(s)" });

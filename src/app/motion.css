@@ -1,0 +1,726 @@
+/* The ambition atlas: decorative motion never carries scholarship facts. */
+.motion-control {
+  position: fixed;
+  right: 16px;
+  bottom: 14px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid var(--gp-border);
+  border-radius: 30px;
+  padding: 7px 11px;
+  background: var(--gp-paper);
+  color: var(--gp-muted-foreground);
+  font-size: 10px;
+  box-shadow: 0 2px 14px #183e2e0a;
+}
+.motion-control:hover {
+  color: var(--gp-foreground);
+  border-color: var(--gp-leaf);
+}
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.hero-line > span,
+.hero-line > em {
+  display: block;
+  animation: headline-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero-line:nth-child(2) > span {
+  animation-delay: 120ms;
+}
+.hero-line:nth-child(3) > em {
+  animation-delay: 240ms;
+}
+@keyframes headline-rise {
+  from {
+    transform: translateY(105%) rotate(2deg);
+    opacity: 0.2;
+  }
+  to {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+.hero-portal {
+  position: relative;
+  width: 100%;
+  height: 490px;
+  perspective: 1100px;
+  isolation: isolate;
+  --portal-x: 0deg;
+  --portal-y: 0deg;
+}
+.portal-system {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--portal-x)) rotateX(var(--portal-y));
+  transition: transform 400ms ease-out;
+}
+.portal-aura {
+  position: absolute;
+  inset: 8% -8%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--gp-accent) 15%, transparent),
+    color-mix(in srgb, var(--gp-secondary) 60%, transparent) 45%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  animation: aura-breathe 8s ease-in-out infinite alternate;
+}
+.portal-arch {
+  position: absolute;
+  width: 65%;
+  height: 80%;
+  top: 9%;
+  left: 18%;
+  overflow: hidden;
+  border: 1px solid #183e2e22;
+  border-radius: 150px 150px 14px 14px;
+  background: linear-gradient(165deg, #e5ead7 5%, #cddbb8 50%, #f3ecd1);
+  box-shadow:
+    inset 0 0 0 10px #ffffff38,
+    0 20px 55px #183e2e10;
+  animation: portal-arrive 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.portal-doorline {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid #183e2e16;
+  border-radius: 140px 140px 5px 5px;
+  pointer-events: none;
+}
+.portal-landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.portal-sun {
+  position: absolute;
+  left: 36%;
+  top: 19%;
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d4a64e;
+  color: #faf5df;
+  box-shadow:
+    0 0 0 15px #d4a64e12,
+    0 0 0 34px #d4a64e08;
+  animation:
+    sun-rise 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+    sun-drift 9s 1.8s ease-in-out infinite alternate;
+}
+.portal-road {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 0;
+  animation: road-reveal 2s 400ms ease both;
+}
+.portal-trail {
+  stroke-dasharray: 14 480;
+  animation: trail-travel 7s 2s linear infinite;
+}
+.portal-orbit {
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--gp-primary) 17%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orbit-one {
+  width: 98%;
+  height: 78%;
+  left: 1%;
+  top: 12%;
+  transform: rotate(-30deg);
+  animation: orbit-turn 45s linear infinite;
+}
+.orbit-two {
+  width: 82%;
+  height: 94%;
+  left: 9%;
+  top: 3%;
+  transform: rotate(28deg);
+  animation: orbit-turn 55s linear infinite reverse;
+  border-style: dashed;
+}
+.orbit-three {
+  width: 108%;
+  height: 64%;
+  left: -4%;
+  top: 20%;
+  transform: rotate(-48deg);
+  opacity: 0.4;
+}
+.portal-orbit > span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gp-accent);
+  top: 15%;
+  left: 15%;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--gp-accent) 12%, transparent);
+}
+.portal-ticket {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-paper);
+  padding: 14px 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px #183e2e0b;
+  animation: ticket-float 7s ease-in-out infinite;
+}
+.ticket-discover {
+  top: 22%;
+  left: -2%;
+  transform: rotate(-6deg);
+}
+.ticket-match {
+  bottom: 18%;
+  right: -4%;
+  animation-delay: -3.5s;
+}
+.ticket-icon {
+  display: grid;
+  place-items: center;
+  color: var(--gp-primary);
+  width: 36px;
+  height: 36px;
+  background: var(--gp-secondary);
+  border-radius: 9px;
+}
+.portal-ticket small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--gp-muted-foreground);
+}
+.portal-ticket strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.portal-seal {
+  position: absolute;
+  right: 1%;
+  top: 6%;
+  width: 82px;
+  height: 82px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #183e2e;
+  color: #ecebd6;
+  border-radius: 50%;
+  outline: 1px dashed #8b9f6b;
+  outline-offset: -6px;
+  transform: rotate(12deg);
+  animation: seal-sway 8s ease-in-out infinite alternate;
+}
+.portal-seal span {
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-align: center;
+}
+.portal-coordinate {
+  position: absolute;
+  z-index: 3;
+  font-size: 7px;
+  letter-spacing: 0.17em;
+  color: var(--gp-muted-foreground);
+}
+.coordinate-top {
+  left: 4%;
+  top: 1%;
+}
+.coordinate-bottom {
+  right: 6%;
+  bottom: 3%;
+}
+.portal-cross {
+  position: absolute;
+  color: var(--gp-leaf);
+  font-weight: 200;
+  font-size: 23px;
+}
+.cross-one {
+  left: 1%;
+  bottom: 20%;
+  animation: cross-turn 14s linear infinite;
+}
+.cross-two {
+  right: 3%;
+  top: 38%;
+  animation: cross-turn 18s linear infinite reverse;
+}
+.portal-stars i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #617a4c88;
+  left: 22%;
+  top: 18%;
+  animation: star-drift 8s ease-in-out infinite alternate;
+}
+.portal-stars i:nth-child(2) {
+  left: 75%;
+  top: 30%;
+  animation-delay: -3s;
+}
+.portal-stars i:nth-child(3) {
+  left: 60%;
+  top: 10%;
+  animation-delay: -5s;
+}
+.portal-stars i:nth-child(4) {
+  left: 15%;
+  top: 42%;
+  animation-delay: -2s;
+}
+.portal-stars i:nth-child(5) {
+  left: 85%;
+  top: 48%;
+  animation-delay: -6s;
+}
+.landing-spotlight {
+  z-index: 4;
+}
+.match-explainer {
+  border: 1px solid var(--gp-border);
+  background: var(--gp-paper);
+  padding: 26px;
+  border-radius: 18px;
+  transform: rotate(-1deg);
+  box-shadow: 0 16px 40px #183e2e05;
+}
+.match-outcome {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+.match-outcome:last-of-type {
+  border: 0;
+}
+.match-outcome > span {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+.match-outcome-green > span {
+  background: var(--gp-success);
+  color: var(--gp-success-foreground);
+}
+.match-outcome-amber > span {
+  background: var(--gp-warning);
+  color: var(--gp-warning-foreground);
+}
+.match-outcome-red > span {
+  background: var(--gp-danger);
+  color: var(--gp-danger-foreground);
+}
+.planning-orbit {
+  position: relative;
+  height: 390px;
+  max-width: 500px;
+  width: 100%;
+  margin-inline: auto;
+}
+.plan-orbit-ring {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  top: 25px;
+  left: calc(50% - 170px);
+  border: 1px dashed #d8dfb944;
+  border-radius: 50%;
+  animation: orbit-turn 65s linear infinite;
+}
+.plan-orbit-ring::after {
+  content: "";
+  position: absolute;
+  top: 44px;
+  left: 44px;
+  width: 6px;
+  height: 6px;
+  background: #d4a64e;
+  border-radius: 50%;
+}
+.ring-inner {
+  width: 230px;
+  height: 230px;
+  left: calc(50% - 115px);
+  top: 80px;
+  border-style: solid;
+  opacity: 0.6;
+  animation-direction: reverse;
+}
+.plan-core {
+  position: absolute;
+  top: 130px;
+  left: calc(50% - 65px);
+  width: 130px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: 1px solid #d8dfb944;
+  background: #ffffff08;
+  border-radius: 50%;
+  color: #d8dfb9;
+}
+.plan-core span {
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-align: center;
+  line-height: 1.5;
+}
+.plan-satellite {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #254b37;
+  border: 1px solid #d8dfb92b;
+  border-radius: 12px;
+  color: #f0f0e3;
+  box-shadow: 0 7px 25px #06180d20;
+  animation: satellite-float 8s ease-in-out infinite;
+}
+.plan-satellite span {
+  font-size: 11px;
+}
+.satellite-one {
+  left: 4%;
+  top: 42px;
+  transform: rotate(-5deg);
+}
+.satellite-two {
+  right: 0;
+  top: 165px;
+  animation-delay: -3s;
+}
+.satellite-three {
+  left: 8%;
+  bottom: 20px;
+  animation-delay: -5s;
+}
+.promise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--gp-border);
+}
+.promise-grid article {
+  padding: 30px 28px 10px;
+  border-right: 1px solid var(--gp-border);
+}
+.promise-grid article:first-child {
+  padding-left: 0;
+}
+.promise-grid article:last-child {
+  border: 0;
+}
+@keyframes aura-breathe {
+  to {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+}
+@keyframes portal-arrive {
+  from {
+    transform: translateY(28px) scale(0.96);
+    opacity: 0.2;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes sun-rise {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes sun-drift {
+  to {
+    transform: translateY(-8px);
+  }
+}
+@keyframes road-reveal {
+  from {
+    stroke-dashoffset: 500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes trail-travel {
+  from {
+    stroke-dashoffset: 500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes orbit-turn {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes ticket-float {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -3deg;
+  }
+  50% {
+    translate: 0 -10px;
+    rotate: 0deg;
+  }
+}
+@keyframes seal-sway {
+  to {
+    transform: rotate(-8deg);
+  }
+}
+@keyframes cross-turn {
+  to {
+    rotate: 180deg;
+  }
+}
+@keyframes star-drift {
+  to {
+    translate: 4px -12px;
+    opacity: 0.3;
+  }
+}
+@keyframes satellite-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-slot="button"]:hover svg {
+    transform: translate(2px, -2px);
+  }
+  [data-slot="button"] svg {
+    transition: transform 200ms ease;
+  }
+  .settings-directory-link:hover,
+  .featured-opportunity:hover {
+    transform: translateY(-3px);
+  }
+  .settings-directory-link,
+  .featured-opportunity {
+    transition:
+      transform 250ms ease,
+      border-color 200ms ease,
+      background-color 200ms ease;
+  }
+}
+@media (max-width: 639px) {
+  .hero-portal {
+    height: 360px;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .landing-visual {
+    max-width: 360px;
+  }
+  .portal-arch {
+    top: 6%;
+    height: 84%;
+    width: 60%;
+    left: 20%;
+  }
+  .portal-sun {
+    width: 62px;
+    height: 62px;
+  }
+  .portal-ticket {
+    padding: 10px;
+    gap: 8px;
+  }
+  .ticket-discover {
+    left: 0;
+    top: 27%;
+  }
+  .ticket-match {
+    right: 0;
+    bottom: 14%;
+  }
+  .ticket-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .portal-ticket strong {
+    font-size: 10px;
+  }
+  .portal-ticket small {
+    font-size: 7px;
+  }
+  .portal-seal {
+    width: 64px;
+    height: 64px;
+    right: 0;
+  }
+  .portal-seal span {
+    font-size: 6px;
+  }
+  .portal-coordinate {
+    font-size: 6px;
+  }
+  .landing-spotlight {
+    margin-top: 10px;
+  }
+  .planning-orbit {
+    height: 340px;
+  }
+  .plan-orbit-ring {
+    width: 290px;
+    height: 290px;
+    left: calc(50% - 145px);
+    top: 20px;
+  }
+  .ring-inner {
+    width: 205px;
+    height: 205px;
+    left: calc(50% - 102px);
+    top: 62px;
+  }
+  .plan-core {
+    top: 103px;
+  }
+  .plan-satellite {
+    padding: 12px;
+    gap: 8px;
+  }
+  .plan-satellite span {
+    font-size: 10px;
+  }
+  .satellite-one {
+    top: 20px;
+    left: 0;
+  }
+  .satellite-two {
+    top: 164px;
+    right: 0;
+  }
+  .satellite-three {
+    bottom: 10px;
+    left: 0;
+  }
+  .promise-grid {
+    grid-template-columns: 1fr;
+  }
+  .promise-grid article,
+  .promise-grid article:first-child {
+    padding: 25px 0;
+    border: 0;
+    border-bottom: 1px solid var(--gp-border);
+  }
+  .match-explainer {
+    padding: 22px;
+    transform: none;
+  }
+  .motion-control {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-portal *,
+  .hero-line > *,
+  .planning-orbit *,
+  .settings-directory-link,
+  .featured-opportunity {
+    animation: none !important;
+    transition: none !important;
+  }
+  .portal-system {
+    transform: none;
+  }
+}
+:root[data-motion="paused"] .hero-portal *,
+:root[data-motion="paused"] .hero-line > *,
+:root[data-motion="paused"] .planning-orbit * {
+  animation-play-state: paused !important;
+}
+:root[data-motion="paused"] .portal-system {
+  transform: none;
+}
+:root[data-motion="paused"] {
+  scroll-behavior: auto;
+}
+/* Pausing during an entrance must never strand useful content off screen. */
+:root[data-motion="paused"] .hero-line > *,
+:root[data-motion="paused"] .portal-arch,
+:root[data-motion="paused"] .portal-sun {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .workspace-nav-link:hover svg {
+    rotate: -8deg;
+    scale: 1.08;
+  }
+  .workspace-nav-link svg {
+    transition:
+      rotate 220ms ease,
+      scale 220ms ease;
+  }
+  .landing-header nav a {
+    position: relative;
+  }
+  .landing-header nav a::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -6px;
+    height: 1px;
+    background: var(--gp-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms ease;
+  }
+  .landing-header nav a:hover::after {
+    transform: scaleX(1);
+  }
+}

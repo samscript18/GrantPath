@@ -34,6 +34,11 @@ export function publicationPolicy(input: {
     if (!v.requirementsComplete && !mandatoryConfirmation(data.requirements))
       reasons.push("MANDATORY_CONDITIONS_UNMAPPED");
     if (previous && semanticHash(previous) !== semanticHash(data)) {
+      if (
+        previous.applicationWindow?.sourceHash &&
+        previous.applicationWindow.sourceHash !== data.applicationWindow?.sourceHash
+      )
+        reasons.push("CALL_SOURCE_CHANGE_REQUIRES_REVIEW");
       const changed = (Object.keys(data) as (keyof ScholarshipData)[]).filter(
         (key) => key !== "evidence" && semanticHash(data[key]) !== semanticHash(previous[key]),
       );
@@ -42,6 +47,8 @@ export function publicationPolicy(input: {
         "deadlineState",
         "deadlineLabel",
         "availability",
+        "applicationWindow",
+        "opensAt",
         "requirements",
         "levels",
         "funding",
@@ -49,6 +56,11 @@ export function publicationPolicy(input: {
         "fundingSummary",
       ]);
       if (changed.some((key) => !safe.has(key))) reasons.push("UNSUPPORTED_FIELD_CHANGE");
+      if (
+        changed.includes("opensAt") &&
+        (!v.cycleConfirmed || !data.opensAt || !v.matchedFields.includes("applicationWindow"))
+      )
+        reasons.push("OPENING_SEMANTICS_UNSUPPORTED");
       if (
         changed.some((key) =>
           ["requirements", "levels", "funding", "fundingType", "fundingSummary"].includes(key),
@@ -73,7 +85,20 @@ export function publicationPolicy(input: {
           !v.matchedFields.includes("deadline"))
       )
         reasons.push("DEADLINE_SEMANTICS_UNSUPPORTED");
-      if (changed.length > 4) reasons.push("MASS_CHANGE");
+      const windowFields = new Set([
+        "applicationWindow",
+        "opensAt",
+        "deadline",
+        "deadlineState",
+        "deadlineLabel",
+        "availability",
+      ]);
+      const evidencedWindowOnly =
+        changed.every((key) => windowFields.has(key)) &&
+        v.matchedFields.includes("applicationWindow") &&
+        (!changed.includes("opensAt") ||
+          data.evidence.some((e) => e.field === "applicationWindow" && e.state === "verified"));
+      if (changed.length > 4 && !evidencedWindowOnly) reasons.push("MASS_CHANGE");
     }
   }
   const codes = [...new Set(reasons)];

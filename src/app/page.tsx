@@ -1,3 +1,4 @@
+import { HeroPortal } from "@/components/hero-portal";
 import { ProviderImage } from "@/components/provider-image";
 import Link from "next/link";
 import {
@@ -9,6 +10,12 @@ import {
   Bookmark,
   MapPin,
   Plus,
+  CircleCheck,
+  CircleHelp,
+  CircleX,
+  BellRing,
+  ListChecks,
+  CalendarDays,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
@@ -22,32 +29,32 @@ const faqs = [
   {
     question: "What can I do with GrantPath?",
     answer:
-      "Discover real scholarships, inspect official evidence, understand how the requirements relate to your profile, and organise your applications. Save opportunities, keep personal notes, and build a preparation checklist in your own workspace.",
+      "Find scholarships, check your eligibility and track applications with private notes and checklists.",
   },
   {
     question: "Do I need an account to explore scholarships?",
     answer:
-      "You can browse the catalogue and read scholarship details without an account. Create an account when you want personalised assessments, saved opportunities, application tracking, and notification preferences. You can build your profile in stages and leave uncertain answers blank.",
+      "No account is needed to browse. Sign up to get personal matches, save scholarships and track applications.",
   },
   {
     question: "Does an eligible match mean I will receive the scholarship?",
     answer:
-      "No. An assessment explains which known requirements you meet, do not meet, or need to confirm. It does not predict an award or guarantee admission. The provider makes the final decision, and application availability is shown separately from eligibility.",
+      "No. A match shows which known requirements you meet and what needs checking. The provider decides who receives an award. Check separately whether applications are open.",
   },
   {
     question: "Are all the scholarships fully funded?",
     answer:
-      "Funding varies. An opportunity may cover tuition, living costs, part of your expenses, or a package that still needs confirmation. Each scholarship explains its recorded funding components and links to supporting evidence so you can check what is included.",
+      "No. Funding can cover tuition, living costs or only part of your expenses. Each listing explains what is included and what needs checking.",
   },
   {
     question: "Where does the information come from, and how current is it?",
     answer:
-      "Accepted records link to official provider sources and show when supporting evidence was checked. Automated monitoring covers supported sources only; check histories distinguish the latest attempt from the last successful check. Unknown deadlines and conflicting information stay labelled for confirmation.",
+      "Listings link to official sources and show when evidence was checked. Supported sources are monitored for changes. Unconfirmed dates, conflicts and failed checks remain visible.",
   },
   {
     question: "Can I submit my scholarship application through GrantPath?",
     answer:
-      "Submit your application through the official provider using the link on the scholarship page. GrantPath helps you prepare and track your personal progress; changing a stage in your workspace does not submit an application or change the provider’s official status.",
+      "Apply through the official provider link. GrantPath helps you prepare and track progress; updating your plan does not submit an application.",
   },
 ];
 export default async function Home() {
@@ -100,12 +107,16 @@ export default async function Home() {
               <span className="h-px w-8 bg-accent" />
               FOR THE CHAPTER YOU HAVEN’T WRITTEN YET
             </p>
-            <h1 className="editorial mt-7 max-w-2xl text-[46px] leading-[1.06] sm:text-[76px] lg:text-[88px]">
-              Big ambitions.
-              <br />
-              Meet your
-              <br />
-              <em className="text-leaf">next opportunity.</em>
+            <h1 className="hero-headline editorial mt-7 max-w-2xl text-[46px] leading-[1.06] sm:text-[76px] lg:text-[88px]">
+              <span className="hero-line">
+                <span>Big ambitions.</span>
+              </span>
+              <span className="hero-line">
+                <span>Meet your</span>
+              </span>
+              <span className="hero-line">
+                <em className="text-leaf">next opportunity.</em>
+              </span>
             </h1>
             <p className="mt-7 max-w-[420px] text-[15px] leading-8 text-muted-foreground">
               A scholarship can change your direction. Find the possibilities, understand where you
@@ -127,9 +138,7 @@ export default async function Home() {
             </p>
           </div>
           <div className="landing-visual relative mx-auto w-full max-w-[440px]">
-            <div className="landing-art relative rounded-t-[180px] rounded-b-2xl border border-border bg-secondary/55 px-7 pt-5 pb-8">
-              <OpportunityArt className="landing-artwork mx-auto w-full" />
-            </div>
+            <HeroPortal />
             {spotlight && (
               <Link
                 href={`/scholarships/${spotlight.slug}`}
@@ -262,10 +271,7 @@ export default async function Home() {
                 Keep your possibilities, questions, and preparation in one place. Take the next step
                 when you’re ready.
               </p>
-              <Link
-                href="/register"
-                className="mt-7 inline-flex items-center gap-3 text-xs font-semibold"
-              >
+              <Link href="/register" className="action-link mt-6">
                 Start your chapter <ArrowRight size={15} />
               </Link>
             </div>
@@ -295,6 +301,147 @@ export default async function Home() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+        <section
+          id="understand-your-match"
+          className="match-story mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 sm:px-10 lg:grid-cols-2 lg:gap-20 lg:px-14 lg:py-24"
+        >
+          <div data-reveal>
+            <p className="eyebrow text-leaf">MORE THAN A SEARCH RESULT</p>
+            <h2 className="editorial mt-5 text-4xl leading-tight sm:text-5xl">
+              A match should
+              <br />
+              <em className="text-leaf">make sense.</em>
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-7 text-muted-foreground">
+              Know what fits, what doesn’t, and what to check. Every assessment keeps the provider’s
+              evidence close.
+            </p>
+            <Button asChild variant="outline" className="mt-7">
+              <Link href="/settings/profile">
+                Build my study profile <ArrowUpRight size={15} />
+              </Link>
+            </Button>
+          </div>
+          <div className="match-explainer" data-reveal>
+            <p className="eyebrow mb-5 text-muted-foreground">THREE CLEAR OUTCOMES</p>
+            {[
+              [CircleCheck, "Eligible", "You meet the known requirements.", "green"],
+              [
+                CircleHelp,
+                "Needs confirmation",
+                "Some information is missing or needs checking.",
+                "amber",
+              ],
+              [CircleX, "Not eligible", "A known requirement isn’t met.", "red"],
+            ].map(([Icon, label, text, tone]) => {
+              const I = Icon as typeof CircleCheck;
+              return (
+                <div key={String(label)} className={`match-outcome match-outcome-${tone}`}>
+                  <span>
+                    <I size={21} strokeWidth={1.5} />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-semibold">{String(label)}</h3>
+                    <p className="mt-2 text-xs leading-6 text-muted-foreground">{String(text)}</p>
+                  </div>
+                </div>
+              );
+            })}
+            <p className="mt-5 border-t border-border pt-4 text-[11px] leading-6 text-muted-foreground">
+              Eligibility is not an award guarantee. Check application availability separately.
+            </p>
+          </div>
+        </section>
+        <section className="planning-story overflow-hidden bg-brand text-white">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 sm:px-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-20 lg:px-14 lg:py-24">
+            <div className="planning-orbit" aria-hidden="true">
+              <div className="plan-orbit-ring" />
+              <div className="plan-orbit-ring ring-inner" />
+              <div className="plan-core">
+                <Bookmark size={33} strokeWidth={1.2} />
+                <span>
+                  YOUR
+                  <br />
+                  NEXT CHAPTER
+                </span>
+              </div>
+              <div className="plan-satellite satellite-one">
+                <ListChecks size={19} />
+                <span>Prepare documents</span>
+              </div>
+              <div className="plan-satellite satellite-two">
+                <CalendarDays size={19} />
+                <span>Keep track of dates</span>
+              </div>
+              <div className="plan-satellite satellite-three">
+                <BellRing size={19} />
+                <span>Stay up to date</span>
+              </div>
+            </div>
+            <div data-reveal>
+              <p className="eyebrow text-[#d4a64e]">FROM SHORTLIST TO NEXT STEP</p>
+              <h2 className="editorial mt-5 text-4xl leading-tight sm:text-5xl">
+                Less scattered.
+                <br />
+                <em className="text-[#d8dfb9]">More prepared.</em>
+              </h2>
+              <p className="mt-6 max-w-md text-sm leading-7 text-white/70">
+                Save scholarships, keep private notes and check off your documents. Follow each
+                application at your own pace.
+              </p>
+              <Button asChild variant="secondary" className="mt-7">
+                <Link href="/applications">
+                  Organise my applications <ArrowUpRight size={15} />
+                </Link>
+              </Button>
+              <p className="mt-5 text-[11px] leading-6 text-white/60">
+                Submit applications through the official provider. Your GrantPath plan stays
+                private.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section className="evidence-promise mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-14 lg:py-24">
+          <div className="mb-10 max-w-2xl" data-reveal>
+            <p className="eyebrow text-leaf">BUILT FOR REAL DECISIONS</p>
+            <h2 className="editorial mt-5 text-4xl leading-tight sm:text-5xl">
+              Your future deserves
+              <br />
+              <em className="text-leaf">more than guesswork.</em>
+            </h2>
+          </div>
+          <div className="promise-grid">
+            {[
+              [
+                ShieldCheck,
+                "Go to the source",
+                "Open official provider links and inspect the wording behind a requirement.",
+              ],
+              [
+                CalendarDays,
+                "See what’s current",
+                "Find check dates and clear labels when a deadline or application window needs confirmation.",
+              ],
+              [
+                BellRing,
+                "Follow meaningful changes",
+                "Supported sources are monitored. Choose alerts for relevant matches, changes and confirmed deadlines.",
+              ],
+            ].map(([Icon, title, text], i) => {
+              const I = Icon as typeof ShieldCheck;
+              return (
+                <article key={String(title)} data-reveal>
+                  <div className="flex items-center justify-between">
+                    <I size={25} strokeWidth={1.25} />
+                    <span className="font-serif text-lg text-leaf/60">0{i + 1}</span>
+                  </div>
+                  <h3 className="mt-7 font-serif text-2xl tracking-tight">{String(title)}</h3>
+                  <p className="mt-4 text-[13px] leading-7 text-muted-foreground">{String(text)}</p>
+                </article>
+              );
+            })}
           </div>
         </section>
         <section

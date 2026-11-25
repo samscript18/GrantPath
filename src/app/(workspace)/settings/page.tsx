@@ -17,8 +17,8 @@ export default async function Settings() {
     <SettingsFrame
       actor={actor}
       active="/settings"
-      title="Make this space your own."
-      description="Your plans, your preferences, and the details that keep your account secure."
+      title="Settings"
+      description="Manage your study profile, notifications and account."
     >
       <Link
         href="/settings/profile"
@@ -46,32 +46,32 @@ export default async function Settings() {
               "/settings/notifications",
               "Notifications",
               "Choose the updates you want.",
-              "Topics, inbox alerts and scholarship emails, on your terms.",
+              "Choose which alerts you receive in the app and by email.",
               Bell,
             ],
             [
               "/settings/app",
               "Appearance & app",
               "Settle into your workspace.",
-              "Light, dark or system appearance, plus your local time zone.",
+              "Choose a theme and time zone.",
               SunMoon,
             ],
             [
               "/settings/account",
               "Password & sessions",
               "Keep access in your hands.",
-              "Change your password with email verification and manage signed-in devices.",
+              "Change your password or sign out of a device.",
               KeyRound,
             ],
             [
               "/settings/privacy",
               "Privacy & data",
               "Your information. Your choice.",
-              "Take a copy of your account or manage a request to close it.",
+              "Download your data or request account deletion.",
               Database,
             ],
           ] as const
-        ).map(([href, title, subtitle, description, Icon]) => (
+        ).map(([href, title, , description, Icon]) => (
           <Link
             key={href}
             href={href}
@@ -88,7 +88,6 @@ export default async function Settings() {
               />
             </div>
             <h2 className="mt-6 font-serif text-[25px] tracking-tight">{title}</h2>
-            <p className="mt-2 text-xs font-medium">{subtitle}</p>
             <p className="mt-3 text-[13px] leading-7 text-muted-foreground">{description}</p>
           </Link>
         ))}

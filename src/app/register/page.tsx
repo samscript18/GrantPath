@@ -7,8 +7,8 @@ export default async function Register() {
   await connection();
   return (
     <AuthLayout
-      title="Let’s find your path."
-      subtitle="A little about you. A clearer view of what’s possible."
+      title="Create your account"
+      subtitle="Get personal matches, save scholarships and plan your applications."
     >
       <AuthForm mode="register" googleEnabled={googleSignInEnabled()} />
     </AuthLayout>

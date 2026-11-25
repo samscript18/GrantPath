@@ -23,22 +23,22 @@ const stages = ["Your world", "Your education", "Your next chapter", "Other requ
 const stageGuides = [
   [
     "Where your story begins.",
-    "Your citizenship and where you live can lead to different opportunities. Keep both true to your circumstances.",
+    "Add your citizenship and where you live. Providers may have different rules for each.",
     MapPin,
   ],
   [
     "Your record. In its own words.",
-    "Use the values and wording on your transcript. Your current qualifications stay separate from your future study plans.",
+    "Enter your current qualification and original transcript results.",
     GraduationCap,
   ],
   [
     "Make room for what’s next.",
-    "Where would you like your studies to take you? These preferences help order relevant opportunities without changing eligibility.",
+    "Choose what and where you want to study. Preferences help sort matches; they do not change eligibility.",
     Compass,
   ],
   [
     "The details that add clarity.",
-    "Language, experience and admission conditions differ by provider. Leave an answer blank when it still needs checking.",
+    "Add language skills and work experience. Leave anything you’re unsure of blank.",
     FileCheck2,
   ],
 ] as const;

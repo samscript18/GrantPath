@@ -1,22 +1,35 @@
 import { supportsCandidate } from "./candidates";
+import { resolveDetailMapping } from "./adapter-registry";
 import { db } from "@/lib/db";
 import { boundedFetchUrl, robotsPolicy } from "@/server/monitoring/network";
 import { reserveHost } from "@/server/monitoring/worker";
 import { directoryDefinitions } from "./registry";
 import { allowedDiscoveryUrl } from "./urls";
-import { processDirectoryHtml, processDetailHtml } from "./service";
+import { processDirectoryHtml, processDetailHtml, processDetailDocument } from "./service";
+import { parsePdfAnnouncement } from "./pdf";
 import type { DirectoryDefinition } from "./types";
+import type { ProgrammeLead } from "./directory-adapters";
+export type DiscoveryAccessSession = Map<
+  string,
+  { retrievedAt: number; status: number; text: string }
+>;
 export async function fetchDiscoveryPage(
   raw: string,
   definition: DirectoryDefinition,
   kind: "directory" | "detail",
+  accessSession?: DiscoveryAccessSession,
 ) {
   const url = allowedDiscoveryUrl(raw, definition, kind);
-  await reserveHost(url.hostname, 20);
-  const robots = await boundedFetchUrl(
-    allowedDiscoveryUrl(`${url.origin}/robots.txt`, definition, "robots"),
-    true,
-  );
+  let robots = accessSession?.get(url.origin);
+  if (!robots || Date.now() - robots.retrievedAt > 300000) {
+    await reserveHost(url.hostname, 20);
+    const retrieved = await boundedFetchUrl(
+      allowedDiscoveryUrl(`${url.origin}/robots.txt`, definition, "robots"),
+      true,
+    );
+    robots = { ...retrieved, retrievedAt: Date.now() };
+    accessSession?.set(url.origin, robots);
+  }
   if (
     ![200, 404, 410].includes(robots.status) ||
     (robots.status === 200 && /<html|<!doctype/i.test(robots.text))
@@ -30,11 +43,15 @@ export async function fetchDiscoveryPage(
   if (policy.crawlDelaySeconds > 60) throw new Error("UNSUPPORTED_CRAWL_DELAY");
   await reserveHost(url.hostname, policy.crawlDelaySeconds);
   // Redirects are rejected by the shared downloader. Canonical changes require policy review.
-  const page = await boundedFetchUrl(url);
+  const page = await boundedFetchUrl(
+    url,
+    false,
+    kind === "detail" ? definition.detailFormat || "html" : definition.directoryFormat || "html",
+  );
   if (page.status !== 200) throw new Error(`SOURCE_HTTP:${page.status}`);
   return page;
 }
-export async function checkDirectory(id: string) {
+export async function checkDirectory(id: string, accessSession?: DiscoveryAccessSession) {
   if (id === "controlled-release") return { id, state: "controlled_snapshots_only" };
   const definition = directoryDefinitions[id];
   if (!definition) return { id, state: "unsupported_directory" };
@@ -48,25 +65,58 @@ export async function checkDirectory(id: string) {
   const schedule = await db().discoveryDirectory.findUniqueOrThrow({ where: { id } });
   const queue = [definition.url],
     visited = new Set<string>();
+  const continuation =
+    definition.resumePagination && schedule.continuationUrl ? schedule.continuationUrl : undefined;
+  const resumingLaterPage = !!continuation && continuation !== definition.url;
+  if (continuation && continuation !== definition.url) queue.push(continuation);
   let discovered = 0,
     created = 0,
     existing = 0,
     excluded = 0;
+  const leads: ProgrammeLead[] = [];
+  const pageLimit = Math.min(10, Math.max(1, definition.bounds?.pages || 3));
+  const candidateLimit = Math.min(100, Math.max(1, definition.bounds?.candidates || 100));
+  let partialPage: string | undefined;
   try {
-    while (queue.length && visited.size < 3 && discovered < 100) {
+    while (
+      queue.length &&
+      visited.size < pageLimit &&
+      discovered < candidateLimit &&
+      leads.length < 200
+    ) {
       const url = queue.shift()!;
       if (visited.has(url)) continue;
       const owner = await db().discoveryDirectory.findUniqueOrThrow({ where: { id } });
       if (!owner.enabled || owner.leaseToken !== token)
         throw new Error("SOURCE_PAUSED_OR_LEASE_LOST");
       visited.add(url);
-      const page = await fetchDiscoveryPage(url, definition, "directory");
-      const result = await processDirectoryHtml(id, page.text, url, 100 - discovered);
+      const page = await fetchDiscoveryPage(url, definition, "directory", accessSession);
+      // A large landing page must not consume the whole candidate budget on
+      // every resumed sweep. New landing links are still prioritised by the
+      // extractor and the remaining budget progresses through later pages.
+      const landingBudget = Math.max(1, Math.floor(candidateLimit / 4));
+      const result = await processDirectoryHtml(
+        id,
+        page.text,
+        url,
+        resumingLaterPage && url === definition.url
+          ? Math.min(landingBudget, candidateLimit - discovered)
+          : candidateLimit - discovered,
+      );
       discovered += result.ids.length;
       created += result.created;
       existing += result.existing;
+      if (result.truncated && !(resumingLaterPage && url === definition.url)) partialPage = url;
       excluded += result.excluded;
-      queue.push(...result.next.filter((next) => !visited.has(next)));
+      leads.push(
+        ...result.leads
+          .filter((lead) => !leads.some((existing) => existing.url === lead.url))
+          .slice(0, 200 - leads.length),
+      );
+      // Check the landing page for newly announced awards on every run, then
+      // resume the previous bounded sweep instead of repeating its first pages.
+      if (!(resumingLaterPage && url === definition.url))
+        queue.push(...result.next.filter((next) => !visited.has(next) && !queue.includes(next)));
     }
     await db().discoveryDirectory.updateMany({
       where: { id, leaseToken: token },
@@ -76,9 +126,24 @@ export async function checkDirectory(id: string) {
         nextCheckAt: new Date(Date.now() + schedule.cadenceHours * 3600000),
         lockedUntil: null,
         leaseToken: null,
+        ...(definition.resumePagination
+          ? { continuationUrl: partialPage || queue.find((next) => !visited.has(next)) || null }
+          : {}),
       },
     });
-    return { id, state: "success", pages: visited.size, discovered, created, existing, excluded };
+    return {
+      id,
+      state: "success",
+      pages: visited.size,
+      discovered,
+      created,
+      existing,
+      excluded,
+      leads,
+      continuationUrl: definition.resumePagination
+        ? partialPage || queue.find((next) => !visited.has(next)) || null
+        : null,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message.slice(0, 600) : "DISCOVERY_FAILED";
     await db().$transaction(async (tx) => {
@@ -104,7 +169,7 @@ export async function checkDirectory(id: string) {
     return { id, state: "failed", error: message };
   }
 }
-export async function checkCandidate(id: string) {
+export async function checkCandidate(id: string, accessSession?: DiscoveryAccessSession) {
   const token = crypto.randomUUID(),
     now = new Date();
   const candidate = await db().discoveredCandidate.findUniqueOrThrow({
@@ -155,24 +220,53 @@ export async function checkCandidate(id: string) {
       candidate.canonicalUrl,
       directoryDefinitions[candidate.directoryId],
       "detail",
+      accessSession,
     );
-    const mapping = directoryDefinitions[candidate.directoryId].mappings.find(
-      (m) => m.url === candidate.canonicalUrl,
-    );
+    let mapping;
+    try {
+      mapping =
+        definition.detailFormat === "pdf"
+          ? definition.mappings.find((m) => m.url === candidate.canonicalUrl)
+          : resolveDetailMapping(definition, candidate.canonicalUrl, {
+              kind: "html",
+              text: page.text,
+            });
+    } catch {
+      // The detail service persists extraction failures as operator review.
+    }
     const supportPages: Record<string, string> = {};
     for (const url of (mapping?.supportPages || []).slice(0, 3)) {
       const support = await fetchDiscoveryPage(
         url,
         directoryDefinitions[candidate.directoryId],
         "detail",
+        accessSession,
       );
       supportPages[url] = support.text;
     }
-    const decision = await processDetailHtml(id, page.text, {
+    const options = {
       leaseToken: token,
       supportPages,
       startedAt: now,
-    });
+    };
+    let decision;
+    if (definition.detailFormat === "pdf") {
+      let document;
+      try {
+        document = await parsePdfAnnouncement(page.bytes);
+      } catch (error) {
+        decision = await processDetailHtml(
+          id,
+          "Official PDF could not be safely interpreted; operator review required.",
+          {
+            ...options,
+            extractionError: error instanceof Error ? error.message : "PDF_PARSE_UNSUPPORTED",
+          },
+        );
+      }
+      if (document) decision = await processDetailDocument(id, document, options);
+    } else decision = await processDetailHtml(id, page.text, options);
+    if (!decision) throw new Error("DETAIL_EXTRACTION_INVALID");
     await db().discoveredCandidate.updateMany({
       where: { id, state: "published" },
       data: { attempts: 0 },

@@ -1,5 +1,6 @@
 import { supportsCandidate } from "./candidates";
 import { parseClosingInstant } from "@/server/monitoring/adapters";
+import { enrichApplicationWindow } from "./application-windows";
 import * as cheerio from "cheerio";
 import { scholarshipDataSchema } from "@/server/scholarships/schema";
 import { semanticHash } from "@/server/scholarships/publish";
@@ -32,6 +33,7 @@ export function extractDirectory(
       if (!supportingOnly.has(detail) && supportsCandidate(definition, detail)) links.add(detail);
       else excluded++;
     } catch {
+      excluded++;
       /* An external or unexpected link is not a source. */
     }
   });
@@ -59,20 +61,32 @@ export function extractDetail(
   html: string,
   now = new Date(),
   supportPages: Record<string, string> = {},
+  plainText = false,
 ) {
   if (Buffer.byteLength(html) > 2_000_000) throw new Error("RESPONSE_TOO_LARGE");
   const $ = cheerio.load(html);
-  $("script,style,nav,header,footer,noscript,iframe").remove();
-  const root = $("main").first().length ? $("main").first() : $("body");
+  $("script,style,nav,footer,noscript,iframe").remove();
+  (mapping.preserveHeaders ? $("header").not(mapping.preserveHeaders) : $("header")).remove();
+  if (mapping.ignoredSelectors?.length) $(mapping.ignoredSelectors.join(",")).remove();
+  const root = mapping.contentSelector
+    ? $(mapping.contentSelector)
+    : $("main").first().length
+      ? $("main").first()
+      : $("body");
   const text = cleanText(root.text());
-  const heading = cleanText(root.find("h1,h2,h3").text());
-  const structure = heading.toLowerCase().includes(mapping.heading.toLowerCase());
+  const heading = cleanText(root.find("h1,h2,h3,h4").text());
+  const structure = (plainText ? text : heading)
+    .toLowerCase()
+    .includes(mapping.heading.toLowerCase());
   const codes: string[] = structure ? [] : ["DETAIL_LAYOUT_CHANGED"];
   const canonicalLink = $("link[rel=canonical]").attr("href");
   if (canonicalLink) {
     try {
-      const canonical = new URL(canonicalLink, mapping.url);
-      if (canonical.hostname !== new URL(mapping.url).hostname)
+      const canonical = canonicalDiscoveryUrl(canonicalLink, mapping.url);
+      if (
+        canonical !== canonicalDiscoveryUrl(mapping.url, mapping.url) &&
+        canonical !== mapping.reviewedCanonicalFallback
+      )
         codes.push("UNSAFE_SOURCE_IDENTITY");
     } catch {
       codes.push("UNSAFE_SOURCE_IDENTITY");
@@ -98,7 +112,8 @@ export function extractDetail(
     const evidenceUrl = mapping.data.evidence.find((e) => e.field === field)?.url || mapping.url;
     const supporting =
       evidenceUrl === mapping.url
-        ? text
+        ? text +
+          (["institution", "destination"].includes(field) ? " " + cleanText($("title").text()) : "")
         : supportPages[evidenceUrl]
           ? cleanText(cheerio.load(supportPages[evidenceUrl]).text())
           : "";
@@ -119,6 +134,15 @@ export function extractDetail(
       codes.push("UNSUPPORTED_SECTION_CHANGE");
   }
   const data = scholarshipDataSchema.parse(structuredClone(mapping.data));
+  for (const section of mapping.supportSections || []) {
+    const supporting = cheerio.load(supportPages[section.url] || "");
+    supporting("script,style,nav,header,footer,noscript,iframe").remove();
+    if (
+      !supporting(section.selector).length ||
+      semanticHash(cleanText(supporting(section.selector).text())) !== section.hash
+    )
+      codes.push("UNSUPPORTED_SUPPORT_SECTION_CHANGE");
+  }
   data.evidence = data.evidence.map((e) => ({
     ...e,
     url: e.url,
@@ -166,6 +190,27 @@ export function extractDetail(
         evidence.state = "verified";
         matchedFields.push("levels");
       }
+    }
+  }
+  if (mapping.applicationWindow) {
+    const window = mapping.applicationWindow;
+    const url = window.url || mapping.url;
+    const source =
+      url === mapping.url
+        ? text
+        : supportPages[url]
+          ? cleanText(cheerio.load(supportPages[url]).text())
+          : "";
+    const passages = [window.opening, window.closing, window.status, window.mode].filter(
+      Boolean,
+    ) as string[];
+    if (passages.some((passage) => !source.includes(cleanText(passage))))
+      codes.push("APPLICATION_WINDOW_EVIDENCE_MISSING");
+    else if (passages.length) {
+      Object.assign(data, enrichApplicationWindow(data, window, url, mapping.cycleConfirmed, now));
+      matchedFields.push("applicationWindow");
+      if (data.availability !== "unknown") matchedFields.push("availability");
+      if (data.deadlineState !== "unknown") matchedFields.push("deadline");
     }
   }
   const validation: Validation = {

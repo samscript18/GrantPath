@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-11-10T13:26:32.149Z",
+  "sha": "bc8601771b8a06c2297107dc624b4792c3d5a8fa",
+  "policies": [
+    {
+      "id": "twente-scholarships",
+      "enabled": true,
+      "autoPublish": true,
+      "health": "healthy",
+      "lastSuccessAt": "2026-11-10T13:19:21.352Z",
+      "nextCheckAt": "2026-11-11T13:19:21.352Z"
+    },
+    {
+      "id": "daad-epos",
+      "enabled": false,
+      "autoPublish": false,
+      "health": "paused",
+      "lastSuccessAt": "2026-11-08T21:17:35.193Z",
+      "nextCheckAt": "2026-11-10T01:48:07.346Z"
+    }
+  ],
+  "runs": [
+    {
+      "id": 42822909925,
+      "kind": "post-merge correctness CI",
+      "result": "success"
+    },
+    {
+      "id": 42823733497,
+      "kind": "manual bounded source verification",
+      "result": "success",
+      "directory": {
+        "processed": 0,
+        "newScholarships": 0
+      },
+      "detail": {
+        "processed": 1,
+        "unchanged": 1,
+        "newScholarships": 0
+      },
+      "legacySources": 0
+    },
+    {
+      "id": 42823739948,
+      "kind": "manual application verification",
+      "result": "success",
+      "accounts": {
+        "abandonedUploads": 0,
+        "dueDeletions": 0
+      },
+      "reminders": {
+        "queued": 0
+      },
+      "events": {
+        "completed": 6,
+        "failed": 0
+      },
+      "deliveries": {},
+      "queue": {
+        "events": 0,
+        "deliveries": 0,
+        "ready": 0,
+        "needsReview": 0
+      }
+    }
+  ],
+  "schedule": {
+    "source": "23 5,17 * * * (UTC)",
+    "applications": "41 * * * * (UTC)",
+    "scope": "Actual manual dispatch verified on main; future scheduled executions are best effort and not claimed as observed."
+  },
+  "email": "No email delivery or recipient receipt claimed from this verification."
+}

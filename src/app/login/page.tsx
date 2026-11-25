@@ -9,10 +9,7 @@ export default async function Login({
 }) {
   const { oauth, passwordChanged } = await searchParams;
   return (
-    <AuthLayout
-      title="Good to have you back."
-      subtitle="Your next opportunity is waiting. Pick up where you left off."
-    >
+    <AuthLayout title="Sign in" subtitle="Access your saved scholarships and applications.">
       {passwordChanged === "1" && (
         <p
           role="status"

@@ -19,7 +19,7 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
   const health = evidenceHealth(row.data);
   const href = `/scholarships/${row.slug}`;
   return (
-    <article className="scholarship-row opportunity-entry group border-b border-border py-7 last:border-b-0 sm:py-8">
+    <article className="scholarship-row opportunity-entry group border-b border-border py-6 last:border-b-0 sm:py-7">
       <div className="opportunity-identity flex items-center gap-3.5">
         <ProviderImage provider={row.programme.provider} className="size-14 text-4xl" />
         <div className="min-w-0 flex-1">
@@ -36,7 +36,7 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
       <div className="opportunity-layout mt-5">
         <div className="min-w-0">
           <Link href={href} className="group/title block">
-            <h2 className="font-serif text-[26px] leading-[1.2] tracking-tight transition-colors group-hover/title:text-leaf sm:text-[29px]">
+            <h2 className="font-serif text-[24px] leading-[1.25] tracking-tight transition-colors group-hover/title:text-leaf sm:text-[27px]">
               {row.title}
             </h2>
           </Link>
@@ -58,7 +58,7 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
                 .join(" · ")}
             </span>
           </div>
-          <p className="mt-4 line-clamp-3 text-[13px] leading-7 text-muted-foreground">
+          <p className="mt-3 line-clamp-2 text-[13px] leading-6 text-muted-foreground">
             {row.data.summary}
           </p>
         </div>
@@ -80,7 +80,12 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
             <p className="mt-2 text-xs leading-6 text-muted-foreground">
               {row.data.deadline
                 ? formatDate(row.data.deadline)
-                : row.data.deadlineLabel || "Deadline to confirm"}
+                : row.data.deadlineLabel ||
+                  row.data.applicationWindow?.closesOn ||
+                  "Deadline to confirm"}
+              {row.data.recordKind === "overview" && row.data.applicationWindow?.closesOn && (
+                <span className="block">Published date · application cycle unconfirmed</span>
+              )}
             </p>
           </div>
           <Badge
@@ -94,7 +99,11 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
             className="w-fit"
           >
             {row.currentAvailability === "unknown"
-              ? "Availability to confirm"
+              ? row.data.applicationWindow?.kind === "unannounced"
+                ? "Cycle not announced"
+                : row.data.applicationWindow?.kind === "rolling"
+                  ? "Rolling · confirm current availability"
+                  : "Application status to confirm"
               : row.currentAvailability === "open"
                 ? "Applications open"
                 : row.currentAvailability === "closed"
@@ -114,7 +123,7 @@ export function ScholarshipCard({ row, action }: { row: CatalogueRow; action?: R
             ? "Conflicting source wording"
             : health.stale
               ? "Evidence needs a fresh check"
-              : `Official evidence checked ${formatDate(health.lastVerified)}`}
+              : `Source checked ${formatDate(health.lastVerified)}`}
         </span>
         <div className="flex flex-wrap items-center gap-2">
           <a

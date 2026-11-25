@@ -1,5 +1,7 @@
 import type { DirectoryDefinition } from "./types";
 export function canonicalDiscoveryUrl(raw: string, base: string) {
+  // Check before WHATWG URL parsing normalises dot segments or backslashes.
+  if (/%(?:2f|5c|2e)|\\/i.test(raw.split(/[?#]/)[0])) throw new Error("UNSAFE_PATH");
   const url = new URL(raw, base);
   if (
     url.protocol !== "https:" ||
@@ -10,6 +12,8 @@ export function canonicalDiscoveryUrl(raw: string, base: string) {
   )
     throw new Error("UNSAFE_URL");
   url.hash = "";
+  if (url.hostname === "www.student-funding.cam.ac.uk")
+    url.pathname = url.pathname.replace(/;jsessionid=[a-z0-9]+$/i, "");
   for (const key of [...url.searchParams.keys()]) {
     if (/^(utm_.+|fbclid|gclid|msclkid)$/i.test(key)) url.searchParams.delete(key);
   }
@@ -47,11 +51,17 @@ export function allowedDiscoveryUrl(
       (rule) =>
         url.hostname === rule.host &&
         (url.pathname === rule.pathPrefix ||
-          url.pathname.startsWith(
-            rule.pathPrefix.endsWith("/") ? rule.pathPrefix : rule.pathPrefix + "/",
-          )),
-    ) ||
-    url.search
+          (!rule.exact &&
+            url.pathname.startsWith(
+              rule.pathPrefix.endsWith("/") ? rule.pathPrefix : rule.pathPrefix + "/",
+            ))) &&
+        (rule.query
+          ? Object.keys(rule.query).length === [...url.searchParams.keys()].length &&
+            Object.entries(rule.query).every(([key, pattern]) =>
+              new RegExp(`^(?:${pattern})$`).test(url.searchParams.get(key) || ""),
+            )
+          : !url.search),
+    )
   )
     throw new Error("DETAIL_OUTSIDE_POLICY");
   // Reject encoded path separators/dot traversal before any network operation.

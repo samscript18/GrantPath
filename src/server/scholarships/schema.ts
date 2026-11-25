@@ -73,6 +73,20 @@ export const scholarshipDataSchema = z
     studyLocations: studyLocationsSchema.optional(),
     recordKind: z.enum(["cycle", "overview"]).optional(),
     cycleStatus: z.enum(["confirmed", "unconfirmed"]).optional(),
+    cycleBasis: z.enum(["academic_intake", "application_round"]).optional(),
+    programmeUrl: officialUrl.optional(),
+    applicationWindow: z
+      .object({
+        kind: z.enum(["fixed", "rolling", "unannounced", "unknown"]),
+        opensOn: z.iso.date().nullable(),
+        closesOn: z.iso.date().nullable(),
+        sourceHash: z
+          .string()
+          .regex(/^[a-f0-9]{64}$/)
+          .optional(),
+      })
+      .strict()
+      .optional(),
     institution: z.string().min(2).max(160),
     levels: z
       .array(z.enum(["bachelor", "master", "doctorate"]))
@@ -168,6 +182,16 @@ export const publicationSchema = scholarshipDataSchema.superRefine((data, ctx) =
     });
   const checked = (field: string) =>
     data.evidence.some((e) => e.field === field && e.state === "verified");
+  if (
+    data.applicationWindow &&
+    data.applicationWindow.kind !== "unknown" &&
+    !checked("applicationWindow")
+  )
+    ctx.addIssue({
+      code: "custom",
+      path: ["applicationWindow"],
+      message: "Application-window classification requires official evidence.",
+    });
   for (const field of [
     ...(data.deadlineState === "confirmed" ? ["deadline"] : []),
     ...(data.availability !== "unknown" ? ["availability"] : []),
@@ -187,11 +211,33 @@ export const fundingLabels = {
   unknown: "Funding to confirm",
 };
 export function availabilityOf(
-  data: { availability: string; deadline: Date | string | null; opensAt?: Date | string | null },
+  data: {
+    availability: string;
+    deadline: Date | string | null;
+    opensAt?: Date | string | null;
+    windowOpensOn?: string | null;
+    windowClosesOn?: string | null;
+    recordKind?: string;
+    applicationWindow?: { opensOn: string | null; closesOn: string | null };
+  },
   now = new Date(),
 ) {
   if (data.deadline && new Date(data.deadline) <= now) return "closed";
+  if (data.availability === "closed") return "closed";
+  const close = data.deadline
+    ? null
+    : data.windowClosesOn ||
+      (data.recordKind === "cycle" ? data.applicationWindow?.closesOn : null);
+  const open =
+    data.windowOpensOn || (data.recordKind === "cycle" ? data.applicationWindow?.opensOn : null);
+  if (close && now.getTime() >= Date.parse(close + "T00:00:00Z") + 38 * 3600000) return "closed";
+  if (close && now.getTime() >= Date.parse(close + "T00:00:00Z") - 14 * 3600000) return "unknown";
   if (data.availability === "upcoming" && data.opensAt && new Date(data.opensAt) <= now)
     return data.deadline && new Date(data.deadline) > now ? "open" : "unknown";
+  if (data.availability === "upcoming" && !data.opensAt && open) {
+    if (now.getTime() >= Date.parse(open + "T00:00:00Z") + 38 * 3600000)
+      return close ? "open" : "unknown";
+    if (now.getTime() >= Date.parse(open + "T00:00:00Z") - 14 * 3600000) return "unknown";
+  }
   return data.availability;
 }

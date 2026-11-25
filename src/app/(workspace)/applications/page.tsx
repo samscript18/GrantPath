@@ -22,8 +22,8 @@ export default async function Applications({
     <>
       <PageHeading
         eyebrow="POSSIBILITY, WITH A PLAN"
-        title="Your applications, in motion."
-        description="Organise your preparation, keep your notes close, and see how far you’ve come."
+        title="My applications"
+        description="Track each application, with private notes and checklists."
       >
         <div className="segmented-control flex gap-1 rounded-lg border border-border bg-paper p-1">
           <Link
@@ -49,7 +49,7 @@ export default async function Applications({
       <div className="mb-7 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-paper px-4 py-3.5 text-[11px] leading-6 text-muted-foreground">
         <p className="flex items-center gap-2">
           <ShieldCheck size={14} className="shrink-0 text-leaf" aria-hidden="true" />
-          Your private preparation space. Personal stages are separate from provider availability.
+          Your progress is private. Scholarship availability is shown separately.
         </p>
         {!list && rows.length > 0 && (
           <span className="flex items-center gap-2">
@@ -58,11 +58,11 @@ export default async function Applications({
         )}
       </div>
       {!rows.length ? (
-        <EmptyState title="Every application begins with a first step.">
+        <EmptyState title="No applications yet">
           <p>
             Save a scholarship to start a personal plan. Your notes and checklist will stay private.
           </p>
-          <Link href="/scholarships" className="mt-4 inline-block text-primary underline">
+          <Link href="/scholarships" className="action-link mt-5">
             Find your first opportunity ↗
           </Link>
         </EmptyState>
@@ -178,7 +178,7 @@ export default async function Applications({
                     ))
                   ) : (
                     <p className="rounded-lg border border-dashed border-border px-3 py-10 text-center text-[11px] leading-6 text-muted-foreground">
-                      No opportunities at this stage yet.
+                      Nothing at this stage yet.
                     </p>
                   )}
                 </div>

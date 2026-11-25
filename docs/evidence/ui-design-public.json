@@ -1,0 +1,43 @@
+{
+  "origin": "http://127.0.0.1:3104",
+  "scope": "Final production build; isolated local database; anonymous read-only UI checks",
+  "pages": [
+    {
+      "path": "/",
+      "heading": "Big ambitions.\nMeet your\nnext opportunity.",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/scholarships",
+      "heading": "Discover scholarships",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/login",
+      "heading": "Sign in",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/register",
+      "heading": "Create your account",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/forgot-password",
+      "heading": "Forgot your password?",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/reset-password",
+      "heading": "Choose a new password",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/verify-email",
+      "heading": "Verify your email",
+      "mobileOverflow": false
+    }
+  ],
+  "runtimeErrors": [],
+  "checkedAt": "2026-11-24T20:27:49.493Z"
+}

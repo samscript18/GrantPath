@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-11-25T04:30:34.089Z",
+  "scope": "Loopback development timings; no student account created",
+  "filters": [
+    {
+      "filter": "open",
+      "total": 7,
+      "rows": 7,
+      "durationMs": 172
+    },
+    {
+      "filter": "upcoming",
+      "total": 3,
+      "rows": 3,
+      "durationMs": 12
+    },
+    {
+      "filter": "closed",
+      "total": 115,
+      "rows": 8,
+      "durationMs": 13
+    },
+    {
+      "filter": "unannounced",
+      "total": 25,
+      "rows": 8,
+      "durationMs": 10
+    },
+    {
+      "filter": "rolling",
+      "total": 1,
+      "rows": 1,
+      "durationMs": 6
+    },
+    {
+      "filter": "confirmation",
+      "total": 916,
+      "rows": 8,
+      "durationMs": 13
+    }
+  ],
+  "matching": {
+    "total": 1067,
+    "rows": 50,
+    "pending": 1067,
+    "durationMs": 35
+  }
+}

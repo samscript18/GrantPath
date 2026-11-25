@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-25T02:16:43.262Z",
+  "results": [
+    {
+      "url": "https://www.msc-waves.eu/",
+      "id": "cmwv8jsuk00029euzl10kklm0",
+      "state": "auto_publish",
+      "reasons": [
+        "VALIDATED_FIELD_UPDATE"
+      ],
+      "scholarshipId": "cmwv8ozzv00179euzsiu6adan",
+      "publicationKind": "updated"
+    },
+    {
+      "url": "https://www.eu-conexus.eu/en/marine-biotechnology/",
+      "id": "cmwv8jsuf00019euzrbcqcr36",
+      "state": "review_required",
+      "reasons": [
+        "UNSUPPORTED_SECTION_CHANGE"
+      ],
+      "scholarshipId": "cmwv8o4eh000q9euz13yrqs5r",
+      "publicationKind": null
+    },
+    {
+      "url": "https://mastergeotech.info/",
+      "id": "cmwv335g60005ueuztix1j91k",
+      "state": "auto_publish",
+      "reasons": [
+        "VALIDATED_FIELD_UPDATE"
+      ],
+      "scholarshipId": "cmwv3al8y001jueuzbpxifj6s",
+      "publicationKind": "updated"
+    }
+  ]
+}

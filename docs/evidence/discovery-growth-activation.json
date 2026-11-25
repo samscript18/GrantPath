@@ -1,0 +1,87 @@
+{
+  "startedAt": "2026-11-10T13:18:49.514Z",
+  "origin": "https://grantpath-lake.vercel.app",
+  "sha": "bc8601771b8a06c2297107dc624b4792c3d5a8fa",
+  "scope": "Actual post-merge production source activation and bounded real HTTP checks",
+  "details": [
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/itc-early-bird-scholarship-programme/",
+      "id": "cmwahpk590002lcuzdkrk2ahv",
+      "state": "review_required",
+      "reasons": ["UNSUPPORTED_DETAIL_MAPPING", "UNSUPPORTED_LAYOUT"],
+      "scholarshipId": null,
+      "publicationKind": null
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/itc-excellence-scholarship-programme/",
+      "id": "cmwahpjln0001lcuzw1rd1j69",
+      "state": "unchanged",
+      "reasons": ["SEMANTICALLY_UNCHANGED"],
+      "scholarshipId": "cmwahsb2h0014lcuz9jlh3z0x",
+      "publicationKind": null
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/kipaji-scholarship/",
+      "id": "cmwahplaa0004lcuz46n1cf3j",
+      "state": "unchanged",
+      "reasons": ["SEMANTICALLY_UNCHANGED"],
+      "scholarshipId": "cmwahql690009lcuzrc48p51j",
+      "publicationKind": null
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/nl-scholarship-university-of-twente/",
+      "id": "cmwahpks20003lcuz3h4wntub",
+      "state": "auto_publish",
+      "reasons": ["VALIDATED_OFFICIAL_RECORD"],
+      "scholarshipId": "cmwapyuf4000f00uzw4qdu0kd",
+      "publicationKind": "new"
+    },
+    {
+      "url": "https://www.utwente.nl/en/education/scholarship-finder/professor-de-winter-scholarship/",
+      "id": "cmwahplq70005lcuza1nn1k35",
+      "state": "unchanged",
+      "reasons": ["SEMANTICALLY_UNCHANGED"],
+      "scholarshipId": "cmwahrgex000olcuzqhe5ykzj",
+      "publicationKind": null
+    }
+  ],
+  "before": {
+    "all": 36,
+    "defaultView": 31
+  },
+  "directory": {
+    "id": "twente-scholarships",
+    "state": "success",
+    "pages": 1,
+    "discovered": 5,
+    "created": 0,
+    "existing": 5,
+    "excluded": 26
+  },
+  "summary": {
+    "processed": 5,
+    "newCandidates": 0,
+    "knownCandidates": 0,
+    "excludedLinks": 0,
+    "newScholarships": 1,
+    "updatedScholarships": 0,
+    "unchanged": 3,
+    "awaitingReview": 1,
+    "rejected": 0,
+    "ignored": 0,
+    "failed": 0,
+    "message": "Fetching or discovering links does not imply publication. Only newScholarships counts additions to the catalogue."
+  },
+  "after": {
+    "all": 37,
+    "defaultView": 32
+  },
+  "policy": {
+    "enabled": true,
+    "autoPublish": true,
+    "health": "healthy",
+    "lastSuccessAt": "2026-11-10T13:19:21.352Z",
+    "nextCheckAt": "2026-11-11T13:19:21.352Z"
+  },
+  "finishedAt": "2026-11-10T13:22:44.396Z"
+}
