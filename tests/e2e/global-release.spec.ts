@@ -86,6 +86,8 @@ test("authenticated operator publishes and replays a valid source while uncertai
   await expect(page).toHaveURL(/dashboard/);
   await dismissStudyPrompt(page);
   await page.goto("/operator");
+  const operatorMenu = page.getByRole("navigation", { name: "Operator sections" });
+  await operatorMenu.getByRole("link", { name: /^Application jobs/ }).click();
   await page.getByText("Isolated source verification", { exact: true }).click();
   await page.getByRole("button", { name: "Eligibility and notifications", exact: true }).click();
   await expect(
@@ -105,6 +107,10 @@ test("authenticated operator publishes and replays a valid source while uncertai
   await expect(
     page.getByRole("button", { name: "Publish valid snapshot", exact: true }),
   ).toBeEnabled();
+  await expect(operatorMenu.getByRole("link", { name: /^Application jobs/ })).toHaveAttribute(
+    "aria-current",
+    "location",
+  );
   await page.getByRole("group", { name: "Isolated scenario" }).scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/operator-scenario-buttons-desktop.png" });
   await page.setViewportSize({ width: 360, height: 850 });
@@ -128,6 +134,7 @@ test("authenticated operator publishes and replays a valid source while uncertai
     "/api/scholarships?q=Unresolved%20source%20scholarship&availability=all",
   );
   expect((await response.json()).total).toBe(0);
+  await operatorMenu.getByRole("link", { name: /^Discovery/ }).click();
   await expect(
     page.getByRole("heading", { name: "[TEST ONLY] Unresolved source scholarship", exact: true }),
   ).toBeVisible();
@@ -163,6 +170,7 @@ test("authenticated operator publishes and replays a valid source while uncertai
   );
   const publications = page.locator("#automatic-publications");
   await expect(publications.getByText(accepted.eventIds[0], { exact: true })).toBeVisible();
+  await operatorMenu.getByRole("link", { name: /^Application jobs/ }).click();
   await page.getByRole("button", { name: "Process queued jobs", exact: true }).click();
   await expect(page.getByRole("status").filter({ hasText: "Queue drained:" })).toBeVisible({
     timeout: 120000,
@@ -178,6 +186,7 @@ test("authenticated operator publishes and replays a valid source while uncertai
   await queue.scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/operator-queue-mobile.png" });
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await operatorMenu.getByRole("link", { name: /^Diagnostics/ }).click();
   await page.getByText(/^Persisted application events/).click();
   await expect(
     page
@@ -185,6 +194,7 @@ test("authenticated operator publishes and replays a valid source while uncertai
       .getByText("Completed", { exact: true })
       .first(),
   ).toBeVisible();
+  await operatorMenu.getByRole("link", { name: /^Discovery/ }).click();
   await publications.getByText(accepted.eventIds[0], { exact: true }).scrollIntoViewIfNeeded();
   await page.screenshot({
     path: "test-results/global-operator-review-desktop.png",
@@ -198,6 +208,12 @@ test("authenticated operator publishes and replays a valid source while uncertai
     fullPage: false,
   });
   const history = page.getByRole("list", { name: "Recent persisted event history" });
+  await operatorMenu.getByRole("link", { name: /^Diagnostics/ }).click();
+  const eventHistory = page
+    .locator("details")
+    .filter({ has: page.locator('ol[aria-label="Recent persisted event history"]') });
+  if ((await eventHistory.getAttribute("open")) === null)
+    await eventHistory.locator("summary").click();
   await history.locator("li").first().scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/global-completed-events-mobile.png" });
   await page.setViewportSize({ width: 1440, height: 1000 });

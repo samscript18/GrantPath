@@ -41,11 +41,14 @@ it("discovers, publishes and replays an unseen template award through the real t
     const scholarshipId = first.scholarshipId;
     expect((await catalogue({ q: tag, destination: "NL", availability: "all" })).total).toBe(0); // URL identity is not invented title text.
     const published = await db().scholarship.findUniqueOrThrow({ where: { id: scholarshipId } });
-    expect(
-      (
-        await catalogue({ q: "[TEST ONLY] ITC Example", destination: "NL", availability: "all" })
-      ).rows.some((r) => r.id === scholarshipId),
-    ).toBe(true);
+    const query = { q: "[TEST ONLY] ITC Example", destination: "NL", availability: "all" };
+    const readback = await catalogue(query);
+    let visible = readback.rows.some((row) => row.id === scholarshipId);
+    // Prior isolated runs retain their immutable fixtures. The newly accepted
+    // record need not be on page one when those titles are identical.
+    for (let page = 2; !visible && page <= Math.min(100, Math.ceil(readback.total / 8)); page++)
+      visible = (await catalogue({ ...query, page })).rows.some((row) => row.id === scholarshipId);
+    expect(visible).toBe(true);
     const replay = await Promise.all([
       processDetailHtml(found.ids[0], html, { controlled: true }),
       processDetailHtml(found.ids[0], html, { controlled: true }),

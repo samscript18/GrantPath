@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Switch } from "./ui/switch";
 export function DiscoveryControls({
   directory,
   candidate,
@@ -15,6 +16,8 @@ export function DiscoveryControls({
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const router = useRouter();
+  const [enabled, setEnabled] = useState(directory?.enabled ?? false);
+  const [automatic, setAutomatic] = useState(directory?.autoPublish ?? false);
   async function send(body: unknown) {
     setBusy(true);
     setMessage("");
@@ -68,15 +71,31 @@ export function DiscoveryControls({
       }}
     >
       {directory && (
-        <div className="flex flex-wrap gap-5 text-xs">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" name="enabled" defaultChecked={directory.enabled} />
-            Source enabled
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" name="automatic" defaultChecked={directory.autoPublish} />
-            Validated automatic publication
-          </label>
+        <div className="studio-policy-controls">
+          <div className="studio-policy-switch">
+            <p>
+              Source retrieval<small>Check the official directory on schedule</small>
+            </p>
+            <Switch
+              name="enabled"
+              label="Source enabled"
+              checked={enabled}
+              onCheckedChange={setEnabled}
+              disabled={busy}
+            />
+          </div>
+          <div className="studio-policy-switch">
+            <p>
+              Automatic publication<small>Publish only when validation passes</small>
+            </p>
+            <Switch
+              name="automatic"
+              label="Validated automatic publication"
+              checked={automatic}
+              onCheckedChange={setAutomatic}
+              disabled={busy}
+            />
+          </div>
         </div>
       )}
       {observation && (

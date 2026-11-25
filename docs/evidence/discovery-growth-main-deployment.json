@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-10T13:17:51.360Z",
+  "sha": "bc8601771b8a06c2297107dc624b4792c3d5a8fa",
+  "origin": "https://grantpath-lake.vercel.app",
+  "id": "dpl_BCP6iLBYZiBXqs5tHcfYZmUPqioJ",
+  "state": "READY",
+  "url": "https://grantpath-numizzbzw-lammysam8-7688.vercel.app",
+  "health": {
+    "application": "GrantPath",
+    "revision": "bc8601771b8a06c2297107dc624b4792c3d5a8fa"
+  }
+}

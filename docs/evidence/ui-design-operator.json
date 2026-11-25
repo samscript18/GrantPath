@@ -1,0 +1,13 @@
+{
+  "scope": "Local Operator Studio UI; existing isolated fixture database and sink email. No production writes or paid execution.",
+  "checks": [
+    "All six workspace sections switch with correct active state and no document reload",
+    "Keyboard section navigation, catalogue search, empty-state recovery and publication filter",
+    "Exception deep link selects the correct workspace and opens its disclosure after reload",
+    "Policy switches preserve on/omitted form values without submitting or changing policy",
+    "All six sections have no page overflow at 360px",
+    "No browser runtime errors"
+  ],
+  "screenshots": ["desktop discovery", "catalogue search", "dark discovery", "360px discovery"],
+  "checkedAt": "2026-11-24T20:13:08.716Z"
+}

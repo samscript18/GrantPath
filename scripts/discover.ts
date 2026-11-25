@@ -10,8 +10,32 @@ import {
 } from "../src/server/discovery/worker";
 import { configureDirectory, registerMappedDetails } from "../src/server/discovery/service";
 import { directoryDefinitions } from "../src/server/discovery/registry";
+import { opportunityAdapters } from "../src/server/discovery/adapter-registry";
+import { directoryAdapters } from "../src/server/discovery/directory-adapters";
 async function main() {
   const args = process.argv.slice(2);
+  if (args.includes("--list")) {
+    console.log(
+      JSON.stringify(
+        {
+          directoryAdapters: [...directoryAdapters.keys()],
+          detailAdapters: opportunityAdapters.list(),
+          sources: Object.values(directoryDefinitions)
+            .filter((d) => d.id !== "controlled-release")
+            .map((d) => ({
+              id: d.id,
+              url: d.url,
+              directoryAdapter: d.directoryAdapter || "official-html-1",
+              detailAdapter: d.dynamicDetail || "reviewed-exact-mapping",
+              review: d.review || null,
+            })),
+        },
+        null,
+        2,
+      ),
+    );
+    return;
+  }
   const value = (key: string) => args[args.indexOf(key) + 1];
   const limit = args.includes("--limit") ? Number(value("--limit")) : 3;
   if (!Number.isInteger(limit) || limit < 1 || limit > 6) throw new Error("Limit must be1–6.");

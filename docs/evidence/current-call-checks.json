@@ -1,0 +1,41 @@
+{
+  "scope": "Isolated development current-call expansion; production unchanged",
+  "branch": "feat/production-discovery-expansion",
+  "checkpoint": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "unit": {
+      "passed": 158,
+      "files": 25
+    },
+    "integration": {
+      "passed": 52,
+      "files": 21,
+      "database": "grantpath_current_calls_final_test"
+    },
+    "build": "passed",
+    "browser": {
+      "passed": 14,
+      "database": "grantpath_expansion_e2e_test"
+    }
+  },
+  "subsequentOverlapGuard": {
+    "typecheck": "passed",
+    "focusedLint": "passed",
+    "focusedIntegration": {
+      "passed": 5,
+      "files": 2
+    },
+    "finalBuild": "passed",
+    "browserScope": "Full browser suite preceded the backend overlap guard; changed behavior verified by focused integration tests."
+  },
+  "liveReadback": "catalogue-growth-validation.json",
+  "completion": "current-call-completion.json",
+  "backup": {
+    "localPath": ".local/growth/grantpath_current_calls_test.dump",
+    "bytes": 9933203
+  },
+  "productionModified": false,
+  "schedulesModified": false,
+  "merged": false
+}

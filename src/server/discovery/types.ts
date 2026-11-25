@@ -1,5 +1,5 @@
 import type { ScholarshipData } from "@/server/scholarships/schema";
-export const ADAPTER_VERSION = "official-directory-1.1.0";
+export const ADAPTER_VERSION = "official-directory-2.0.0";
 export const SCHEMA_VERSION = "scholarship-2.0.0";
 export const POLICY_VERSION = "publication-1.0.0";
 export type DetailMapping = {
@@ -20,17 +20,40 @@ export type DetailMapping = {
   levelSelector?: string;
   levelRuleId?: string;
   supportPages?: string[];
+  supportSections?: { url: string; selector: string; hash: string }[];
+  // Reviewed CMS defect only; never expands the network URL allowlist.
+  reviewedCanonicalFallback?: string;
+  contentSelector?: string;
+  preserveHeaders?: string;
+  // Code-reviewed non-award widgets only; never inferred from page content.
+  ignoredSelectors?: string[];
+  applicationWindow?: import("./application-windows").WindowInput & { url?: string };
 };
 export type DirectoryDefinition = {
   id: string;
   url: string;
   heading: string;
   linkSelector: string;
-  allowedDetails: { host: string; pathPrefix: string }[];
+  detailLinkWrapper?: { host: string; path: string; queryKey: string };
+  allowedDetails: {
+    host: string;
+    pathPrefix: string;
+    exact?: boolean;
+    query?: Record<string, string>;
+  }[];
   pagination?: { selector: string; pathPrefix: string; queryKeys: string[] };
   mappings: DetailMapping[];
   restrictToSupportedDetails?: boolean;
-  dynamicDetail?: "makerere-announcement-1" | "twente-award-1";
+  // Identifiers must resolve in the code-reviewed adapter registry, never module paths.
+  dynamicDetail?: string;
+  directoryAdapter?: string;
+  detailFormat?: "html" | "pdf";
+  directoryFormat?: "html" | "json";
+  resumePagination?: boolean;
+  // Reviewed templates with separately labelled opening and closing dates.
+  discoverApplicationRounds?: boolean;
+  review?: { reviewedAt: string; rationale: string; limitations: string[] };
+  bounds?: { pages: number; candidates: number };
 };
 export type Validation = {
   codes: string[];

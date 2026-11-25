@@ -143,6 +143,11 @@ model Scholarship {
   field          String
   fundingType    String
   availability   String @default("unknown")
+  windowKind     String @default("unknown")
+  // Calendar dates are strings, never fabricated closing instants.
+  windowOpensOn  String?
+  windowClosesOn String?
+  opensAt        DateTime?
   deadline       DateTime?
   deadlineLabel  String?
   published      Boolean @default(false)
@@ -432,6 +437,7 @@ model DiscoveryDirectory {
   nextCheckAt DateTime @default(now())
   lockedUntil DateTime?
   leaseToken String?
+  continuationUrl String?
   candidates DiscoveredCandidate[]
   checks DirectoryCheck[]
 }

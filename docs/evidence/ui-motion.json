@@ -1,0 +1,12 @@
+{
+  "scope": "Local rendered landing page and shared motion; no account or source mutations",
+  "checks": [
+    "Pause stops decorative animation and persists after reload; enable restores motion",
+    "Mobile 360px has no document overflow; decorative hero remains visible",
+    "Device reduced-motion preference disables decorative animation and overrides toggle",
+    "Removing device reduced-motion restores the user’s active preference",
+    "No browser runtime errors"
+  ],
+  "screenshots": ["desktop hero"],
+  "checkedAt": "2026-11-25T01:58:33.619Z"
+}

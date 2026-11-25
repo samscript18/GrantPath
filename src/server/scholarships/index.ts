@@ -5,6 +5,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import { scholarshipDataSchema, availabilityOf } from "./schema";
 import { normaliseScholarshipLinks } from "./links";
 import { matchStudyField, type FieldMatching } from "./field-matching";
+import { availabilityWhere } from "./availability";
 export const filtersSchema = z.object({
   q: z.string().trim().max(120).default(""),
   destination: z.string().max(100).default(""),
@@ -13,7 +14,17 @@ export const filtersSchema = z.object({
   field: z.string().trim().max(100).default(""),
   funding: z.enum(["", "comprehensive", "tuition", "partial", "unknown"]).default(""),
   availability: z
-    .enum(["active", "all", "open", "upcoming", "unknown", "closed"])
+    .enum([
+      "active",
+      "all",
+      "open",
+      "upcoming",
+      "unknown",
+      "closed",
+      "rolling",
+      "unannounced",
+      "confirmation",
+    ])
     .default("active"),
   deadlineBefore: z.union([z.iso.date(), z.literal("")]).default(""),
   page: z.coerce.number().int().min(1).max(10000).default(1),
@@ -36,16 +47,19 @@ export async function catalogue(input: unknown) {
   if (filters.provider) where.programme = { provider: { slug: filters.provider } };
   if (filters.funding) where.fundingType = filters.funding;
   const now = new Date();
-  if (filters.availability === "active")
+  if (["rolling", "unannounced"].includes(filters.availability)) {
+    where.windowKind = filters.availability;
+    where.AND = [availabilityWhere("unknown", now)];
+  } else if (filters.availability === "confirmation") {
+    where.AND = [availabilityWhere("unknown", now)];
+    where.windowKind = { notIn: ["rolling", "unannounced"] };
+  } else if (filters.availability !== "all") {
     where.AND = [
-      { availability: { not: "closed" } },
-      { OR: [{ deadline: null }, { deadline: { gt: now } }] },
+      availabilityWhere(
+        filters.availability as "active" | "open" | "upcoming" | "closed" | "unknown",
+        now,
+      ),
     ];
-  else if (filters.availability === "closed")
-    where.AND = [{ OR: [{ availability: "closed" }, { deadline: { lte: now } }] }];
-  else if (filters.availability !== "all") {
-    where.availability = filters.availability;
-    where.AND = [{ OR: [{ deadline: null }, { deadline: { gt: now } }] }];
   }
   if (filters.deadlineBefore)
     where.deadline = {
@@ -94,7 +108,7 @@ export async function catalogue(input: unknown) {
         versions: { orderBy: { number: "desc" }, take: 1 },
         sources: true,
       },
-      orderBy: [{ title: "asc" }],
+      orderBy: [{ title: "asc" }, { id: "asc" }],
       skip: (filters.page - 1) * 8,
       take: 8,
     }),

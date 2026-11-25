@@ -115,7 +115,7 @@ export function RecoveryForm({ reset = false }: { reset?: boolean }) {
           {message}
         </p>
       )}
-      <Link className="block text-center text-sm underline underline-offset-4" href="/login">
+      <Link className="action-link mx-auto" href="/login">
         Back to sign in
       </Link>
     </form>

@@ -29,12 +29,6 @@ export default async function Dashboard() {
       s.evaluation?.outcome !== "not_eligible" &&
       ["open", "upcoming"].includes(s.currentAvailability),
   );
-  const potential = overview.matches.filter(
-    (s) =>
-      s.evaluationCurrent &&
-      s.evaluation?.outcome === "potential" &&
-      s.currentAvailability !== "closed",
-  );
   const saved = plans.filter((a) => a.saved);
   const now = new Date();
   const deadlines = plans
@@ -69,7 +63,7 @@ export default async function Dashboard() {
       <PageHeading
         eyebrow="YOUR NEXT CHAPTER"
         title={`A little closer, ${actor.name.split(" ")[0]}.`}
-        description="Big ambitions move forward with small, intentional steps."
+        description="Your matches, saved scholarships and next steps, in one place."
       >
         <span className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
           <CheckCircle2 size={12} />
@@ -98,8 +92,8 @@ export default async function Dashboard() {
           </h2>
           <p className="mt-4 max-w-lg text-[13px] leading-7 text-white/70">
             {readiness.ready
-              ? "Your matching basics are saved. Explore explained opportunities and check any requirements that still need confirmation."
-              : "Add your education, circumstances and intended study plans. Each saved answer adds context to your scholarship assessments."}
+              ? "Your profile is ready. Explore matches and check any requirements that need confirmation."
+              : "Add your education and study plans to see more useful scholarship matches."}
           </p>
           <Button asChild variant="secondary" className="mt-6">
             <Link href={readiness.ready ? "/scholarships" : "/settings/profile"}>
@@ -131,18 +125,18 @@ export default async function Dashboard() {
       <div className="dashboard-summary my-8 grid grid-cols-3 divide-x divide-border border-b border-border pb-7 pt-1">
         {[
           [
-            relevant.length,
+            overview.summary.readyToExplore,
             "Ready to explore",
-            "Current potential or eligible · open/upcoming",
+            "Eligible or potential matches · open or upcoming",
             CheckCircle2,
           ],
           [
-            potential.length,
+            overview.summary.needsConfirmation,
             "Needs confirmation",
-            "A question can be a useful next step",
+            "Requirements that still need checking",
             CircleHelp,
           ],
-          [saved.length, "Saved opportunities", "Possibilities you’re keeping close", Bookmark],
+          [saved.length, "Saved opportunities", "Your personal shortlist", Bookmark],
         ].map(([count, label, desc, Icon]) => {
           const I = Icon as typeof CheckCircle2;
           return (
@@ -169,7 +163,7 @@ export default async function Dashboard() {
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <p className="eyebrow text-muted-foreground">A PLACE TO BEGIN</p>
-              <h2 className="editorial mt-3 text-3xl">Possibilities for your path.</h2>
+              <h2 className="editorial mt-3 text-3xl">Scholarships for you</h2>
             </div>
             <Link href="/scholarships" className="flex shrink-0 items-center gap-2 text-[11px]">
               Explore all <ArrowUpRight size={13} />
@@ -205,10 +199,7 @@ export default async function Dashboard() {
                   <p className="mt-4 text-[13px] leading-7 text-muted-foreground">
                     {s.data.fundingSummary}
                   </p>
-                  <Link
-                    href={`/scholarships/${s.slug}#requirements`}
-                    className="mt-3 inline-flex items-center gap-2 text-[11px] font-semibold"
-                  >
+                  <Link href={`/scholarships/${s.slug}#requirements`} className="action-link mt-4">
                     See my requirements <ArrowRight size={12} />
                   </Link>
                 </article>
@@ -228,7 +219,7 @@ export default async function Dashboard() {
                 </p>
                 <Link
                   href={overview.profile.version ? "/scholarships" : "/profile"}
-                  className="mt-3 inline-block underline"
+                  className="action-link mt-4"
                 >
                   {overview.profile.version ? "Explore scholarships" : "Start my profile"} ↗
                 </Link>
@@ -238,7 +229,7 @@ export default async function Dashboard() {
           <section className="mt-8">
             <div className="mb-5 flex items-center gap-2">
               <FileCheck2 size={17} strokeWidth={1.3} />
-              <h2 className="font-serif text-2xl">A useful next step.</h2>
+              <h2 className="font-serif text-2xl">Next steps</h2>
             </div>
             {priorities.length ? (
               priorities.map(([title, description]) => (
@@ -262,9 +253,7 @@ export default async function Dashboard() {
                 className="flex items-center justify-between gap-4 border-t border-border py-5"
               >
                 <div>
-                  <h3 className="text-xs font-semibold">
-                    Turn an opportunity into a preparation plan
-                  </h3>
+                  <h3 className="text-xs font-semibold">Start preparing an application</h3>
                   <p className="mt-2 text-[11px] text-muted-foreground">
                     Add personal notes, confirm requirements, and check off your next step.
                   </p>
@@ -280,9 +269,9 @@ export default async function Dashboard() {
               <CalendarDays size={13} />
               KEEP IN VIEW
             </p>
-            <h2 className="mt-4 font-serif text-[25px]">Dates on your horizon.</h2>
+            <h2 className="mt-4 font-serif text-[25px]">Upcoming deadlines</h2>
             <p className="mt-3 text-[11px] leading-6 text-muted-foreground">
-              Confirmed closing instants for your personal plans. Times shown in {profile.timeZone}.
+              Confirmed deadlines for your saved plans. Times shown in {profile.timeZone}.
             </p>
             {deadlines.length ? (
               deadlines.map((a) => (

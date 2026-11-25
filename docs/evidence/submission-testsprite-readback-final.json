@@ -133,14 +133,8 @@
     }
   ],
   "testListMetadata": {
-    "keys": [
-      "items",
-      "nextToken"
-    ],
-    "portalKeys": [
-      "items",
-      "nextToken"
-    ]
+    "keys": ["items", "nextToken"],
+    "portalKeys": ["items", "nextToken"]
   },
   "backend": {
     "status": "passed",

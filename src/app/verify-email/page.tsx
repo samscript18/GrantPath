@@ -8,11 +8,11 @@ export default async function Verify({
   const { error, email } = await searchParams;
   return (
     <AuthLayout
-      title="Check your inbox."
+      title="Verify your email"
       subtitle={
         error
           ? "This verification link has expired or was already used. Sign in if your account is verified, or request a new link below."
-          : "Follow the verification link to activate your account. The link expires in one hour. If delivery fails, request a new one below."
+          : "Open the link in your email to activate your account. It expires in one hour. Request a new link below if needed."
       }
     >
       <VerificationResend initialEmail={email} />

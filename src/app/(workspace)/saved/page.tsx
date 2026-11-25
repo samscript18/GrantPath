@@ -15,8 +15,8 @@ export default async function Saved() {
     <>
       <PageHeading
         eyebrow="KEEP THE POSSIBILITIES CLOSE"
-        title="Your scholarship shortlist."
-        description="Your shortlist, at your own pace. Saved opportunities and personal progress belong only to you."
+        title="Saved scholarships"
+        description="Keep your favourite scholarships here, then plan your applications."
       >
         <Badge>
           {rows.length} saved {rows.length === 1 ? "opportunity" : "opportunities"}
@@ -51,12 +51,9 @@ export default async function Saved() {
               </section>
             ))
           ) : (
-            <EmptyState title="Your shortlist starts with a possibility.">
-              <p>
-                Save an opportunity from its details page. It will be here when you’re ready to
-                plan.
-              </p>
-              <Link href="/scholarships" className="mt-4 inline-block text-primary underline">
+            <EmptyState title="No saved scholarships yet">
+              <p>Use the bookmark button on a scholarship to save it here.</p>
+              <Link href="/scholarships" className="action-link mt-5">
                 Find an opportunity ↗
               </Link>
             </EmptyState>
@@ -71,10 +68,9 @@ export default async function Saved() {
             to a plan.
           </h2>
           <p className="mt-4 text-xs leading-6 text-muted-foreground">
-            Move your preparation forward in My applications. Add notes, make a checklist and follow
-            your progress.
+            Add notes, create a checklist and track your progress in My applications.
           </p>
-          <Link href="/applications" className="mt-5 inline-block text-xs underline">
+          <Link href="/applications" className="action-link mt-5">
             Open my applications ↗
           </Link>
           <p className="mt-6 text-[10px] leading-5 text-muted-foreground">

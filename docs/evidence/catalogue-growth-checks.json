@@ -1,0 +1,86 @@
+{
+  "scope": "Local feature branch and isolated databases only; no deployment or production changes",
+  "catalogue": {
+    "checkedAt": "2026-11-25T02:02:08.899Z",
+    "scope": "Read-only isolated development catalogue",
+    "records": 1066,
+    "uniqueProgrammes": 1066,
+    "availability": [
+      {
+        "availability": "open",
+        "total": 7
+      },
+      {
+        "availability": "upcoming",
+        "total": 2
+      },
+      {
+        "availability": "closed",
+        "total": 7
+      },
+      {
+        "availability": "unknown",
+        "total": 1050
+      }
+    ],
+    "profilesChecked": 12,
+    "unknownConditionAssessments": 12552,
+    "filtersChecked": {
+      "levels": 3,
+      "destinations": 6
+    },
+    "integrity": {
+      "missingEvents": 0,
+      "missingVersions": 0
+    },
+    "failures": []
+  },
+  "sourceRegistry": {
+    "configuredDirectoryDefinitions": 27,
+    "registeredDevelopmentDirectories": 11,
+    "successfullyRetrievedDirectories": 11,
+    "directoriesWithPublishedRecords": 11
+  },
+  "checks": [
+    {
+      "command": "npm run check",
+      "result": "passed",
+      "unitTests": 145,
+      "log": ".local/growth/1000-check-complete.log"
+    },
+    {
+      "command": "npm run test:integration",
+      "result": "passed",
+      "tests": 50,
+      "database": "grantpath_growth_1000_final_test",
+      "log": ".local/growth/1000-integration-clean.log",
+      "scope": "Full suite after matching/pagination changes; SEED-2 subsequently covered by four focused unit tests and actual isolated publication/replay."
+    },
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "log": ".local/growth/1000-build-complete.log"
+    },
+    {
+      "command": "PLAYWRIGHT_PRODUCTION=1 npm run test:e2e",
+      "result": "passed",
+      "tests": 14,
+      "log": ".local/growth/1000-browser-final.log",
+      "scope": "Full browser suite after matching and reference-library changes; SEED-2 backend addition followed with focused extraction tests and production build."
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "remainingCoverageGaps": [
+    "Confirmed application windows: most records are evidence-backed scheme overviews with unknown availability.",
+    "DAAD, Oxford, UCL, Monash and Warwick access restrictions remain respected.",
+    "Cambridge interactive pagination and ANU robots-restricted query pagination.",
+    "Further Erasmus programme hosts require individual review; EMILDAI, EGEI and CYBERSURE have conflicting terms.",
+    "420 review records; largest recurring cause is unconfirmed funded degree, not assumed eligibility.",
+    "Later multi-host DNS outage halted growth sweeps; 48 failed candidates preserve accepted facts."
+  ],
+  "academicReferences": 32,
+  "backup": ".local/growth/grantpath_growth_test.dump"
+}

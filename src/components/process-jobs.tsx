@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { processOperatorJobs } from "@/server/operator/jobs";
+import { Workflow } from "lucide-react";
 import { Button } from "./ui/button";
 type JobResult = Awaited<ReturnType<typeof processOperatorJobs>>;
 export function ProcessJobs({ initialQueue }: { initialQueue: JobResult["queue"] }) {
@@ -60,37 +61,59 @@ export function ProcessJobs({ initialQueue }: { initialQueue: JobResult["queue"]
     }
   }
   return (
-    <div className="mt-4 rounded-xl border border-border bg-paper p-4">
-      <div className="flex flex-wrap gap-3">
-        <Button size="sm" disabled={busy} onClick={() => process(10)}>
-          {busy ? "Processing queued jobs…" : "Process queued jobs"}
-        </Button>
-        <Button size="sm" variant="outline" disabled={busy} onClick={() => process(1)}>
-          Process up to 10 pending jobs
-        </Button>
+    <div className="paper overflow-hidden">
+      <div className="flex items-start gap-4 p-6">
+        <span className="rounded-xl border border-border bg-secondary p-3 text-leaf">
+          <Workflow size={21} aria-hidden="true" />
+        </span>
+        <div>
+          <h3 className="font-serif text-xl">Queue control</h3>
+          <p className="mt-2 max-w-xl text-xs leading-6 text-muted-foreground">
+            Process accepted changes and notifications. Failed or uncertain deliveries stay visible
+            for review.
+          </p>
+        </div>
       </div>
-      <p className="mt-3 text-[11px] leading-6 text-muted-foreground">
-        Each run processes at most 10 batches of 10 events and deliveries. Retries and active
-        workers remain visible; failed or uncertain deliveries need review.
-      </p>
       {visibleQueue && (
-        <dl aria-label="Queue status" className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-xs">
+        <dl
+          aria-label="Queue status"
+          className="grid grid-cols-2 divide-x divide-border border-y border-border bg-muted/30 sm:grid-cols-4"
+        >
           {[
             ["Pending events", visibleQueue.events],
             ["Pending deliveries", visibleQueue.deliveries],
             ["Runnable jobs", visibleQueue.ready],
             ["Needs review", visibleQueue.needsReview],
           ].map(([label, count]) => (
-            <div key={label}>
-              <dt className="text-muted-foreground">{label}</dt>
-              <dd className="mt-1 font-semibold">{count}</dd>
+            <div key={label} className="p-5">
+              <dt className="text-[11px] text-muted-foreground">{label}</dt>
+              <dd className="mt-2 font-serif text-3xl">{count}</dd>
             </div>
           ))}
         </dl>
       )}
-      <p role="status" className="mt-3 text-xs leading-6">
-        {message}
-      </p>
+      <div className="p-6">
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" disabled={busy} onClick={() => process(10)}>
+            {busy ? "Processing queued jobs…" : "Process queued jobs"}
+          </Button>
+          <Button size="sm" variant="outline" disabled={busy} onClick={() => process(1)}>
+            Process up to 10 pending jobs
+          </Button>
+        </div>
+        <p className="mt-4 text-[11px] leading-6 text-muted-foreground">
+          Each run processes at most 10 batches of 10 events and deliveries. Work waiting for a
+          retry or an active worker remains in the queue.
+        </p>
+        {message && (
+          <p
+            role="status"
+            className="mt-4 rounded-lg border border-border bg-muted/40 p-3 text-xs leading-6"
+          >
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

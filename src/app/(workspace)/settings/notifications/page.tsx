@@ -10,8 +10,8 @@ export default async function NotificationSettings() {
     <SettingsFrame
       actor={actor}
       active="/settings/notifications"
-      title="Your inbox, your terms."
-      description="A little direction when it matters. Choose what you hear from us."
+      title="Notification preferences"
+      description="Choose your alerts and where you receive them."
     >
       <div className="grid items-start gap-9 xl:grid-cols-[minmax(0,1fr)_260px]">
         <section className="paper p-6 sm:p-8">
@@ -25,8 +25,7 @@ export default async function NotificationSettings() {
             <em>A clearer next step.</em>
           </h2>
           <p className="mt-4 text-xs leading-7 text-muted-foreground">
-            Keep the updates that help you move forward. You can change your choices whenever your
-            plans change.
+            Turn alerts on or off at any time.
           </p>
           <div className="mt-7 border-t border-border pt-6">
             <p className="flex items-center gap-2 text-xs font-semibold">

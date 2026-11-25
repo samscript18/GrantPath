@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-25T09:02:18.802Z",
+  "scope": "Read-only isolated development catalogue",
+  "records": 1126,
+  "uniqueProgrammes": 1068,
+  "availability": [
+    {
+      "availability": "open",
+      "total": 62
+    },
+    {
+      "availability": "upcoming",
+      "total": 8
+    },
+    {
+      "availability": "closed",
+      "total": 115
+    },
+    {
+      "availability": "unknown",
+      "total": 941
+    }
+  ],
+  "profilesChecked": 12,
+  "unknownConditionAssessments": 13272,
+  "filtersChecked": {
+    "levels": 3,
+    "destinations": 6
+  },
+  "integrity": {
+    "missingEvents": 0,
+    "missingVersions": 0
+  },
+  "failures": []
+}

@@ -1,0 +1,840 @@
+{
+  "verifiedAt": "2026-11-25T08:19:26.094Z",
+  "total": 1126,
+  "baseline": {
+    "total": 1067,
+    "open": 7,
+    "upcoming": 3,
+    "closed": 115,
+    "unknown": 942,
+    "review": 419
+  },
+  "availability": {
+    "open": 62,
+    "upcoming": 8,
+    "closed": 115,
+    "unknown": 941
+  },
+  "distinctProgrammes": 1068,
+  "newlyDiscoveredProgrammes": 1,
+  "newlyLinkedApplicationRounds": 58,
+  "existingAcademicIntakesUpdated": 1,
+  "review": 419,
+  "projectionBackfill": {
+    "records": 204,
+    "versionsBefore": 1513,
+    "versionsAfter": 1513,
+    "eventsBefore": 1513,
+    "eventsAfter": 1513
+  },
+  "outbox": {
+    "completed": 1513,
+    "states": [
+      {
+        "_count": 1513,
+        "state": "done"
+      }
+    ]
+  },
+  "enabledDirectories": 0,
+  "sources": [
+    "uq-scholarships",
+    "auckland-scholarships",
+    "csc-current-calls",
+    "ediss-current-calls"
+  ],
+  "limitations": [
+    "Date-only closing boundaries remain uncertain; no timezone inferred.",
+    "Zero student accounts in isolated catalogue; recipient delivery is exercised by integration tests."
+  ],
+  "sourceContributions": [
+    {
+      "source": "auckland-scholarships",
+      "newApplicationRounds": 8,
+      "availability": {
+        "open": 5,
+        "upcoming": 3
+      },
+      "directory": {
+        "id": "auckland-scholarships",
+        "state": "success",
+        "pages": 1,
+        "discovered": 100,
+        "created": 0,
+        "existing": 100,
+        "excluded": 298,
+        "leads": [],
+        "continuationUrl": null
+      },
+      "replay": {
+        "id": "cmwv64up6004u7fuz8joc0ej5",
+        "state": "unchanged",
+        "reasons": ["SEMANTICALLY_UNCHANGED"],
+        "scholarshipId": "cmwvsx9ap003gkjuzx71f7b2p",
+        "publicationKind": null,
+        "versionsBefore": 1,
+        "versionsAfter": 1,
+        "eventsBefore": 1,
+        "eventsAfter": 1
+      }
+    },
+    {
+      "source": "uq-scholarships",
+      "newApplicationRounds": 50,
+      "availability": {
+        "open": 48,
+        "upcoming": 2
+      },
+      "directory": {
+        "id": "uq-scholarships",
+        "state": "success",
+        "pages": 10,
+        "discovered": 95,
+        "created": 84,
+        "existing": 11,
+        "excluded": 5,
+        "leads": [],
+        "continuationUrl": "https://scholarships.uq.edu.au/scholarships?page=37"
+      },
+      "replay": {
+        "id": "cmwv224il00em2euzb64pvx07",
+        "state": "unchanged",
+        "reasons": ["SEMANTICALLY_UNCHANGED"],
+        "scholarshipId": "cmwvt137h00chkjuz3p3wsxmh",
+        "publicationKind": null,
+        "versionsBefore": 1,
+        "versionsAfter": 1,
+        "eventsBefore": 1,
+        "eventsAfter": 1
+      }
+    },
+    {
+      "source": "ediss-current-calls",
+      "newProgrammes": 0,
+      "existingIntakesUpdated": 1,
+      "availability": {
+        "open": 1
+      },
+      "directory": {
+        "id": "ediss-current-calls",
+        "state": "success",
+        "pages": 1,
+        "discovered": 1,
+        "created": 1,
+        "existing": 0,
+        "excluded": 3,
+        "leads": [],
+        "continuationUrl": null
+      },
+      "replays": [
+        {
+          "id": "cmwvtzkpt0004d7uzbk95xsdw",
+          "state": "unchanged",
+          "reasons": ["SEMANTICALLY_UNCHANGED"],
+          "scholarshipId": "cmwv799qb00082guzi6murit3",
+          "publicationKind": null,
+          "versionsBefore": 2,
+          "versionsAfter": 2,
+          "eventsBefore": 2,
+          "eventsAfter": 2
+        }
+      ]
+    },
+    {
+      "source": "csc-current-calls",
+      "newProgrammes": 1,
+      "existingIntakesUpdated": 0,
+      "availability": {
+        "open": 1
+      },
+      "directory": {
+        "id": "csc-current-calls",
+        "state": "success",
+        "pages": 1,
+        "discovered": 1,
+        "created": 1,
+        "existing": 0,
+        "excluded": 5,
+        "leads": [],
+        "continuationUrl": null
+      },
+      "replays": [
+        {
+          "id": "cmwvtzkf60002d7uz099491rz",
+          "state": "unchanged",
+          "reasons": ["SEMANTICALLY_UNCHANGED"],
+          "scholarshipId": "cmwvtzzy20008d7uzg02dq0yg",
+          "publicationKind": null,
+          "versionsBefore": 1,
+          "versionsAfter": 1,
+          "eventsBefore": 1,
+          "eventsAfter": 1
+        }
+      ]
+    }
+  ],
+  "newCycleRecords": 59,
+  "currentCallEvidence": [
+    {
+      "id": "cmwvsx9ap003gkjuzx71f7b2p",
+      "programmeId": "cmwv6w9ni01pq7fuzxag3hs1t",
+      "title": "University of Auckland Fulbright Scholarship",
+      "cycle": "Application round 2026-10-15 to 2026-11-26",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/university-of-auckland-fulbright-scholarship-293-all.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvsxosv004lkjuzlqe6sxen",
+      "programmeId": "cmwv9qe6r06qdr1uzl3yxurw3",
+      "title": "Snickel Lane Urban Art Award",
+      "cycle": "Application round 2026-11-19 to 2026-12-05",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/snickel-lane-urban-art-award-904-art.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvsy3hp005qkjuzii0x2jiv",
+      "programmeId": "cmwv6dee100yw7fuz7v93eec9",
+      "title": "Professor Brian Coote Memorial Scholarship for Overseas Study in Law",
+      "cycle": "Application round 2027-02-04 to 2027-03-18",
+      "availability": "upcoming",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/prof-brian-coote-memorial-scholarship-for-overseas-study-in-law-1209-law.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvsyits006ukjuzckmdimk6",
+      "programmeId": "cmwv2bk9300zy2euzzcnyswur",
+      "title": "Murray Wren Doctoral Scholarship in Architecture",
+      "cycle": "Application round 2027-10-12 to 2027-11-23",
+      "availability": "upcoming",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/murray-wren-doctoral-scholarship-in-architecture-816-eng.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvsyz4l007zkjuzgjhgeq3w",
+      "programmeId": "cmwv4ohi6039yc1uz4rfz06qm",
+      "title": "Jane and Rebecca Hulst Memorial Scholarship",
+      "cycle": "Application round 2026-10-15 to 2026-11-26",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/jane-and-rebecca-hulst-memorial-scholarship-648-sci.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvszejl0094kjuzbayn6a85",
+      "programmeId": "cmwv4prrl03ezc1uzt3yao0nj",
+      "title": "Jean Heywood Postgraduate Scholarship",
+      "cycle": "Application round 2026-10-15 to 2026-11-26",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/jean-heywood-postgraduate-scholarship-586-sci.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvsztai00a8kjuzisdydlxo",
+      "programmeId": "cmwv92dfb04t0r1uzn0fm7nk4",
+      "title": "Jarvis Family Award",
+      "cycle": "Application round 2026-10-27 to 2026-12-08",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/jarvis-family-award-1247-eng.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt08qw00bbkjuzlyjtnrv3",
+      "programmeId": "cmwv397g601k56guzdoybi3gi",
+      "title": "Alex Regan Scholarship in Economics",
+      "cycle": "Application round 2027-02-17 to 2027-03-03",
+      "availability": "upcoming",
+      "version": 1,
+      "officialUrl": "https://www.auckland.ac.nz/en/study/scholarships-and-awards/find-a-scholarship/alex-regan-scholarship-729-bus.html",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt137h00chkjuz3p3wsxmh",
+      "programmeId": "cmwv2wrk200k76guz07xladpn",
+      "title": "UQ-LPDP Cooperative Scholarship",
+      "cycle": "Application round 2026-10-30 to 2026-11-30",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/uq-lpdp-cooperative-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt1is600dgkjuzzpdzvvmk",
+      "programmeId": "cmwv88bxf02axr1uzh8cj1db1",
+      "title": "Cross-disciplinary PhD collaboration scholarship (Quantum and Advanced Technologies)",
+      "cycle": "Application round 2026-11-02 to 2027-01-11",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/cross-disciplinary-phd-collaboration-scholarship-quantum-and-advanced-technologies",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt1y3m00ejkjuznoqee542",
+      "programmeId": "cmwv8br6i02l2r1uz4d23ee8d",
+      "title": "UQ-Technical University of Munich Travel Bursary",
+      "cycle": "Application round 2026-11-02 to 2027-01-11",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/uq-technical-university-munich-travel-bursary-0",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt2dlq00f6kjuziyh3oi5n",
+      "programmeId": "cmwv8ebty02ugr1uz8g490vn1",
+      "title": "Mai Lan Kunzy Scholarship",
+      "cycle": "Application round 2026-11-11 to 2027-01-25",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/mai-lan-kunzy-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt2sxy00g1kjuz2kq6odzv",
+      "programmeId": "cmwv8g1nr030yr1uzhn5fu8fi",
+      "title": "Molecular Maverick Award",
+      "cycle": "Application round 2026-11-02 to 2027-02-15",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/molecular-maverick-award",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt3num00grkjuzlpabgens",
+      "programmeId": "cmwva2rv107j7r1uzz9qyw6dk",
+      "title": "Dr Philip Robinson Memorial Scholarship",
+      "cycle": "Application round 2027-01-15 to 2027-03-07",
+      "availability": "upcoming",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/dr-philip-robinson-memorial-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt439600hhkjuzxzuvzohy",
+      "programmeId": "cmwv87wb2029kr1uzw9rtxjbi",
+      "title": "Alliance for Healthy Ageing (AHA) in Western Queensland - PhD or MPhil Top-Up Scholarship",
+      "cycle": "Application round 2024-03-05 to 2026-12-31",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/alliance-healthy-ageing-aha-western-queensland-phd-or-mphil-top-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt4ipw00idkjuzcavkov3y",
+      "programmeId": "cmwv9imgx062kr1uzm6m2kiz0",
+      "title": "Business School Postgraduate Coursework Master\u2019s Scholarship",
+      "cycle": "Application round 2026-10-02 to 2027-07-19",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/business-school-postgraduate-coursework-masters-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt4y5h00j4kjuzi41o87c5",
+      "programmeId": "cmwv2xmel00mm6guzpnju6gb1",
+      "title": "Kingshott Cassidy Poetry Award",
+      "cycle": "Application round 2026-08-03 to 2026-11-29",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/kingshott-cassidy-poetry-award",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt5dj800jrkjuz1o1sk8k3",
+      "programmeId": "cmwv37hca01fj6guzv4abodae",
+      "title": "International House Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/international-house-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt5sz100klkjuzclt53py3",
+      "programmeId": "cmwv372hj01e26guzv8nj7erd",
+      "title": "International House Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/international-house-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt68da00lfkjuzu7ei0dqk",
+      "programmeId": "cmwv8f6s002y3r1uzajyjutuo",
+      "title": "UQ Refugee and Humanitarian Scholarship",
+      "cycle": "Application round 2026-10-29 to 2027-01-17",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/uq-refugee-and-humanitarian-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt6ofl00m4kjuzncy31068",
+      "programmeId": "cmwv8ggzo032tr1uzo5vl2zuy",
+      "title": "The Neil Brice Memorial Fund",
+      "cycle": "Application round 2026-08-17 to 2027-01-24",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/neil-brice-memorial-fund",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt73bo00mpkjuzp90urw2r",
+      "programmeId": "cmwv8tc74042ir1uzzexlg5ef",
+      "title": "Ampol Indigenous Student Fund",
+      "cycle": "Application round 2026-08-17 to 2027-02-26",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/ampol-indigenous-student-fund",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt7ito00ndkjuzushptmpe",
+      "programmeId": "cmwva0mku07fqr1uzchht9wdg",
+      "title": "David Dunlop Memorial Undergraduate Scholarship",
+      "cycle": "Application round 2027-01-15 to 2027-03-07",
+      "availability": "upcoming",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/david-dunlop-memorial-undergraduate-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt7y9600o0kjuzfz50vlbp",
+      "programmeId": "cmwv2x70400lu6guzjqmhe99l",
+      "title": "UQ Ramsay Merit Scholarship",
+      "cycle": "Application round 2026-10-26 to 2026-12-02",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/uq-ramsay-merit-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt8dni00otkjuzzoh7kg4m",
+      "programmeId": "cmwv31wqd00xz6guzonsfjsx5",
+      "title": "Duchesne College O\u2019Dwyer Family Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-odwyer-family-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt8t2f00pokjuz49t652ut",
+      "programmeId": "cmwv32s1501116guzna72gch5",
+      "title": "Duchesne College Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt98gk00qjkjuzjcc2efgc",
+      "programmeId": "cmwv341wv014v6guzdokvq50u",
+      "title": "Duchesne College Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvt9oag00rfkjuz7jymcmef",
+      "programmeId": "cmwv34hc5016e6guzwnmvtm31",
+      "title": "Emmanuel College Indigenous Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/emmanuel-college-indigenous-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtaiqj00s9kjuz96x0l81v",
+      "programmeId": "cmwv35rp501av6guzkznzm7ai",
+      "title": "Emmanuel College Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/emmanuel-college-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtaylh00t3kjuz9tquppmu",
+      "programmeId": "cmwv36ml401d76guz2nt4jbhu",
+      "title": "Flannery Foundation Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/flannery-foundation-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtbdob00tzkjuzyqu13j4b",
+      "programmeId": "cmwv37x3q01h16guz0q9m9h1o",
+      "title": "Gatton Halls Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/gatton-halls-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtbt2x00utkjuzkpabp1yg",
+      "programmeId": "cmwv38rof01ij6guzq6mbgxfp",
+      "title": "Grace College Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/grace-college-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtc8hp00vnkjuzz7h0p6md",
+      "programmeId": "cmwv3974x01jc6guze6wil0sa",
+      "title": "JD Adams Memorial Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/jd-adams-memorial-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtco6600wjkjuz3zb8r338",
+      "programmeId": "cmwv2v2a700gy6guzfavatky5",
+      "title": "Blair and Beth Wilson Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/blair-and-beth-wilson-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtd3e100xekjuzvu84zjgn",
+      "programmeId": "cmwv2trk200ds6guzfds34q8p",
+      "title": "33rd UQ Senate Create Change Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/33rd-uq-senate-create-change-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtditm00yakjuzsfp7oger",
+      "programmeId": "cmwv2u6xy00fc6guz0y4kdymh",
+      "title": "Access UQ Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/access-uq-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtdy6p00z5kjuzfpyz5ahu",
+      "programmeId": "cmwv2y1vo00n86guz2cou2nbd",
+      "title": "Cairngorm-Kurrajong Residential Scholarship Endowment",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/cairngorm-kurrajong-residential-scholarship-endowment",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtedn50100kjuz46s9ttsn",
+      "programmeId": "cmwv2yhaa00o26guzb36ydyjm",
+      "title": "Campaign Board Create Change Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/campaign-board-create-change-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtet15010ukjuzyoajq3es",
+      "programmeId": "cmwv2ywrq00pk6guzvcn9uswf",
+      "title": "Cromwell College Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/cromwell-college-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtf8uf011pkjuzhxt5tg8g",
+      "programmeId": "cmwv2zc5800r26guzwfrfc18l",
+      "title": "Cromwell College Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/cromwell-college-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtfnxs012jkjuzink1ror9",
+      "programmeId": "cmwv32c5k00zj6guz8dpfo2je",
+      "title": "Duchesne College Peter and Lea Walker-Franks Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-peter-and-lea-walker-franks-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtg3h1013ekjuzsmbwnsz6",
+      "programmeId": "cmwv2zrra00sk6guz5oscuvs2",
+      "title": "Dr Chris Muir Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/dr-chris-muir-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtgj3t014akjuzu14tvrm5",
+      "programmeId": "cmwv3071000u46guzj1atitx9",
+      "title": "Duchesne College Dr Margaret Grant (DC\u201957) Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-dr-margaret-grant-dc57-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvthdp10155kjuzrzw44nmm",
+      "programmeId": "cmwv33751011v6guz8u4uuh6v",
+      "title": "Duchesne College Sister Philomene Tiernan RSCJ Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-sister-philomene-tiernan-rscj-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtht5s0160kjuzb430echl",
+      "programmeId": "cmwv30mgq00uy6guz61zpklgc",
+      "title": "Duchesne College Fiona Forrest DC\u201996 Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-fiona-forrest-dc96-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvti8ji016ukjuze5agvoyc",
+      "programmeId": "cmwv311vt00wf6guz9h3ed0by",
+      "title": "Duchesne College Margaret McEniery Family Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-margaret-mceniery-family-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtinyw017pkjuz99u73ld6",
+      "programmeId": "cmwv33mi6013d6guzamt7gk86",
+      "title": "Duchesne College Wright Family Residential Scholarship Bursary",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/duchesne-college-wright-family-residential-scholarship-bursary",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtj3dx018kkjuz1e7znzvw",
+      "programmeId": "cmwv34wsf017v6guz4m3vrm52",
+      "title": "Emmanuel College Nev Ducat Regional Queensland Engineering Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/emmanuel-college-nev-ducat-regional-queensland-engineering-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtjitu019fkjuz9ydrzqej",
+      "programmeId": "cmwv35cht019d6guzaf51m0y2",
+      "title": "Emmanuel College Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/emmanuel-college-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtjynr01a9kjuzinycxlrm",
+      "programmeId": "cmwv3679201cd6guzj3gdwl8g",
+      "title": "Frazer Family Foundation Young Achievers Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/frazer-family-foundation-young-achievers-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtkdp801b4kjuzwov2aezh",
+      "programmeId": "cmwv39mim01kv6guz8ycvhcq3",
+      "title": "John Martin OAM Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/john-martin-oam-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtkt7301bzkjuzazbehgdz",
+      "programmeId": "cmwv3a1ym01md6guz10tyr8p3",
+      "title": "Keitha Edith Yates Education Scholarship (KEYES)",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/keitha-edith-yates-education-scholarship-keyes",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtl8hx01cvkjuzau0wwshk",
+      "programmeId": "cmwv3ahbh01nw6guzv7jc5kqd",
+      "title": "Kev Carmody House Young Achievers Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/kev-carmody-house-young-achievers-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtlnz401dpkjuzvo1u5myf",
+      "programmeId": "cmwv3awsv01pd6guz438zxnt4",
+      "title": "Kev Carmody Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/kev-carmody-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtm3gm01ejkjuzgv79d8sm",
+      "programmeId": "cmwv3bcah01qu6guzuxe8rjq1",
+      "title": "King\u2019s College Colin and Betty Elworthy Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/kings-college-colin-and-betty-elworthy-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtmiuj01ffkjuzq91fh8f7",
+      "programmeId": "cmwv7v1f90168r1uzlml9jfbm",
+      "title": "Marie Myers Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/marie-myers-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtmya401gakjuz9sc5q466",
+      "programmeId": "cmwv7xmos01fcr1uzgicqyg1u",
+      "title": "St John\u2019s College Allfrey Family Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/st-johns-college-allfrey-family-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtndog01h4kjuzq22awbqd",
+      "programmeId": "cmwv7ygw101isr1uzonyx5s3z",
+      "title": "St John\u2019s College Bonifant and Mana Families Residential Scholarship",
+      "cycle": "Application round 2026-10-10 to 2026-12-04",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://scholarships.uq.edu.au/scholarship/st-johns-college-bonifant-and-mana-families-residential-scholarship",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwv799qb00082guzi6murit3",
+      "programmeId": "cmwv799q700072guz9ixppydg",
+      "title": "EDISS Master\u2019s programme scholarships",
+      "cycle": "2027/29",
+      "availability": "open",
+      "version": 2,
+      "officialUrl": "https://www.master-ediss.eu/",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    },
+    {
+      "id": "cmwvtzzy20008d7uzg02dq0yg",
+      "programmeId": "cmwvtzzxz0007d7uz31c2q1e5",
+      "title": "Commonwealth Shared Scholarships",
+      "cycle": "2027/28",
+      "availability": "open",
+      "version": 1,
+      "officialUrl": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/",
+      "recordKind": "cycle",
+      "sourceFactsRetained": true
+    }
+  ],
+  "validationReceipt": "catalogue-growth-validation.json"
+}

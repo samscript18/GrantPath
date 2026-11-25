@@ -1,16 +1,39 @@
-# Demonstration outline
+# GrantPath demo: what to click
 
-1. Open the actual public Vercel preview (README link). Show GLOCAL under Germany and Japan, reload its filters and explain that both find the same programme/cycle rather than duplicate awards. Coverage32real records/17countries includes overviews and historical calls, not32open applications. Landing and discovery: real catalogue examples, search for Twente, filter destination; inspect funding and official evidence. Explain known versus uncertain dates and source-check history.
-2. Create an isolated student account, follow captured verification, save the four profile stages. Show citizenship versus residence, current/final-year qualifications versus intended master's study, and original GPA scale.
-3. Update matches. Open a potential match and read pass/fail/unknown reasons and provider-confirmation clauses. Show that ranking and application availability do not alter eligibility.
-4. Save an opportunity, add a note/checklist, move to Preparing documents. Reload and sign out/return. Show provider status remains independent.
-5. In the isolated browser test only, use the labelled controlled-source record. An approved valid snapshot automatically publishes through the real policy; an ambiguous snapshot reaches the exception queue. Publish a supported level change with evidence; the real outbox handlers recalculate the student's outcome and create one alert. Replay creates no duplicate.
-6. Open the alert's exact evidence/evaluation context. Disable accepted-change alerts, accept the reversal, and show suppression. The prior alert still opens the older immutable evidence. A controlled source outage preserves last success and accepted data.
-7. Operator studio: actual attempts/success, automatic-publication IDs, pending review, audits and delivery states. Show retained completed events separately from unfinished work and safe retries. Explain sink capture versus provider acceptance versus recipient receipt.
-8. Present TEST_EVIDENCE.md and the external setup ledger. Do not demonstrate a deployment, paid test result or blocked merge that has not actually occurred.
+Use this with [the spoken script](DEMO_VOICEOVER.md). Allow about three minutes. You do not need to explain how the app was built.
 
-For a live presentation use a dedicated isolated database, `EMAIL_MODE=sink`, and clearly label controlled fixtures. Public development/production seed data contains only real source-backed scholarships.
+## Get ready
 
-Current native gate is not all-green: source963149e reported4pass/1fail/2blocked; required checks remain intact. Authentic f13residence failure/blocked gate and later profile passes exist. The user corrected a trigger that pointed at GitHub instead of the app; await its next actual result. Do not present all hosted Playwright assertions as TestSprite assertions.
+1. Open the [live GrantPath app](https://grantpath-git-release-hosted-verification-lammysam8-7688.vercel.app).
+2. Have a demo student account signed in. Use only an account prepared for the demonstration.
+3. Have its study profile filled in and one scholarship assessment ready to show. Look at the result beforehand so you know what it actually says.
+4. Have a saved scholarship with a short demo note and one checklist item. Have an actual notification ready if you plan to show the inbox.
+5. Keep passwords, personal messages and account details out of the recording. Close unrelated tabs and turn off desktop notifications.
 
-Final handoff26October: published62b0ac8 Ready, CI40359127982 passed software/build/13browser and failed only its required native-outcome guard. All7exact hosted sources pass on this exact head; DOM/API readback proves identical joint-programme href/ID across7destinations. Corrected-target native1e8d5352:4pass/1fail/2blocked, actual120credits (3.5debit). Profile/notification passed; multi comparisons not captured, publication/access inspection blocked. Store/source bundle equivalence is not runtime proof. No complete native green or submission readiness claimed. All implementation pushed; final receipts committed locally without a further paid docs-only push. See FINAL_HANDOFF.md.
+## Follow this order
+
+| Time      | What to show                          | What to do                                                                                                                                                                                                                            |
+| --------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0:00–0:20 | Landing page                          | Show the top of the page while reading the welcome.                                                                                                                                                                                   |
+| 0:20–1:00 | Discover scholarships                 | Search GLOCAL. Choose Germany and All application windows, then apply the filters. Switch to Japan and open GLOCAL. Show its universities, funding and official links.                                                                |
+| 1:00–1:45 | Study profile and a match             | Briefly show citizenship, residence and study plans. Open your prepared scholarship assessment. Point to a requirement you meet and one that needs confirmation, if available. Describe the result actually shown.                    |
+| 1:45–2:25 | Saved scholarship and My applications | Save an opportunity if it is not already saved. Open its application plan, add a short demo note, tick a checklist item and save. In My applications, show or select Preparing documents. Reload once to show the work remains saved. |
+| 2:25–2:45 | Notifications and settings            | Open a real alert, then show the notification settings. If the inbox is empty, show the empty state briefly and move to preferences; do not pretend an alert exists.                                                                  |
+| 2:45–3:00 | Dashboard or landing page             | Read the closing words. Finish with the live website address visible.                                                                                                                                                                 |
+
+## Keep it easy
+
+- Read one section of the voiceover, do the matching action, then pause before moving on.
+- Record the profile already completed; filling every field on camera takes too long.
+- You do not need to show registration, email verification, admin tools, background processing or code.
+- If a scholarship is already saved, show that state and continue. Avoid removing a prepared application just to save it again.
+- Say “needs confirmation” when that is what the assessment shows. A match is not a guarantee of admission or a scholarship award.
+- Keep the official scholarship information visible long enough for viewers to understand where it comes from.
+
+## Optional testing clip: another 15 seconds
+
+Open TestSprite and show the actual recorded results. Use the short optional paragraph at the end of the voiceover. No new test run is needed for the video. Do not describe an older or partial passing result as a complete pass for a newer release.
+
+## If something goes wrong while recording
+
+Pause and repeat that short section. If the live app reports missing information, an empty inbox or unavailable matching, describe what it shows or skip that optional part. Do not invent a result to keep the recording moving.

@@ -11,8 +11,8 @@ export default async function ProfileSettings() {
     <SettingsFrame
       actor={actor}
       active="/settings/profile"
-      title="A little about you."
-      description="Your original qualifications, circumstances and future plans. Save your progress at each stage."
+      title="Your study profile"
+      description="Add your education and study plans. You can save and return at any step."
     >
       <ProfileForm
         initial={profile.data}

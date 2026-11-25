@@ -1,0 +1,71 @@
+{
+  "scope": "Isolated local fixture accounts, read-only UI inspection; no production writes or test emails",
+  "pages": [
+    {
+      "path": "/dashboard",
+      "heading": "Welcome back, Test.",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/saved",
+      "heading": "Saved scholarships",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/applications",
+      "heading": "My applications",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/notifications",
+      "heading": "Notifications",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/profile",
+      "heading": "Your profile",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/academic-references",
+      "heading": "Academic references",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings",
+      "heading": "Settings",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings/profile",
+      "heading": "Your study profile",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings/notifications",
+      "heading": "Notification preferences",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings/app",
+      "heading": "Appearance & time zone",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings/account",
+      "heading": "Password & sessions",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/settings/privacy",
+      "heading": "Privacy & data",
+      "mobileOverflow": false
+    },
+    {
+      "path": "/operator",
+      "theme": "dark"
+    }
+  ],
+  "runtimeErrors": [],
+  "checkedAt": "2026-11-24T20:13:16.704Z"
+}

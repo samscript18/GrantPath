@@ -48,8 +48,8 @@ export default async function Scholarships({
     <>
       <PageHeading
         eyebrow="A WORLD OF POSSIBILITY"
-        title="Find your next chapter."
-        description="Real scholarships. Official evidence. A clearer view of what’s possible."
+        title="Discover scholarships"
+        description="Search scholarships by destination, study level and funding."
       >
         <Button asChild variant="outline" size="sm">
           <Link href="/profile">
@@ -141,6 +141,9 @@ export default async function Scholarships({
                 <option value="open">Applications open</option>
                 <option value="upcoming">Upcoming</option>
                 <option value="unknown">Availability to confirm</option>
+                <option value="unannounced">Schemes · cycle not announced</option>
+                <option value="rolling">Rolling consideration · confirm status</option>
+                <option value="confirmation">Application status needs confirmation</option>
                 <option value="closed">Closed</option>
               </select>
             </div>
@@ -180,8 +183,7 @@ export default async function Scholarships({
                     aria-describedby="field-help"
                   />
                   <p id="field-help" className="mt-1 text-[11px] text-muted-foreground">
-                    Includes related subjects and specialisms, such as organic synthesis for
-                    Chemistry.
+                    Also looks for related subjects, such as organic synthesis for Chemistry.
                   </p>
                 </div>
                 <div>
@@ -257,7 +259,7 @@ export default async function Scholarships({
                   No scholarships match these filters. Try another destination, include closed
                   cycles, or broaden your study level.
                 </p>
-                <Link href="/scholarships" className="mt-4 inline-block text-primary underline">
+                <Link href="/scholarships" className="action-link mt-5">
                   Reset filters
                 </Link>
               </EmptyState>

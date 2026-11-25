@@ -67,12 +67,35 @@ export async function boundedFetch(raw: string, adapter: string, robots = false)
   return boundedFetchUrl(url, robots);
 }
 // Call only after an explicit source/directory URL policy has validated this URL.
-export async function boundedFetchUrl(url: URL, robots = false) {
-  const addresses = await lookup(url.hostname, { all: true });
+export async function boundedFetchUrl(
+  url: URL,
+  robots = false,
+  format: "html" | "pdf" | "json" = "html",
+) {
+  // DNS precedes fetch's AbortSignal; bound it separately so a resolver stall
+  // cannot outlive a discovery lease before the HTTP timeout even starts.
+  let dnsTimer: ReturnType<typeof setTimeout> | undefined;
+  const addresses = await Promise.race([
+    lookup(url.hostname, { all: true }),
+    new Promise<never>((_, reject) => {
+      dnsTimer = setTimeout(() => reject(new Error("SOURCE_DNS_TIMEOUT")), 5000);
+    }),
+  ]).finally(() => {
+    if (dnsTimer) clearTimeout(dnsTimer);
+  });
   if (!addresses.length || addresses.some((a) => !isPublicAddress(a.address)))
     throw new Error("Source DNS did not resolve exclusively to public addresses.");
   const response = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT, Accept: robots ? "text/plain" : "text/html" },
+    headers: {
+      "User-Agent": USER_AGENT,
+      Accept: robots
+        ? "text/plain"
+        : format === "pdf"
+          ? "application/pdf"
+          : format === "json"
+            ? "application/json"
+            : "text/html",
+    },
     redirect: "manual",
     signal: AbortSignal.timeout(12000),
   });
@@ -80,7 +103,15 @@ export async function boundedFetchUrl(url: URL, robots = false) {
     throw new Error(
       "Source redirected. Review and allowlist its new canonical address before fetching.",
     );
-  if (!robots && !response.headers.get("content-type")?.toLowerCase().includes("text/html"))
+  if (
+    !robots &&
+    !response.headers
+      .get("content-type")
+      ?.toLowerCase()
+      .includes(
+        format === "pdf" ? "application/pdf" : format === "json" ? "application/json" : "text/html",
+      )
+  )
     throw new Error(`Unexpected source content type (${response.status}).`);
   const reader = response.body?.getReader();
   if (!reader) throw new Error("The source returned an empty body.");
@@ -103,7 +134,9 @@ export async function boundedFetchUrl(url: URL, robots = false) {
     buffer.set(chunk, offset);
     offset += chunk.length;
   }
-  return { status: response.status, text: new TextDecoder().decode(buffer) };
+  if (!robots && format === "pdf" && new TextDecoder().decode(buffer.slice(0, 5)) !== "%PDF-")
+    throw new Error("INVALID_PDF_SIGNATURE");
+  return { status: response.status, text: new TextDecoder().decode(buffer), bytes: buffer };
 }
 type Directive = { allow: boolean; path: string };
 export function robotsPolicy(text: string, path: string) {

@@ -7,11 +7,15 @@ import { publishScholarshipTx, semanticHash } from "@/server/scholarships/publis
 import type { Prisma } from "@/generated/prisma/client";
 import { directoryDefinitions } from "./registry";
 import { allowedDiscoveryUrl } from "./urls";
-import { extractDirectory, extractDetail } from "./adapters";
-import { twenteAward } from "./twente";
-import { makerereAnnouncement } from "./makerere";
+import { extractDetail } from "./adapters";
+import { directoryAdapters, extractRegisteredDirectory } from "./directory-adapters";
+import { resolveDetailMapping, opportunityAdapters, type SourceDocument } from "./adapter-registry";
+import { pdfEvidenceHtml } from "./pdf";
 import { publicationPolicy } from "./policy";
 import { ADAPTER_VERSION, POLICY_VERSION, SCHEMA_VERSION } from "./types";
+import type { DetailMapping } from "./types";
+import * as cheerio from "cheerio";
+import { jassoProgrammeName, fundingProfiles, fundingLayoutReasons } from "./university-funding";
 const automatic: Actor = {
   id: "service:official-discovery",
   name: "Validated official discovery",
@@ -34,6 +38,12 @@ export async function configureDirectory(
     throw new Error("Deferred activation must be within the next 48 hours.");
   if (!definition || input.reason.trim().length < 10)
     throw new Error("Choose a supported directory and explain its policy.");
+  if (
+    input.enabled &&
+    (!directoryAdapters.has(definition.directoryAdapter || "official-html-1") ||
+      (definition.dynamicDetail && !opportunityAdapters.get(definition.dynamicDetail)))
+  )
+    throw new Error("UNSUPPORTED_ADAPTER: keep this source paused until its adapter is reviewed.");
   return db().$transaction(async (tx) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`directory:${id}`}))`;
     const previous = await tx.discoveryDirectory.findUnique({ where: { id } });
@@ -96,10 +106,26 @@ export async function processDirectoryHtml(
   const definition = directoryDefinitions[directoryId];
   if (!definition) throw new Error("UNSUPPORTED_DIRECTORY");
   const url = allowedDiscoveryUrl(pageUrl || directory.url, definition, "directory").href;
-  const extracted = extractDirectory(definition, html, url);
+  const extracted = extractRegisteredDirectory(definition, html, url);
   const ids: string[] = [];
   let created = 0;
-  for (const canonicalUrl of extracted.links.slice(0, Math.max(0, Math.min(100, remaining)))) {
+  // Large single-page catalogues must not starve unknown awards behind the
+  // same first 100 accepted URLs forever. Inspect a bounded window, then queue
+  // at most the unchanged per-check quota, preferring genuinely unseen URLs.
+  const links = [...new Set(extracted.links)].slice(0, 500);
+  const known = new Set(
+    (
+      await db().discoveredCandidate.findMany({
+        where: { directoryId, canonicalUrl: { in: links } },
+        select: { canonicalUrl: true },
+      })
+    ).map((candidate) => candidate.canonicalUrl),
+  );
+  const prioritised = [
+    ...links.filter((url) => !known.has(url)),
+    ...links.filter((url) => known.has(url)),
+  ];
+  for (const canonicalUrl of prioritised.slice(0, Math.max(0, Math.min(100, remaining)))) {
     const inserted = await db().discoveredCandidate.createMany({
       data: [
         {
@@ -137,6 +163,9 @@ export async function processDirectoryHtml(
     created,
     existing: ids.length - created,
     excluded: extracted.excluded,
+    leads: extracted.leads || [],
+    truncated:
+      links.filter((url) => !known.has(url)).length > Math.max(0, Math.min(100, remaining)),
   };
 }
 export async function processDetailHtml(
@@ -148,6 +177,8 @@ export async function processDetailHtml(
     leaseToken?: string;
     supportPages?: Record<string, string>;
     startedAt?: Date;
+    document?: SourceDocument;
+    extractionError?: string;
   } = {},
 ) {
   if (options.controlled && process.env.APP_ENV !== "test" && !controlledFixturesEnabled())
@@ -159,23 +190,47 @@ export async function processDetailHtml(
   const definition = directoryDefinitions[candidate.directoryId];
   if (!definition) throw new Error("UNSUPPORTED_DIRECTORY");
   allowedDiscoveryUrl(candidate.canonicalUrl, definition, "detail");
-  const mapping =
-    definition.mappings.find((m) => m.url === candidate.canonicalUrl) ||
-    makerereAnnouncement(definition, candidate.canonicalUrl, html) ||
-    twenteAward(definition, candidate.canonicalUrl, html);
+  if (Buffer.byteLength(html) > 2_000_000) throw new Error("RESPONSE_TOO_LARGE");
+  let mapping: DetailMapping | undefined;
+  let extractionError = options.extractionError;
+  try {
+    if (!extractionError)
+      mapping = resolveDetailMapping(
+        definition,
+        candidate.canonicalUrl,
+        options.document || { kind: "html", text: html },
+      );
+  } catch (error) {
+    extractionError =
+      error instanceof Error && /^STRUCTURED_[A-Z_]+$/.test(error.message)
+        ? error.message
+        : "DETAIL_EXTRACTION_INVALID";
+  }
   const now = options.now || new Date();
   const extraction = mapping
-    ? extractDetail(mapping, html, now, options.supportPages)
+    ? extractDetail(mapping, html, now, options.supportPages, options.document?.kind === "pdf-text")
     : {
         data: null,
         validation: {
-          codes: ["UNSUPPORTED_DETAIL_MAPPING"],
+          codes: [
+            extractionError || "UNSUPPORTED_DETAIL_MAPPING",
+            ...(!extractionError ? fundingLayoutReasons(definition, html) : []),
+          ],
           structure: false,
           matchedFields: [],
           requirementsComplete: false,
           cycleConfirmed: false,
         },
-        excerpt: "Unmapped official detail; operator registration required.",
+        excerpt: (() => {
+          const $ = cheerio.load(html);
+          $("script,style,nav,header,footer").remove();
+          const selector = fundingProfiles.find(
+            (profile) => profile.id === definition.dynamicDetail,
+          )?.root;
+          const root =
+            selector && $(selector).length ? $(selector) : $("main").length ? $("main") : $("body");
+          return root.text().replace(/\s+/g, " ").trim().slice(0, 8000);
+        })(),
       };
   return db().$transaction(async (tx) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${candidateId}))`;
@@ -214,8 +269,41 @@ export async function processDetailHtml(
     const policy = await tx.discoveryDirectory.findUniqueOrThrow({
       where: { id: candidate.directoryId },
     });
+    if (mapping?.data.cycleBasis === "application_round")
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`application-rounds:${mapping.key}`}))`;
     if (mapping)
       await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`discovery:${mapping.key}:${mapping.cycle}`}))`;
+    if (mapping) {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`source-url:${candidate.canonicalUrl}`}))`;
+      const acceptedUrl = await tx.scholarshipVersion.findFirst({
+        where: { data: { path: ["officialUrl"], equals: candidate.canonicalUrl } },
+        include: { scholarship: { include: { programme: true } } },
+        orderBy: { createdAt: "desc" },
+      });
+      if (acceptedUrl && acceptedUrl.scholarship.programme.slug !== mapping.key)
+        extraction.validation.codes.push("URL_PROGRAMME_IDENTITY_CONFLICT");
+    }
+    if (mapping && definition.dynamicDetail === "jasso-scholarship-cms-1") {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`programme-identity:${mapping.provider.key}:${jassoProgrammeName(mapping.data.title)}:${mapping.cycle}`}))`;
+      const others = await tx.scholarship.findMany({
+        where: {
+          published: true,
+          programme: { provider: { slug: mapping.provider.key }, slug: { not: mapping.key } },
+        },
+        select: { title: true, cycle: true },
+        take: 501,
+      });
+      if (others.length > 500)
+        extraction.validation.codes.push("PROGRAMME_IDENTITY_CHECK_BOUND_EXCEEDED");
+      if (
+        others.some(
+          (row) =>
+            row.cycle === mapping.cycle &&
+            jassoProgrammeName(row.title) === jassoProgrammeName(mapping.data.title),
+        )
+      )
+        extraction.validation.codes.push("PROGRAMME_VARIANT_IDENTITY_REQUIRES_REVIEW");
+    }
     const existingProgramme = mapping
       ? await tx.programme.findUnique({ where: { slug: mapping.key } })
       : null;
@@ -231,7 +319,28 @@ export async function processDetailHtml(
     const previous = existing?.versions[0]
       ? scholarshipDataSchema.parse(existing.versions[0].data)
       : null;
-    if (existing?.versions[0] && existing.versions[0].createdAt > (options.startedAt || now))
+    // A changed closing date is not proof of a new application round. Keep
+    // overlapping periods in review instead of duplicating an accepted call.
+    if (!existing && existingProgramme && mapping?.data.cycleBasis === "application_round") {
+      const window = extraction.data?.applicationWindow;
+      if (window?.opensOn && window.closesOn) {
+        const overlap = await tx.scholarship.findFirst({
+          where: {
+            programmeId: existingProgramme.id,
+            version: { gt: 0 },
+            windowOpensOn: { lte: window.closesOn },
+            windowClosesOn: { gte: window.opensOn },
+          },
+          select: { id: true },
+        });
+        if (overlap) extraction.validation.codes.push("APPLICATION_ROUND_IDENTITY_REQUIRES_REVIEW");
+      }
+    }
+    if (
+      existing?.versions[0] &&
+      existing.versions[0].createdAt > (options.startedAt || now) &&
+      semanticHash(previous) !== semanticHash(extraction.data)
+    )
       extraction.validation.codes.push("SOURCE_OBSERVATION_STALE");
     if (existing?.version && !existing.published)
       extraction.validation.codes.push("RECORD_UNPUBLISHED");
@@ -322,10 +431,21 @@ export async function processDetailHtml(
     return decision;
   });
 }
+export async function processDetailDocument(
+  candidateId: string,
+  document: SourceDocument,
+  options: Parameters<typeof processDetailHtml>[2] = {},
+) {
+  return processDetailHtml(
+    candidateId,
+    document.kind === "html" ? document.text : pdfEvidenceHtml(document.text),
+    { ...options, document },
+  );
+}
 export async function discoveryOverview(actor: Actor, scholarshipId?: string) {
   requireOperator(actor);
   const selectedId = z.string().min(1).max(128).optional().parse(scholarshipId);
-  const [directories, candidates, decisions] = await Promise.all([
+  const [directories, candidates, decisions, recentChecks] = await Promise.all([
     db().discoveryDirectory.findMany({
       include: {
         checks: { orderBy: { attemptedAt: "desc" }, take: 3 },
@@ -342,7 +462,15 @@ export async function discoveryOverview(actor: Actor, scholarshipId?: string) {
       take: 100,
     }),
     db().publicationDecision.findMany({
-      where: { decision: "auto_publish", ...(selectedId ? { scholarshipId: selectedId } : {}) },
+      where: {
+        decision: "auto_publish",
+        ...(selectedId ? { scholarshipId: selectedId } : {}),
+      },
+      orderBy: { createdAt: "desc" },
+      take: 30,
+    }),
+    db().publicationDecision.findMany({
+      where: { decision: "unchanged", ...(selectedId ? { scholarshipId: selectedId } : {}) },
       orderBy: { createdAt: "desc" },
       take: 30,
     }),
@@ -352,12 +480,25 @@ export async function discoveryOverview(actor: Actor, scholarshipId?: string) {
       ? data.title
       : null;
   return {
+    adapters: opportunityAdapters.list(),
+    availableDirectories: Object.values(directoryDefinitions).map((definition) => ({
+      id: definition.id,
+      url: definition.url,
+      registered: directories.some((directory) => directory.id === definition.id),
+      directoryAdapter: definition.directoryAdapter || "official-html-1",
+      detailAdapter: definition.dynamicDetail || "reviewed-exact-mapping",
+      supported:
+        directoryAdapters.has(definition.directoryAdapter || "official-html-1") &&
+        (!definition.dynamicDetail || !!opportunityAdapters.get(definition.dynamicDetail)),
+      review: definition.review || null,
+    })),
     directories,
     candidates: candidates.map((candidate) => ({
       ...candidate,
       title: titleOf(candidate.observations[0]?.data ?? null),
     })),
     decisions: decisions.map((decision) => ({ ...decision, title: titleOf(decision.after) })),
+    recentChecks: recentChecks.map((decision) => ({ ...decision, title: titleOf(decision.after) })),
   };
 }
 

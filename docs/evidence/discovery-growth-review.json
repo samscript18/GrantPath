@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-11-10T13:00:40.963477+00:00",
+  "head": "1d5c82394aacd2058daee82b595cf9b0f789bfa3",
+  "branch": "fix/discovery-catalogue-growth",
+  "remoteBranch": "https://github.com/samscript18/GrantPath/tree/fix/discovery-catalogue-growth",
+  "compareUrl": "https://github.com/samscript18/GrantPath/compare/main...fix/discovery-catalogue-growth",
+  "push": "success",
+  "prCreation": {
+    "result": "denied",
+    "httpStatus": 403,
+    "message": "Resource not accessible by integration",
+    "followup": "Owner asked to create the PR; no alternate-identity retry."
+  },
+  "mergePerformed": false,
+  "workerDeployment": "pending",
+  "newSourcePolicy": "paused",
+  "tests": {
+    "unit": 108,
+    "postgresql": 40,
+    "productionBrowser": 14,
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "formatting": "passed"
+  },
+  "testSpriteExecution": false
+}

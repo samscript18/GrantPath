@@ -142,7 +142,11 @@ export default async function ScholarshipDetail({
           </div>
           <Badge tone={s.currentAvailability === "open" ? "green" : "amber"}>
             {s.currentAvailability === "unknown"
-              ? "Availability to confirm"
+              ? d.applicationWindow?.kind === "unannounced"
+                ? "Cycle not announced"
+                : d.applicationWindow?.kind === "rolling"
+                  ? "Rolling consideration · confirm status"
+                  : "Application status to confirm"
               : `${s.currentAvailability[0].toUpperCase()}${s.currentAvailability.slice(1)}`}
           </Badge>
           <span className="text-[10px] text-muted-foreground">{s.cycle}</span>
@@ -220,20 +224,17 @@ export default async function ScholarshipDetail({
                   </li>
                 ))}
               </ul>
-              <a
-                href="#evidence-funding"
-                className="mt-4 inline-flex items-center gap-2 text-xs underline underline-offset-4"
-              >
+              <a href="#evidence-funding" className="action-link mt-4">
                 Inspect funding evidence <ArrowUpRight size={12} />
               </a>
             </div>
           </section>
           <section id="requirements" className="mt-12">
             <p className="eyebrow text-muted-foreground">KNOW WHERE YOU STAND</p>
-            <h2 className="editorial mt-3 text-3xl">A clearer look at the requirements.</h2>
+            <h2 className="editorial mt-3 text-3xl">Requirements</h2>
             <p className="mt-3 text-xs leading-6 text-muted-foreground">
-              Eligibility and application availability are assessed separately. Missing information
-              requires confirmation, rather than silently passing.
+              Check which requirements you meet and what needs confirmation. Eligibility does not
+              mean applications are open.
             </p>
             <div>
               {match?.evaluation ? (
@@ -316,7 +317,7 @@ export default async function ScholarshipDetail({
           </section>
           <section id="history" className="mt-12">
             <p className="eyebrow text-muted-foreground">THE ACCEPTED RECORD</p>
-            <h2 className="editorial mt-3 mb-5 text-3xl">A path you can trace.</h2>
+            <h2 className="editorial mt-3 mb-5 text-3xl">Change history</h2>
             <ChangeTimeline
               slug={s.slug}
               versions={s.versions.map((v) => ({
@@ -336,8 +337,32 @@ export default async function ScholarshipDetail({
               {d.deadline ? formatDate(d.deadline, viewerTimeZone) : "Check the closing date"}
             </h2>
             <p className="mt-3 text-xs leading-6 text-muted-foreground">
-              {d.deadlineLabel || "A closing date has not been confirmed."}
+              {d.deadlineLabel ||
+                d.applicationWindow?.closesOn ||
+                "A closing date has not been confirmed."}
             </p>
+            {d.applicationWindow?.opensOn && (
+              <p className="mt-2 text-xs">Published opening date: {d.applicationWindow.opensOn}</p>
+            )}
+            {d.recordKind === "overview" && d.applicationWindow?.closesOn && (
+              <p className="mt-2 text-xs">
+                This is a published scheme date. Its application cycle is unconfirmed; it does not
+                establish a current call.
+              </p>
+            )}
+            {d.applicationWindow?.kind === "unannounced" && (
+              <p className="mt-2 text-xs">
+                The provider lists the application dates as to be announced or confirmed. Check the
+                official page for a new call.
+              </p>
+            )}
+            {d.applicationWindow?.kind === "rolling" && (
+              <p className="mt-2 text-xs">
+                The provider describes year-round consideration. Confirm the application route,
+                funding availability and eligibility; some awards use automatic assessment or
+                nomination.
+              </p>
+            )}
             {d.deadline && (
               <p className="mt-2 text-[10px] text-muted-foreground">
                 Closes{" "}
@@ -352,7 +377,7 @@ export default async function ScholarshipDetail({
             {d.deadlineState !== "confirmed" && (
               <p className="mt-3 flex gap-2 text-[11px] leading-5 text-warning-foreground">
                 <CircleHelp size={14} className="mt-0.5 shrink-0" />
-                No exact countdown or reminder until the closing instant is confirmed.
+                Reminders become available once the exact closing time is confirmed.
               </p>
             )}
             <div className="mt-6 flex items-center gap-2.5">
@@ -397,7 +422,7 @@ export default async function ScholarshipDetail({
                     : "Sign in to track your progress"}
               </p>
               <p className="mt-2 text-[11px] leading-6 text-muted-foreground">
-                Your private plan is separate from the provider’s application window.
+                Your progress does not change the scholarship’s availability.
               </p>
             </section>
             {application && (

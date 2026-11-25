@@ -23,9 +23,9 @@ export default async function Notifications({
   return (
     <>
       <PageHeading
-        eyebrow="A LITTLE DIRECTION, WHEN IT MATTERS"
-        title="Keep your possibilities in view."
-        description="Relevant updates, reviewed changes, and confirmed deadlines. Your preferences lead the way."
+        eyebrow="YOUR INBOX"
+        title="Notifications"
+        description="New matches, scholarship changes and deadline reminders."
       >
         <Badge tone={data.unread ? "amber" : "neutral"}>{data.unread} unread</Badge>
       </PageHeading>
@@ -95,10 +95,7 @@ export default async function Notifications({
                           · {profile.data.timeZone}
                         </p>
                         <div className="mt-4 flex flex-wrap justify-between gap-3">
-                          <Link
-                            href={n.href}
-                            className="inline-flex items-center gap-2 text-xs font-semibold"
-                          >
+                          <Link href={n.href} className="action-link">
                             Inspect the evidence <ArrowUpRight size={13} />
                           </Link>
                           {!n.readAt && <MarkRead id={n.id} />}
@@ -110,16 +107,14 @@ export default async function Notifications({
               })}
             </div>
           ) : (
-            <EmptyState
-              title={unreadOnly ? "You’re all caught up." : "A quiet moment on your path."}
-            >
+            <EmptyState title={unreadOnly ? "You’re all caught up." : "No updates yet"}>
               <Bell className="mx-auto my-4 text-primary/45" size={22} strokeWidth={1.3} />
               <p>
                 {unreadOnly
                   ? "There are no unread updates. Your earlier updates are kept in All updates."
-                  : "New relevant matches, reviewed changes to saved opportunities and confirmed deadline reminders will appear here when processed."}
+                  : "New matches, changes to saved scholarships and confirmed deadline reminders will appear here."}
               </p>
-              <Link href="/scholarships" className="mt-4 inline-block underline">
+              <Link href="/scholarships" className="action-link mt-5">
                 Explore opportunities ↗
               </Link>
             </EmptyState>
@@ -150,13 +145,9 @@ export default async function Notifications({
           <Bell size={25} strokeWidth={1.2} className="mb-6 text-leaf" aria-hidden="true" />
           <h2 className="mb-6 font-serif text-2xl">Your inbox, your terms.</h2>
           <p className="text-xs leading-7 text-muted-foreground">
-            Choose the updates you want and where you receive them. Manage your topics and channels
-            in Settings.
+            Choose which updates reach your inbox and email.
           </p>
-          <Link
-            href="/settings/notifications"
-            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4"
-          >
+          <Link href="/settings/notifications" className="action-link mt-5">
             Notification settings <ArrowUpRight size={14} />
           </Link>
         </aside>
